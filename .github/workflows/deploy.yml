@@ -16,35 +16,35 @@ permissions:
   id-token: write
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  # build:
+  #   runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+  #   steps:
+  #   - name: Checkout repository
+  #     uses: actions/checkout@v4
 
-    - name: Install npm dependencies
-      run: docker run --rm -v $(pwd):/app -w /app node:19.6.0-alpine npm install --silent
+  #   - name: Install npm dependencies
+  #     run: docker run --rm -v $(pwd):/app -w /app node:19.6.0-alpine npm install --silent
 
-    - name: Build assets
-      run: docker run --rm -v $(pwd):/app -w /app node:19.6.0-alpine npm run build --silent
+  #   - name: Build assets
+  #     run: docker run --rm -v $(pwd):/app -w /app node:19.6.0-alpine npm run build --silent
 
-    - name: List files after build
-      run: ls -R
+  #   - name: List files after build
+  #     run: ls -R
 
-    - name: Clean up
-      run: |
-        sudo rm -rf $GITHUB_WORKSPACE/node_modules
-        sudo rm -rf $GITHUB_WORKSPACE/package-lock.json
-        sudo rm -rf $GITHUB_WORKSPACE/package.json
-        sudo rm -rf $GITHUB_WORKSPACE/webpack-config.js
-        sudo rm -rf $GITHUB_WORKSPACE/src
+  #   - name: Clean up
+  #     run: |
+  #       sudo rm -rf $GITHUB_WORKSPACE/node_modules
+  #       sudo rm -rf $GITHUB_WORKSPACE/package-lock.json
+  #       sudo rm -rf $GITHUB_WORKSPACE/package.json
+  #       sudo rm -rf $GITHUB_WORKSPACE/webpack-config.js
+  #       sudo rm -rf $GITHUB_WORKSPACE/src
 
-    # - name: Deploy to GitHub Pages
-    #   uses: peaceiris/actions-gh-pages@v3
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     publish_dir: ./dist
+  #   # - name: Deploy to GitHub Pages
+  #   #   uses: peaceiris/actions-gh-pages@v3
+  #   #   with:
+  #   #     github_token: ${{ secrets.GITHUB_TOKEN }}
+  #   #     publish_dir: ./dist
 
   deploy:
     needs: build
@@ -53,9 +53,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy dist folder to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
+          path: ./dist
           # github_token: ${{ secrets.GITHUB_TOKEN }}
           github_token: ${{ secrets.GH_PAT }}
           publish_dir: ./dist
