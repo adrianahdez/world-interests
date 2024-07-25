@@ -1,8 +1,6 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-name: Node.js CI
-
+name: Install node dependencies, add assets and deploy
 on:
   push:
     branches: [ "main" ]
@@ -11,19 +9,19 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [19.6.0]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm run build --if-present
+    - name: Install npm dependencies
+      run: docker run --rm -v $(pwd):/app -w /app node:19.6.0-alpine npm install --silent
+
+    - name: Build assets
+      run: docker run --rm -v $(pwd):/app -w /app node:19.6.0-alpine npm run build --silent
+
+    - name: Clean up
+      run: |
+        sudo rm -rf /node_modules
+        sudo rm -rf /package-lock.json
+        sudo rm -rf /package.json
+        sudo rm -rf /webpack-config.js
+        sudo rm -rf /src
