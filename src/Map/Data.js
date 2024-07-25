@@ -27,11 +27,11 @@ const fetchData = async (url) => {
  */
 export const getData = async () => {
   // This commented line provokes an error in console: https://... has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
-  const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'response.json';
+  // const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'response.json';
   // That's why we use PHP to get the JSON file from the backend.
-  // const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'getJson.php';
+  const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'getJson.php';
   try {
-    const response = await fetchData(apiUrl); 
+    const response = await fetchData(apiUrl);
     if (!response.data || response.error) {
       throw new Error('No data');
     }
