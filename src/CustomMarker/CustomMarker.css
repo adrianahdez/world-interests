@@ -1,0 +1,133 @@
+.custom-marker__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  line-height: 1.35;
+  letter-spacing: 0.6px;
+  color: white;
+  position: relative;
+  box-sizing: border-box;
+  top: -50%;
+}
+
+.custom-marker__point .custom-marker__bg-pointer {
+  content: "";
+  box-shadow: -2px -2px 2px 0px rgb(0 0 0 / 8%);
+  border-radius: 2px;
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  transform: translateX(-50%) rotate(45deg);
+  transform-origin: center;
+  z-index: 1;
+}
+
+.custom-marker__bg,
+.custom-marker__container {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.custom-marker__bg {
+  border-radius: 50px;
+}
+
+.custom-marker .bg-color {
+  background-color: #5e606f;
+  opacity: 0.7;
+}
+
+.custom-marker__bg,
+.custom-marker__content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.custom-marker__point {
+  width: 100%;
+  height: 100%;
+  padding: 3px;
+  z-index: 2;
+  position: absolute;
+  display: flex;
+  left: 0px;
+  top: 0px;
+  border-color: unset;
+  border: 0px;
+  border: 1px;
+  border-radius: 3px;
+  white-space: nowrap;
+  -webkit-transition: background-color 250ms linear, transform 250ms;
+  -moz-transition: background-color 250ms linear, transform 250ms;
+  -o-transition: background-color 250ms linear, transform 250ms;
+  -ms-transition: background-color 250ms linear, transform 250ms;
+  transition: background-color 250ms linear, transform 250ms
+}
+
+.custom-marker__point .image-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.custom-marker__point img {
+  width: 100% !important;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.custom-marker__point .text-container {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: white;
+  z-index: 1;
+  padding-right: 8px;
+}
+
+/* HOVER */
+.custom-marker:has(.custom-marker__container:hover) {
+  z-index: 99999 !important;
+}
+.custom-marker__container:hover {
+  -webkit-transition: background-color 250ms linear, transform 250ms;
+  -moz-transition: background-color 250ms linear, transform 250ms;
+  -o-transition: background-color 250ms linear, transform 250ms;
+  -ms-transition: background-color 250ms linear, transform 250ms;
+  transition: background-color 250ms linear, transform 250ms;
+  -ms-transform: scale(2);
+  -webkit-transform: scale(2);
+  transform: scale(2)
+}
+
+.custom-marker__container:hover .custom-marker__point {
+  height: auto;
+  width: auto;
+  gap: 8px;
+}
+
+.custom-marker__container:hover .custom-marker__bg {
+  opacity: .9;
+}
+
+.custom-marker__container:hover .custom-marker__bg-pointer {
+  display: none;
+}
+
+.custom-marker__container:hover .custom-marker__point .image-container {
+  width: 44px !important;
+  height: 44px !important;
+}
+
+.custom-marker__container:hover .custom-marker__point .text-container {
+  display: flex;
+}
