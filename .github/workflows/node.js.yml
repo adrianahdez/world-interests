@@ -20,6 +20,12 @@ jobs:
     - name: Build assets
       run: docker run --rm -v $(pwd):/app -w /app node:19.6.0-alpine npm run build --silent
 
+    - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+
     - name: Clean up
       run: |
         sudo rm -rf /node_modules
