@@ -27,8 +27,8 @@ jobs:
 
     - name: Clean up
       run: |
-        sudo rm -rf node_modules/
-        sudo rm -rf package-lock.json
-        sudo rm -rf package.json
-        sudo rm -rf webpack-config.js
-        sudo rm -rf src/
+        sudo rm -rf $GITHUB_WORKSPACE/node_modules
+        sudo rm -rf $GITHUB_WORKSPACE/package-lock.json
+        sudo rm -rf $GITHUB_WORKSPACE/package.json
+        sudo rm -rf $GITHUB_WORKSPACE/webpack-config.js
+        sudo rm -rf $GITHUB_WORKSPACE/src
