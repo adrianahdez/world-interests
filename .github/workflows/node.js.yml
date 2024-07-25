@@ -1,6 +1,5 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 name: Install node dependencies, add assets and deploy
+
 on:
   push:
     branches: [ "main" ]
@@ -21,10 +20,10 @@ jobs:
       run: docker run --rm -v $(pwd):/app -w /app node:19.6.0-alpine npm run build --silent
 
     - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
 
     - name: Clean up
       run: |
