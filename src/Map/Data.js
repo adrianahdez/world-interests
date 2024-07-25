@@ -31,7 +31,7 @@ export const getData = async () => {
   // That's why we use PHP to get the JSON file from the backend.
   // const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'getJson.php';
   try {
-    const response = await fetchData(apiUrl);
+    const response = await fetchData(apiUrl); 
     if (!response.data || response.error) {
       throw new Error('No data');
     }
