@@ -53,10 +53,12 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Deploy dist folder to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          path: ./dist
           # github_token: ${{ secrets.GITHUB_TOKEN }}
           github_token: ${{ secrets.GH_PAT }}
           publish_dir: ./dist
