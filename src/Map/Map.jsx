@@ -2,21 +2,10 @@ import countries from './countries.geo.json';
 import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, GeoJSON, Marker } from 'react-leaflet'
 // import { useMap, useMapEvent } from 'react-leaflet';
-// import CustomPopup from '../CustomPopup/CustomPopup';
-// import CustomTooltip from '../CustomTooltip/CustomTooltip';
 import { setConfig } from './geoJsonConfig';
 import CustomMarker from '../CustomMarker/CustomMarker';
 import { getCountryLatLon, getData } from './Data';
 import { processPoint } from './Points';
-
-// import markerIconPng from '../img/marker-icon.png';
-// import markerShadowPng from '../img/marker-shadow.png';
-// delete L.Icon.Default.prototype._getIconUrl;
-// L.Icon.Default.mergeOptions({
-//   iconRetinaUrl: markerIconPng,
-//   iconUrl: markerIconPng,
-//   shadowUrl: markerShadowPng,
-// });
 
 // Know the center of the map.
 // function MyComponent() {
@@ -83,7 +72,6 @@ export default function Map() {
     });
   }, [data]);
 
-  // const markerPosition2 = [-38.416097, -63.616672];
   const mapConfig = {
     center: [0, 0],
     zoom: 3,
@@ -120,9 +108,6 @@ export default function Map() {
         {/* <MyComponent /> */}
 
         {/* <Marker position={markerPosition} opacity={.6} eventHandlers={{ click: () => handleMarkerClick() }}>
-          <CustomPopup />
-          <Click position={markerPosition2} />
-          <CustomTooltip />
         </Marker> */}
 
         {Object.keys(data).map((alpha2) => {
