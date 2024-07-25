@@ -19,6 +19,9 @@ jobs:
     - name: Build assets
       run: docker run --rm -v $(pwd):/app -w /app node:19.6.0-alpine npm run build --silent
 
+    - name: List files after build
+      run: ls -R
+
     - name: Clean up
       run: |
         sudo rm -rf $GITHUB_WORKSPACE/node_modules
