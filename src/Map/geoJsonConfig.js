@@ -12,7 +12,7 @@ function getColor(d) {
 export function setConfig({ properties }) {
   return {
     weight: 1.3,
-    color: '#45383f',
+    color: '#5f4e57',
     opacity: 1,
     // fillColor: '#1d1a16',
     fillColor: getColor(properties.density),
