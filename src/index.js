@@ -8,7 +8,7 @@ import './main.css';
 const Map = lazy(() => import('./Map/Map'));
 
 const Loading = () => {
-  return <div>Loading...</div>;
+  return <div className='pageLoading'>Loading...</div>;
 }
 
 const root = createRoot(document.getElementById('app'));
