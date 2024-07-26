@@ -12,9 +12,9 @@ function getColor(d) {
 export function setConfig({ properties }) {
   return {
     weight: 1.3,
-    color: 'var(--page-highlight-color)',
+    color: 'var(--country-delimiter-color)',
     opacity: 1,
-    fillColor: '#1d1a16',
+    fillColor: 'var(--country-fill-color)',
     fillColor: getColor(properties.density),
     fillOpacity: 1,
     dashArray: '3',

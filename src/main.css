@@ -1,16 +1,22 @@
 :root {
   --page-bg: rgb(26, 63, 73);
-  --page-highlight-color: #5f4e57;
-  --page-text-color: #f5f5f5;
+  --country-delimiter-color: #5f4e57;
+  --country-fill-color: #1d1a16;
+  --page-text-color: #ddcfcf;
+  /* This is used to set the height of the map, so adjust based on the real footer height counting the vertical paddings, min-height, etc. */
+  --footer-height: 123px;
+  --link-color: #008dd1;
 }
 
-html,body {
+html,
+body {
   max-width: 100%;
   overflow-x: hidden
 }
 
 body,
-h1,h1 small {
+h1,
+h1 small {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
@@ -24,7 +30,7 @@ h1,h1 small {
 .map-container,
 #app {
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - var(--footer-height));
 }
 
 .map-container img {
@@ -32,7 +38,9 @@ h1,h1 small {
   max-width: 100%
 }
 
-a,a:focus,a:hover {
+a,
+a:focus,
+a:hover {
   text-decoration: none
 }
 
@@ -46,4 +54,49 @@ a,a:focus,a:hover {
   position: fixed;
   color: var(--page-text-color);
   font-size: 36px;
+}
+
+/* FOOTER */
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  z-index: 999;
+}
+
+footer .footer-content {
+  background-color: var(--country-fill-color);
+  color: var(--page-text-color);
+  justify-content: center;
+  min-height: var(--footer-height);
+
+  padding-top: 30px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 8px;
+}
+
+footer .what-is-this {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 12px;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+footer .what-is-this .i1{
+  font-size: 24px;
+  /* margin-bottom: 18px; */
+}
+
+footer .footer-content a {
+  color: var(--link-color)
+}
+
+footer .developer {
+  font-size: 12px;
 }
