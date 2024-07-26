@@ -5,7 +5,9 @@
   --page-text-color: #ddcfcf;
   /* This is used to set the height of the map, so adjust based on the real footer height counting the vertical paddings, min-height, etc. */
   --footer-height: 136px;
-  --link-color: #008dd1;
+  --link-color: #1fa2e1;
+  --menu-margin-top: 30px;
+  --menu-margin-bottom: 40px;
 }
 
 html,
@@ -28,9 +30,23 @@ h1 small {
 }
 
 .map-container,
-#app {
+#app,
+.app-container {
   width: 100%;
+}
+
+.map-container,
+#app {
   height: calc(100vh - var(--footer-height));
+}
+
+#app {
+  height: 100vh;
+}
+
+.app-container {
+  height: 100vh;
+  position: relative;
 }
 
 .map-container img {

@@ -36,7 +36,7 @@ import { processPoint } from './Points';
 //   return null
 // }
 
-export default function Map() {
+export default function Map({ category }) {
   // TODO: Center map in a better way in mobile.
 
   const [data, setData] = useState({});
@@ -44,8 +44,8 @@ export default function Map() {
   const fetchInterval = 20000;
 
   useEffect(() => {
-    const fetchData = () => {
-      getData()
+    const fetchData = (category) => {
+      getData(category)
         .then((result) => {
           // Compare the new data with the previous data to ensure that the state is only updated when there are real changes in the data and avoid unnecessary re-renders. Because whitout this, React is detecting the data as a new object every time even if the data is the same.
           if (JSON.stringify(result) !== JSON.stringify(prevDataRef.current)) {
@@ -57,10 +57,10 @@ export default function Map() {
           console.error('Error:', error);
         });
     };
-    fetchData();
-    const interval = setInterval(fetchData, fetchInterval);
+    fetchData(category);
+    const interval = setInterval(fetchData(category), fetchInterval);
     return () => clearInterval(interval);
-  }, []);
+  }, [category]);
 
   // processPoint after a new data is fetched, to change their appearance a little bit/
   useEffect(() => {
@@ -118,13 +118,14 @@ export default function Map() {
 
           return latLon ? (
             <CustomMarker key={alpha2} position={latLon} opacity={0.6}>
-              <div className="custom-marker__point" data-region={regionPoint.regionName} data-user={c.channelUsername}>
+              <div className="custom-marker__point" data-region={regionPoint.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
                 <span className="custom-marker__bg bg-color"></span>
                 <span className="custom-marker__bg-pointer bg-color"></span>
                 <div className="image-container">
                   <img src={c.channelImage} alt="marker" />
                 </div>
-                <a className="text-container" target="_blank" href={`https://youtube.com/${c.channelUsername}`}>
+                {/* <a className="text-container" target="_blank" href={`https://youtube.com/${c.channelUsername}`}> */}
+                <a className="text-container" target="_blank" href={`https://youtube.com/channel/${c.channelId}`}>
                   <span className='channel-title'>{c.channelTitle}</span>
                   <span className="location">{regionPoint.regionName}</span>
                 </a>
