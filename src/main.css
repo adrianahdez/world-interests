@@ -4,7 +4,7 @@
   --country-fill-color: #1d1a16;
   --page-text-color: #ddcfcf;
   /* This is used to set the height of the map, so adjust based on the real footer height counting the vertical paddings, min-height, etc. */
-  --footer-height: 123px;
+  --footer-height: 136px;
   --link-color: #008dd1;
 }
 
