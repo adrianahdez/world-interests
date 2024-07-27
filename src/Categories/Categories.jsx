@@ -1,9 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Categories.scss';
 
-// Render Footer component
-export default function Categories({ category, setCategory }) {
+// Render Categories component
+export default function Categories({ category, setCategory, isDialogOpen, toggleDialog }) {
   // TODO: make a fetch to get categories from category-list.php and have it hardcoded in only one place.
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    if (isDialogOpen) {
+      // debugger;
+      dialogRef.current.showModal();
+    } else {
+      dialogRef.current.close();
+    }
+  }, [isDialogOpen]);
+
   const categoryNames = [
     {
       slug: 'music',
@@ -128,9 +139,15 @@ export default function Categories({ category, setCategory }) {
   ];
 
   return (
-    <nav className='categories'>
+    <dialog ref={dialogRef} className='categories'>
       <span className='categories__bg'></span>
       <div className="categories__content">
+        <menu>
+          <button className="cancelButton" type="reset" onClick={toggleDialog}>
+            {/* <img style={{ width: "18px" }} src="/img/icons/close.svg" /> */}
+            <span>X</span>
+          </button>
+        </menu>
         <h2 className="categories__title">Categories</h2>
         <ul className="categories__list">
           {categoryNames.map(({ slug, name }, index) => (
@@ -143,6 +160,6 @@ export default function Categories({ category, setCategory }) {
           ))}
         </ul>
       </div>
-    </nav>
+    </dialog>
   );
 }

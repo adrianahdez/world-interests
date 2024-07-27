@@ -1,0 +1,39 @@
+@use 'helpers' as *;
+
+dialog {
+  border: unset;
+  box-sizing: border-box;
+  background-color: transparent;
+  padding: 0;
+  overflow-y: clip;
+
+  menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    top: rem(24);
+    right: rem(28);
+    margin-block-end: 0;
+    margin-block-start: 0;
+    padding-left: 0;
+    z-index: 2;
+
+    .cancelButton {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      padding-block-end: 0;
+      padding-block-start: 0;
+      padding-inline-end: 0;
+      padding-inline-start: 0;
+      padding: 10px;
+      color: white;
+    }
+
+    @include respond-at(992) {
+      top: rem(30);
+      right: rem(30);
+    }
+  }
+}

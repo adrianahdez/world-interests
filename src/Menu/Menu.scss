@@ -1,0 +1,77 @@
+@use '../Globals/helpers' as *;
+
+.menu-toggle {
+  display: block;
+  -webkit-user-select: none;
+  user-select: none;
+  height: fit-content;
+
+  align-self: flex-end;
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 401;
+
+  .toggle-btn {
+    position: relative;
+    cursor: pointer;
+
+    /* The hamburger */
+    span {
+      display: block;
+      width: 24px;
+      height: 2.5px;
+      margin-bottom: rem(6);
+      position: relative;
+      background: var(--link-color, #1fa2e1);
+      transition: transform 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.3s ease;
+
+      &:first-child {
+        transform-origin: 0% 100%;
+      }
+
+      &:nth-child(2) {
+        transform-origin: 0% 0%;
+        width: 14px;
+        // Uncomment the following line to invert position of the middle line
+        // margin-left: 14px;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+
+html.burger-expanded {
+  .menu-toggle {
+    bottom: unset;
+
+    .toggle-btn {
+      +.menu {
+        transform: none !important;
+      }
+
+      span {
+
+        &:first-child {
+          margin-left: 0;
+          width: 24px;
+          // transform: rotate(45deg) translate(1px, 1px);
+          transform: rotate(45deg) translate(1px, -3px);
+        }
+
+        &:nth-child(2) {
+          opacity: 0;
+        }
+
+        &:last-child {
+          // transform: rotate(-45deg) translate(2px, -8px);
+          transform: rotate(-45deg) translate(6px, -7px);
+        }
+      }
+    }
+  }
+}

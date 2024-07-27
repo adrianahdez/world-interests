@@ -1,3 +1,13 @@
+/// Responsive management for mobile first
+/// @access public
+/// @param {integer} $breakpoint - Breakpoint value
+/// @requires $breakpoint
+@mixin respond-at($breakpoint: $global-breakpoint) {
+  @media only screen and (min-width: #{$breakpoint}px) {
+    @content;
+  }
+}
+
 /// Set a placeholder to the element.
 /// Usage example: @include placeholder { color: pink; }
 @mixin scroll($width, $height, $area-bg, $thumb-bg, $border-radius, $border-width: 0, $border-color: $area-bg) {
@@ -34,3 +44,15 @@
   }
 }
 
+/// Function to convert px to rem
+/// Pass $size in px (without 'px') to get the rules in rem
+/// @param {Number} $size - Size in px
+@function rem($size) {
+	$rem-size: $size " ";
+
+	@if $size !=null and $size !=auto and $size !=unset and $size !=inherit and $size !=initial and $size !=revert and $size !=none {
+		$rem-size: #{calc($size / 16)}rem;
+	}
+
+	@return #{$rem-size};
+}

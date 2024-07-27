@@ -1,7 +1,7 @@
-@use './mixins' as *;
+@use '../Globals/helpers' as *;
+@use '../Globals/modal' as *;
 
 .categories {
-  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: var(--menu-margin-top);
