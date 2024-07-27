@@ -3,9 +3,8 @@
 
 
 .sidebar.sidebar--map-point {
-  right: 0;
   z-index: 501;
-  left: unset;
+  width: auto;
 
   a {
     color: var(--link-color);
@@ -36,7 +35,8 @@
 
     &__top {
       align-items: center;
-      gap: 30px;
+      gap: 40px;
+      justify-content: space-between;
     }
 
     &__bottom {
@@ -47,6 +47,7 @@
     &__text {
       display: flex;
       flex-direction: column;
+      flex-grow: 1;
     }
 
     &__heading {
@@ -63,7 +64,8 @@
   }
 
   @include respond-at(768) {
-    margin-right: 24px;
+    margin-right: 0;
     margin-left: unset;
+    left: unset;
   }
 }

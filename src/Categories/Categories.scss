@@ -2,10 +2,9 @@
 @use '../Globals/Components/sidebars' as *;
 
 .sidebar.sidebar--categories {
-  left: 0;
 
   @include respond-at(768) {
-    margin-left: 24px;
+    margin-left: 0;
     margin-right: unset;
   }
 }
