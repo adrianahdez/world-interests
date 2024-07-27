@@ -30,7 +30,7 @@ export default function InfoSidebar({ mapPoint, setPoint, isSidebarOpen, toggleS
             <span>X</span>
           </button>
         </menu>
-        <h2 className="sidebar__title">Categories</h2>
+        <h2 className="sidebar__title">Channel info</h2>
         <ul className="sidebar__list">
           {/* Point info here */}
           Lorem ipsum dolor sit amet

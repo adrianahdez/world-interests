@@ -1,6 +1,14 @@
+@use '../Globals/helpers' as *;
 @use '../Globals/Components/sidebars' as *;
 
 
 .sidebar {
-  &--map-point {}
+  &--map-point {
+    right: 0;
+  }
+
+  @include respond-at(768) {
+    margin-right: 24px;
+    margin-left: unset;
+  }
 }

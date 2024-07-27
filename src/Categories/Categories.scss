@@ -1,5 +1,13 @@
+@use '../Globals/helpers' as *;
 @use '../Globals/Components/sidebars' as *;
 
 .sidebar {
-  &--categories {}
+  &--categories {
+    left: 0;
+  }
+
+  @include respond-at(768) {
+    margin-left: 24px;
+    margin-right: unset;
+  }
 }
