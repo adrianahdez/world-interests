@@ -1,0 +1,21 @@
+.close-icon {
+  .toggle-btn {
+    span {
+      &:first-child {
+        margin-left: 0;
+        width: 24px;
+        // transform: rotate(45deg) translate(1px, 1px);
+        transform: rotate(45deg) translate(1px, -3px);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      &:last-child {
+        // transform: rotate(-45deg) translate(2px, -8px);
+        transform: rotate(-45deg) translate(6px, -7px);
+      }
+    }
+  }
+}

@@ -62,6 +62,12 @@
     font-size: 28px;
   }
 
+  .close-icon {
+    left: unset;
+    top: 0;
+    right: -10px;
+  }
+
   .active a {
     color: var(--link-color);
     font-weight: 600;

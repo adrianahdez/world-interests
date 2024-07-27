@@ -21,10 +21,13 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
       <span className='sidebar__bg'></span>
       <div className="sidebar__content">
         <menu>
-          <button className="cancel-button" type="reset" onClick={() => toggleSidebar(false)}>
-            {/* <img style={{ width: "18px" }} src="/img/icons/close.svg" /> */}
-            <span>X</span>
-          </button>
+          <div className='menu-toggle close-icon'>
+            <button type="reset" className='toggle-btn' onClick={() => toggleSidebar(false)}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
         </menu>
         <h2 className="sidebar__title">Channel info</h2>
         <div className="sidebar__list">

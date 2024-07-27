@@ -13,7 +13,7 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
     }
   }, [isDialogOpen]);
 
-    // TODO: make a fetch to get categories from category-list.php and have it hardcoded in only one place.
+  // TODO: make a fetch to get categories from category-list.php and have it hardcoded in only one place.
   const categoryNames = [
     {
       slug: 'music',
@@ -142,10 +142,13 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
       <span className='sidebar__bg'></span>
       <div className="sidebar__content">
         <menu>
-          <button className="cancel-button" type="reset" onClick={toggleDialog}>
-            {/* <img style={{ width: "18px" }} src="/img/icons/close.svg" /> */}
-            <span>X</span>
-          </button>
+          <div className='menu-toggle close-icon'>
+            <button type="reset" className='toggle-btn' onClick={toggleDialog}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
         </menu>
         <h2 className="sidebar__title">Categories</h2>
         <ul className="sidebar__list">
