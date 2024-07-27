@@ -5,6 +5,7 @@
 .sidebar.sidebar--map-point {
   z-index: 501;
   width: auto;
+  max-width: 500px;
 
   a {
     color: var(--link-color);
@@ -19,7 +20,7 @@
     opacity: 1;
 
     @include respond-at(768) {
-      opacity: .45;
+      opacity: .65;
     }
   }
 
@@ -42,6 +43,11 @@
     &__bottom {
       flex-direction: column;
       align-items: flex-start;
+
+      h4,
+      h4 ~ p {
+        padding-left: 34px;
+      }
     }
 
     &__text {

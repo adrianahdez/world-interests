@@ -35,7 +35,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
               <a target="_blank" href={`https://youtube.com/channel/${c?.channelId}`}>{c?.channelTitle}</a>
               <h3 className='channel-content__heading'>Channel username:</h3>
               <p>{c?.channelUsername}</p>
-              <h3 className='channel-content__heading'>Region:</h3>
+              <h3 className='channel-content__heading'>Country/Region:</h3>
               <p>{mapPoint?.regionName}</p>
             </div>
           </div>
