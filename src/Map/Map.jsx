@@ -115,6 +115,7 @@ export default function Map({ category }) {
           const regionPoint = data[alpha2][0]
           const latLon = getCountryLatLon(alpha2);
           const c = regionPoint?.channel;
+          const channelImg = c?.channelImage ? c.channelImage : 'https://via.placeholder.com/80x80?text=Image+Not+Found';
 
           return latLon && typeof regionPoint !== 'undefined' ? (
             <CustomMarker key={alpha2} position={latLon} opacity={0.6}>
@@ -122,7 +123,7 @@ export default function Map({ category }) {
                 <span className="custom-marker__bg bg-color"></span>
                 <span className="custom-marker__bg-pointer bg-color"></span>
                 <div className="image-container">
-                  <img src={c.channelImage} alt="marker" />
+                  <img src={channelImg} alt="marker" />
                 </div>
                 {/* <a className="text-container" target="_blank" href={`https://youtube.com/${c.channelUsername}`}> */}
                 <a className="text-container" target="_blank" href={`https://youtube.com/channel/${c.channelId}`}>
