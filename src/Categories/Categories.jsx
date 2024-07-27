@@ -3,7 +3,6 @@ import './Categories.scss';
 
 // Render Categories component
 export default function Categories({ category, setCategory, isDialogOpen, toggleDialog }) {
-  // TODO: make a fetch to get categories from category-list.php and have it hardcoded in only one place.
   const dialogRef = useRef(null);
 
   useEffect(() => {
@@ -14,6 +13,7 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
     }
   }, [isDialogOpen]);
 
+    // TODO: make a fetch to get categories from category-list.php and have it hardcoded in only one place.
   const categoryNames = [
     {
       slug: 'music',

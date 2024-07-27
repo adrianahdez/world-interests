@@ -60,6 +60,8 @@ function setUpPointAttributes(point, pointLatLon) {
  * @param {Array} pointLatLon
  */
 function changePointAppearance(point, pointLatLon) {
+  if ( typeof point === 'undefined') return;
+
   let attrs = setUpPointAttributes(point, pointLatLon);
 
   let markerPoint = document.querySelector('.custom-marker__point[data-region="' + point.regionName + '"]');

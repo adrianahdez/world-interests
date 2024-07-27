@@ -86,9 +86,9 @@ export default function Map({ category }) {
     }
   }
 
-  const handleMarkerClick = (e) => {
-    console.log('marker clicked', e);
-  }
+  // const handleMarkerClick = (e) => {
+  //   console.log('marker clicked', e);
+  // }
 
   // Remove old markers before the new ones are rendered.
   // Because the markers are not removed from the map when the data is updated.
@@ -114,9 +114,9 @@ export default function Map({ category }) {
 
           const regionPoint = data[alpha2][0]
           const latLon = getCountryLatLon(alpha2);
-          const c = regionPoint.channel;
+          const c = regionPoint?.channel;
 
-          return latLon ? (
+          return latLon && typeof regionPoint !== 'undefined' ? (
             <CustomMarker key={alpha2} position={latLon} opacity={0.6}>
               <div className="custom-marker__point" data-region={regionPoint.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
                 <span className="custom-marker__bg bg-color"></span>
