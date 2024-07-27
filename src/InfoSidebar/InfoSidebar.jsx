@@ -43,7 +43,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
             <h2 className="channel-content__subheading">Statistics</h2>
             <div className='channel-content__text'>
               <h3 className='channel-content__heading'>Today's Most Popular Video: </h3>
-              <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>[VIDEO_NAME]</a>
+              <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
               <h4 className='channel-content__heading'>View Count: </h4>
               <p>{s?.viewCount}</p>
               <h4 className='channel-content__heading'>Like Count:</h4>
