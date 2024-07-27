@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './Categories.css';
+import './Categories.scss';
 
 // Render Footer component
 export default function Categories({ category, setCategory }) {

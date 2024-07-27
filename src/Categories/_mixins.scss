@@ -1,0 +1,36 @@
+/// Set a placeholder to the element.
+/// Usage example: @include placeholder { color: pink; }
+@mixin scroll($width, $height, $area-bg, $thumb-bg, $border-radius, $border-width: 0, $border-color: $area-bg) {
+  /* Rules only for Firefox */
+  scrollbar-width: $width;
+  scrollbar-color: $thumb-bg $area-bg;
+
+  &::-webkit-scrollbar {
+    /* width of the entire scrollbar */
+    width: $width;
+    height: $height;
+  }
+
+  &::-webkit-scrollbar-track {
+    /* color of the tracking area */
+    background: $area-bg;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    /* color of the scroll thumb */
+    background-color: $thumb-bg;
+    /* roundness of the scroll thumb */
+    border-radius: $border-radius;
+    /* creates padding around scroll thumb */
+    border: $border-width solid $border-color;
+  }
+
+  /* Safari */
+  @supports (-webkit-appearance: none) {
+    & {
+      scrollbar-width: $width;
+      scrollbar-height: $height;
+    }
+  }
+}
+
