@@ -2,12 +2,21 @@
 @use '../Globals/Components/sidebars' as *;
 
 
-.sidebar {
-  &--map-point {
-    right: 0;
+.sidebar.sidebar--map-point {
+  right: 0;
+  z-index: 501;
+  left: unset;
+
+  .a {
+    color: var(--link-color);
+  }
+
+  .sidebar__bg {
     opacity: 1;
-    z-index: 501;
-    left: unset;
+
+    @include respond-at(768) {
+      opacity: .45;
+    }
   }
 
   img {
