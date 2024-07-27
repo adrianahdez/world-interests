@@ -18,8 +18,10 @@
   position: absolute;
   bottom: -3px;
   left: 50%;
-  width: 16px;
-  height: 16px;
+  /* width: 16px;
+  height: 16px; */
+  width: 26px;
+  height: 26px;
   transform: translateX(-50%) rotate(45deg);
   transform-origin: center;
   z-index: 1;
