@@ -138,20 +138,20 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
   ];
 
   return (
-    <dialog ref={dialogRef} className='categories'>
-      <span className='categories__bg'></span>
-      <div className="categories__content">
+    <dialog ref={dialogRef} className='sidebar sidebar--categories'>
+      <span className='sidebar__bg'></span>
+      <div className="sidebar__content">
         <menu>
           <button className="cancelButton" type="reset" onClick={toggleDialog}>
             {/* <img style={{ width: "18px" }} src="/img/icons/close.svg" /> */}
             <span>X</span>
           </button>
         </menu>
-        <h2 className="categories__title">Categories</h2>
-        <ul className="categories__list">
+        <h2 className="sidebar__title">Categories</h2>
+        <ul className="sidebar__list">
           {categoryNames.map(({ slug, name }, index) => (
-            <li key={index} className={`categories__item${category === slug ? ' active' : ''}`}>
-              <a href="#" className="categories__link" data-category={slug} onClick={e => {
+            <li key={index} className={`sidebar__item${category === slug ? ' active' : ''}`}>
+              <a href="#" className="sidebar__link" data-category={slug} onClick={e => {
                 e.preventDefault();
                 setCategory(slug);
               }}>{name}</a>

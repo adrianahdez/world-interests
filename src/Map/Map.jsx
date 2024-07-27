@@ -36,7 +36,7 @@ import { processPoint } from './Points';
 //   return null
 // }
 
-export default function Map({ category }) {
+export default function Map({ category, toggleSidebar }) {
   // TODO: Center map in a better way in mobile.
 
   const [data, setData] = useState({});
@@ -119,17 +119,17 @@ export default function Map({ category }) {
 
           return latLon && typeof regionPoint !== 'undefined' ? (
             <CustomMarker key={alpha2} position={latLon} opacity={0.6}>
-              <div className="custom-marker__point" data-region={regionPoint.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
+              <div className="custom-marker__point" data-region={regionPoint.regionName} data-user={c.channelUsername} data-channel-id={c.channelId} onClick={toggleSidebar}>
                 <span className="custom-marker__bg bg-color"></span>
                 <span className="custom-marker__bg-pointer bg-color"></span>
                 <div className="image-container">
                   <img src={channelImg} alt="marker" />
                 </div>
                 {/* <a className="text-container" target="_blank" href={`https://youtube.com/${c.channelUsername}`}> */}
-                <a className="text-container" target="_blank" href={`https://youtube.com/channel/${c.channelId}`}>
+                <div className="text-container" target="_blank" href={`https://youtube.com/channel/${c.channelId}`}>
                   <span className='channel-title'>{c.channelTitle}</span>
                   <span className="location">{regionPoint.regionName}</span>
-                </a>
+                </div>
               </div>
             </CustomMarker>
           ) : null

@@ -3,16 +3,26 @@ import Map from '../Map/Map';
 import Categories from '../Categories/Categories';
 import Footer from '../Footer/Footer';
 import Menu from '../Menu/Menu';
+import InfoSidebar from '../InfoSidebar/InfoSidebar';
 
 // Render App.
 export default function App() {
   // Set the category by default (e.g: music) which the map will show when it loads before the user selects any category.
   const [category, setCategory] = useState('music');
+  // Category dialog state.
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const [mapPoint, setPoint] = useState(null);
+  // InfoSidebar dialog state.
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleDialog = () => {
     setIsDialogOpen(!isDialogOpen);
   };
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  }
 
   return (
     <div className='app-container'>
@@ -23,7 +33,13 @@ export default function App() {
         isDialogOpen={isDialogOpen}
         toggleDialog={toggleDialog}
       />
-      <Map category={category} />
+      <InfoSidebar
+        mapPoint={mapPoint}
+        setPoint={setPoint}
+        isSidebarOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}
+      />
+      <Map category={category} toggleSidebar={toggleSidebar} />
       <Footer />
     </div>
   );
