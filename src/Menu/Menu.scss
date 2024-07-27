@@ -45,33 +45,29 @@
   }
 }
 
+.menu-toggle.open {
+  bottom: unset;
 
-html.burger-expanded {
-  .menu-toggle {
-    bottom: unset;
+  .toggle-btn {
+    +.menu {
+      transform: none !important;
+    }
 
-    .toggle-btn {
-      +.menu {
-        transform: none !important;
+    span {
+      &:first-child {
+        margin-left: 0;
+        width: 24px;
+        // transform: rotate(45deg) translate(1px, 1px);
+        transform: rotate(45deg) translate(1px, -3px);
       }
 
-      span {
+      &:nth-child(2) {
+        opacity: 0;
+      }
 
-        &:first-child {
-          margin-left: 0;
-          width: 24px;
-          // transform: rotate(45deg) translate(1px, 1px);
-          transform: rotate(45deg) translate(1px, -3px);
-        }
-
-        &:nth-child(2) {
-          opacity: 0;
-        }
-
-        &:last-child {
-          // transform: rotate(-45deg) translate(2px, -8px);
-          transform: rotate(-45deg) translate(6px, -7px);
-        }
+      &:last-child {
+        // transform: rotate(-45deg) translate(2px, -8px);
+        transform: rotate(-45deg) translate(6px, -7px);
       }
     }
   }

@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <div className='app-container'>
-      <Menu toggleDialog={toggleDialog} />
+      <Menu isDialogOpen={isDialogOpen} toggleDialog={toggleDialog} />
       <Categories
         category={category}
         setCategory={setCategory}
