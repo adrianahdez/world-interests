@@ -9,8 +9,8 @@ import InfoSidebar from '../InfoSidebar/InfoSidebar';
 export default function App() {
   // Set the category by default (e.g: music) which the map will show when it loads before the user selects any category.
   const [category, setCategory] = useState('music');
-  // Category dialog state.
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  // Category dialog first state. Set to true to show the dialog when the app loads or false to hide it.
+  const [isDialogOpen, setIsDialogOpen] = useState(true);
 
   const [mapPoint, setPoint] = useState(null);
   // InfoSidebar dialog state.
