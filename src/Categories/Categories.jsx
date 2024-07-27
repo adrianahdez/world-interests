@@ -7,7 +7,7 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
 
   useEffect(() => {
     if (isDialogOpen) {
-      dialogRef.current.showModal();
+      dialogRef.current.show();
     } else {
       dialogRef.current.close();
     }
