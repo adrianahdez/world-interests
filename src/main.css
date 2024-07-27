@@ -6,10 +6,17 @@
   /* This is used to set the height of the map, so adjust based on the real footer height counting the vertical paddings, min-height, etc. */
   --footer-height: 136px;
   --link-color: #1fa2e1;
-  --menu-margin-top: 30px;
+  --menu-margin-top: 70px;
   --menu-margin-bottom: 40px;
   --distance-btw-content-and-footer: 24px;
 }
+
+/* @media screen and (max-width: 768px) {
+  :root {
+    --menu-margin-top: 70px;
+  }
+  
+} */
 
 html,
 body {

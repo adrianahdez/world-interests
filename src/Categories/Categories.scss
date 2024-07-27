@@ -10,13 +10,12 @@
   z-index: 500;
   left: 0;
   color: white;
-  margin-left: 30px;
+  margin-left: auto;
+  margin-right: auto;
   letter-spacing: .7px;
   line-height: 1.7;
   height: calc(100vh - var(--footer-height) - var(--menu-margin-top) - var(--menu-margin-bottom) - var(--distance-btw-content-and-footer));
   margin-bottom: var(--menu-margin-bottom);
-
-
 
   &__bg {
     background: var(--country-fill-color);
@@ -64,5 +63,10 @@
   .active a {
     color: var(--link-color);
     font-weight: 600;
+  }
+
+  @include respond-at(768) {
+    margin-left: 24px;
+    margin-right: unset;
   }
 }

@@ -155,6 +155,8 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
               <a href="#" className="categories__link" data-category={slug} onClick={e => {
                 e.preventDefault();
                 setCategory(slug);
+                // TODO: remove next line and change the current dialog Component to be a custom modal to leave it open when the user clicks on a category.
+                toggleDialog();
               }}>{name}</a>
             </li>
           ))}
