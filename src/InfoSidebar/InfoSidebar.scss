@@ -4,9 +4,9 @@
 
 
 .sidebar.sidebar--map-point {
+  $mobile-breakpoint: 578;
   z-index: 501;
   width: auto;
-  max-width: 500px;
 
   a {
     color: var(--link-color);
@@ -26,8 +26,8 @@
   }
 
   img {
-    width: 190px;
-    height: 190px;
+    width: 220px;
+    height: 220px;
     object-fit: cover;
   }
 
@@ -36,9 +36,16 @@
     justify-content: center;
 
     &__top {
-      align-items: center;
-      gap: 40px;
+      flex-direction: column;
+      align-items: flex-start;
       justify-content: space-between;
+      gap: 20px;
+
+      @include respond-at($mobile-breakpoint) {
+        flex-direction: row;
+        align-items: center;
+        gap: 40px;
+      }
     }
 
     &__bottom {
@@ -46,8 +53,10 @@
       align-items: flex-start;
 
       h4,
-      h4 ~ p {
-        padding-left: 34px;
+      h4~p {
+        @include respond-at($mobile-breakpoint) {
+          padding-left: 34px;
+        }
       }
     }
 
@@ -74,5 +83,12 @@
     margin-right: 0;
     margin-left: unset;
     left: unset;
+    max-width: 500px;
+  }
+}
+
+.menu-toggle:has(~ dialog.sidebar--map-point[open]) {
+  @include respond-max(767) {
+    display: none;
   }
 }

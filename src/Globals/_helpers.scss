@@ -8,6 +8,16 @@
   }
 }
 
+/// Responsive management for desktop first (max-width)
+/// @access public
+/// @param {integer} $breakpoint - Breakpoint value
+/// @requires $breakpoint
+@mixin respond-max($breakpoint: $global-breakpoint) {
+  @media only screen and (max-width: #{$breakpoint}px) {
+    @content;
+  }
+}
+
 /// Set a placeholder to the element.
 /// Usage example: @include placeholder { color: pink; }
 @mixin scroll($width, $height, $area-bg, $thumb-bg, $border-radius, $border-width: 0, $border-color: $area-bg) {
@@ -48,11 +58,11 @@
 /// Pass $size in px (without 'px') to get the rules in rem
 /// @param {Number} $size - Size in px
 @function rem($size) {
-	$rem-size: $size " ";
+  $rem-size: $size " ";
 
-	@if $size !=null and $size !=auto and $size !=unset and $size !=inherit and $size !=initial and $size !=revert and $size !=none {
-		$rem-size: #{calc($size / 16)}rem;
-	}
+  @if $size !=null and $size !=auto and $size !=unset and $size !=inherit and $size !=initial and $size !=revert and $size !=none {
+    $rem-size: #{calc($size / 16)}rem;
+  }
 
-	@return #{$rem-size};
+  @return #{$rem-size};
 }
