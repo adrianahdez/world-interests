@@ -115,12 +115,9 @@ export default function Map({ category, toggleSidebar, mapPoint, setMapPoint }) 
 
           const regionPoint = data[alpha2][0]
           const latLon = getCountryLatLon(alpha2);
-          // const channelImg = c?.channelImage ? c.channelImage : 'https://via.placeholder.com/100x100?text=Image+Not+Found';
           if (regionPoint && regionPoint.channel) {
             regionPoint.channel.channelImage = regionPoint.channel.channelImage || ImageNotFound;
           }
-
-          // regionPoint.channel.channelImage = typeof regionPoint?.channel?.channelImage !== 'undefined' ? regionPoint.channel.channelImage : `${ImageNotFound}`;
           const c = regionPoint?.channel;
 
           return latLon && typeof regionPoint !== 'undefined' ? (
@@ -131,8 +128,7 @@ export default function Map({ category, toggleSidebar, mapPoint, setMapPoint }) 
                 <div className="image-container">
                   <img src={c.channelImage} alt="marker" />
                 </div>
-                {/* <a className="text-container" target="_blank" href={`https://youtube.com/${c.channelUsername}`}> */}
-                <div className="text-container" target="_blank" href={`https://youtube.com/channel/${c.channelId}`}>
+                <div className="text-container">
                   <span className='channel-title'>{c.channelTitle}</span>
                   <span className="location">{regionPoint.regionName}</span>
                 </div>

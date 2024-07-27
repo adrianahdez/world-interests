@@ -29,28 +29,28 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
         <h2 className="sidebar__title">Channel info</h2>
         <div className="sidebar__list">
           <div className='channel-content channel-content__top'>
-          <img src={c?.channelImage} alt="marker" />
-          <div className='channel-content__text'>
-            <h3 className='channel-content__heading'>Channel Name: </h3>
-            <p>{c?.channelTitle}</p>
-            <h3 className='channel-content__heading'>Channel username:</h3>
-            <p>{c?.channelUsername}</p>
-            <h3 className='channel-content__heading'>Region:</h3>
-            <p>{mapPoint?.regionName}</p>
-          </div>
+            <img src={c?.channelImage} alt="marker" />
+            <div className='channel-content__text'>
+              <h3 className='channel-content__heading'>Channel Name: </h3>
+              <a target="_blank" href={`https://youtube.com/channel/${c?.channelId}`}>{c?.channelTitle}</a>
+              <h3 className='channel-content__heading'>Channel username:</h3>
+              <p>{c?.channelUsername}</p>
+              <h3 className='channel-content__heading'>Region:</h3>
+              <p>{mapPoint?.regionName}</p>
+            </div>
           </div>
           <div className='channel-content channel-content__bottom'>
-          <h2 className="channel-content__subheading">Statistics</h2>
-          <div className='channel-content__text'>
-            <h3 className='channel-content__heading'>Today's Most Popular Video: </h3>
-            <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>[VIDEO_NAME]</a>
-            <h4 className='channel-content__heading'>View Count: </h4>
-            <p>{s?.viewCount}</p>
-            <h4 className='channel-content__heading'>Like Count:</h4>
-            <p>{s?.likeCount}</p>
-            <h4 className='channel-content__heading'>Comment Count:</h4>
-            <p>{s?.commentCount}</p>
-          </div>
+            <h2 className="channel-content__subheading">Statistics</h2>
+            <div className='channel-content__text'>
+              <h3 className='channel-content__heading'>Today's Most Popular Video: </h3>
+              <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>[VIDEO_NAME]</a>
+              <h4 className='channel-content__heading'>View Count: </h4>
+              <p>{s?.viewCount}</p>
+              <h4 className='channel-content__heading'>Like Count:</h4>
+              <p>{s?.likeCount}</p>
+              <h4 className='channel-content__heading'>Comment Count:</h4>
+              <p>{s?.commentCount}</p>
+            </div>
           </div>
         </div>
       </div>
