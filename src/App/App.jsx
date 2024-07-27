@@ -10,7 +10,6 @@ export default function App() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const toggleDialog = () => {
-    // debugger;
     setIsDialogOpen(!isDialogOpen);
   };
 

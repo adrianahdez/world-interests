@@ -8,7 +8,6 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
 
   useEffect(() => {
     if (isDialogOpen) {
-      // debugger;
       dialogRef.current.showModal();
     } else {
       dialogRef.current.close();
