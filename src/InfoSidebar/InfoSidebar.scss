@@ -7,8 +7,13 @@
   z-index: 501;
   left: unset;
 
-  .a {
+  a {
     color: var(--link-color);
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
   }
 
   .sidebar__bg {
@@ -47,6 +52,8 @@
     &__heading {
       font-weight: 600;
       margin-top: 14px;
+      margin-bottom: 0;
+      font-size: 16px;
     }
 
     &__subheading {

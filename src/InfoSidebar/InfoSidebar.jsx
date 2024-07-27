@@ -15,7 +15,6 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
 
   const c = mapPoint?.channel;
   const s = mapPoint?.statistics;
-  const channelImg = c?.channelImage ? c.channelImage : 'https://via.placeholder.com/80x80?text=Image+Not+Found';
 
   return (
     <dialog ref={sidebarRef} className='sidebar sidebar--map-point'>
@@ -30,14 +29,14 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
         <h2 className="sidebar__title">Channel info</h2>
         <div className="sidebar__list">
           <div className='channel-content channel-content__top'>
-          <img src={channelImg} alt="marker" />
+          <img src={c?.channelImage} alt="marker" />
           <div className='channel-content__text'>
-            <span className='channel-content__heading'>Channel Name: </span>
-            <span>{c?.channelTitle}</span>
-            <span className='channel-content__heading'>Channel username:</span>
-            <span>{c?.channelUsername}</span>
-            <span className='channel-content__heading'>Region:</span>
-            <span>{mapPoint?.regionName}</span>
+            <h3 className='channel-content__heading'>Channel Name: </h3>
+            <p>{c?.channelTitle}</p>
+            <h3 className='channel-content__heading'>Channel username:</h3>
+            <p>{c?.channelUsername}</p>
+            <h3 className='channel-content__heading'>Region:</h3>
+            <p>{mapPoint?.regionName}</p>
           </div>
           </div>
           <div className='channel-content channel-content__bottom'>
@@ -45,12 +44,12 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
           <div className='channel-content__text'>
             <h3 className='channel-content__heading'>Today's Most Popular Video: </h3>
             <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>[VIDEO_NAME]</a>
-            <span className='channel-content__heading'>View Count: </span>
-            <span>{s?.viewCount}</span>
-            <span className='channel-content__heading'>Like Count:</span>
-            <span>{s?.likeCount}</span>
-            <span className='channel-content__heading'>Comment Count:</span>
-            <span>{s?.commentCount}</span>
+            <h4 className='channel-content__heading'>View Count: </h4>
+            <p>{s?.viewCount}</p>
+            <h4 className='channel-content__heading'>Like Count:</h4>
+            <p>{s?.likeCount}</p>
+            <h4 className='channel-content__heading'>Comment Count:</h4>
+            <p>{s?.commentCount}</p>
           </div>
           </div>
         </div>

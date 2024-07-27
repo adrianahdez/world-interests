@@ -6,6 +6,7 @@ import { setConfig } from './geoJsonConfig';
 import CustomMarker from '../CustomMarker/CustomMarker';
 import { getCountryLatLon, getData } from './Data';
 import { processPoint } from './Points';
+import ImageNotFound from '../Globals/img/image-not-found.png';
 
 // Know the center of the map.
 // function MyComponent() {
@@ -114,8 +115,13 @@ export default function Map({ category, toggleSidebar, mapPoint, setMapPoint }) 
 
           const regionPoint = data[alpha2][0]
           const latLon = getCountryLatLon(alpha2);
+          // const channelImg = c?.channelImage ? c.channelImage : 'https://via.placeholder.com/100x100?text=Image+Not+Found';
+          if (regionPoint && regionPoint.channel) {
+            regionPoint.channel.channelImage = regionPoint.channel.channelImage || ImageNotFound;
+          }
+
+          // regionPoint.channel.channelImage = typeof regionPoint?.channel?.channelImage !== 'undefined' ? regionPoint.channel.channelImage : `${ImageNotFound}`;
           const c = regionPoint?.channel;
-          const channelImg = c?.channelImage ? c.channelImage : 'https://via.placeholder.com/80x80?text=Image+Not+Found';
 
           return latLon && typeof regionPoint !== 'undefined' ? (
             <CustomMarker key={alpha2} position={latLon} opacity={0.6} toggleSidebar={toggleSidebar} mapPoint={regionPoint} setMapPoint={setMapPoint}>
@@ -123,7 +129,7 @@ export default function Map({ category, toggleSidebar, mapPoint, setMapPoint }) 
                 <span className="custom-marker__bg bg-color"></span>
                 <span className="custom-marker__bg-pointer bg-color"></span>
                 <div className="image-container">
-                  <img src={channelImg} alt="marker" />
+                  <img src={c.channelImage} alt="marker" />
                 </div>
                 {/* <a className="text-container" target="_blank" href={`https://youtube.com/${c.channelUsername}`}> */}
                 <div className="text-container" target="_blank" href={`https://youtube.com/channel/${c.channelId}`}>
