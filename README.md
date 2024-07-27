@@ -1,8 +1,8 @@
 # What is this?
 
-A frontend app developed in React that displays the main interests around the world on a map, categorized by various topics.
+A frontend app developed in React that displays the main interests around the world on an interactive map, categorized by various topics.
 
-The data is obtained from the Youtube API, so you can see the most popular videos and channels that is trending in each country in real-time.
+The data is obtained from the YouTube API, so you can see the most popular channels and trending videos in each country in real-time.
 
 ### Categories:
 
