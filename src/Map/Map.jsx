@@ -36,7 +36,7 @@ import { processPoint } from './Points';
 //   return null
 // }
 
-export default function Map({ category, toggleSidebar }) {
+export default function Map({ category, toggleSidebar, mapPoint, setMapPoint }) {
   // TODO: Center map in a better way in mobile.
 
   const [data, setData] = useState({});
@@ -118,8 +118,8 @@ export default function Map({ category, toggleSidebar }) {
           const channelImg = c?.channelImage ? c.channelImage : 'https://via.placeholder.com/80x80?text=Image+Not+Found';
 
           return latLon && typeof regionPoint !== 'undefined' ? (
-            <CustomMarker key={alpha2} position={latLon} opacity={0.6}>
-              <div className="custom-marker__point" data-region={regionPoint.regionName} data-user={c.channelUsername} data-channel-id={c.channelId} onClick={toggleSidebar}>
+            <CustomMarker key={alpha2} position={latLon} opacity={0.6} toggleSidebar={toggleSidebar} mapPoint={regionPoint} setMapPoint={setMapPoint}>
+              <div className="custom-marker__point" data-region={regionPoint.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
                 <span className="custom-marker__bg bg-color"></span>
                 <span className="custom-marker__bg-pointer bg-color"></span>
                 <div className="image-container">

@@ -142,7 +142,7 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
       <span className='sidebar__bg'></span>
       <div className="sidebar__content">
         <menu>
-          <button className="cancelButton" type="reset" onClick={toggleDialog}>
+          <button className="cancel-button" type="reset" onClick={toggleDialog}>
             {/* <img style={{ width: "18px" }} src="/img/icons/close.svg" /> */}
             <span>X</span>
           </button>

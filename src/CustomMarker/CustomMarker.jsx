@@ -4,7 +4,7 @@ import { useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import './CustomMarker.css';
 
-const CustomMarker = ({ position, children, ...props }) => {
+const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint, ...props }) => {
   const containerRef = useRef(null);
   const map = useMap(); // Get the map instance
 
@@ -25,9 +25,14 @@ const CustomMarker = ({ position, children, ...props }) => {
       });
 
       // Create the marker with the position and the custom icon
-      L.marker(position, { icon }).addTo(map);
+      const marker = L.marker(position, { icon }).addTo(map);
+      marker.on('click', () => {
+        // The sidebar will always be opened on marker click
+          toggleSidebar(true);
+          setMapPoint(mapPoint);
+      });
     }
-  }, [position, children, map]);
+  }, [position, children, map, toggleSidebar]);
 
   return (
     <div ref={containerRef} style={{ display: 'none' }}>

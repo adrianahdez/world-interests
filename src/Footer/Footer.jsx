@@ -7,7 +7,7 @@ export default function Footer() {
     <footer>
       <div className="footer-content">
         <div className="what-is-this">
-          <span className="i1">Which Youtube channels are most popular now (realtime)</span>
+          <h1 className="i1">Which Youtube channels are most popular now (realtime)</h1>
           <span className="i2">Data obtained from the YouTube API - You are viewing the #1 trending video channel from each country.</span>
         </div>
         <span className="developer">

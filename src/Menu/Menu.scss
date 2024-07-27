@@ -23,7 +23,8 @@
       height: 2.5px;
       margin-bottom: rem(6);
       position: relative;
-      background: var(--link-color, #1fa2e1);
+      // background: var(--link-color, #1fa2e1);
+      background: white;
       transition: transform 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.3s ease;
 
       &:first-child {

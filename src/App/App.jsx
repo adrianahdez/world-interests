@@ -12,7 +12,7 @@ export default function App() {
   // Category dialog first state. Set to true to show the dialog when the app loads or false to hide it.
   const [isDialogOpen, setIsDialogOpen] = useState(true);
 
-  const [mapPoint, setPoint] = useState(null);
+  const [mapPoint, setMapPoint] = useState(null);
   // InfoSidebar dialog state.
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -20,8 +20,8 @@ export default function App() {
     setIsDialogOpen(!isDialogOpen);
   };
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
+  const toggleSidebar = (open = true) => {
+    setIsSidebarOpen(open);
   }
 
   return (
@@ -35,11 +35,11 @@ export default function App() {
       />
       <InfoSidebar
         mapPoint={mapPoint}
-        setPoint={setPoint}
+        setMapPoint={setMapPoint}
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
       />
-      <Map category={category} toggleSidebar={toggleSidebar} />
+      <Map category={category} toggleSidebar={toggleSidebar} mapPoint={mapPoint} setMapPoint={setMapPoint} />
       <Footer />
     </div>
   );
