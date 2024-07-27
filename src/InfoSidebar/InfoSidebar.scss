@@ -5,6 +5,8 @@
 .sidebar {
   &--map-point {
     right: 0;
+    opacity: 1;
+    z-index: 501;
   }
 
   @include respond-at(768) {

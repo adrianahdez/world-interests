@@ -14,14 +14,7 @@ export default function InfoSidebar({ mapPoint, setPoint, isSidebarOpen, toggleS
   }, [isSidebarOpen]);
 
   return (
-    <dialog ref={sidebarRef} className='sidebar sidebar--map-point'  style={{
-      // TODO: Temporal
-      left: 'unset',
-      right: '24px',
-      // display: 'flex',
-      opacity: 1,
-      zIndex: 501,
-    }}>
+    <dialog ref={sidebarRef} className='sidebar sidebar--map-point'>
       <span className='sidebar__bg'></span>
       <div className="sidebar__content">
         <menu>
