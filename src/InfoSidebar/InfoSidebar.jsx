@@ -5,12 +5,16 @@ import Player from '../Player/Player';
 // Render InfoSidebar component
 export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) {
   const sidebarRef = useRef(null);
+  const playerRef = useRef(null);
 
   useEffect(() => {
     if (isSidebarOpen) {
       sidebarRef.current.show();
     } else {
       sidebarRef.current.close();
+      if (playerRef.current) {
+        playerRef.current.pauseVideo();
+      }
     }
   }, [isSidebarOpen]);
 
@@ -55,7 +59,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
               <h4 className='channel-content__heading'>Comment Count:</h4>
               <p>{s?.commentCount}</p>
             </div>
-            {mapPoint?.idVideo && mapPoint.idVideo.trim() !== '' && <Player idVideo={mapPoint.idVideo} />}
+            {mapPoint?.idVideo && mapPoint.idVideo.trim() !== '' && <Player ref={playerRef}  idVideo={mapPoint.idVideo} />}
           </div>
         </div>
       </div>
