@@ -39,6 +39,6 @@ The data is obtained from the YouTube API, so you can see the most popular chann
 
 # See it in action
 
-[Go to website](https://adrianahdez.github.io/world-interests/) and enjoy!
+[Go to website](https://worldinterests.midri.net/) and enjoy!
 
 [Backend repository](https://github.com/adrianahdez/world-interests-backend) (private).
