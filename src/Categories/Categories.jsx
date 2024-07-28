@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import './Categories.scss';
 
 // Render Categories component
-export default function Categories({ category, setCategory, isDialogOpen, toggleDialog }) {
+export default function Categories({ category, setCategory, isDialogOpen, toggleDialog, toggleSidebar }) {
   const dialogRef = useRef(null);
 
   useEffect(() => {
@@ -157,6 +157,7 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
               <a href="#" className="sidebar__link" data-category={slug} onClick={e => {
                 e.preventDefault();
                 setCategory(slug);
+                toggleSidebar(false);
               }}>{name}</a>
             </li>
           ))}

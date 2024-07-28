@@ -42,6 +42,7 @@ export default function App() {
         setCategory={setCategory}
         isDialogOpen={isDialogOpen}
         toggleDialog={toggleDialog}
+        toggleSidebar={toggleSidebar}
       />
       <InfoSidebar
         mapPoint={mapPoint}
