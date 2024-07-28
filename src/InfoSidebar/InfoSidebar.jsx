@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import './InfoSidebar.scss';
+import Player from '../Player/Player';
 
 // Render InfoSidebar component
 export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) {
@@ -54,6 +55,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
               <h4 className='channel-content__heading'>Comment Count:</h4>
               <p>{s?.commentCount}</p>
             </div>
+            {mapPoint?.idVideo && mapPoint.idVideo.trim() !== '' && <Player idVideo={mapPoint.idVideo} />}
           </div>
         </div>
       </div>
