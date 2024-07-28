@@ -119,6 +119,7 @@
 
 .custom-marker__container:hover .custom-marker__bg {
   opacity: .9;
+  filter: brightness(0.5);
 }
 
 .custom-marker__container:hover .custom-marker__bg-pointer {

@@ -3,10 +3,9 @@ let mapHeight = 0; // height of the map
 let scaleFactor = 0; // scale factor for the map
 
 // Function to convert a character to hexadecimal value
-function convertToHex(v) {
+function convertToHex(v, index) {
   v = v.toLowerCase().charCodeAt(0);
-  v = (parseInt(255 / 28 * (v - 48) / 5));
-  if (v > 128) v = 128;
+  v = (parseInt(255 / 28 * (v - 48) / 5) + index * 50) % 256;
   v = v.toString(16);
   if (v.length == 1) v = '0' + v;
   return v;
@@ -37,10 +36,10 @@ function setUpPointAttributes(point, pointLatLon) {
 
   // Determine background color based on name value
   var bgColor = '#5962a1';
-  if (typeof name[0] !== 'undefined') bgColor = convertToHex(name[0]);
-  if (typeof name[1] !== 'undefined') bgColor += convertToHex(name[1]);
+  if (typeof name[0] !== 'undefined') bgColor = convertToHex(name[0], 0);
+  if (typeof name[1] !== 'undefined') bgColor += convertToHex(name[1], 1);
   else bgColor += 'cc';
-  if (typeof name[2] !== 'undefined') bgColor += convertToHex(name[2]);
+  if (typeof name[2] !== 'undefined') bgColor += convertToHex(name[2], 2);
   else bgColor += 'cc';
 
   attributes = {
@@ -60,7 +59,7 @@ function setUpPointAttributes(point, pointLatLon) {
  * @param {Array} pointLatLon
  */
 function changePointAppearance(point, pointLatLon) {
-  if ( typeof point === 'undefined') return;
+  if (typeof point === 'undefined') return;
 
   let attrs = setUpPointAttributes(point, pointLatLon);
 
