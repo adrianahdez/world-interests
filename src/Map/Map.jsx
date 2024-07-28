@@ -1,3 +1,5 @@
+// ./countries-and-us-states.geo.json is a file that contains the coordinates of the countries and US states. Not used at the moment.
+// import countries from './countries-and-us-states.geo.json';
 import countries from './countries.geo.json';
 import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, GeoJSON, Marker } from 'react-leaflet'

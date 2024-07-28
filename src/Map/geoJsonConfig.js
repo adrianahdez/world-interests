@@ -15,7 +15,7 @@ export function setConfig({ properties }) {
     color: 'var(--country-delimiter-color)',
     opacity: 1,
     fillColor: 'var(--country-fill-color)',
-    fillColor: getColor(properties.density),
+    // fillColor: getColor(properties.density),
     fillOpacity: 1,
     dashArray: '3',
   };
