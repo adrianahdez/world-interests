@@ -150,7 +150,7 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
             </button>
           </div>
         </menu>
-        <h2 className="sidebar__title">Categories</h2>
+        <h2 className="sidebar__title">YouTube<br></br> Categories</h2>
         <ul className="sidebar__list">
           {categoryNames.map(({ slug, name }, index) => (
             <li key={index} className={`sidebar__item${category === slug ? ' active' : ''}`}>

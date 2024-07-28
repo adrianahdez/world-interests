@@ -5,6 +5,10 @@
 .sidebar.sidebar--categories {
   min-width: 300px;
 
+  .sidebar__title {
+    line-height: 1.3;
+  }
+
   @include respond-at(768) {
     margin-left: 0;
     margin-right: unset;
