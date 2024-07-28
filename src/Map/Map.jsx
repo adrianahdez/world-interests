@@ -76,7 +76,7 @@ export default function Map({ category, toggleSidebar, mapPoint, setMapPoint }) 
   const mapConfig = {
     center: [0, 0],
     zoom: 3,
-    minZoom: 2,
+    minZoom: 1,
     maxZoom: 5,
     scrollWheelZoom: true,
     zoomControl: false,
