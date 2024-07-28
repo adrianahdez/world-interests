@@ -11,7 +11,7 @@ export default function App() {
   // Set the category by default (e.g: music) which the map will show when it loads before the user selects any category.
   const [category, setCategory] = useState('music');
   // Category dialog first state. Set to true to show the dialog when the app loads or false to hide it.
-  const [isDialogOpen, setIsDialogOpen] = useState(localStorage.getItem('isDialogOpen') === 'true' || false);
+  const [isDialogOpen, setIsDialogOpen] = useState(() => setDefault());
 
   const [mapPoint, setMapPoint] = useState(null);
   // InfoSidebar dialog state.
@@ -25,6 +25,12 @@ export default function App() {
 
   const toggleSidebar = (open = true) => {
     setIsSidebarOpen(open);
+  }
+
+  // If the state is not set, return true to show the dialog by default. If the state is set, return the state.
+  function setDefault() {
+    const defaultState = localStorage.getItem('isDialogOpen');
+    return defaultState === null ? true : defaultState === 'true';
   }
 
   return (
