@@ -4,7 +4,7 @@
   --country-fill-color: #16161d;
   --page-text-color: #ddcfcf;
   /* This is used to set the height of the map, so adjust based on the real footer height counting the vertical paddings, min-height, etc. */
-  --footer-height: 103.5px;
+  --footer-height: 108px;
   --link-color: #1fa2e1;
   --menu-margin-top: 70px;
   --menu-margin-bottom: 40px;
@@ -13,9 +13,8 @@
 
 @media screen and (max-width: 604px) {
   :root {
-    --footer-height: 145px;
+    --footer-height: 154px;
   }
-  
 }
 
 html,
