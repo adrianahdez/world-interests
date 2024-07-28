@@ -76,7 +76,7 @@ export default function Map({ category, toggleSidebar, mapPoint, setMapPoint }) 
   }, [data]);
 
   const mapConfig = {
-    center: [20, 0], // Center of the map. We set it a bit to the upper side to have a better view of the countries.
+    center: [25, 0], // Center of the map. We set it a bit to the upper side to have a better view of the countries.
     zoom: 3,
     minZoom: 1,
     maxZoom: 5,
