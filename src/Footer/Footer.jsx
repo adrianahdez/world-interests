@@ -14,6 +14,9 @@ export default function Footer() {
           © Developed by <a target="_blank" href="https://github.com/adrianahdez">Adriana Hernández Regueiro.</a>
         </span>
       </div>
+      {/* <!-- Cloudflare Web Analytics --> */}
+      <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "126a755056a14b3bbc11a5f0ad03edd6"}'></script>
+      {/* <!-- End Cloudflare Web Analytics --> */}
     </footer>
   );
 }
