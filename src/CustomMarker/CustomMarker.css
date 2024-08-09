@@ -93,7 +93,6 @@
 }
 
 .custom-marker__point .text-container {
-  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -101,12 +100,14 @@
   z-index: 0;
   padding-right: 8px;
   
+  display: none;
   visibility: hidden;
-  -webkit-transition: visibility 150ms linear;
-  -moz-transition: visibility 150ms linear;
-  -o-transition: visibility 150ms linear;
-  -ms-transition: visibility 150ms linear;
-  transition: visibility 150ms linear;
+  width: 0;
+  -webkit-transition: visibility 250ms linear, width 250ms linear;
+  -moz-transition: visibility 250ms linear, width 250ms linear;
+  -o-transition: visibility 250ms linear, width 250ms linear;
+  -ms-transition: visibility 250ms linear, width 250ms linear;
+  transition: visibility 250ms linear, width 250ms linear;
 }
 
 /* HOVER */
@@ -143,4 +144,5 @@
 .custom-marker__container:hover .custom-marker__point .text-container {
   display: flex;
   visibility: visible;
+  width: auto;
 }
