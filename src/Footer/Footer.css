@@ -14,7 +14,7 @@ footer .footer-content {
   display: flex;
   flex-direction: column;
   text-align: center;
-  gap: 8px;
+  gap: 0;
 }
 
 footer .what-is-this {
@@ -22,13 +22,13 @@ footer .what-is-this {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  font-size: 12px;
+  font-size: 9px;
   gap: 4px;
   margin-bottom: 8px;
 }
 
 footer .what-is-this .i1{
-  font-size: 28px;
+  font-size: 22px;
   /* margin-bottom: 18px; */
 }
 
@@ -37,5 +37,23 @@ footer .footer-content a {
 }
 
 footer .developer {
-  font-size: 12px;
+  font-size: 9px;
+}
+
+@media (min-width: 768px) {
+  footer .footer-content {
+    gap: 8px;
+  }
+
+  footer .what-is-this {
+    font-size: 12px;
+  }
+  
+  footer .what-is-this .i1{
+    font-size: 28px;
+  }
+
+  footer .developer {
+    font-size: 12px;
+  }
 }
