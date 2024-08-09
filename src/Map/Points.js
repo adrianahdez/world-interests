@@ -64,10 +64,12 @@ function changePointAppearance(point, pointLatLon) {
   let attrs = setUpPointAttributes(point, pointLatLon);
 
   let markerPoint = document.querySelector('.custom-marker__point[data-region="' + point.regionName + '"]');
-  let bg = markerPoint.querySelector('.bg-color');
+  let bg = markerPoint.querySelectorAll('.bg-color');
   let text = markerPoint.querySelector('.text-container');
   // text.style.color = '#' + attrs.color;
-  bg.style.backgroundColor = '#' + attrs.bgColor;
+  for (let i = 0; i < bg.length; i++) {
+    bg[i].style.backgroundColor = '#' + attrs.bgColor;
+  }
   // markerPoint.style.opacity = attrs.opa;
 }
 
