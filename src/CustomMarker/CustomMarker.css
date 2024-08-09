@@ -9,6 +9,12 @@
   position: relative;
   box-sizing: border-box;
   top: -50%;
+
+  -webkit-transition: background-color 250ms linear, transform 250ms;
+  -moz-transition: background-color 250ms linear, transform 250ms;
+  -o-transition: background-color 250ms linear, transform 250ms;
+  -ms-transition: background-color 250ms linear, transform 250ms;
+  transition: background-color 250ms linear, transform 250ms;
 }
 
 .custom-marker__point .custom-marker__bg-pointer {
@@ -92,20 +98,23 @@
   justify-content: center;
   align-items: flex-start;
   color: white;
-  z-index: 1;
+  z-index: 0;
   padding-right: 8px;
+  
+  visibility: hidden;
+  -webkit-transition: visibility 150ms linear;
+  -moz-transition: visibility 150ms linear;
+  -o-transition: visibility 150ms linear;
+  -ms-transition: visibility 150ms linear;
+  transition: visibility 150ms linear;
 }
 
 /* HOVER */
 .custom-marker:has(.custom-marker__container:hover) {
   z-index: 99999 !important;
 }
+
 .custom-marker__container:hover {
-  -webkit-transition: background-color 250ms linear, transform 250ms;
-  -moz-transition: background-color 250ms linear, transform 250ms;
-  -o-transition: background-color 250ms linear, transform 250ms;
-  -ms-transition: background-color 250ms linear, transform 250ms;
-  transition: background-color 250ms linear, transform 250ms;
   -ms-transform: scale(2);
   -webkit-transform: scale(2);
   transform: scale(2)
@@ -133,4 +142,5 @@
 
 .custom-marker__container:hover .custom-marker__point .text-container {
   display: flex;
+  visibility: visible;
 }

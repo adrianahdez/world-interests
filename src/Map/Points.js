@@ -34,7 +34,7 @@ function setUpPointAttributes(point, pointLatLon) {
   else if (score > 0 && score <= 1) color = '78dd73';
   else if (score > 1) color = '0d0';
 
-  // Determine background color based on name value
+  // Determine background color based on name value (first 3 characters) in order to give more relevance to the most important/popular points and the same channel name have the same color at the same time.
   var bgColor = '#5962a1';
   if (typeof name[0] !== 'undefined') bgColor = convertToHex(name[0], 0);
   if (typeof name[1] !== 'undefined') bgColor += convertToHex(name[1], 1);
