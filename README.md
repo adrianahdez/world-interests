@@ -42,3 +42,10 @@ The data is obtained from the YouTube API, so you can see the most popular chann
 [Go to website](https://worldinterests.midri.net/) and enjoy!
 
 [Backend repository](https://github.com/adrianahdez/world-interests-backend) (private).
+
+# Run the project
+
+1. Clone the repository and step into the project folder with terminal.
+2. Run `npm install` to install the dependencies.
+3. Run `npm run build` if you don't need a watcher or `npm run dev` if you want to run the project with a file watcher.
+4. When push to the `main` branch, the `dist` folder will be automatically deployed to Cloudflare Pages.
