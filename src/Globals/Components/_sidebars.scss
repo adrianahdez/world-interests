@@ -13,7 +13,9 @@
   margin-right: auto;
   letter-spacing: .7px;
   line-height: 1.7;
-  height: calc(100vh - var(--footer-height) - var(--menu-margin-top) - var(--menu-margin-bottom) - var(--distance-btw-content-and-footer));
+  // height: calc(100vh - var(--footer-height) - var(--menu-margin-top) - var(--menu-margin-bottom) - var(--distance-btw-content-and-footer));
+  max-height: calc(100vh - var(--footer-height) - var(--menu-margin-top) - var(--menu-margin-bottom) - var(--distance-btw-content-and-footer));
+  height: auto;
   margin-bottom: var(--menu-margin-bottom);
   left: 24px;
   right: 24px;
