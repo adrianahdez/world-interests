@@ -53,11 +53,11 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
               <h3 className='channel-content__heading'>Today's Most Popular Video: </h3>
               <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
               <h4 className='channel-content__heading'>View Count: </h4>
-              <p>{s?.viewCount}</p>
+              <p>{Number(s?.viewCount).toLocaleString()}</p>
               <h4 className='channel-content__heading'>Like Count:</h4>
-              <p>{s?.likeCount}</p>
+              <p>{Number(s?.likeCount).toLocaleString()}</p>
               <h4 className='channel-content__heading'>Comment Count:</h4>
-              <p>{s?.commentCount}</p>
+              <p>{Number(s?.commentCount).toLocaleString()}</p>
             </div>
             {mapPoint?.idVideo && mapPoint.idVideo.trim() !== '' && <Player ref={playerRef}  idVideo={mapPoint.idVideo} />}
           </div>
