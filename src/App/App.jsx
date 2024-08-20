@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Map from '../Map/Map';
 import Categories from '../Categories/Categories';
 import Footer from '../Footer/Footer';
@@ -17,15 +17,15 @@ export default function App() {
   // InfoSidebar dialog state.
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const toggleDialog = () => {
-    setIsDialogOpen(!isDialogOpen);
+  const toggleDialog = useCallback(() => {
+    setIsDialogOpen((prev) => !prev);
     // Save the state in the local storage to remember the user's choice.
     localStorage.setItem('isDialogOpen', !isDialogOpen);
-  };
+  }, [isDialogOpen]);
 
-  const toggleSidebar = (open = true) => {
+  const toggleSidebar =  useCallback((open = true) => {
     setIsSidebarOpen(open);
-  }
+  }, []);
 
   // If the state is not set, return true to show the dialog by default. If the state is set, return the state.
   function setDefault() {
@@ -46,11 +46,14 @@ export default function App() {
       />
       <InfoSidebar
         mapPoint={mapPoint}
-        setMapPoint={setMapPoint}
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
       />
-      <Map category={category} toggleSidebar={toggleSidebar} mapPoint={mapPoint} setMapPoint={setMapPoint} />
+      <Map 
+      category={category} 
+      toggleSidebar={toggleSidebar} 
+      setMapPoint={setMapPoint} 
+      />
       <Footer />
     </div>
   );

@@ -29,13 +29,19 @@ const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint
       marker.on('click', () => {
         // The sidebar will always be opened on marker click
           toggleSidebar(true);
+          // Set the map point of the InfoSidebar to the current marker point
           setMapPoint(mapPoint);
       });
+      
+      return () => map.removeLayer(marker); // Remove the marker when the component is unmounted
     }
-  }, [position, children, map, toggleSidebar]);
+  // }, [position, children, map, toggleSidebar]);
+  }, [position, map, mapPoint, toggleSidebar, setMapPoint]);
+  // }, [children]);
+  // }, []);
 
   return (
-    <div ref={containerRef} style={{ display: 'none' }}>
+    <div ref={containerRef} className='custom-marker__parent' style={{ display: 'none' }}>
       {children}
     </div>
   );

@@ -1,7 +1,7 @@
 // ./countries-and-us-states.geo.json is a file that contains the coordinates of the countries and US states. Not used at the moment.
 // import countries from './countries-and-us-states.geo.json';
 import countries from './countries.geo.json';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { MapContainer, GeoJSON, Marker } from 'react-leaflet'
 // import { useMap, useMapEvent } from 'react-leaflet';
 import { setConfig } from './geoJsonConfig';
@@ -39,7 +39,7 @@ import ImageNotFound from '../Globals/img/image-not-found.png';
 //   return null
 // }
 
-export default function Map({ category, toggleSidebar, mapPoint, setMapPoint }) {
+function Map({ category, toggleSidebar, setMapPoint }) {
   // TODO: Center map in a better way in mobile.
 
   const [data, setData] = useState({});
@@ -52,20 +52,22 @@ export default function Map({ category, toggleSidebar, mapPoint, setMapPoint }) 
         .then((result) => {
           // Compare the new data with the previous data to ensure that the state is only updated when there are real changes in the data and avoid unnecessary re-renders. Because whitout this, React is detecting the data as a new object every time even if the data is the same.
           if (JSON.stringify(result) !== JSON.stringify(prevDataRef.current)) {
+            prevDataRef.current = result;
             setData(result);
           }
         })
         .catch((error) => {
-          setData({});
           console.error('Error:', error);
+          setData({});
         });
     };
     fetchData(category);
+    
     const interval = setInterval(fetchData(category), fetchInterval);
     return () => clearInterval(interval);
   }, [category]);
 
-  // processPoint after a new data is fetched, to change their appearance a little bit/
+  // processPoint after a new data is fetched, to change their appearance a little bit.
   useEffect(() => {
     if (Object.keys(data).length === 0) return;
     Object.keys(data).map((alpha2) => {
@@ -93,16 +95,6 @@ export default function Map({ category, toggleSidebar, mapPoint, setMapPoint }) 
   //   console.log('marker clicked', e);
   // }
 
-  // Remove old markers before the new ones are rendered.
-  // Because the markers are not removed from the map when the data is updated.
-  const markers = document.querySelectorAll('.custom-marker');
-  if (JSON.stringify(data) !== JSON.stringify(prevDataRef.current)) {
-    markers.forEach((marker) => {
-      marker.remove();
-    });
-    // Update the previous data with the new data. This line must be after the markers are removed and not in the useEffect because it will cause an infinite loop.
-    prevDataRef.current = data;
-  }
 
   return (
     <div className="map-container">
@@ -123,7 +115,7 @@ export default function Map({ category, toggleSidebar, mapPoint, setMapPoint }) 
           const c = regionPoint?.channel;
 
           return latLon && typeof regionPoint !== 'undefined' ? (
-            <CustomMarker key={alpha2} position={latLon} opacity={0.6} toggleSidebar={toggleSidebar} mapPoint={regionPoint} setMapPoint={setMapPoint}>
+            <CustomMarker key={alpha2} position={latLon} toggleSidebar={toggleSidebar} mapPoint={regionPoint} setMapPoint={setMapPoint} >
               <div className="custom-marker__point" data-region={regionPoint.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
                 <span className="custom-marker__bg bg-color"></span>
                 <span className="custom-marker__bg-pointer bg-color"></span>
@@ -144,4 +136,5 @@ export default function Map({ category, toggleSidebar, mapPoint, setMapPoint }) 
   )
 }
 
+export default memo(Map);
 
