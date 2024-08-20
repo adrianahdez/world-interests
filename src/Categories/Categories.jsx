@@ -9,15 +9,13 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
   useEffect(() => {
     fetchCategories()
       .then((result) => {
-        debugger;
         setCategoryNames(result);
       })
       .catch((error) => {
-        debugger;
         setCategoryNames([]);
-        console.error('Error:', error);
+        console.error('Error getting categories:', error);
       });
-  }, isDialogOpen);
+  }, [isDialogOpen]);
 
   useEffect(() => {
     if (isDialogOpen) {
@@ -39,7 +37,6 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
       }
 
       const data = await response.json();
-      console.log('data', data);
       if (!data || data.error) {
         throw new Error('No data');
       }
