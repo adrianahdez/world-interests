@@ -2,9 +2,9 @@ import React, { useState, useCallback } from 'react';
 import Map from '../Map/Map';
 import Categories from '../Categories/Categories';
 import Footer from '../Footer/Footer';
-import Menu from '../Menu/Menu';
-import InfoSidebar from '../InfoSidebar/InfoSidebar';
 import Header from '../Header/Header';
+import InfoSidebar from '../InfoSidebar/InfoSidebar';
+import Head from '../Head/Head';
 
 // Render App.
 export default function App() {
@@ -35,8 +35,8 @@ export default function App() {
 
   return (
     <div className='app-container'>
-      <Header />
-      <Menu isDialogOpen={isDialogOpen} toggleDialog={toggleDialog} />
+      <Head />
+      <Header isDialogOpen={isDialogOpen} toggleDialog={toggleDialog} />
       <Categories
         category={category}
         setCategory={setCategory}

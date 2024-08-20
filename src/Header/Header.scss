@@ -13,6 +13,10 @@
   left: 24px;
   z-index: 401;
 
+  &__lang {
+    left: 48px;
+  }
+
   .toggle-btn {
     position: relative;
     cursor: pointer;

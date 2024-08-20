@@ -1,35 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
+import './Header.scss';
 
-// Render Header component
-export default function Header() {
+export default function Header({ isDialogOpen, toggleDialog }) {
 
-  useEffect(() => {
-    // Load Google Analytics script
-    const script = document.createElement('script');
-    script.src = "https://www.googletagmanager.com/gtag/js?id=G-MDKV0QPB8F";
-    script.async = true;
-    document.head.appendChild(script);
+  const [isEs, setIsEs] = useState(() => setDefaultLang());
 
-    // Configure Google Analytics
-    script.onload = () => {
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { window.dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', 'G-MDKV0QPB8F');
-    };
+  // If the lang is not set, return false to show EN by default. If the lang is set, return the lang.
+  function setDefaultLang() {
+    const defaultLang = localStorage.getItem('isEs');
+    return defaultLang === null ? false : defaultLang === 'true';
+  }
 
-    return () => {
-      // Clean up: remove the script if the component is unmounted
-      document.head.removeChild(script);
-    };
-  }, []);
+  const toggleLang = () => {
+    // Set the language to the opposite of the current state
+    setIsEs((prev) => !prev);
 
+    // Save the state in the local storage to remember the user's choice.
+    localStorage.setItem('isEs', !isEs);
+  }
 
+  // Return a burger menu icon
   return (
     <header className='header'>
-      {/* Header content here */}
+      <div className={`menu-toggle${isDialogOpen === true ? ' close-icon' : ''}`}>
+        <div className='toggle-btn' onClick={toggleDialog}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
     </header>
   );
 }
-
-
