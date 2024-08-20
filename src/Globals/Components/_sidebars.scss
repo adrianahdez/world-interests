@@ -13,8 +13,7 @@
   margin-right: auto;
   letter-spacing: .7px;
   line-height: 1.7;
-  // height: calc(100vh - var(--footer-height) - var(--menu-margin-top) - var(--menu-margin-bottom) - var(--distance-btw-content-and-footer));
-  max-height: calc(100vh - var(--footer-height) - var(--menu-margin-top) - var(--menu-margin-bottom) - var(--distance-btw-content-and-footer));
+  max-height: calc(100vh - var(--footer-height) - var(--menu-margin-top) - var(--menu-margin-bottom));
   height: auto;
   margin-bottom: var(--menu-margin-bottom);
   left: 24px;
@@ -43,7 +42,7 @@
     margin: 0;
     position: relative;
     height: 100%;
-    max-height: calc(100% - 46px);
+    max-height: inherit;
     overflow-y: auto;
     padding: 14px 30px 30px 30px;
     @include scroll(4px, 100%, #213443, var(--link-color), 0);
@@ -54,6 +53,8 @@
     height: 100%;
     padding-right: 8px;
     padding-bottom: 22px;
+    height: 100%;
+    max-height: inherit;
   }
 
   &__title {
