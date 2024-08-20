@@ -26,7 +26,7 @@ const fetchData = async (url) => {
  * @returns {Promise} Promise object represents the data fetched from the API.
  */
 export const getData = async (category) => {
-  const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'getJson.php' + '?category=' + category;
+  const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'get-json.php' + '?category=' + category;
   try {
     const response = await fetchData(apiUrl);
     if (!response.data || response.error) {

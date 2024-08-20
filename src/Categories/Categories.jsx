@@ -26,7 +26,7 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
   }, [isDialogOpen]);
 
   const fetchCategories = async () => {
-    const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'category-list.php';
+    const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'get-category-list.php';
 
     try {
       const response = await fetch(apiUrl,
