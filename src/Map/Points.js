@@ -96,5 +96,5 @@ const resize = (point, pointLatLon) => {
 export const processPoint = (point, pointLatLon) => {
   // Initial setup
   resize(point, pointLatLon); // Call resize to set up the map
-  window.addEventListener('resize', resize(point, pointLatLon)); // Resize map on window resize
+  window.addEventListener('resize', resize(point, pointLatLon), { passive: true }); // Resize map on window resize
 }
