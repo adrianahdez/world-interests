@@ -1,26 +1,40 @@
 @use '../Globals/helpers' as *;
 @use '../Globals/Components/close-icon' as *;
 
-.menu-toggle {
-  display: block;
-  -webkit-user-select: none;
-  user-select: none;
-  height: fit-content;
-
-  align-self: flex-end;
+.header {
+  background-color: var(--country-fill-color);
+  width: fit-content;
+  padding-left: 24px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   position: absolute;
-  top: 24px;
-  left: 24px;
+  padding-right: 24px;
+  left: 0;
+  top: 0;
   z-index: 401;
+  display: flex;
+  gap: 24px;
+  border-bottom-right-radius: 28px;
+}
+
+.menu-item {
+  color: white;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 
   &__lang {
-    left: 48px;
+    font-size: 26px;
+    user-select: none;
   }
+}
+
+.menu-toggle {
 
   .toggle-btn {
     position: relative;
-    cursor: pointer;
     padding: 6px;
+    height: 100%;
 
     /* The hamburger */
     span {
