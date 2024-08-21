@@ -43,15 +43,17 @@ h1 small {
 
 .map-container,
 #app {
-  height: calc(100vh - var(--footer-height));
+  /* height: calc(100vh - var(--footer-height)); */
+  height: calc(100svh - var(--footer-height));
 }
 
-#app {
-  height: 100vh;
+#app,
+.app-container {
+  /* height: 100vh; */
+  height: 100svh;
 }
 
 .app-container {
-  height: 100vh;
   position: relative;
 }
 
@@ -75,7 +77,8 @@ a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
+  height: 100svh;
   width: 100%;
   background-color: var(--page-bg);
   position: fixed;
