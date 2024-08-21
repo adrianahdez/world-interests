@@ -13,7 +13,8 @@
   margin-right: auto;
   letter-spacing: .7px;
   line-height: 1.7;
-  // max-height: calc(100vh - var(--footer-height) - var(--menu-margin-top) - var(--menu-margin-bottom));
+  /* Fallback if svh is not supported */
+  max-height: calc(100vh - var(--footer-height) - var(--menu-margin-top) - var(--menu-margin-bottom));
   max-height: calc(100svh - var(--footer-height) - var(--menu-margin-top) - var(--menu-margin-bottom));
   height: auto;
   margin-bottom: var(--menu-margin-bottom);
