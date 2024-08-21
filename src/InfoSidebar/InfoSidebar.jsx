@@ -12,7 +12,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
       sidebarRef.current.show();
     } else {
       sidebarRef.current.close();
-      if (playerRef.current) {
+      if (playerRef?.current && typeof playerRef.current.pauseVideo === 'function') {
         playerRef.current.pauseVideo();
       }
     }
@@ -59,7 +59,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
               <h4 className='channel-content__heading'>Comment Count:</h4>
               <p>{Number(s?.commentCount).toLocaleString()}</p>
             </div>
-            {mapPoint?.idVideo && mapPoint.idVideo.trim() !== '' && <Player ref={playerRef}  idVideo={mapPoint.idVideo} />}
+            {mapPoint?.idVideo && mapPoint.idVideo.trim() !== '' && <Player ref={playerRef} idVideo={mapPoint.idVideo} />}
           </div>
         </div>
       </div>

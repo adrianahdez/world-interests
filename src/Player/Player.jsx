@@ -46,7 +46,7 @@ const Player = forwardRef(({ idVideo }, ref) => {
 
   useImperativeHandle(ref, () => ({
     pauseVideo() {
-      if (playerInstance.current) {
+      if (playerInstance?.current && typeof playerInstance.current.pauseVideo === 'function') {
         playerInstance.current.pauseVideo();
       }
     }
