@@ -8,7 +8,7 @@ import { setConfig } from './geoJsonConfig';
 import CustomMarker from '../CustomMarker/CustomMarker';
 import { getCountryLatLon, getData } from './Data';
 import { processPoint } from './Points';
-import ImageNotFound from '../Globals/img/image-not-found.png';
+import ImageNotFound from '../GlobalStyles/img/image-not-found.png';
 
 // Know the center of the map.
 // function MyComponent() {
