@@ -1,17 +1,23 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import './Footer.css';
+import { LanguageContext } from '../Common/LanguageContext';
+import translations from '../Common/translations'; 
 
 // Render Footer component
 export default function Footer() {
+  const { isEs } = useContext(LanguageContext);
+
+  const tr = isEs ? translations.es : translations.en;
+
   return (
     <footer>
       <div className="footer-content">
         <div className="what-is-this">
-          <h1 className="i1">Which Youtube channels are most popular now (realtime)</h1>
-          <span className="i2">Data obtained from the YouTube API - You are viewing the #1 trending video channel from each country.</span>
+          <h1 className="i1">{tr.footerTitle}</h1>
+          <span className="i2">{tr.footerDesc}</span>
         </div>
         <span className="developer">
-          © Developed by <a target="_blank" href="https://github.com/adrianahdez">Adriana Hernández Regueiro.</a>
+          {tr.footerCopyright} <a target="_blank" href="https://github.com/adrianahdez">Adriana Hernández Regueiro.</a>
         </span>
       </div>
       {/* <!-- Cloudflare Web Analytics --> */}

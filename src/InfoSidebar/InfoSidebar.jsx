@@ -24,7 +24,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
   const c = mapPoint?.channel;
   const s = mapPoint?.statistics;
 
-  const t = isEs ? translations.es : translations.en;
+  const tr = isEs ? translations.es : translations.en;
 
   return (
     <dialog ref={sidebarRef} className='sidebar sidebar--map-point'>
@@ -39,29 +39,29 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
             </button>
           </div>
         </menu>
-        <h2 className="sidebar__title">{t.channelInfo}</h2>
+        <h2 className="sidebar__title">{tr.channelInfo}</h2>
         <div className="sidebar__list">
           <div className='channel-content channel-content__top'>
             <img src={c?.channelImage} alt="marker" />
             <div className='channel-content__text'>
-              <h3 className='channel-content__heading'>Channel Name: </h3>
+              <h3 className='channel-content__heading'>{tr.channelName}</h3>
               <a target="_blank" href={`https://youtube.com/channel/${c?.channelId}`}>{c?.channelTitle}</a>
-              <h3 className='channel-content__heading'>Channel username:</h3>
+              <h3 className='channel-content__heading'>{tr.channelUsername}</h3>
               <p>{c?.channelUsername}</p>
-              <h3 className='channel-content__heading'>Country/Region:</h3>
+              <h3 className='channel-content__heading'>{tr.country}</h3>
               <p>{mapPoint?.regionName}</p>
             </div>
           </div>
           <div className='channel-content channel-content__bottom'>
-            <h2 className="channel-content__subheading">Statistics</h2>
+            <h2 className="channel-content__subheading">{tr.statistics}</h2>
             <div className='channel-content__text'>
-              <h3 className='channel-content__heading'>Today's Most Popular Video: </h3>
+              <h3 className='channel-content__heading'>{tr.mostPopularVideo}</h3>
               <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
-              <h4 className='channel-content__heading'>View Count: </h4>
+              <h4 className='channel-content__heading'>{tr.viewCount}</h4>
               <p>{Number(s?.viewCount).toLocaleString()}</p>
-              <h4 className='channel-content__heading'>Like Count:</h4>
+              <h4 className='channel-content__heading'>{tr.likeCount}</h4>
               <p>{Number(s?.likeCount).toLocaleString()}</p>
-              <h4 className='channel-content__heading'>Comment Count:</h4>
+              <h4 className='channel-content__heading'>{tr.commentCount}</h4>
               <p>{Number(s?.commentCount).toLocaleString()}</p>
             </div>
             {mapPoint?.idVideo && mapPoint.idVideo.trim() !== '' && <Player ref={playerRef} idVideo={mapPoint.idVideo} />}

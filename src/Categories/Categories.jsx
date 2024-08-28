@@ -1,8 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import './Categories.scss';
+import { LanguageContext } from '../Common/LanguageContext';
+import translations from '../Common/translations'; 
 
 // Render Categories component
 export default function Categories({ category, setCategory, isDialogOpen, toggleDialog, toggleSidebar }) {
+  const { isEs } = useContext(LanguageContext);
   const dialogRef = useRef(null);
   const [categoryNames, setCategoryNames] = useState([]);
 
@@ -49,6 +52,8 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
     }
   }
 
+  const tr = isEs ? translations.es : translations.en;
+
   return (
     <dialog ref={dialogRef} className='sidebar sidebar--categories'>
       <span className='sidebar__bg'></span>
@@ -62,7 +67,7 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
             </button>
           </div>
         </menu>
-        <h2 className="sidebar__title">YouTube Categories</h2>
+        <h2 className="sidebar__title">{tr.youtubeCategories}</h2>
         <ul className="sidebar__list">
           {categoryNames.map(({ slug, name }, index) => (
             <li key={index} className={`sidebar__item${category === slug ? ' active' : ''}`}>
