@@ -30,45 +30,50 @@
     user-select: none;
     color: var(--white);
   }
-}
 
-.menu-toggle {
-
-  .toggle-btn {
-    position: relative;
-    padding: 6px;
-    height: 100%;
-
-    /* The hamburger */
-    span {
-      display: block;
-      width: 24px;
-      height: 2.5px;
-      margin-bottom: rem(6);
-      position: relative;
-      // background: var(--link-color, #1fa2e1);
-      background: var(--white, white);
-      transition: transform 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.3s ease;
-
-      &:first-child {
-        transform-origin: 0% 100%;
-      }
-
-      &:nth-child(2) {
-        transform-origin: 0% 0%;
-        width: 14px;
-        // Uncomment the following line to invert position of the middle line
-        // margin-left: 14px;
-      }
-
-      &:last-child {
-        margin-bottom: 0;
-      }
+  &__theme {
+    .toggle-btn {
+      display: flex;
+      align-items: center;
     }
   }
 }
 
-.menu-toggle.close-icon {
+.toggle-btn {
+  position: relative;
+  padding: 6px;
+  height: 100%;
+
+  /* The hamburger */
+  span {
+    display: block;
+    width: 24px;
+    height: 2.5px;
+    margin-bottom: rem(6);
+    position: relative;
+    // background: var(--link-color, #1fa2e1);
+    background: var(--white, white);
+    transition: transform 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.3s ease;
+
+    &:first-child {
+      transform-origin: 0% 100%;
+    }
+
+    &:nth-child(2) {
+      transform-origin: 0% 0%;
+      width: 14px;
+      // Uncomment the following line to invert position of the middle line
+      // margin-left: 14px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+
+.close-icon {
   bottom: unset;
 
   .toggle-btn {

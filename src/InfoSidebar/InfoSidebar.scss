@@ -86,9 +86,3 @@
     max-width: 500px;
   }
 }
-
-.menu-toggle:has(~ dialog.sidebar--map-point[open]) {
-  @include respond-max(767) {
-    display: none;
-  }
-}

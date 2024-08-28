@@ -1,0 +1,68 @@
+@use '../GlobalStyles/helpers' as *;
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  z-index: 999;
+
+
+  .footer-content {
+    background-color: var(--country-fill-color);
+    color: var(--page-text-color);
+    justify-content: center;
+    min-height: var(--footer-height);
+    padding: 4px 24px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 0;
+
+    @include respond-at(768) {
+      padding: 14px 24px;
+    }
+  }
+
+  .what-is-this {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 9px;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+
+  .what-is-this .i1 {
+    font-size: 22px;
+    line-height: 1.1;
+    font-weight: 400;
+    /* margin-bottom: 18px; */
+  }
+
+  .footer-content a {
+    color: var(--link-color)
+  }
+
+  .developer {
+    font-size: 9px;
+  }
+
+  @include respond-at(768) {
+    .footer-content {
+      gap: 8px;
+    }
+
+    .what-is-this {
+      font-size: 12px;
+    }
+
+    .what-is-this .i1 {
+      font-size: 28px;
+    }
+
+    .developer {
+      font-size: 12px;
+    }
+  }
+}

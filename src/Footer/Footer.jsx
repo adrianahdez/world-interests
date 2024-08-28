@@ -1,7 +1,7 @@
-import React, {useContext} from 'react';
-import './Footer.css';
+import React, { useContext } from 'react';
+import './Footer.scss';
 import { LanguageContext } from '../Common/LanguageContext';
-import translations from '../Common/translations'; 
+import translations from '../Common/translations';
 
 // Render Footer component
 export default function Footer() {
@@ -17,7 +17,7 @@ export default function Footer() {
           <span className="i2">{tr.footerDesc}</span>
         </div>
         <span className="developer">
-          {tr.footerCopyright} <a target="_blank" href="https://github.com/adrianahdez">Adriana Hernández Regueiro.</a>
+          © {new Date().getFullYear()}. {tr.developedBy} <a target="_blank" href="https://github.com/adrianahdez">Adriana Hernández Regueiro.</a>
         </span>
       </div>
       {/* <!-- Cloudflare Web Analytics --> */}

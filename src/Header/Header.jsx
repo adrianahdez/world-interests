@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import './Header.scss';
+import MoonIcon from './MoonIcon';
+import SunIcon from './SunIcon';
 import { LanguageContext } from '../Common/LanguageContext';
 import { ThemeContext } from '../Common/ThemeContext';
 
@@ -10,7 +12,7 @@ export default function Header({ isDialogOpen, toggleDialog }) {
 
   return (
     <header className='header'>
-      <div className={`menu-item menu-toggle${isDialogOpen === true ? ' close-icon' : ''}`}>
+      <div className={`menu-item ${isDialogOpen === true ? ' close-icon' : ''}`}>
         <div className='toggle-btn' onClick={toggleDialog}>
           <span></span>
           <span></span>
@@ -18,14 +20,14 @@ export default function Header({ isDialogOpen, toggleDialog }) {
         </div>
       </div>
       <div className={`menu-item menu-item__lang${isEs === true ? ' es' : ' en'}`}>
-        <div className='toggle-btn' onClick={toggleLanguage}>
+        <div onClick={toggleLanguage}>
           <span>{isEs === true ? 'ES' : 'EN'}</span>
         </div>
       </div>
       <div className='menu-item menu-item__theme'>
-        <button className='toggle-btn' onClick={toggleTheme}>
-          {isDarkMode ? 'Dark Mode' : 'Light Mode'}
-        </button>
+        <span onClick={toggleTheme}>
+        {isDarkMode ? <MoonIcon /> : <SunIcon />} 
+        </span>
       </div>
     </header>
   );

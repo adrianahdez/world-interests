@@ -31,7 +31,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
       <span className='sidebar__bg'></span>
       <div className="sidebar__content">
         <menu>
-          <div className='menu-toggle close-icon'>
+          <div className='close-icon'>
             <button type="reset" className='toggle-btn' onClick={() => toggleSidebar(false)}>
               <span></span>
               <span></span>
