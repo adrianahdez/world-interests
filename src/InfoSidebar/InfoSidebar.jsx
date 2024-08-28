@@ -1,9 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import './InfoSidebar.scss';
 import Player from '../Player/Player';
+import { LanguageContext } from '../Common/LanguageContext';
+import translations from '../Common/translations'; 
 
 // Render InfoSidebar component
 export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) {
+  const { isEs } = useContext(LanguageContext);
   const sidebarRef = useRef(null);
   const playerRef = useRef(null);
 
@@ -21,6 +24,8 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
   const c = mapPoint?.channel;
   const s = mapPoint?.statistics;
 
+  const t = isEs ? translations.es : translations.en;
+
   return (
     <dialog ref={sidebarRef} className='sidebar sidebar--map-point'>
       <span className='sidebar__bg'></span>
@@ -34,7 +39,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
             </button>
           </div>
         </menu>
-        <h2 className="sidebar__title">Channel info</h2>
+        <h2 className="sidebar__title">{t.channelInfo}</h2>
         <div className="sidebar__list">
           <div className='channel-content channel-content__top'>
             <img src={c?.channelImage} alt="marker" />
