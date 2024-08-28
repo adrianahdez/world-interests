@@ -6,7 +6,8 @@ export const LanguageProvider = ({ children }) => {
   const [isEs, setIsEs] = useState(() => {
     // Get the language from the localStorage
     const isEsSavedLang = localStorage.getItem('isEs');
-    return isEsSavedLang === 'true'; // Return true if the isEs saved language is 'true' or false otherwise
+    // Return true if the isEs saved language is 'true' or false otherwise
+    return isEsSavedLang === 'true';
   });
 
   useEffect(() => {

@@ -1,5 +1,6 @@
 @use '../GlobalStyles/helpers' as *;
 @use '../GlobalStyles/Components/close-icon' as *;
+@use '../GlobalStyles/Components/theme' as *;
 
 .header {
   background-color: var(--country-fill-color);
@@ -15,10 +16,11 @@
   display: flex;
   gap: 24px;
   border-bottom-right-radius: 28px;
+  font-weight: 400;
 }
 
 .menu-item {
-  color: white;
+  color: var(--page-text-color);
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -26,6 +28,7 @@
   &__lang {
     font-size: 26px;
     user-select: none;
+    color: var(--white);
   }
 }
 
@@ -44,7 +47,7 @@
       margin-bottom: rem(6);
       position: relative;
       // background: var(--link-color, #1fa2e1);
-      background: white;
+      background: var(--white, white);
       transition: transform 0.3s cubic-bezier(0.77, 0.2, 0.05, 1.0), opacity 0.3s ease;
 
       &:first-child {

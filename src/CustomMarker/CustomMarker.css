@@ -5,7 +5,7 @@
   font-size: 10px;
   line-height: 1.35;
   letter-spacing: 0.6px;
-  color: white;
+  color: var(--page-text-color);
   position: relative;
   box-sizing: border-box;
   top: -50%;
@@ -44,6 +44,7 @@
 }
 
 .custom-marker .bg-color {
+  /* Fallback bg color in case the js don't work */
   background-color: #5e606f;
   opacity: 0.7;
 }
@@ -96,10 +97,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  color: white;
+  color: var(--page-text-color);
   z-index: 0;
   padding-right: 8px;
-  
+
   display: none;
   visibility: hidden;
   width: 0;
@@ -145,4 +146,13 @@
   display: flex;
   visibility: visible;
   width: auto;
+}
+
+/* Light theme */
+.light .custom-marker__container:hover .custom-marker__bg {
+  filter: brightness(1.5);
+}
+
+.custom-marker__point .text-container {
+  color: var(--page-text-color);
 }

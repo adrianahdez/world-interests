@@ -1,21 +1,3 @@
-:root {
-  --page-bg: rgb(26, 63, 73);
-  --country-delimiter-color: #5f4e57;
-  --country-fill-color: #16161d;
-  --page-text-color: #ddcfcf;
-  /* This is used to set the height of the map, so adjust based on the real footer height counting the vertical paddings, min-height, etc. */
-  --footer-height: 108px;
-  --link-color: #1fa2e1;
-  --menu-margin-top: 70px;
-  --menu-margin-bottom: 40px;
-}
-
-@media screen and (max-width: 604px) {
-  :root {
-    --footer-height: 123px;
-  }
-}
-
 html,
 body {
   max-width: 100%;

@@ -85,7 +85,7 @@ function Map({ category, toggleSidebar, setMapPoint }) {
     scrollWheelZoom: true,
     zoomControl: false,
     style: {
-      background: '#1a3f49',
+      background: 'var(--page-bg)',
       with: '100%',
       height: '100%'
     }

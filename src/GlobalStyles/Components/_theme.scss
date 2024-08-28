@@ -1,0 +1,32 @@
+:root {
+  // Dark theme colors by default
+  --page-bg: rgb(26, 63, 73);
+  --country-delimiter-color: #5f4e57;
+  --country-fill-color: #16161d;
+  --page-text-color: #ddcfcf;
+  --link-color: #1fa2e1;
+  --black: black;
+  --white: white;
+
+  // Theme measurements
+  /* This is used to set the height of the map, so adjust based on the real footer height counting the vertical paddings, min-height, etc. */
+  --footer-height: 108px;
+  --menu-margin-top: 70px;
+  --menu-margin-bottom: 40px;
+}
+
+// Light theme
+.light {
+  --page-bg: #97e2ff;
+  --country-delimiter-color: #d3d3d3;
+  --country-fill-color: #ffffff;
+  --page-text-color: #000000;
+  --black: white;
+  --white: black;
+}
+
+@media screen and (max-width: 604px) {
+  :root {
+    --footer-height: 123px;
+  }
+}

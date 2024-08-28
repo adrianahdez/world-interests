@@ -12,7 +12,7 @@ dialog {
     align-items: center;
     justify-content: flex-end;
     position: absolute;
-    top: rem(24);
+    top: rem(22);
     right: rem(28);
     margin-block-end: 0;
     margin-block-start: 0;
@@ -24,13 +24,13 @@ dialog {
       background-color: transparent;
       cursor: pointer;
       padding: 0;
-      color: white;
+      color: var(--page-text-color);
       outline: none;
     }
   }
 
   &::backdrop {
     opacity: 0.4;
-    background: black;
+    background: var(--black, black);
   }
 }
