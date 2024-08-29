@@ -1,13 +1,13 @@
 // ./countries-and-us-states.geo.json is a file that contains the coordinates of the countries and US states. Not used at the moment.
-// import countries from './countries-and-us-states.geo.json';
-import countries from './countries.geo.json';
+// import countries from './Countries/countries-and-us-states.geo.json';
+import countries from './Countries/countries.geo.json';
 import React, { useState, useEffect, useRef, memo } from 'react';
 import { MapContainer, GeoJSON, Marker } from 'react-leaflet'
 // import { useMap, useMapEvent } from 'react-leaflet';
 import { setConfig } from './geoJsonConfig';
 import CustomMarker from '../CustomMarker/CustomMarker';
-import { getCountryLatLon, getData } from './Data';
-import { processPoint } from './Points';
+import { getCountryLatLon, getData } from './Points/Data';
+import { processPoint } from './Points/Points';
 import ImageNotFound from '../GlobalStyles/img/image-not-found.png';
 
 // Know the center of the map.

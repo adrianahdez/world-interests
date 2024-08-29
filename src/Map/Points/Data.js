@@ -1,7 +1,7 @@
 /**
  * JSON with the center coordinates of each country in format: ISO 3166-1 alpha-2 and alpha-3 codes, because we need to match the data from the API which comes with alpha-2 codes, with a point on the map of each country.
  */
-import countryCoordinates from './country-codes-lat-long-alpha3.json';
+import countryCoordinates from '../Countries/country-codes-lat-long-alpha3.json';
 
 /**
  * Utility function to fetch data from an endpoint.
