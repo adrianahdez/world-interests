@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import { useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import './CustomMarker.css';
+import './CustomMarker.scss';
 
 const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint, ...props }) => {
   const containerRef = useRef(null);
