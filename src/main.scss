@@ -27,6 +27,7 @@ h1 small {
 #app {
   /* Fallback if svh is not supported */
   height: calc(100vh - var(--footer-height));
+  /* We use svh to avoid the footer to be hidden by the browser's bottom bar in mobile devices */
   height: calc(100svh - var(--footer-height));
 }
 
@@ -41,15 +42,20 @@ h1 small {
   position: relative;
 }
 
-.map-container img {
-  width: 100%;
-  max-width: 100%
+.map-container {
+  img {
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
-a,
-a:focus,
-a:hover {
-  text-decoration: none
+a {
+  text-decoration: none;
+
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 .leaflet-bottom {

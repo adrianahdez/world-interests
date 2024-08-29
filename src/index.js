@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { createRoot } from 'react-dom/client';
 import 'leaflet/dist/leaflet.css';
-import './main.css';
+import './main.scss';
 import { LanguageProvider } from './Common/LanguageContext';
 import { ThemeProvider } from './Common/ThemeContext';
 
