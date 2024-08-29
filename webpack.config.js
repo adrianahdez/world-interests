@@ -57,7 +57,7 @@ module.exports = (env, argv) => {
       }),
       new CopyWebpackPlugin({
         patterns: [
-          { from: 'favicon.ico', to: '' }, // Copy the favicon.ico to the dist folder
+          { from: 'favicon.svg', to: '' }, // Copy the favicon.svg to the dist folder
         ],
       }),
     ],
