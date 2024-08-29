@@ -47,3 +47,13 @@ export const getCountryLatLon = (alpha2) => {
   const c = countryCoordinates.find(c => c.alpha2 === alpha2);
   return c ? [c.latitude, c.longitude] : null;
 }
+
+/**
+ * Get the ISO 3166-1 alpha-2 code of an alpha-3 code.
+ * @param {string} alpha3 - ISO 3166-1 alpha-3 code of the country.
+ */
+export const getAlpha2FromAlpha3 = (alpha3) => {
+  const c = countryCoordinates.find(c => c.alpha3 === alpha3);
+  const alpha2 = c ? c.alpha2 : null;
+  return alpha2;
+}

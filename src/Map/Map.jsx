@@ -1,43 +1,11 @@
-// ./countries-and-us-states.geo.json is a file that contains the coordinates of the countries and US states. Not used at the moment.
-// import countries from './Countries/countries-and-us-states.geo.json';
-import countries from './Countries/countries.geo.json';
 import React, { useState, useEffect, useRef, memo } from 'react';
-import { MapContainer, GeoJSON, Marker } from 'react-leaflet'
-// import { useMap, useMapEvent } from 'react-leaflet';
-import { setConfig } from './geoJsonConfig';
+import { MapContainer } from 'react-leaflet'
 import CustomMarker from '../CustomMarker/CustomMarker';
 import { getCountryLatLon, getData } from './Points/Data';
 import { processPoint } from './Points/Points';
 import ImageNotFound from '../GlobalStyles/img/image-not-found.png';
-
-// Know the center of the map.
-// function MyComponent() {
-//   const map = useMap()
-//   console.log('map center:', map.getCenter())
-//   return null
-// }
-
-// Know the location of the clicked point. Require user permission to access the location.
-// function MyComponent() {
-//   const map = useMapEvents({
-//     click: () => {
-//       map.locate()
-//     },
-//     locationfound: (location) => {
-//       console.log('location found:', location)
-//     },
-//   })
-//   return null
-// }
-
-// Re center to the point after clicking anywhere on the map.
-// function Click({ position }) {
-//   const map = useMapEvent('click', () => {
-//     map.setView(position, map.getZoom())
-//     console.log('map center:', map.getCenter());
-//   })
-//   return null
-// }
+import './Countries/Countries.scss';
+import Countries from './Countries/Countries';
 
 function Map({ category, toggleSidebar, setMapPoint }) {
   // TODO: Center map in a better way in mobile.
@@ -46,8 +14,6 @@ function Map({ category, toggleSidebar, setMapPoint }) {
   const prevDataRef = useRef({});
 
   useEffect(() => {
-    console.log(category);
-    
     const fetchData = (category) => {
       getData(category)
         .then((result) => {
@@ -65,7 +31,7 @@ function Map({ category, toggleSidebar, setMapPoint }) {
     fetchData(category);
   }, [category]);
 
-  // processPoint after a new data is fetched, to change their appearance a little bit.
+  // processPoint after a new data is fetched, to change their appearance.
   useEffect(() => {
     if (Object.keys(data).length === 0) return;
     Object.keys(data).map((alpha2) => {
@@ -89,32 +55,24 @@ function Map({ category, toggleSidebar, setMapPoint }) {
     }
   }
 
-  // const handleMarkerClick = (e) => {
-  //   console.log('marker clicked', e);
-  // }
-
-
   return (
     <div className="map-container">
       <MapContainer {...mapConfig}>
-        <GeoJSON data={countries} style={setConfig} />
-        {/* <MyComponent /> */}
-
-        {/* <Marker position={markerPosition} opacity={.6} eventHandlers={{ click: () => handleMarkerClick() }}>
-        </Marker> */}
+        {/* This has the GeoJSON component. */}
+        <Countries data={data} category={category} />
 
         {Object.keys(data).map((alpha2) => {
-
-          const regionPoint = data[alpha2][0]
+          const countryData = data[alpha2][0]
           const latLon = getCountryLatLon(alpha2);
-          if (regionPoint && regionPoint.channel) {
-            regionPoint.channel.channelImage = regionPoint.channel.channelImage || ImageNotFound;
-          }
-          const c = regionPoint?.channel;
 
-          return latLon && typeof regionPoint !== 'undefined' ? (
-            <CustomMarker key={alpha2} position={latLon} toggleSidebar={toggleSidebar} mapPoint={regionPoint} setMapPoint={setMapPoint} >
-              <div className="custom-marker__point" data-region={regionPoint.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
+          if (countryData && countryData.channel) {
+            countryData.channel.channelImage = countryData.channel.channelImage || ImageNotFound;
+          }
+          const c = countryData?.channel;
+
+          return latLon && typeof countryData !== 'undefined' ? (
+            <CustomMarker key={alpha2} position={latLon} toggleSidebar={toggleSidebar} mapPoint={countryData} setMapPoint={setMapPoint} >
+              <div className="custom-marker__point" data-region={countryData.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
                 <span className="custom-marker__bg bg-color"></span>
                 <span className="custom-marker__bg-pointer bg-color"></span>
                 <div className="image-container">
@@ -122,7 +80,7 @@ function Map({ category, toggleSidebar, setMapPoint }) {
                 </div>
                 <div className="text-container">
                   <span className='channel-title'>{c.channelTitle}</span>
-                  <span className="location">{regionPoint.regionName}</span>
+                  <span className="location">{countryData.regionName}</span>
                 </div>
               </div>
             </CustomMarker>
