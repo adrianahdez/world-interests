@@ -1,3 +1,9 @@
+/// Variables
+$sidebar-title-height-desktop: 71px; // counting the vertical paddings
+$sidebar-title-height-mobile: 46px; // counting the vertical paddings
+$sidebar-title-padding-top: 10px;
+$sidebar-title-padding-bottom: 10px;
+
 /// Responsive management for mobile first
 /// @access public
 /// @param {integer} $breakpoint - Breakpoint value

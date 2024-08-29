@@ -2,27 +2,30 @@
   // Dark theme colors by default
   --page-bg: rgb(26, 63, 73);
   --country-delimiter-color: #5f4e57;
-  --country-fill-color: #16161d;
+  --country-fill-color: #161d1a;
   --page-text-color: #ddcfcf;
   --link-color: #1fa2e1;
   --black: black;
   --white: white;
+  --panels-fill-color: rgb(10 28 36);
 
   // Theme measurements
   /* This is used to set the height of the map, so adjust based on the real footer height counting the vertical paddings, min-height, etc. */
   --footer-height: 108px;
   --menu-margin-top: 70px;
   --menu-margin-bottom: 40px;
+  --panels-fill-opacity: 0.8;
 }
 
 // Light theme
 .light {
   --page-bg: #97e2ff;
-  --country-delimiter-color: #d3d3d3;
-  --country-fill-color: #ffffff;
+  --country-delimiter-color: #84b3c5;
+  --country-fill-color: #f7eccf;
   --page-text-color: #000000;
   --black: white;
   --white: black;
+  --panels-fill-color: var(--black, black);
 }
 
 @media screen and (max-width: 604px) {

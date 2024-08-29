@@ -1,5 +1,6 @@
 @use '../helpers' as *;
 
+// Styles for all HTML dialog elements
 dialog {
   border: unset;
   box-sizing: border-box;
@@ -12,7 +13,7 @@ dialog {
     align-items: center;
     justify-content: flex-end;
     position: absolute;
-    top: rem(28);
+    top: calc($sidebar-title-height-mobile - 30px);
     right: rem(28);
     margin-block-end: 0;
     margin-block-start: 0;
@@ -26,6 +27,10 @@ dialog {
       padding: 0;
       color: var(--page-text-color);
       outline: none;
+    }
+
+    @include respond-at(768) {
+      top: calc($sidebar-title-height-desktop - 42px);
     }
   }
 

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useContext } from 'react';
 import './InfoSidebar.scss';
 import Player from '../Player/Player';
 import { LanguageContext } from '../Common/LanguageContext';
-import translations from '../Common/translations'; 
+import translations from '../Common/translations';
 
 // Render InfoSidebar component
 export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) {
@@ -44,30 +44,52 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
           <div className='channel-content channel-content__top'>
             <img src={c?.channelImage} alt="marker" />
             <div className='channel-content__text'>
-              <h3 className='channel-content__heading'>{tr.channelName}</h3>
-              <a target="_blank" href={`https://youtube.com/channel/${c?.channelId}`}>{c?.channelTitle}</a>
-              <h3 className='channel-content__heading'>{tr.channelUsername}</h3>
-              <p>{c?.channelUsername}</p>
-              <h3 className='channel-content__heading'>{tr.country}</h3>
-              <p>{mapPoint?.regionName}</p>
+
+              <div className='channel-content__text-group'>
+                <h3 className='channel-content__heading'>{tr.channelName}</h3>
+                <a target="_blank" href={`https://youtube.com/channel/${c?.channelId}`}>{c?.channelTitle}</a>
+              </div>
+
+              <div className='channel-content__text-group'>
+                <h3 className='channel-content__heading'>{tr.channelUsername}</h3>
+                <p>{c?.channelUsername}</p>
+              </div>
+
+              <div className='channel-content__text-group'>
+                <h3 className='channel-content__heading'>{tr.country}</h3>
+                <p>{mapPoint?.regionName}</p>
+              </div>
+
             </div>
           </div>
           <div className='channel-content channel-content__bottom'>
             <h2 className="channel-content__subheading">{tr.statistics}</h2>
             <div className='channel-content__text'>
-              <h3 className='channel-content__heading'>{tr.mostPopularVideo}</h3>
-              <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
-              <h4 className='channel-content__heading'>{tr.viewCount}</h4>
-              <p>{Number(s?.viewCount).toLocaleString()}</p>
-              <h4 className='channel-content__heading'>{tr.likeCount}</h4>
-              <p>{Number(s?.likeCount).toLocaleString()}</p>
-              <h4 className='channel-content__heading'>{tr.commentCount}</h4>
-              <p>{Number(s?.commentCount).toLocaleString()}</p>
+
+              <div className='channel-content__text-group'>
+                <h3 className='channel-content__heading'>{tr.mostPopularVideo}</h3>
+                <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
+              </div>
+
+              <div className='channel-content__text-group'>
+                <h4 className='channel-content__heading'>{tr.viewCount}</h4>
+                <p>{Number(s?.viewCount).toLocaleString()}</p>
+              </div>
+
+              <div className='channel-content__text-group'>
+                <h4 className='channel-content__heading'>{tr.likeCount}</h4>
+                <p>{Number(s?.likeCount).toLocaleString()}</p>
+              </div>
+
+              <div className='channel-content__text-group'>
+                <h4 className='channel-content__heading'>{tr.commentCount}</h4>
+                <p>{Number(s?.commentCount).toLocaleString()}</p>
+              </div>
             </div>
             {mapPoint?.idVideo && mapPoint.idVideo.trim() !== '' && <Player ref={playerRef} idVideo={mapPoint.idVideo} />}
           </div>
         </div>
       </div>
-    </dialog>
+    </dialog >
   );
 }
