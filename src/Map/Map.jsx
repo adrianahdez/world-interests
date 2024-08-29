@@ -44,9 +44,10 @@ function Map({ category, toggleSidebar, setMapPoint }) {
 
   const [data, setData] = useState({});
   const prevDataRef = useRef({});
-  const fetchInterval = 20000;
 
   useEffect(() => {
+    console.log(category);
+    
     const fetchData = (category) => {
       getData(category)
         .then((result) => {
@@ -62,9 +63,6 @@ function Map({ category, toggleSidebar, setMapPoint }) {
         });
     };
     fetchData(category);
-    
-    const interval = setInterval(fetchData(category), fetchInterval);
-    return () => clearInterval(interval);
   }, [category]);
 
   // processPoint after a new data is fetched, to change their appearance a little bit.
