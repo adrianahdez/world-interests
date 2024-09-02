@@ -3,7 +3,6 @@ import './InfoSidebar.scss';
 import Player from '../Player/Player';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
-import { getFlagFromAlpha2 } from '../Map/Points/Data';
 
 // Render InfoSidebar component
 export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) {
@@ -24,7 +23,6 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
 
   const c = mapPoint?.channel;
   const s = mapPoint?.statistics;
-  const flag = getFlagFromAlpha2(mapPoint?.regionCode);
 
   const tr = isEs ? translations.es : translations.en;
 
@@ -41,7 +39,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
             </button>
           </div>
         </menu>
-        <h2 className="sidebar__title">{tr.statsFor} {mapPoint?.regionName} {flag}</h2>
+        <h2 className="sidebar__title">{tr.statsFor} {mapPoint?.regionName} {mapPoint?.flag}</h2>
         <div className="sidebar__list">
           <div className='channel-content channel-content__top'>
             <img src={c?.channelImage} alt="marker" />
@@ -60,13 +58,10 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
             </div>
           </div>
           <div className='channel-content channel-content__bottom'>
-            <h2 className="channel-content__subheading">{tr.statistics}</h2>
+            <h2 className="channel-content__subheading">{tr.mostPopularVideo}</h2>
             <div className='channel-content__text'>
 
-              <div className='channel-content__text-group'>
-                <h3 className='channel-content__heading'>{tr.mostPopularVideo}</h3>
                 <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
-              </div>
 
               <div className='channel-content__stats'>
                 <div className='channel-content__text-group'>

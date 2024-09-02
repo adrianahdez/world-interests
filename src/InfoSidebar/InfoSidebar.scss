@@ -31,7 +31,7 @@
     height: auto;
 
     @include respond-at($mobile-breakpoint) {
-      max-width: 64px;
+      max-width: 78px;
     }
   }
 

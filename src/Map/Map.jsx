@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, memo } from 'react';
 import { MapContainer } from 'react-leaflet'
 import CustomMarker from '../CustomMarker/CustomMarker';
-import { getCountryLatLon, getData } from './Points/Data';
+import { getCountryLatLon, getData, getFlagFromAlpha2 } from './Points/Data';
 import { processPoint } from './Points/Points';
 import ImageNotFound from '../GlobalStyles/img/image-not-found.png';
 import './Countries/Countries.scss';
@@ -62,10 +62,15 @@ function Map({ category, toggleSidebar, setMapPoint }) {
         <Countries data={data} category={category} />
 
         {Object.keys(data).map((alpha2) => {
-          const countryData = data[alpha2][0]
-          const latLon = getCountryLatLon(alpha2);
+          const countryData = data[alpha2]?.[0];
+          if (!countryData) return null;
 
-          if (countryData && countryData.channel) {
+          const latLon = getCountryLatLon(alpha2);
+          if (!latLon) return null;
+
+          countryData.flag = getFlagFromAlpha2(alpha2 || '');
+
+          if (countryData.channel) {
             countryData.channel.channelImage = countryData.channel.channelImage || ImageNotFound;
           }
           const c = countryData?.channel;
