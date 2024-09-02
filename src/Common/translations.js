@@ -13,6 +13,8 @@ const translations = {
     viewCount: "View Count: ",
     likeCount: "Like Count: ",
     commentCount: "Comment Count: ",
+    appMetaTagTitle: "Real-time #1 Trending YouTube Channels around the world 🔥",
+    appMetaTagDescription: "View on a real-time map the most popular YouTube channels in different categories and countries around the world",
   },
   es: {
     channelInfo: "Info del Canal",
@@ -28,6 +30,8 @@ const translations = {
     viewCount: "Número de Vistas: ",
     likeCount: "Número de Me Gusta: ",
     commentCount: "Número de Comentarios: ",
+    appMetaTagTitle: "Canales de YouTube más populares en tiempo real en todo el mundo 🔥",
+    appMetaTagDescription: "Visualiza en un mapa en tiempo real los canales de YouTube más populares en diferentes categorías y países alrededor del mundo",
   },
 };
 
