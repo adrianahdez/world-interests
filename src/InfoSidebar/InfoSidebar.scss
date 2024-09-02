@@ -8,6 +8,14 @@
   z-index: 501;
   width: auto;
 
+  .sidebar__list {
+    font-size: 12px;
+
+    @include respond-at(768) {
+      font-size: 16px;
+    }
+  }
+
   a {
     color: var(--link-color);
     font-weight: 400;
@@ -27,6 +35,7 @@
 
   img {
     width: 100%;
+    max-width: 58px;
     object-fit: contain;
     height: auto;
 
@@ -40,7 +49,8 @@
     justify-content: center;
 
     &__top {
-      flex-direction: column;
+      // flex-direction: column;
+      flex-direction: row;
       align-items: flex-start;
       justify-content: space-between;
       gap: 20px;
@@ -83,19 +93,23 @@
       margin-block-start: 0;
       font-weight: 600;
       margin-bottom: 0;
-      font-size: 16px;
+      font-size: 12px;
 
 
       @include respond-at($mobile-breakpoint) {
         flex-shrink: 1;
+        font-size: 16px;
       }
     }
 
     &__subheading {
       align-self: flex-start;
       margin-bottom: 0;
-      font-size: 20px;
-      margin-top: 22px;
+      margin-top: 16px;
+
+      @include respond-at($mobile-breakpoint) {
+        margin-top: 22px;
+      }
     }
   }
 
