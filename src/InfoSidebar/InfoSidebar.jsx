@@ -3,6 +3,7 @@ import './InfoSidebar.scss';
 import Player from '../Player/Player';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
+import { getFlagFromAlpha2 } from '../Map/Points/Data';
 
 // Render InfoSidebar component
 export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) {
@@ -23,6 +24,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
 
   const c = mapPoint?.channel;
   const s = mapPoint?.statistics;
+  const flag = getFlagFromAlpha2(mapPoint?.regionCode);
 
   const tr = isEs ? translations.es : translations.en;
 
@@ -39,25 +41,20 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
             </button>
           </div>
         </menu>
-        <h2 className="sidebar__title">{tr.channelInfo}</h2>
+        <h2 className="sidebar__title">{tr.statsFor} {mapPoint?.regionName} {flag}</h2>
         <div className="sidebar__list">
           <div className='channel-content channel-content__top'>
             <img src={c?.channelImage} alt="marker" />
             <div className='channel-content__text'>
 
-              <div className='channel-content__text-group'>
+              <div className='channel-content__text-group mt-0'>
                 <h3 className='channel-content__heading'>{tr.channelName}</h3>
                 <a target="_blank" href={`https://youtube.com/channel/${c?.channelId}`}>{c?.channelTitle}</a>
               </div>
 
-              <div className='channel-content__text-group'>
+              <div className='channel-content__text-group mt-0'>
                 <h3 className='channel-content__heading'>{tr.channelUsername}</h3>
                 <p>{c?.channelUsername}</p>
-              </div>
-
-              <div className='channel-content__text-group'>
-                <h3 className='channel-content__heading'>{tr.country}</h3>
-                <p>{mapPoint?.regionName}</p>
               </div>
 
             </div>
@@ -71,19 +68,21 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
                 <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
               </div>
 
-              <div className='channel-content__text-group'>
-                <h4 className='channel-content__heading'>{tr.viewCount}</h4>
-                <p>{Number(s?.viewCount).toLocaleString()}</p>
-              </div>
+              <div className='channel-content__stats'>
+                <div className='channel-content__text-group'>
+                  <h4 className='channel-content__heading'>👁️</h4>
+                  <p>{Number(s?.viewCount).toLocaleString()}</p>
+                </div>
 
-              <div className='channel-content__text-group'>
-                <h4 className='channel-content__heading'>{tr.likeCount}</h4>
-                <p>{Number(s?.likeCount).toLocaleString()}</p>
-              </div>
+                <div className='channel-content__text-group'>
+                  <h4 className='channel-content__heading'>👍🏼</h4>
+                  <p>{Number(s?.likeCount).toLocaleString()}</p>
+                </div>
 
-              <div className='channel-content__text-group'>
-                <h4 className='channel-content__heading'>{tr.commentCount}</h4>
-                <p>{Number(s?.commentCount).toLocaleString()}</p>
+                <div className='channel-content__text-group'>
+                  <h4 className='channel-content__heading'>💬</h4>
+                  <p>{Number(s?.commentCount).toLocaleString()}</p>
+                </div>
               </div>
             </div>
             {mapPoint?.idVideo && mapPoint.idVideo.trim() !== '' && <Player ref={playerRef} idVideo={mapPoint.idVideo} />}
