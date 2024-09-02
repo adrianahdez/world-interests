@@ -76,6 +76,7 @@ export default function App() {
         mapPoint={mapPoint}
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
+        category={category}
       />
       <Map
         category={category}

@@ -5,7 +5,7 @@ import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
 
 // Render InfoSidebar component
-export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) {
+export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar, category }) {
   const { isEs } = useContext(LanguageContext);
   const sidebarRef = useRef(null);
   const playerRef = useRef(null);
@@ -55,11 +55,10 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
                 <p>{c?.channelUsername}</p>
               </div>
 
-              {/* Category: */}
-              {/* <div className='channel-content__text-group mt-0'>
+              <div className='channel-content__text-group mt-0'>
                 <h3 className='channel-content__heading'>{tr.category}</h3>
-                <p>{c?.channelCategory}</p>
-              </div> */}
+                <p>{category}</p>
+              </div>
 
             </div>
           </div>
