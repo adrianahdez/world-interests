@@ -8,8 +8,13 @@
   z-index: 501;
   width: auto;
 
-  .sidebar__list {
+  .sidebar__list,
+  .channel-content__heading {
     font-size: 12px;
+
+    @include respond-at($mobile-breakpoint) {
+      font-size: 14px;
+    }
 
     @include respond-at(768) {
       font-size: 16px;
@@ -80,6 +85,7 @@
       column-gap: 10px;
       row-gap: 0px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
     &__stats {
@@ -93,12 +99,10 @@
       margin-block-start: 0;
       font-weight: 600;
       margin-bottom: 0;
-      font-size: 12px;
 
 
       @include respond-at($mobile-breakpoint) {
         flex-shrink: 1;
-        font-size: 16px;
       }
     }
 
