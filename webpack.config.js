@@ -58,6 +58,8 @@ module.exports = (env, argv) => {
       new CopyWebpackPlugin({
         patterns: [
           { from: 'favicon.svg', to: '' }, // Copy the favicon.svg to the dist folder
+          { from: 'sitemap.xml', to: '' }, // Copy the sitemap.xml to the dist folder
+          { from: 'screenshot.jpg', to: '' }, // Copy the screenshot.jpg to the dist folder
         ],
       }),
     ],

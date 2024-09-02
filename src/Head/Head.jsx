@@ -49,16 +49,19 @@ export default function Head() {
   // Add meta tags
   const addMetaTags = () => {
     const keywords = "YouTube, live, music, videos, channels, countries, map, realtime, popular, trending, top, statistics, data, information, info, categories, free";
+    const currentURL = window.location.href;
+    const currentURLWithoutParams = currentURL.split('?')[0];
+
     const metaTags = [
       { property: metaTag.ogTitle, content: tr.appMetaTagTitle },
       { property: metaTag.ogDescription, content: tr.appMetaTagDescription },
-      { property: metaTag.ogImage, content: process.env.REACT_APP_BACKEND_API_URL + 'screenshot.jpg' },
-      { property: metaTag.ogUrl, content: window.location.href },
+      { property: metaTag.ogImage, content: currentURLWithoutParams + 'screenshot.jpg' },
+      { property: metaTag.ogUrl, content: currentURL },
       { property: metaTag.ogType, content: 'website' },
       { name: metaTag.twitterCard, content: 'summary_large_image' },
       { name: metaTag.twitterTitle, content: tr.appMetaTagTitle },
       { name: metaTag.twitterDescription, content: tr.appMetaTagDescription },
-      { name: metaTag.twitterImage, content: process.env.REACT_APP_BACKEND_API_URL + 'screenshot.jpg' },
+      { name: metaTag.twitterImage, content: currentURLWithoutParams + 'screenshot.jpg' },
 
       // Add more meta tags here. description, keywords, robots, etc.
       { name: 'description', content: tr.appMetaTagDescription },
