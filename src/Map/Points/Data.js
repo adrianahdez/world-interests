@@ -1,7 +1,7 @@
 /**
  * JSON with the center coordinates of each country in format: ISO 3166-1 alpha-2 and alpha-3 codes, because we need to match the data from the API which comes with alpha-2 codes, with a point on the map of each country.
  */
-import countryCoordinates from '../Countries/country-codes-lat-long-alpha3.json';
+import countryCoordinates from '../Countries/country-codes-lat-long-flags-alpha3.json';
 
 /**
  * Utility function to fetch data from an endpoint.
@@ -56,4 +56,14 @@ export const getAlpha2FromAlpha3 = (alpha3) => {
   const c = countryCoordinates.find(c => c.alpha3 === alpha3);
   const alpha2 = c ? c.alpha2 : null;
   return alpha2;
+}
+
+/**
+ * Get the flag of a country based on its alpha-2 code.
+ * @param {string} alpha2 - ISO 3166-1 alpha-2 code of the country.
+ */
+export const getFlagFromAlpha2 = (alpha2) => {
+  const c = countryCoordinates.find(c => c.alpha2 === alpha2);
+  const flag = c ? c.flag : null;
+  return flag;
 }
