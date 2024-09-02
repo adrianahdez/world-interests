@@ -4,11 +4,11 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100vw;
-  z-index: 999;
+  z-index: 500;
 
 
   .footer-content {
-    background-color: var(--panels-fill-color);
+    background-color: var(--footer-fill-color);
     color: var(--page-text-color);
     justify-content: center;
     min-height: var(--footer-height);

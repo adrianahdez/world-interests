@@ -7,6 +7,9 @@
   $mobile-breakpoint: 578;
   z-index: 501;
   width: auto;
+  /* Fallback if svh is not supported */
+  max-height: calc(100vh  - var(--menu-margin-top) - var(--menu-margin-bottom));
+  max-height: calc(100svh - var(--menu-margin-top) - var(--menu-margin-bottom));
 
   .sidebar__list,
   .channel-content__heading {

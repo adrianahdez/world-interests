@@ -8,12 +8,13 @@
   --black: black;
   --white: white;
   --panels-fill-color: rgb(10 28 36);
+  --footer-fill-color: rgb(11, 36, 46);
 
   // Theme measurements
   /* This is used to set the height of the map, so adjust based on the real footer height counting the vertical paddings, min-height, etc. */
   --footer-height: 108px;
   --menu-margin-top: 70px;
-  --menu-margin-bottom: 40px;
+  --menu-margin-bottom: 20px;
   --panels-fill-opacity: 0.8;
 }
 
