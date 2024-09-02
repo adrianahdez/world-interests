@@ -55,13 +55,19 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar }) 
                 <p>{c?.channelUsername}</p>
               </div>
 
+              {/* Category: */}
+              {/* <div className='channel-content__text-group mt-0'>
+                <h3 className='channel-content__heading'>{tr.category}</h3>
+                <p>{c?.channelCategory}</p>
+              </div> */}
+
             </div>
           </div>
           <div className='channel-content channel-content__bottom'>
             <h2 className="channel-content__subheading">{tr.mostPopularVideo}</h2>
             <div className='channel-content__text'>
 
-                <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
+              <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
 
               <div className='channel-content__stats'>
                 <div className='channel-content__text-group'>

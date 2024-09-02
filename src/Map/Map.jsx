@@ -83,6 +83,7 @@ function Map({ category, toggleSidebar, setMapPoint }) {
                 <div className="image-container">
                   <img src={c.channelImage} alt="marker" />
                 </div>
+                <span className='flag'>{countryData.flag}</span>
                 <div className="text-container">
                   <span className='channel-title'>{c.channelTitle}</span>
                   <span className="location">{countryData.regionName}</span>
