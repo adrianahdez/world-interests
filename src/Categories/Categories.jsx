@@ -12,13 +12,15 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
   useEffect(() => {
     fetchCategories()
       .then((result) => {
-        setCategoryNames(result);
+        // If isEs is true, select the language 'es' from result, otherwise select the 'en' language.
+        const categoriesOfCurrentLanguage = result.find(({ language }) => language === (isEs ? 'es' : 'en'));
+        setCategoryNames(categoriesOfCurrentLanguage['categories']);
       })
       .catch((error) => {
         setCategoryNames([]);
         console.error('Error getting categories:', error);
       });
-  }, [isDialogOpen]);
+  }, [isDialogOpen, isEs]);
 
   useEffect(() => {
     if (isDialogOpen) {
@@ -48,6 +50,10 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
    * @returns {Promise<Array>} An array of objects with the category slug and name.
    * @throws {Error} If the network response is not ok or there is no data.
    * @throws {Error} If there is an error fetching the categories.
+   * The returned array is like this:[
+   * { language: 'en', categories: [{ slug: 'music', name: 'Music' }, { slug: 'gaming', name: 'Gaming' }, ...] },
+   * { language: 'es', categories: [{ slug: 'music', name: 'Música' }, { slug: 'gaming', name: 'Juegos' }, ...] }
+   * ];
    */
   const fetchCategories = async () => {
     const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'get-category-list.php';
@@ -64,8 +70,15 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
       if (!data || data.error) {
         throw new Error('No data');
       }
-      const categoriesArray = Object.entries(data).map(([slug, name]) => ({ slug, name }));
-      return categoriesArray;
+
+      const dataArray = Object.entries(data).map(([lang, categories]) => {
+        return {
+          language: lang,
+          categories: Object.entries(categories).map(([slug, name]) => ({ slug, name }))
+        };
+      });
+
+      return dataArray;
 
     } catch (e) {
       console.error('Error fetching categories:', e);
