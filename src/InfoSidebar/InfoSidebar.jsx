@@ -21,6 +21,21 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar, ca
     }
   }, [isSidebarOpen]);
 
+  // Handle Escape key to close the sidebar
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape' && isSidebarOpen) {
+        toggleSidebar(false);
+      }
+    };
+    // Add event listener for keydown
+    window.addEventListener('keydown', handleKeyDown);
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isSidebarOpen, toggleSidebar]);
+
   const c = mapPoint?.channel;
   const s = mapPoint?.statistics;
 

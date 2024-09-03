@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
 import './Categories.scss';
 import { LanguageContext } from '../Common/LanguageContext';
-import translations from '../Common/translations'; 
+import translations from '../Common/translations';
 
 // Render Categories component
 export default function Categories({ category, setCategory, isDialogOpen, toggleDialog, toggleSidebar }) {
@@ -28,6 +28,27 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
     }
   }, [isDialogOpen]);
 
+  // Handle Escape key to close the dialog
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape' && isDialogOpen) {
+        toggleDialog();
+      }
+    };
+    // Add event listener for keydown
+    window.addEventListener('keydown', handleKeyDown);
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isDialogOpen, toggleDialog]);
+
+  /**
+   * Fetch categories from the backend API.
+   * @returns {Promise<Array>} An array of objects with the category slug and name.
+   * @throws {Error} If the network response is not ok or there is no data.
+   * @throws {Error} If there is an error fetching the categories.
+   */
   const fetchCategories = async () => {
     const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'get-category-list.php';
 
