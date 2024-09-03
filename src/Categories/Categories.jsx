@@ -74,6 +74,8 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
   }
 
   const tr = isEs ? translations.es : translations.en;
+  // Detect if the device is mobile
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
   return (
     <dialog ref={dialogRef} className='sidebar sidebar--categories'>
@@ -96,6 +98,10 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
                 e.preventDefault();
                 setCategory(slug);
                 toggleSidebar(false);
+                // Close the dialog only if on a mobile device
+                if (isMobile) {
+                  toggleDialog();
+                }
               }}>{name}</a>
             </li>
           ))}
