@@ -14,7 +14,8 @@
 
   // Theme measurements
   /* This is used to set the height of the map, so adjust based on the real footer height counting the vertical paddings, min-height, etc. */
-  --footer-height: 108px;
+  // --footer-height: 123px;
+  --footer-height: 86px;
   --menu-margin-top: 70px;
   --menu-margin-bottom: 20px;
   --panels-fill-opacity: 0.8;
@@ -28,6 +29,7 @@
   --page-text-color: #000000;
   --black: white;
   --white: black;
+  --link-color: #0376ae;
   --panels-fill-color: var(--black, black);
   --footer-fill-color: var(--panels-fill-color, black);
 
@@ -48,8 +50,9 @@
   }
 }
 
-@media screen and (max-width: 604px) {
+@media screen and (min-width: 604px) {
   :root {
-    --footer-height: 123px;
+    // --footer-height: 108px;
+    --footer-height: 100px;
   }
 }
