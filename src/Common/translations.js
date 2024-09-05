@@ -2,7 +2,7 @@ const translations = {
   en: {
     statsFor: "Statistics for ",
     youtubeCategories: "YouTube Categories",
-    footerTitle: "Which Youtube channels are most popular now (realtime)",
+    footerTitle: "Youtube channels trending #1 now (realtime)",
     footerDesc: "Data obtained from the YouTube API - You are viewing the #1 trending video channel from each country.",
     developedBy: "Developed by ",
     channelName: "Channel Name: ",
@@ -16,7 +16,7 @@ const translations = {
   es: {
     statsFor: "Estadísticas para ",
     youtubeCategories: "Categorías de YouTube",
-    footerTitle: "Canales de YouTube más populares ahora (en tiempo real)",
+    footerTitle: "Canales de YouTube en tendencia ahora (en tiempo real)",
     footerDesc: "Datos obtenidos de la API de YouTube - Estás viendo el canal de video más popular de cada país.",
     developedBy: "Desarrollado por ",
     channelName: "Nombre del Canal: ",
