@@ -2,9 +2,10 @@ import React, { useState, useCallback, useEffect } from 'react';
 import Map from '../Map/Map';
 import Categories from '../Categories/Categories';
 import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
 import InfoSidebar from '../InfoSidebar/InfoSidebar';
 import Head from '../Head/Head';
+// Header must be loaded after all components to load the theme rules at last and override others.
+import Header from '../Header/Header';
 
 // Helper function to get the category from the URL
 const getCategoryFromUrl = () => {

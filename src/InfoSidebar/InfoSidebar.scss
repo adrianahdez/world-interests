@@ -33,13 +33,13 @@
     margin: 0;
   }
 
-  .sidebar__bg {
-    opacity: 1;
+  // .sidebar__bg {
+  //   background: rgb(10 28 36 / var(--panels-fill-opacity, .65));
 
-    @include respond-at(768) {
-      opacity: var(--panels-fill-opacity, .65);
-    }
-  }
+  //   @include respond-at(768) {
+  //     background: rgb(10 28 36 / var(--panels-fill-opacity, .65));
+  //   }
+  // }
 
   img {
     width: 100%;

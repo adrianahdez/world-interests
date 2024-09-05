@@ -1,3 +1,5 @@
+@use '../helpers' as *;
+
 :root {
   // Dark theme colors by default
   --page-bg: rgb(26, 63, 73);
@@ -28,6 +30,22 @@
   --white: black;
   --panels-fill-color: var(--black, black);
   --footer-fill-color: var(--panels-fill-color, black);
+
+  .sidebar {
+    .sidebar__bg {
+        background: rgb(255 255 255 / var(--panels-fill-opacity, .65));
+    }
+
+    // &--map-point {
+    //   .sidebar__bg {
+    //     background: rgb(255 255 255 / 1);
+
+    //     @include respond-at(768) {
+    //       background: rgb(255 255 255 / var(--panels-fill-opacity, .65));
+    //     }
+    //   }
+    // }
+  }
 }
 
 @media screen and (max-width: 604px) {
