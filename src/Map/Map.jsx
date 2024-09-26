@@ -15,7 +15,8 @@ function Map({ category, toggleSidebar, setMapPoint }) {
 
   useEffect(() => {
     const fetchData = (category) => {
-      getData(category)
+      const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'get-json.php' + '?category=' + category;
+      getData(apiUrl)
         .then((result) => {
           // Compare the new data with the previous data to ensure that the state is only updated when there are real changes in the data and avoid unnecessary re-renders. Because whitout this, React is detecting the data as a new object every time even if the data is the same.
           if (JSON.stringify(result) !== JSON.stringify(prevDataRef.current)) {

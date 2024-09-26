@@ -2,19 +2,39 @@ import React, { useEffect, useRef, useState, useContext } from 'react';
 import './Categories.scss';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
+import { getData } from '../Map/Points/Data';
 
 // Render Categories component
 export default function Categories({ category, setCategory, isDialogOpen, toggleDialog, toggleSidebar }) {
   const { isEs } = useContext(LanguageContext);
   const dialogRef = useRef(null);
+  // The result categoryNames is an array of objects with the category slug and name like this: [{slug: 'music', name: 'Music'}, {slug: 'gaming', name: 'Gaming'}].
   const [categoryNames, setCategoryNames] = useState([]);
 
   useEffect(() => {
     fetchCategories()
       .then((result) => {
         // If isEs is true, select the language 'es' from result, otherwise select the 'en' language.
-        const categoriesOfCurrentLanguage = result.find(({ language }) => language === (isEs ? 'es' : 'en'));
-        setCategoryNames(categoriesOfCurrentLanguage['categories']);
+        const currLang = isEs ? 'es' : 'en';
+        // Parse the result if it is a string
+        const parsedResult = typeof result === 'string' ? JSON.parse(result) : result;
+        // Ensure the parsed result is an object and not null
+        if (typeof parsedResult !== 'object' || parsedResult === null) {
+          throw new Error('Invalid data format');
+        }
+        const categoriesOfCurrentLanguage = parsedResult[currLang];
+        if (!categoriesOfCurrentLanguage) {
+          setCategoryNames([]);
+          return;
+        }
+
+        // Transform the object into an array of categories with slug and name properties
+        const transformedCategories = Object.entries(categoriesOfCurrentLanguage).map(([slug, name]) => ({
+          slug,
+          name,
+        }));
+
+        setCategoryNames(transformedCategories);
       })
       .catch((error) => {
         setCategoryNames([]);
@@ -50,40 +70,10 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
    * @returns {Promise<Array>} An array of objects with the category slug and name.
    * @throws {Error} If the network response is not ok or there is no data.
    * @throws {Error} If there is an error fetching the categories.
-   * The returned array is like this:[
-   * { language: 'en', categories: [{ slug: 'music', name: 'Music' }, { slug: 'gaming', name: 'Gaming' }, ...] },
-   * { language: 'es', categories: [{ slug: 'music', name: 'Música' }, { slug: 'gaming', name: 'Juegos' }, ...] }
-   * ];
    */
   const fetchCategories = async () => {
     const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'get-category-list.php';
-
-    try {
-      const response = await fetch(apiUrl,
-        { headers: { 'Content-type': 'application/json' } }
-      );
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      if (!data || data.error) {
-        throw new Error('No data');
-      }
-
-      const dataArray = Object.entries(data).map(([lang, categories]) => {
-        return {
-          language: lang,
-          categories: Object.entries(categories).map(([slug, name]) => ({ slug, name }))
-        };
-      });
-
-      return dataArray;
-
-    } catch (e) {
-      console.error('Error fetching categories:', e);
-      return [];
-    }
+    return await getData(apiUrl);
   }
 
   const tr = isEs ? translations.es : translations.en;

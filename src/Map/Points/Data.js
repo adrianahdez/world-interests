@@ -8,7 +8,7 @@ import countryCoordinates from '../Countries/country-codes-lat-long-flags-alpha3
  * @param {string} url Endpoint to fetch data from.
  * @returns {Promise} Promise object represents the data fetched from the API.
  */
-export const fetchData = async (url) => {
+const fetchData = async (url) => {
   const response = await fetch(url,
     {
       headers: {
@@ -16,6 +16,7 @@ export const fetchData = async (url) => {
       },
     }
   );
+
   const data = await response?.json();
   return data;
 }
@@ -25,15 +26,15 @@ export const fetchData = async (url) => {
  * The json file is updated periodically with new data from the backend.
  * @returns {Promise} Promise object represents the data fetched from the API.
  */
-export const getData = async (category) => {
-  const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'get-json.php' + '?category=' + category;
+export const getData = async (apiUrl) => {
   try {
     const response = await fetchData(apiUrl);
-    if (!response.data || response.error) {
-      throw new Error('No data');
+    if (!response || response.error) {
+      throw new Error(response?.data);
     }
     return response.data;
   } catch (e) {
+    console.error(e);
     return [];
   }
 }
