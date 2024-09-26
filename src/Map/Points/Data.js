@@ -8,7 +8,7 @@ import countryCoordinates from '../Countries/country-codes-lat-long-flags-alpha3
  * @param {string} url Endpoint to fetch data from.
  * @returns {Promise} Promise object represents the data fetched from the API.
  */
-const fetchData = async (url) => {
+export const fetchData = async (url) => {
   const response = await fetch(url,
     {
       headers: {
