@@ -71,7 +71,7 @@ docker compose -f compose.dev.yml up
 docker compose -f compose.dev.yml down
 ```
 
-The app will be available at http://localhost:9000.
+The app will be available at http://localhost:9000. The webpack-dev-server **watches all source files** (JSX, SCSS, JS, etc.) — any change you save is recompiled instantly and the browser updates automatically via Hot Module Replacement (HMR), no manual refresh needed.
 
 To run a one-off production build to `dist/`:
 
@@ -87,7 +87,7 @@ Requires Node.js and npm installed on the host.
 
 ```bash
 npm install
-npm run serve   # starts webpack-dev-server at http://localhost:9000
+npm run serve   # starts webpack-dev-server at http://localhost:9000 with file watching and HMR
 ```
 
 Other useful commands:
