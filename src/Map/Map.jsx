@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, memo } from 'react';
+import React, { useState, useEffect, useRef, memo, useContext } from 'react';
 import { MapContainer } from 'react-leaflet'
 import CustomMarker from '../CustomMarker/CustomMarker';
 import { getCountryLatLon, getData, getFlagFromAlpha2 } from './Points/Data';
@@ -6,14 +6,19 @@ import { processPoint } from './Points/Points';
 import ImageNotFound from '../GlobalStyles/img/image-not-found.png';
 import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
+import { LanguageContext } from '../Common/LanguageContext';
+import translations from '../Common/translations';
 
 function Map({ category, toggleSidebar, setMapPoint }) {
   // TODO: Center map in a better way in mobile.
 
+  const { isEs } = useContext(LanguageContext);
   const [data, setData] = useState({});
+  const [mapError, setMapError] = useState(false);
   const prevDataRef = useRef({});
 
   useEffect(() => {
+    setMapError(false);
     const fetchData = (category) => {
       const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'get-json.php' + '?category=' + category;
       getData(apiUrl)
@@ -25,7 +30,8 @@ function Map({ category, toggleSidebar, setMapPoint }) {
           }
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.warn('[WorldInterests] Could not load map data for category "' + category + '":', error.message);
+          setMapError(true);
           setData({});
         });
     };
@@ -56,8 +62,15 @@ function Map({ category, toggleSidebar, setMapPoint }) {
     }
   }
 
+  const tr = isEs ? translations.es : translations.en;
+
   return (
     <div className="map-container">
+      {mapError && (
+        <div className="map-error-overlay">
+          <p>{tr.mapDataUnavailable}</p>
+        </div>
+      )}
       <MapContainer {...mapConfig}>
         {/* This has the GeoJSON component. */}
         <Countries data={data} category={category} />
