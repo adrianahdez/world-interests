@@ -99,7 +99,7 @@ There are no automated tests configured in this project (see CLAUDE.md). Validat
 
 - [x] Step 2: **Create `compose.dev.yml`.** Single service `worldinterests_frontend` using `node:20-alpine`, working dir `/app`, volumes `.:/app` + anonymous `/app/node_modules`, port `9000:9000`, command `sh -c "npm install && npm run serve"`.
 
-- [ ] Step 3: **Create `.env.example`.** Single entry: `REACT_APP_BACKEND_API_URL=http://localhost:8080/` with a comment explaining it must point to the running backend.
+- [x] Step 3: **Create `.env.example`.** Single entry: `REACT_APP_BACKEND_API_URL=http://localhost:8080/` with a comment explaining it must point to the running backend.
 
 - [ ] Step 4: **Create `.dockerignore`.** Exclude `node_modules`, `dist`, `.git`, `.claude`, `*.md`, `.idea`, `.vscode`, `.env`, `.env.example`.
 
