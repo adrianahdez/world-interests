@@ -87,7 +87,7 @@ There are no automated tests configured in this project (see CLAUDE.md). Validat
 
 - [x] Step 1: **Fix `src/Map/Points/Data.js`.** In `fetchData()`: check `response.ok` and throw a descriptive `Error` if not; wrap `response.json()` in a try/catch and throw a descriptive `Error` on parse failure. In `getData()`: remove the internal try/catch so errors propagate to callers; remove `console.error`.
 
-- [ ] Step 2: **Add error translations to `src/Common/translations.js`.** Add two new keys to both `en` and `es`: one for categories unavailable (shown in the sidebar) and one for map data unavailable (shown on the map overlay).
+- [x] Step 2: **Add error translations to `src/Common/translations.js`.** Add two new keys to both `en` and `es`: one for categories unavailable (shown in the sidebar) and one for map data unavailable (shown on the map overlay).
 
 - [ ] Step 3: **Update `src/Categories/Categories.jsx`.** Add a `categoriesError` state (boolean). In the `.catch()` handler: set `categoriesError(true)`, log a `console.warn` with a descriptive message. In the JSX: when `categoriesError` is true and the sidebar is open, render the error message string instead of the `<ul>` list.
 
