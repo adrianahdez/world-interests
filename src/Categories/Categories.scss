@@ -9,6 +9,14 @@
     line-height: 1.3;
   }
 
+  .sidebar__error {
+    padding: 20px 30px;
+    opacity: 0.75;
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
   @include respond-at(768) {
     margin-left: 0;
     margin-right: unset;

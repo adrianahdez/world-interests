@@ -89,6 +89,6 @@ There are no automated tests configured in this project (see CLAUDE.md). Validat
 
 - [x] Step 2: **Add error translations to `src/Common/translations.js`.** Add two new keys to both `en` and `es`: one for categories unavailable (shown in the sidebar) and one for map data unavailable (shown on the map overlay).
 
-- [ ] Step 3: **Update `src/Categories/Categories.jsx`.** Add a `categoriesError` state (boolean). In the `.catch()` handler: set `categoriesError(true)`, log a `console.warn` with a descriptive message. In the JSX: when `categoriesError` is true and the sidebar is open, render the error message string instead of the `<ul>` list.
+- [x] Step 3: **Update `src/Categories/Categories.jsx`.** Add a `categoriesError` state (boolean). In the `.catch()` handler: set `categoriesError(true)`, log a `console.warn` with a descriptive message. In the JSX: when `categoriesError` is true and the sidebar is open, render the error message string instead of the `<ul>` list.
 
 - [ ] Step 4: **Update `src/Map/Map.jsx`.** Add a `mapError` state (boolean). In the `.catch()` handler: set `mapError(true)`, log a `console.warn`. In the JSX: when `mapError` is true, render a centered overlay `<div>` inside `.map-container` with the error message. Reset `mapError` to `false` when `category` changes and a new fetch starts.
