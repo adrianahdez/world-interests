@@ -47,6 +47,7 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         template: './index.html',
         inject: 'body', // Inject the script and styles tag in the body, ensuring the load of the assets with the unique generated name by the content hash.
+        isProd: !isDevelopment,
       }),
       // This plugin compress the files with gzip
       new CompressionWebpackPlugin({
