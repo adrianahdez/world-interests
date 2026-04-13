@@ -97,4 +97,4 @@ Other useful commands:
 
 ## Deployment
 
-When pushed to the `main` branch, the `dist` folder is automatically deployed to Cloudflare Pages.
+When pushed to the `main` branch, Cloudflare Pages automatically pulls the source code, runs `npm run build` on its servers, and serves the resulting `dist/` folder. The `REACT_APP_BACKEND_API_URL` environment variable must be configured in the Cloudflare Pages dashboard (Settings → Environment variables) so it is available during the build.
