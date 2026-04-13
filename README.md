@@ -65,7 +65,7 @@ Requires only Docker — no local Node.js installation needed.
 
 ```bash
 # Start the dev server (installs deps on first run, then starts webpack-dev-server)
-docker compose -f compose.dev.yml up
+docker compose -f compose.dev.yml up -d
 
 # Stop the container
 docker compose -f compose.dev.yml down
