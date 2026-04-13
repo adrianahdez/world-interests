@@ -95,7 +95,7 @@ There are no automated tests configured in this project (see CLAUDE.md). Validat
 
 ## Implementation Plan
 
-- [ ] Step 1: **Add `serve` script to `package.json`.** Add `"serve": "webpack serve --mode development --host 0.0.0.0"` to the `scripts` block. This is the only change to existing application code.
+- [x] Step 1: **Add `serve` script to `package.json`.** Add `"serve": "webpack serve --mode development --host 0.0.0.0"` to the `scripts` block. This is the only change to existing application code.
 
 - [ ] Step 2: **Create `compose.dev.yml`.** Single service `worldinterests_frontend` using `node:20-alpine`, working dir `/app`, volumes `.:/app` + anonymous `/app/node_modules`, port `9000:9000`, command `sh -c "npm install && npm run serve"`.
 
