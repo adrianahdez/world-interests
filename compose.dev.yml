@@ -1,0 +1,11 @@
+services:
+  worldinterests_frontend:
+    image: node:20-alpine
+    container_name: worldinterests_frontend
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "9000:9000"
+    command: sh -c "npm install && npm run serve"
