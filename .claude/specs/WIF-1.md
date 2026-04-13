@@ -101,6 +101,6 @@ There are no automated tests configured in this project (see CLAUDE.md). Validat
 
 - [x] Step 3: **Create `.env.example`.** Single entry: `REACT_APP_BACKEND_API_URL=http://localhost:8080/` with a comment explaining it must point to the running backend.
 
-- [ ] Step 4: **Create `.dockerignore`.** Exclude `node_modules`, `dist`, `.git`, `.claude`, `*.md`, `.idea`, `.vscode`, `.env`, `.env.example`.
+- [x] Step 4: ~~**Create `.dockerignore`.**~~ Skipped — no Dockerfile means no build context, so `.dockerignore` is unnecessary.
 
-- [ ] Step 5: **Rewrite `README.md`.** Remove the "With Docker (Apache)" section including the embedded `docker-compose.yml` block. Rewrite the "Run the project" section into a clear "Local development" section covering: (a) prerequisite — backend must be running, link to backend repo; (b) copy `.env.example`; (c) Docker path (`docker compose -f compose.dev.yml up`, rebuild command, stop command); (d) non-Docker path (existing content, lightly cleaned up). Update port references to 9000 where relevant.
+- [x] Step 5: **Rewrite `README.md`.** Remove the "With Docker (Apache)" section including the embedded `docker-compose.yml` block. Rewrite the "Run the project" section into a clear "Local development" section covering: (a) prerequisite — backend must be running, link to backend repo; (b) copy `.env.example`; (c) Docker path (`docker compose -f compose.dev.yml up`, rebuild command, stop command); (d) non-Docker path (existing content, lightly cleaned up). Update port references to 9000 where relevant.
