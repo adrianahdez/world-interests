@@ -10,10 +10,12 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
   const dialogRef = useRef(null);
   // The result categoryNames is an array of objects with the category slug and name like this: [{slug: 'music', name: 'Music'}, {slug: 'gaming', name: 'Gaming'}].
   const [categoryNames, setCategoryNames] = useState([]);
+  const [categoriesError, setCategoriesError] = useState(false);
 
   useEffect(() => {
     fetchCategories()
       .then((result) => {
+        setCategoriesError(false);
         // If isEs is true, select the language 'es' from result, otherwise select the 'en' language.
         const currLang = isEs ? 'es' : 'en';
         // Parse the result if it is a string
@@ -23,7 +25,9 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
           throw new Error('Invalid data format');
         }
         const categoriesOfCurrentLanguage = parsedResult[currLang];
-        if (!categoriesOfCurrentLanguage) {
+        if (!categoriesOfCurrentLanguage || Object.keys(categoriesOfCurrentLanguage).length === 0) {
+          console.warn('[WorldInterests] Categories list is empty: the backend returned no categories for language "' + currLang + '".');
+          setCategoriesError(true);
           setCategoryNames([]);
           return;
         }
@@ -37,8 +41,9 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
         setCategoryNames(transformedCategories);
       })
       .catch((error) => {
+        console.warn('[WorldInterests] Could not load categories:', error.message);
+        setCategoriesError(true);
         setCategoryNames([]);
-        console.error('Error getting categories:', error);
       });
   }, [isDialogOpen, isEs]);
 
@@ -94,21 +99,25 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
           </div>
         </menu>
         <h2 className="sidebar__title">{tr.youtubeCategories}</h2>
-        <ul className="sidebar__list">
-          {categoryNames.map(({ slug, name }, index) => (
-            <li key={index} className={`sidebar__item${category === slug ? ' active' : ''}`}>
-              <a href="#" className="sidebar__link" data-category={slug} onClick={e => {
-                e.preventDefault();
-                setCategory(slug);
-                toggleSidebar(false);
-                // Close the dialog only if on a mobile device
-                if (isMobile) {
-                  toggleDialog();
-                }
-              }}>{name}</a>
-            </li>
-          ))}
-        </ul>
+        {categoriesError ? (
+          <p className="sidebar__error">{tr.categoriesUnavailable}</p>
+        ) : (
+          <ul className="sidebar__list">
+            {categoryNames.map(({ slug, name }, index) => (
+              <li key={index} className={`sidebar__item${category === slug ? ' active' : ''}`}>
+                <a href="#" className="sidebar__link" data-category={slug} onClick={e => {
+                  e.preventDefault();
+                  setCategory(slug);
+                  toggleSidebar(false);
+                  // Close the dialog only if on a mobile device
+                  if (isMobile) {
+                    toggleDialog();
+                  }
+                }}>{name}</a>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </dialog>
   );

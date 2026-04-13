@@ -17,8 +17,15 @@ const fetchData = async (url) => {
     }
   );
 
-  const data = await response?.json();
-  return data;
+  if (!response.ok) {
+    throw new Error(`Request to ${url} failed with HTTP ${response.status} (${response.statusText}).`);
+  }
+
+  try {
+    return await response.json();
+  } catch {
+    throw new Error(`Request to ${url} returned a non-JSON response. The backend may not have data available yet.`);
+  }
 }
 
 /**
@@ -27,16 +34,11 @@ const fetchData = async (url) => {
  * @returns {Promise} Promise object represents the data fetched from the API.
  */
 export const getData = async (apiUrl) => {
-  try {
-    const response = await fetchData(apiUrl);
-    if (!response || response.error) {
-      throw new Error(response?.data);
-    }
-    return response.data;
-  } catch (e) {
-    console.error(e);
-    return [];
+  const response = await fetchData(apiUrl);
+  if (!response || response.error) {
+    throw new Error(response?.data || 'No data returned from backend.');
   }
+  return response.data;
 }
 
 /**
