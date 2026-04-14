@@ -64,8 +64,6 @@ function MapViewSaver() {
 }
 
 function Map({ category, toggleSidebar, setMapPoint }) {
-  // TODO: Center map in a better way in mobile.
-
   const { isEs } = useContext(LanguageContext);
   const [data, setData] = useState({});
   const [mapError, setMapError] = useState(false);

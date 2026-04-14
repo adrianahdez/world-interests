@@ -17,8 +17,8 @@ function convertToHex(v, index) {
 function setUpPointAttributes(point, pointLatLon) {
   // Set up variables
   let name = point.channel.channelTitle;
-  let value = getRandomFloat(0, 20); // TODO: Get value based on point statistics instead of random
-  let score = getRandomFloat(-2, 2); // TODO: Get value based on point statistics instead of random
+  let value = getRandomFloat(0, 20); // TODO: Get value based on point statistics in a logic way, instead of random
+  let score = getRandomFloat(-2, 2); // TODO: Get value based on point statistics in a logic way, instead of random
 
   // Set up the point attributes
   let attributes = null;
