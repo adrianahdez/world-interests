@@ -12,29 +12,12 @@ function convertToHex(v, index) {
 }
 
 /**
- * Set up the point attributes based on the point statistics to change the appearance of the point on the map and give more relevance to the most important/popular points.
+ * Set up the point attributes based on the channel name to give each channel a consistent colour.
  */
-function setUpPointAttributes(point, pointLatLon) {
-  // Set up variables
+function setUpPointAttributes(point) {
   let name = point.channel.channelTitle;
-  let value = getRandomFloat(0, 20); // TODO: Get value based on point statistics in a logic way, instead of random
-  let score = getRandomFloat(-2, 2); // TODO: Get value based on point statistics in a logic way, instead of random
 
-  // Set up the point attributes
-  let attributes = null;
-  var size = 0.2 + value / 8; // Calculate size based on value
-  if (size > 1) size = 1;
-  var opa = 0.5 + value / 8; // Calculate opacity based on value
-  if (opa > 0.8) opa = 0.8;
-  var color = 'fff'; // Default color
-
-  // Determine text color based on score
-  if (score < 0 && score >= -1) color = 'd90';
-  else if (score < -1) color = 'a00';
-  else if (score > 0 && score <= 1) color = '78dd73';
-  else if (score > 1) color = '0d0';
-
-  // Determine background color based on name value (first 3 characters) in order to give more relevance to the most important/popular points and the same channel name have the same color at the same time.
+  // Determine background color based on name value (first 3 characters) so the same channel name always gets the same color.
   var bgColor = '#5962a1';
   if (typeof name[0] !== 'undefined') bgColor = convertToHex(name[0], 0);
   if (typeof name[1] !== 'undefined') bgColor += convertToHex(name[1], 1);
@@ -42,47 +25,32 @@ function setUpPointAttributes(point, pointLatLon) {
   if (typeof name[2] !== 'undefined') bgColor += convertToHex(name[2], 2);
   else bgColor += 'cc';
 
-  attributes = {
-    size: size,
-    opa: opa,
-    color: color,
-    bgColor: bgColor,
-  };
-
-  return attributes;
+  return { bgColor };
 }
 
 /**
  * Change the appearance of a point on the map
- * 
+ *
  * @param {Object} point
  * @param {Array} pointLatLon
  */
 function changePointAppearance(point, pointLatLon) {
   if (typeof point === 'undefined') return;
 
-  let attrs = setUpPointAttributes(point, pointLatLon);
+  let attrs = setUpPointAttributes(point);
 
   let markerPoint = document.querySelector('.custom-marker__point[data-region="' + point.regionName + '"]');
   let bg = markerPoint.querySelectorAll('.bg-color');
-  let text = markerPoint.querySelector('.text-container');
-  // text.style.color = '#' + attrs.color;
   for (let i = 0; i < bg.length; i++) {
     bg[i].style.backgroundColor = '#' + attrs.bgColor;
   }
-  // markerPoint.style.opacity = attrs.opa;
-}
-
-// TODO: Remove this function when integrate with data stats.
-function getRandomFloat(min, max) {
-  return Math.random() * (max - min) + min;
 }
 
 /**
  * Reload values based on window resize and set up the points appearance
- * 
- * @param {Object} point 
- * @param {Array} pointLatLon 
+ *
+ * @param {Object} point
+ * @param {Array} pointLatLon
  */
 const resize = (point, pointLatLon) => {
   mapWidth = document.getElementById('app').clientWidth; // Get map width
