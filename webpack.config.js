@@ -43,7 +43,10 @@ module.exports = (env, argv) => {
     },
     devtool: isDevelopment ? 'eval-source-map' : 'source-map',
     plugins: [
-      new Dotenv(), // This will load the .env file and make it available to the app
+      new Dotenv({
+        path: isDevelopment ? './.env' : './.env.production',
+        systemvars: true, // also pick up env vars set by the CI/CD environment (e.g. Cloudflare Pages)
+      }),
       new HtmlWebpackPlugin({
         template: './index.html',
         inject: 'body', // Inject the script and styles tag in the body, ensuring the load of the assets with the unique generated name by the content hash.
