@@ -4,7 +4,7 @@ import { useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import './CustomMarker.scss';
 
-const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint, clusterLayerRef = null, ...props }) => {
+const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint, clusterLayerRef = null, ariaLabel = '', ...props }) => {
   const containerRef = useRef(null);
   const map = useMap(); // Get the map instance
 
@@ -16,7 +16,7 @@ const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint
       // Create a div icon with the HTML content
       const icon = new L.DivIcon({
         className: 'custom-marker',
-        html: `<div class="custom-marker__container">
+        html: `<div class="custom-marker__container" role="button" aria-label="${ariaLabel}">
                 ${htmlContent}
               </div>`,
         iconSize: [50, 50],
@@ -42,7 +42,7 @@ const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint
         }
       };
     }
-  }, [position, map, mapPoint, toggleSidebar, setMapPoint, clusterLayerRef]);
+  }, [position, map, mapPoint, toggleSidebar, setMapPoint, clusterLayerRef, ariaLabel]);
   // }, [children]);
   // }, []);
 

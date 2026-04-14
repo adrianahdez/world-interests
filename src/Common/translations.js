@@ -15,6 +15,7 @@ const translations = {
     categoriesUnavailable: "Categories are not available right now. Please try again later.",
     mapDataUnavailable: "Map data is not available right now. Please try again later.",
     retrying: "Retrying",
+    mapAriaLabel: "Interactive world map showing trending YouTube channels by country",
   },
   es: {
     statsFor: "Estadísticas para ",
@@ -32,6 +33,7 @@ const translations = {
     categoriesUnavailable: "Las categorías no están disponibles en este momento. Por favor, inténtalo más tarde.",
     mapDataUnavailable: "Los datos del mapa no están disponibles en este momento. Por favor, inténtalo más tarde.",
     retrying: "Reintentando",
+    mapAriaLabel: "Mapa mundial interactivo con los canales de YouTube en tendencia por país",
   },
 };
 

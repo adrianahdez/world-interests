@@ -375,7 +375,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
     const c = countryData?.channel;
 
     return latLon && typeof countryData !== 'undefined' ? (
-      <CustomMarker key={alpha2} position={latLon} toggleSidebar={toggleSidebar} mapPoint={countryData} setMapPoint={setMapPoint} clusterLayerRef={CLUSTERING_ENABLED ? clusterGroupRef : null}>
+      <CustomMarker key={alpha2} position={latLon} toggleSidebar={toggleSidebar} mapPoint={countryData} setMapPoint={setMapPoint} clusterLayerRef={CLUSTERING_ENABLED ? clusterGroupRef : null} ariaLabel={`${countryData.regionName}${c.channelTitle ? ` — ${c.channelTitle}` : ''}`}>
         <div className="custom-marker__point" data-region={countryData.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
           <span className="custom-marker__bg bg-color"></span>
           <span className="custom-marker__bg-pointer bg-color"></span>
@@ -393,7 +393,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   });
 
   return (
-    <div className="map-container">
+    <div className="map-container" role="region" aria-label={tr.mapAriaLabel}>
       {isLoading && !mapError && (
         <div className="map-loading-overlay">
           <div className="map-loading-overlay__spinner" />
