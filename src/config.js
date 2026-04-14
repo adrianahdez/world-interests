@@ -2,7 +2,7 @@
 // Set any flag to false to disable the feature entirely (one-line toggle).
 
 // Groups nearby markers into animated cluster badges at low zoom levels.
-export const CLUSTERING_ENABLED        = false;
+export const CLUSTERING_ENABLED        = true;
 
 // Requires Ctrl+scroll (desktop) or two-finger pinch (mobile) to zoom the map,
 // preventing accidental zoom when the user is scrolling the page.

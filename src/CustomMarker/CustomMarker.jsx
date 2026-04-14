@@ -4,7 +4,7 @@ import { useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import './CustomMarker.scss';
 
-const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint, ...props }) => {
+const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint, clusterLayerRef = null, ...props }) => {
   const containerRef = useRef(null);
   const map = useMap(); // Get the map instance
 
@@ -24,19 +24,25 @@ const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint
         iconAnchor: [25, 50], // Position of the icon
       });
 
-      // Create the marker with the position and the custom icon
-      const marker = L.marker(position, { icon }).addTo(map);
+      // Add to the cluster group if provided, otherwise directly to the map.
+      const target = clusterLayerRef?.current || map;
+      const marker = L.marker(position, { icon }).addTo(target);
       marker.on('click', () => {
         // The sidebar will always be opened on marker click
           toggleSidebar(true);
           // Set the map point of the InfoSidebar to the current marker point
           setMapPoint(mapPoint);
       });
-      
-      return () => map.removeLayer(marker); // Remove the marker when the component is unmounted
+
+      return () => {
+        if (clusterLayerRef?.current) {
+          clusterLayerRef.current.removeLayer(marker);
+        } else {
+          map.removeLayer(marker);
+        }
+      };
     }
-  // }, [position, children, map, toggleSidebar]);
-  }, [position, map, mapPoint, toggleSidebar, setMapPoint]);
+  }, [position, map, mapPoint, toggleSidebar, setMapPoint, clusterLayerRef]);
   // }, [children]);
   // }, []);
 

@@ -8,9 +8,12 @@ import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED } from '../config';
+import { STORAGE_KEY_MAP_VIEW, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED } from '../config';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css';
 import 'leaflet-gesture-handling';
+import L from 'leaflet';
+import 'leaflet.markercluster';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
 
 const DEFAULT_CENTER = [25, 0];
 const DEFAULT_ZOOM = 3;
@@ -142,6 +145,26 @@ function HoverCountryLabel({ labelRef }) {
   );
 }
 
+// Creates a native Leaflet MarkerClusterGroup, adds it to the map, and stores it in clusterGroupRef
+// so CustomMarker can add markers directly into it. Must render before the markers.
+function ClusterGroupSetup({ clusterGroupRef }) {
+  const map = useMap();
+  useEffect(() => {
+    const group = L.markerClusterGroup({
+      chunkedLoading: true,
+      disableClusteringAtZoom: 4,
+      maxClusterRadius: 80,
+    });
+    map.addLayer(group);
+    clusterGroupRef.current = group;
+    return () => {
+      map.removeLayer(group);
+      clusterGroupRef.current = null;
+    };
+  }, [map, clusterGroupRef]);
+  return null;
+}
+
 function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   const { isEs } = useContext(LanguageContext);
   const [data, setData] = useState({});
@@ -149,6 +172,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   const [isLoading, setIsLoading] = useState(true); // true until first data fetch resolves
   const [retryCount, setRetryCount] = useState(0); // current retry attempt (0 = first try, 1-3 = retrying)
   const hoverLabelRef = useRef(null); // ref to HoverCountryLabel DOM node — updated directly to avoid re-renders
+  const clusterGroupRef = useRef(null); // ref to the native Leaflet MarkerClusterGroup layer
   const prevDataRef = useRef({});
   // Tracks whether the sidebar restore has already fired, so it only runs once per session.
   const restoredRef = useRef(false);
@@ -318,6 +342,39 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
 
   const tr = isEs ? translations.es : translations.en;
 
+  // Extracted so the same JSX can be rendered directly or inside MarkerClusterGroup.
+  const renderMarkers = () => Object.keys(data).map((alpha2) => {
+    const countryData = data[alpha2]?.[0];
+    if (!countryData) return null;
+
+    const latLon = getCountryLatLon(alpha2);
+    if (!latLon) return null;
+
+    countryData.flag = getFlagFromAlpha2(alpha2 || '');
+
+    if (countryData.channel) {
+      countryData.channel.channelImage = countryData.channel.channelImage || ImageNotFound;
+    }
+    const c = countryData?.channel;
+
+    return latLon && typeof countryData !== 'undefined' ? (
+      <CustomMarker key={alpha2} position={latLon} toggleSidebar={toggleSidebar} mapPoint={countryData} setMapPoint={setMapPoint} clusterLayerRef={CLUSTERING_ENABLED ? clusterGroupRef : null}>
+        <div className="custom-marker__point" data-region={countryData.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
+          <span className="custom-marker__bg bg-color"></span>
+          <span className="custom-marker__bg-pointer bg-color"></span>
+          <div className="image-container">
+            <img src={c.channelImage} alt="marker" loading="lazy" />
+          </div>
+          <span className='flag'>{countryData.flag}</span>
+          <div className="text-container">
+            <span className='channel-title'>{c.channelTitle}</span>
+            <span className="location">{countryData.regionName}</span>
+          </div>
+        </div>
+      </CustomMarker>
+    ) : null;
+  });
+
   return (
     <div className="map-container">
       {isLoading && !mapError && (
@@ -340,37 +397,9 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
         {/* This has the GeoJSON component. */}
         <Countries data={data} category={category} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
 
-        {Object.keys(data).map((alpha2) => {
-          const countryData = data[alpha2]?.[0];
-          if (!countryData) return null;
-
-          const latLon = getCountryLatLon(alpha2);
-          if (!latLon) return null;
-
-          countryData.flag = getFlagFromAlpha2(alpha2 || '');
-
-          if (countryData.channel) {
-            countryData.channel.channelImage = countryData.channel.channelImage || ImageNotFound;
-          }
-          const c = countryData?.channel;
-
-          return latLon && typeof countryData !== 'undefined' ? (
-            <CustomMarker key={alpha2} position={latLon} toggleSidebar={toggleSidebar} mapPoint={countryData} setMapPoint={setMapPoint} >
-              <div className="custom-marker__point" data-region={countryData.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
-                <span className="custom-marker__bg bg-color"></span>
-                <span className="custom-marker__bg-pointer bg-color"></span>
-                <div className="image-container">
-                  <img src={c.channelImage} alt="marker" loading="lazy" />
-                </div>
-                <span className='flag'>{countryData.flag}</span>
-                <div className="text-container">
-                  <span className='channel-title'>{c.channelTitle}</span>
-                  <span className="location">{countryData.regionName}</span>
-                </div>
-              </div>
-            </CustomMarker>
-          ) : null
-        })}
+        {/* ClusterGroupSetup must appear before the markers so its effect runs first. */}
+        {CLUSTERING_ENABLED && <ClusterGroupSetup clusterGroupRef={clusterGroupRef} />}
+        {renderMarkers()}
 
       </MapContainer>
     </div>
