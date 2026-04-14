@@ -147,6 +147,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   const [data, setData] = useState({});
   const [mapError, setMapError] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // true until first data fetch resolves
+  const [retryCount, setRetryCount] = useState(0); // current retry attempt (0 = first try, 1-3 = retrying)
   const hoverLabelRef = useRef(null); // ref to HoverCountryLabel DOM node — updated directly to avoid re-renders
   const prevDataRef = useRef({});
   // Tracks whether the sidebar restore has already fired, so it only runs once per session.
@@ -155,11 +156,20 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   useEffect(() => {
     setMapError(false);
     setIsLoading(true);
-    const fetchData = (category) => {
+    setRetryCount(0);
+
+    let cancelled = false;
+    let retryTimer = null;
+    // Exponential backoff delays: 2s, 4s, 8s (max 3 retries).
+    const RETRY_DELAYS = [2000, 4000, 8000];
+
+    const attempt = (attemptIndex) => {
       const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'get-json.php' + '?category=' + category;
       getData(apiUrl)
         .then((result) => {
-          // Compare the new data with the previous data to ensure that the state is only updated when there are real changes in the data and avoid unnecessary re-renders. Because whitout this, React is detecting the data as a new object every time even if the data is the same.
+          if (cancelled) return;
+          setRetryCount(0);
+          // Only update state when data actually changed to avoid unnecessary re-renders.
           if (JSON.stringify(result) !== JSON.stringify(prevDataRef.current)) {
             prevDataRef.current = result;
             setData(result);
@@ -167,13 +177,29 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
           setIsLoading(false);
         })
         .catch((error) => {
-          console.warn('[WorldInterests] Could not load map data for category "' + category + '":', error.message);
-          setMapError(true);
-          setIsLoading(false);
-          setData({});
+          if (cancelled) return;
+          if (attemptIndex < RETRY_DELAYS.length) {
+            // Schedule next retry and show the attempt counter in the UI.
+            setRetryCount(attemptIndex + 1);
+            retryTimer = setTimeout(() => attempt(attemptIndex + 1), RETRY_DELAYS[attemptIndex]);
+          } else {
+            // All retries exhausted — surface the error.
+            console.warn('[WorldInterests] Could not load map data for category "' + category + '" after ' + (RETRY_DELAYS.length + 1) + ' attempts:', error.message);
+            setRetryCount(0);
+            setMapError(true);
+            setIsLoading(false);
+            setData({});
+          }
         });
     };
-    fetchData(category);
+
+    attempt(0);
+
+    return () => {
+      // Cancel in-flight retries when category changes or component unmounts.
+      cancelled = true;
+      if (retryTimer) clearTimeout(retryTimer);
+    };
   }, [category]);
 
   // Retry channel images that fail to load (YouTube CDN 429 rate limiting).
@@ -297,6 +323,9 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
       {isLoading && !mapError && (
         <div className="map-loading-overlay">
           <div className="map-loading-overlay__spinner" />
+          {retryCount > 0 && (
+            <p className="map-loading-overlay__retry">{tr.retrying} ({retryCount}/3)…</p>
+          )}
         </div>
       )}
       {mapError && (
