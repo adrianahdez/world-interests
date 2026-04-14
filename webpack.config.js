@@ -72,12 +72,13 @@ module.exports = (env, argv) => {
         maxSize: 243 * 1024, // 244 KiB
       },
 
-      // This TerserPlugin minify the js files and remove the console.log and other elements.
+      // This TerserPlugin minify the js files and removes console.log calls.
+      // console.warn and console.error are preserved so operational warnings remain visible in production.
       minimize: !isDevelopment,
       minimizer: [new TerserPlugin({
         terserOptions: {
           compress: {
-            drop_console: true,
+            drop_console: ['log'],
           },
         },
       })],
