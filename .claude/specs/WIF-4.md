@@ -272,12 +272,7 @@ No tests apply — this is a research and documentation spec. Verification is re
 | 17 | **Smooth wheel zoom** | Incremental scroll zoom replacing discrete Leaflet steps | Low | Lowest | 17 |
 | 18 | **Reduced motion** | Disable animations when `prefers-reduced-motion: reduce` is set | Low | Lowest | 18 |
 
-**Removed from backlog** (already working or decided against):
-- Country hover highlight → already implemented via `onEachFeature` handlers in `geoJsonConfig.js`
-- Marker hover tooltip → already implemented via CSS `:hover` on `.custom-marker__container`
-- Dark tile layer swap → no tiles in this app; GeoJSON-only background is final
 
----
 
 ## Analysis
 
