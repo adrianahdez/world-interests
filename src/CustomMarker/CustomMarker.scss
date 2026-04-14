@@ -166,9 +166,16 @@
 
 /* Low zoom (zoom 2–2.5): shrink pins and hide flags */
 .map--low-zoom {
-  .custom-marker__container:not(:hover) {
-    transform: scale(0.6);
+  .custom-marker__container {
     transform-origin: bottom center;
+  }
+
+  .custom-marker__container:not(:hover) {
+    transform: scale(0.5);
+  }
+
+  .custom-marker__container:hover {
+    transform: scale(1.2);
   }
 
   .flag {
@@ -178,8 +185,16 @@
 
 /* Very low zoom (zoom 1–1.5): pins at their smallest */
 .map--very-low-zoom {
+  .custom-marker__container {
+    transform-origin: bottom center;
+  }
+
   .custom-marker__container:not(:hover) {
-    transform: scale(0.4); /* overrides the 0.5 from map--low-zoom */
+    transform: scale(0.3);
+  }
+
+  .custom-marker__container:hover {
+    transform: scale(1.1);
   }
 }
 
@@ -214,7 +229,7 @@
 
   /* Subtle scale + brightness lift on hover to signal the pin is clickable */
   .custom-marker__container:hover {
-    transform: scale(1.05);
+    transform: scale(1.2);
 
     .custom-marker__bg {
       filter: brightness(0.65); /* slightly less dark than the resting 0.5 */
@@ -225,5 +240,11 @@
 /* Light theme: brighter background at max zoom for readability */
 .light.map--max-zoom .custom-marker__bg,
 .light .map--max-zoom .custom-marker__bg {
+  filter: brightness(1.5);
+}
+
+/* Light theme at max zoom: undo the dark-mode hover brightness — behave like other zoom levels */
+.light .map--max-zoom .custom-marker__container:hover .custom-marker__bg,
+.light.map--max-zoom .custom-marker__container:hover .custom-marker__bg {
   filter: brightness(1.5);
 }

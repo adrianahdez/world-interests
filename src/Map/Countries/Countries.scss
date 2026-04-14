@@ -2,6 +2,43 @@
   filter: brightness(1.5);
 }
 
+/* Cluster badge styling — matches the dark app theme */
+.marker-cluster {
+  background-clip: padding-box;
+
+  div {
+    width: 34px;
+    height: 34px;
+    margin: 5px;
+    border-radius: 50%;
+    background-color: rgba(30, 60, 70, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1;
+  }
+}
+
+/* Outer wrapper must be transparent — the coloured square comes from here */
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large  { background-color: transparent !important; }
+
+.light {
+  .marker-cluster div {
+    background-color: rgba(180, 220, 240, 0.9);
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+  .marker-cluster span { color: rgba(0, 0, 0, 0.85); }
+}
+
 /* Countries with no data for the current category (NO_DATA_INDICATOR_ENABLED) */
 .leaflet-container path.country--no-data {
   filter: saturate(0.15) brightness(1.6);
