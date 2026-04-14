@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useRef, memo, useContext } from 'react';
-import { MapContainer } from 'react-leaflet'
+import { MapContainer, useMap } from 'react-leaflet'
+import CustomMarker from '../CustomMarker/CustomMarker';
+import { getCountryLatLon, getData, getFlagFromAlpha2 } from './Points/Data';
+import { processPoint } from './Points/Points';
+import ImageNotFound from '../GlobalStyles/img/image-not-found.png';
+import './Countries/Countries.scss';
+import Countries from './Countries/Countries';
+import { LanguageContext } from '../Common/LanguageContext';
+import translations from '../Common/translations';
 
 const MAP_VIEW_KEY = 'mapView';
 const DEFAULT_CENTER = [25, 0];
@@ -29,14 +37,31 @@ function loadMapView() {
     return null;
   }
 }
-import CustomMarker from '../CustomMarker/CustomMarker';
-import { getCountryLatLon, getData, getFlagFromAlpha2 } from './Points/Data';
-import { processPoint } from './Points/Points';
-import ImageNotFound from '../GlobalStyles/img/image-not-found.png';
-import './Countries/Countries.scss';
-import Countries from './Countries/Countries';
-import { LanguageContext } from '../Common/LanguageContext';
-import translations from '../Common/translations';
+
+function MapViewSaver() {
+  const map = useMap();
+  const debounceRef = useRef(null);
+
+  useEffect(() => {
+    const save = () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+      debounceRef.current = setTimeout(() => {
+        const { lat, lng } = map.getCenter();
+        saveMapView([lat, lng], map.getZoom());
+      }, 400);
+    };
+
+    map.on('moveend', save);
+    map.on('zoomend', save);
+    return () => {
+      map.off('moveend', save);
+      map.off('zoomend', save);
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, [map]);
+
+  return null;
+}
 
 function Map({ category, toggleSidebar, setMapPoint }) {
   // TODO: Center map in a better way in mobile.
@@ -157,6 +182,7 @@ function Map({ category, toggleSidebar, setMapPoint }) {
         </div>
       )}
       <MapContainer {...mapConfig}>
+        <MapViewSaver />
         {/* This has the GeoJSON component. */}
         <Countries data={data} category={category} />
 

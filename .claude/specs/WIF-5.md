@@ -78,5 +78,5 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 ## Implementation Plan
 
 - [x] Step 1: Add localStorage helpers and initial-state read in `src/Map/Map.jsx` — write `saveMapView(center, zoom)` and `loadMapView()` functions above the `Map` component; replace the hardcoded `center` and `zoom` in `mapConfig` with values from `loadMapView()`.
-- [ ] Step 2: Add `MapViewSaver` component inline in `src/Map/Map.jsx` — a function component that calls `useMap()`, attaches debounced `moveend` + `zoomend` listeners in a `useEffect`, and cleans up on unmount; mount `<MapViewSaver />` inside `<MapContainer>`.
+- [x] Step 2: Add `MapViewSaver` component inline in `src/Map/Map.jsx` — a function component that calls `useMap()`, attaches debounced `moveend` + `zoomend` listeners in a `useEffect`, and cleans up on unmount; mount `<MapViewSaver />` inside `<MapContainer>`.
 - [ ] Step 3: Manual QA — verify restore on reload, fallback on cleared storage, and no console errors on malformed data.
