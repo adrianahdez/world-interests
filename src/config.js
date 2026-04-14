@@ -25,6 +25,10 @@ export const SMOOTH_ZOOM_ENABLED       = false;
 // "prefers-reduced-motion" setting is active.
 export const REDUCED_MOTION_ENABLED    = false;
 
+// Shows a small label at the bottom-right of the map with the current zoom level.
+// Automatically true in development builds and false in production (via webpack NODE_ENV).
+export const DEBUG_ZOOM_LEVEL_ENABLED  = process.env.NODE_ENV === 'development';
+
 // ─── localStorage Keys ───────────────────────────────────────────────────────
 // Single source of truth for every key written to localStorage.
 

@@ -255,22 +255,23 @@ No tests apply — this is a research and documentation spec. Verification is re
 |---|---------|-------------|------------|----------|------|
 | 1 | **Central config file** | `src/config.js` with all feature flags and localStorage key constants | Low | Prerequisite | 1 |
 | 2 | **Zoom detail tiers** | At zoom 5, reveal channel name and view count on markers directly (no hover needed) | Medium | Highest | 2 |
-| 3 | **Category persistence** | Remember last selected category (Music, Gaming…) across reloads | Low | High | 3 |
-| 4 | **Sidebar state persistence** | Restore open country sidebar after reload | Medium | Very High | 4 |
-| 5 | **Loading spinner** | Non-blocking overlay while data is fetching | Low | High | 5 |
-| 6 | **Gesture handling** | Require Ctrl+scroll / two-finger pinch to zoom; prevents scroll trap | Low | Medium | 6 |
-| 7 | **No-data country indicator** | Desaturated/dashed polygon style for countries with no data in current category | Low | Medium | 7 |
-| 8 | **API retry with backoff** | Retry failed API calls (max 3, 2s/4s/8s delays) with subtle "retrying…" indicator | Medium | Very High | 8 |
-| 9 | **Marker clustering** | Group nearby markers at low zoom into animated cluster badges | Medium | Middle | 9 |
-| 10 | **ARIA labels** | `aria-label` on map container and each marker for screen readers | Low | Medium | 10 |
-| 11 | **Keyboard navigation** | Tab through markers, open sidebar with Enter/Space | Medium | Medium | 11 |
-| 12 | **Heatmap overlay** | Toggleable color-gradient layer showing regional trending intensity | Medium | Low | 12 |
-| 13 | **Pane z-index layering** | Explicit Leaflet panes so polygons always render below markers | Low | Low | 13 |
-| 14 | **Mobile bottom sheet** | Sidebar slides up from bottom on narrow viewports | Medium | Very Low | 14 |
-| 15 | **Fullscreen mode** | Button to expand map to full viewport | Low | Low | 15 |
-| 16 | **Minimap** | Small thumbnail map showing current view region in world context (desktop only) | Medium | Very Low | 16 |
-| 17 | **Smooth wheel zoom** | Incremental scroll zoom replacing discrete Leaflet steps | Low | Lowest | 17 |
-| 18 | **Reduced motion** | Disable animations when `prefers-reduced-motion: reduce` is set | Low | Lowest | 18 |
+| 3 | **Debug zoom indicator** | Fixed label at bottom-right showing current zoom level; debug-only, off by default via `DEBUG_ZOOM_LEVEL_ENABLED` flag | Low | Debug | 3 |
+| 4 | **Category persistence** | Remember last selected category (Music, Gaming…) across reloads | Low | High | 4 |
+| 5 | **Sidebar state persistence** | Restore open country sidebar after reload | Medium | Very High | 5 |
+| 6 | **Loading spinner** | Non-blocking overlay while data is fetching | Low | High | 6 |
+| 7 | **Gesture handling** | Require Ctrl+scroll / two-finger pinch to zoom; prevents scroll trap | Low | Medium | 7 |
+| 8 | **No-data country indicator** | Desaturated/dashed polygon style for countries with no data in current category | Low | Medium | 8 |
+| 9 | **API retry with backoff** | Retry failed API calls (max 3, 2s/4s/8s delays) with subtle "retrying…" indicator | Medium | Very High | 9 |
+| 10 | **Marker clustering** | Group nearby markers at low zoom into animated cluster badges | Medium | Middle | 10 |
+| 11 | **ARIA labels** | `aria-label` on map container and each marker for screen readers | Low | Medium | 11 |
+| 12 | **Keyboard navigation** | Tab through markers, open sidebar with Enter/Space | Medium | Medium | 12 |
+| 13 | **Heatmap overlay** | Toggleable color-gradient layer showing regional trending intensity | Medium | Low | 13 |
+| 14 | **Pane z-index layering** | Explicit Leaflet panes so polygons always render below markers | Low | Low | 14 |
+| 15 | **Mobile bottom sheet** | Sidebar slides up from bottom on narrow viewports | Medium | Very Low | 15 |
+| 16 | **Fullscreen mode** | Button to expand map to full viewport | Low | Low | 16 |
+| 17 | **Minimap** | Small thumbnail map showing current view region in world context (desktop only) | Medium | Very Low | 17 |
+| 18 | **Smooth wheel zoom** | Incremental scroll zoom replacing discrete Leaflet steps | Low | Lowest | 18 |
+| 19 | **Reduced motion** | Disable animations when `prefers-reduced-motion: reduce` is set | Low | Lowest | 19 |
 
 
 
@@ -335,20 +336,21 @@ Each step in this spec is implemented on its own Git branch following this patte
 ## Implementation Plan
 
 - [x] Step 1: Create `src/config.js` — define all feature flags (`CLUSTERING_ENABLED`, `GESTURE_HANDLING_ENABLED`, `NO_DATA_INDICATOR_ENABLED`, `HEATMAP_ENABLED`, `FULLSCREEN_ENABLED`, `SMOOTH_ZOOM_ENABLED`, `REDUCED_MOTION_ENABLED`) and all localStorage key constants (`STORAGE_KEY_MAP_VIEW`, `STORAGE_KEY_LANG`, `STORAGE_KEY_THEME`, `STORAGE_KEY_DIALOG`, `STORAGE_KEY_CATEGORY`, `STORAGE_KEY_SIDEBAR`); update existing files that hardcode these keys to import from config.
-- [ ] Step 2: Implement zoom detail tiers — extend the `MapViewSaver`/zoom-class pattern in `src/Map/Map.jsx` and `src/CustomMarker/CustomMarker.scss` to add a `map--max-zoom` class at zoom 5 that reveals channel name and view count labels directly on markers without hover.
-- [ ] Step 3: Implement category persistence — read last category from `STORAGE_KEY_CATEGORY` in `src/App/App.jsx` on mount (validate against current category list); write on every category change.
-- [ ] Step 4: Implement sidebar state persistence — store the open country's `alpha2` key under `STORAGE_KEY_SIDEBAR` in `src/App/App.jsx`; restore on mount by waiting for data to load then reopening the sidebar for that country.
-- [ ] Step 5: Add loading spinner — show a non-blocking overlay in `src/Map/Map.jsx` while `data` is empty and no error has occurred; hide once data arrives or error shows.
-- [ ] Step 6: Add gesture handling — install `leaflet-gesture-handling`; integrate in `src/Map/Map.jsx` behind `GESTURE_HANDLING_ENABLED` flag from config; coordinate with existing `scrollWheelZoom` setting.
-- [ ] Step 7: Add no-data country indicator — refactor `src/Map/geoJsonConfig.js` `setConfig` into a factory that receives the `data` object; apply desaturated/dashed style to countries with no data in the current category; guard behind `NO_DATA_INDICATOR_ENABLED` flag.
-- [ ] Step 8: Implement API retry with exponential backoff — replace the current single `getData` call in `src/Map/Map.jsx` with a retry wrapper (max 3 retries, 2s/4s/8s delays, capped at 30s); show a subtle "retrying…" indicator in the map error overlay.
-- [ ] Step 9: Add marker clustering — install `leaflet.markercluster` (or `react-leaflet-cluster`); wrap markers in `<MarkerClusterGroup>` in `src/Map/Map.jsx` behind `CLUSTERING_ENABLED` constant; style cluster icons to match the app theme.
-- [ ] Step 10: Add ARIA labels — add `aria-label` to the map container in `src/Map/Map.jsx` and to each marker's DOM element in `src/CustomMarker/CustomMarker.jsx`; add `role="region"` to the map wrapper.
-- [ ] Step 11: Add keyboard navigation for markers — add `tabIndex={0}` and `keydown` (Enter/Space) handler to each marker in `src/CustomMarker/CustomMarker.jsx` to open the sidebar.
-- [ ] Step 12: Add heatmap overlay — install `@linkurious/leaflet-heat`; add a toggleable `<HeatmapLayer>` inside `<MapContainer>` in `src/Map/Map.jsx` driven by `HEATMAP_ENABLED` and a UI toggle button; guard behind config flag.
-- [ ] Step 13: Add pane z-index layering — use react-leaflet `<Pane>` in `src/Map/Map.jsx` to explicitly assign GeoJSON polygons to a `polygons` pane (z-index 200) and markers to a `markers` pane (z-index 400).
-- [ ] Step 14: Add mobile bottom sheet sidebar — add responsive CSS in `src/GlobalStyles/Components/_sidebars.scss` for viewports below 768px to position the sidebar as a bottom drawer; add slide-up animation.
-- [ ] Step 15: Add fullscreen mode — install `leaflet.fullscreen`; add control to `src/Map/Map.jsx` behind `FULLSCREEN_ENABLED` flag; adapt sidebar CSS for fullscreen container bounds.
-- [ ] Step 16: Add minimap — install `leaflet-minimap`; mount inside `<MapContainer>` in `src/Map/Map.jsx` on desktop only (hide below 768px viewport); guard behind config flag.
-- [ ] Step 17: Add smooth wheel zoom — install `@luomus/leaflet-smooth-wheel-zoom`; integrate in `src/Map/Map.jsx` behind `SMOOTH_ZOOM_ENABLED` flag; disable default `scrollWheelZoom` when active.
-- [ ] Step 18: Add reduced motion support — add `@media (prefers-reduced-motion: reduce)` rules to `src/CustomMarker/CustomMarker.scss` and `src/GlobalStyles/Components/_sidebars.scss`; pass `animate: false` to Leaflet `setView`/`flyTo` calls when the media query matches; guard behind `REDUCED_MOTION_ENABLED` flag.
+- [x] Step 2: Implement zoom detail tiers — extend the `MapViewSaver`/zoom-class pattern in `src/Map/Map.jsx` and `src/CustomMarker/CustomMarker.scss` to add a `map--max-zoom` class at zoom 5 that reveals channel name and view count labels directly on markers without hover.
+- [x] Step 3: Add debug zoom level indicator — add a `DEBUG_ZOOM_LEVEL_ENABLED` flag to `src/config.js`; when enabled, render a small fixed label at the bottom-right corner of the map showing the current zoom level, updated on every `zoomend` event via `MapViewSaver`; hidden entirely when the flag is `false`.
+- [ ] Step 4: Implement category persistence — read last category from `STORAGE_KEY_CATEGORY` in `src/App/App.jsx` on mount (validate against current category list); write on every category change.
+- [ ] Step 5: Implement sidebar state persistence — store the open country's `alpha2` key under `STORAGE_KEY_SIDEBAR` in `src/App/App.jsx`; restore on mount by waiting for data to load then reopening the sidebar for that country.
+- [ ] Step 6: Add loading spinner — show a non-blocking overlay in `src/Map/Map.jsx` while `data` is empty and no error has occurred; hide once data arrives or error shows.
+- [ ] Step 7: Add gesture handling — install `leaflet-gesture-handling`; integrate in `src/Map/Map.jsx` behind `GESTURE_HANDLING_ENABLED` flag from config; coordinate with existing `scrollWheelZoom` setting.
+- [ ] Step 8: Add no-data country indicator — refactor `src/Map/geoJsonConfig.js` `setConfig` into a factory that receives the `data` object; apply desaturated/dashed style to countries with no data in the current category; guard behind `NO_DATA_INDICATOR_ENABLED` flag.
+- [ ] Step 9: Implement API retry with exponential backoff — replace the current single `getData` call in `src/Map/Map.jsx` with a retry wrapper (max 3 retries, 2s/4s/8s delays, capped at 30s); show a subtle "retrying…" indicator in the map error overlay.
+- [ ] Step 10: Add marker clustering — install `leaflet.markercluster` (or `react-leaflet-cluster`); wrap markers in `<MarkerClusterGroup>` in `src/Map/Map.jsx` behind `CLUSTERING_ENABLED` constant; style cluster icons to match the app theme.
+- [ ] Step 11: Add ARIA labels — add `aria-label` to the map container in `src/Map/Map.jsx` and to each marker's DOM element in `src/CustomMarker/CustomMarker.jsx`; add `role="region"` to the map wrapper.
+- [ ] Step 12: Add keyboard navigation for markers — add `tabIndex={0}` and `keydown` (Enter/Space) handler to each marker in `src/CustomMarker/CustomMarker.jsx` to open the sidebar.
+- [ ] Step 13: Add heatmap overlay — install `@linkurious/leaflet-heat`; add a toggleable `<HeatmapLayer>` inside `<MapContainer>` in `src/Map/Map.jsx` driven by `HEATMAP_ENABLED` and a UI toggle button; guard behind config flag.
+- [ ] Step 14: Add pane z-index layering — use react-leaflet `<Pane>` in `src/Map/Map.jsx` to explicitly assign GeoJSON polygons to a `polygons` pane (z-index 200) and markers to a `markers` pane (z-index 400).
+- [ ] Step 15: Add mobile bottom sheet sidebar — add responsive CSS in `src/GlobalStyles/Components/_sidebars.scss` for viewports below 768px to position the sidebar as a bottom drawer; add slide-up animation.
+- [ ] Step 16: Add fullscreen mode — install `leaflet.fullscreen`; add control to `src/Map/Map.jsx` behind `FULLSCREEN_ENABLED` flag; adapt sidebar CSS for fullscreen container bounds.
+- [ ] Step 17: Add minimap — install `leaflet-minimap`; mount inside `<MapContainer>` in `src/Map/Map.jsx` on desktop only (hide below 768px viewport); guard behind config flag.
+- [ ] Step 18: Add smooth wheel zoom — install `@luomus/leaflet-smooth-wheel-zoom`; integrate in `src/Map/Map.jsx` behind `SMOOTH_ZOOM_ENABLED` flag; disable default `scrollWheelZoom` when active.
+- [ ] Step 19: Add reduced motion support — add `@media (prefers-reduced-motion: reduce)` rules to `src/CustomMarker/CustomMarker.scss` and `src/GlobalStyles/Components/_sidebars.scss`; pass `animate: false` to Leaflet `setView`/`flyTo` calls when the media query matches; guard behind `REDUCED_MOTION_ENABLED` flag.
