@@ -1,5 +1,34 @@
 import React, { useState, useEffect, useRef, memo, useContext } from 'react';
 import { MapContainer } from 'react-leaflet'
+
+const MAP_VIEW_KEY = 'mapView';
+const DEFAULT_CENTER = [25, 0];
+const DEFAULT_ZOOM = 3;
+
+function saveMapView(center, zoom) {
+  try {
+    localStorage.setItem(MAP_VIEW_KEY, JSON.stringify({ center, zoom }));
+  } catch (_) {}
+}
+
+function loadMapView() {
+  try {
+    const raw = localStorage.getItem(MAP_VIEW_KEY);
+    if (!raw) return null;
+    const { center, zoom } = JSON.parse(raw);
+    const [lat, lng] = center;
+    if (
+      typeof lat !== 'number' || typeof lng !== 'number' ||
+      typeof zoom !== 'number' ||
+      lat < -90 || lat > 90 ||
+      lng < -180 || lng > 180 ||
+      zoom < 1 || zoom > 5
+    ) return null;
+    return { center, zoom };
+  } catch (_) {
+    return null;
+  }
+}
 import CustomMarker from '../CustomMarker/CustomMarker';
 import { getCountryLatLon, getData, getFlagFromAlpha2 } from './Points/Data';
 import { processPoint } from './Points/Points';
@@ -99,9 +128,11 @@ function Map({ category, toggleSidebar, setMapPoint }) {
     });
   }, [data]);
 
+  const savedView = loadMapView();
+
   const mapConfig = {
-    center: [25, 0], // Center of the map. We set it a bit to the upper side to have a better view of the countries.
-    zoom: 3,
+    center: savedView ? savedView.center : DEFAULT_CENTER,
+    zoom: savedView ? savedView.zoom : DEFAULT_ZOOM,
     minZoom: 1,
     maxZoom: 5,
     zoomSnap: 0.5,
