@@ -93,6 +93,9 @@ module.exports = (env, argv) => {
       },
       compress: true,
       port: 9000,
+      headers: {
+        'Permissions-Policy': 'web-share=self',
+      },
     },
   };
 };
