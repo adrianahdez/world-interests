@@ -328,7 +328,7 @@ Each step in this spec is implemented on its own Git branch following this patte
 2. Create a branch named `feat/WIF-4-step<N>-<short-slug>` (e.g. `feat/WIF-4-step1-central-config`).
 3. Implement the step, pause for user review.
 4. On approval: commit with message `WIF-4: step N - <short description>`, mark the step `[x]` in this file, amend the commit to include the spec update, push the branch, and open a PR.
-5. After PR is created, switch back to `main`, `git pull`, and start the next step.
+5. After PR is created, wait for user confirmation that the branch is already merged to main and then switch back to `main`, `git pull`, and start the next step.
 
 **Code style note**: every new constant, flag, or non-obvious variable must have a brief inline or preceding comment explaining what it does.
 
