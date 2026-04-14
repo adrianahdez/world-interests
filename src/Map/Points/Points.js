@@ -2,13 +2,38 @@ let mapWidth = 0; // width of the map
 let mapHeight = 0; // height of the map
 let scaleFactor = 0; // scale factor for the map
 
-// Function to convert a character to hexadecimal value
-function convertToHex(v, index) {
-  v = v.toLowerCase().charCodeAt(0);
-  v = (parseInt(255 / 28 * (v - 48) / 5) + index * 50) % 256;
-  v = v.toString(16);
-  if (v.length == 1) v = '0' + v;
-  return v;
+// Curated palette of visually distinct colours for pin backgrounds.
+// Each channel name is hashed to a consistent index so the same name always gets the same colour.
+const COLOR_PALETTE = [
+  'e74c3c', // red
+  'e67e22', // orange
+  'f1c40f', // yellow
+  '2ecc71', // emerald
+  '1abc9c', // turquoise
+  '3498db', // blue
+  '9b59b6', // purple
+  'e91e63', // pink
+  '00bcd4', // cyan
+  'ff5722', // deep orange
+  '8bc34a', // lime green
+  '5c6bc0', // indigo
+  'f06292', // light pink
+  '26c6da', // light cyan
+  'ffa726', // amber
+  '66bb6a', // light green
+  'ab47bc', // medium purple
+  'ef5350', // light red
+  '42a5f5', // light blue
+  '26a69a', // teal
+];
+
+// Deterministic hash: maps a channel name to a consistent palette index.
+function nameToColorIndex(name) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = (hash * 31 + name.charCodeAt(i)) >>> 0;
+  }
+  return hash % COLOR_PALETTE.length;
 }
 
 // Convert a 6-char hex string to an rgba() CSS value with the given opacity.
@@ -29,13 +54,9 @@ function hexToRgba(hex, opacity) {
 function setUpPointAttributes(point, minViews, maxViews) {
   let name = point.channel.channelTitle;
 
-  // Determine background color based on name value (first 3 characters) so the same channel name always gets the same color.
-  var bgColor = '5962a1';
-  if (typeof name[0] !== 'undefined') bgColor = convertToHex(name[0], 0);
-  if (typeof name[1] !== 'undefined') bgColor += convertToHex(name[1], 1);
-  else bgColor += 'cc';
-  if (typeof name[2] !== 'undefined') bgColor += convertToHex(name[2], 2);
-  else bgColor += 'cc';
+  // Pick a colour from the palette deterministically based on the full channel name.
+  // Same name always maps to the same colour; different names spread across the palette.
+  const bgColor = COLOR_PALETTE[nameToColorIndex(name)] || '5962a1';
 
   // Normalize viewCount to 0–1 relative to the current dataset.
   // Falls back to fully prominent (1) if min/max are not yet available or all pins are equal.
