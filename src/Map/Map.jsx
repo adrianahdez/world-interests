@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, memo, useContext } from 'react';
-import { MapContainer } from 'react-leaflet'
+import { MapContainer, useMap } from 'react-leaflet'
 import CustomMarker from '../CustomMarker/CustomMarker';
 import { getCountryLatLon, getData, getFlagFromAlpha2 } from './Points/Data';
 import { processPoint } from './Points/Points';
@@ -8,6 +8,60 @@ import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
+
+const MAP_VIEW_KEY = 'mapView';
+const DEFAULT_CENTER = [25, 0];
+const DEFAULT_ZOOM = 3;
+
+function saveMapView(center, zoom) {
+  try {
+    localStorage.setItem(MAP_VIEW_KEY, JSON.stringify({ center, zoom }));
+  } catch (_) {}
+}
+
+function loadMapView() {
+  try {
+    const raw = localStorage.getItem(MAP_VIEW_KEY);
+    if (!raw) return null;
+    const { center, zoom } = JSON.parse(raw);
+    const [lat, lng] = center;
+    if (
+      typeof lat !== 'number' || typeof lng !== 'number' ||
+      typeof zoom !== 'number' ||
+      lat < -90 || lat > 90 ||
+      lng < -180 || lng > 180 ||
+      zoom < 1 || zoom > 5
+    ) return null;
+    return { center, zoom };
+  } catch (_) {
+    return null;
+  }
+}
+
+function MapViewSaver() {
+  const map = useMap();
+  const debounceRef = useRef(null);
+
+  useEffect(() => {
+    const save = () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+      debounceRef.current = setTimeout(() => {
+        const { lat, lng } = map.getCenter();
+        saveMapView([lat, lng], map.getZoom());
+      }, 400);
+    };
+
+    map.on('moveend', save);
+    map.on('zoomend', save);
+    return () => {
+      map.off('moveend', save);
+      map.off('zoomend', save);
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, [map]);
+
+  return null;
+}
 
 function Map({ category, toggleSidebar, setMapPoint }) {
   // TODO: Center map in a better way in mobile.
@@ -99,9 +153,11 @@ function Map({ category, toggleSidebar, setMapPoint }) {
     });
   }, [data]);
 
+  const savedView = loadMapView();
+
   const mapConfig = {
-    center: [25, 0], // Center of the map. We set it a bit to the upper side to have a better view of the countries.
-    zoom: 3,
+    center: savedView ? savedView.center : DEFAULT_CENTER,
+    zoom: savedView ? savedView.zoom : DEFAULT_ZOOM,
     minZoom: 1,
     maxZoom: 5,
     zoomSnap: 0.5,
@@ -126,6 +182,7 @@ function Map({ category, toggleSidebar, setMapPoint }) {
         </div>
       )}
       <MapContainer {...mapConfig}>
+        <MapViewSaver />
         {/* This has the GeoJSON component. */}
         <Countries data={data} category={category} />
 
