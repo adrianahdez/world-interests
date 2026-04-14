@@ -1,60 +1,35 @@
-import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
+import React, { useRef, useImperativeHandle, forwardRef } from 'react';
 import './Player.scss';
 
-// Render Player component
+// Render Player component using a plain iframe instead of the YouTube IFrame API.
+// This avoids loading www-widgetapi.js which produces an unfixable 'web-share' console warning.
+// Playback control (pause on sidebar close) is handled via YouTube's postMessage API.
 const Player = forwardRef(({ idVideo }, ref) => {
-  const playerRef = useRef(null);
-  const playerInstance = useRef(null);
-
-  // Change the iframe when the video id changes.
-  // Load the YouTube iframe API. We need all of this in order to be able to pause the player when the sidebar is closed.
-  useEffect(() => {
-    if (idVideo) {
-      if (playerInstance.current) {
-        playerInstance.current.loadVideoById(idVideo);
-      } else {
-        const onYouTubeIframeAPIReady = () => {
-          playerInstance.current = new window.YT.Player(playerRef.current, {
-            videoId: idVideo,
-            events: {
-              onReady: () => {
-                playerInstance.current.cueVideoById(idVideo);
-              }
-            }
-          });
-        };
-
-        if (!window.YT) {
-          const tag = document.createElement('script');
-          tag.src = "https://www.youtube.com/iframe_api";
-          tag.async = true;
-          window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
-          document.head.appendChild(tag);
-        } else {
-          onYouTubeIframeAPIReady();
-        }
-      }
-    }
-
-    return () => {
-      if (playerInstance.current) {
-        playerInstance.current.destroy();
-        playerInstance.current = null;
-      }
-    };
-  }, [idVideo]);
+  const iframeRef = useRef(null);
 
   useImperativeHandle(ref, () => ({
     pauseVideo() {
-      if (playerInstance?.current && typeof playerInstance.current.pauseVideo === 'function') {
-        playerInstance.current.pauseVideo();
+      if (iframeRef.current?.contentWindow) {
+        iframeRef.current.contentWindow.postMessage(JSON.stringify({
+          event: 'command',
+          func: 'pauseVideo',
+          args: []
+        }), '*');
       }
     }
   }));
 
   return (
     <div className='player-container'>
-      <div id="player" ref={playerRef} />
+      {idVideo && (
+        <iframe
+          ref={iframeRef}
+          src={`https://www.youtube-nocookie.com/embed/${idVideo}?enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}`}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title="YouTube video player"
+        />
+      )}
     </div>
   );
 });

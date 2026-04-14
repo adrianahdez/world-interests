@@ -4,92 +4,73 @@ branch: bugfix/WIF-3-Fix-YouTube-Player-Console-Warnings-And-Errors
 
 ## Summary
 
-When a user clicks a map pin, a modal opens with a YouTube video player. Two sets of browser console issues appear, even though the functionality itself works correctly:
+When a user clicks a map pin, a modal opens with a YouTube video player. Several browser console issues appear, even though the functionality itself works correctly:
 
-1. **On modal open (pin click):** A browser warning `Unrecognized feature: 'web-share'` is logged by the YouTube IFrame API. Additionally, two `console.log` errors appear: `Failed to get subsystem status for purpose` with a `Attempting to use a disconnected port object` message — these originate from a browser extension content script reacting to the YouTube embed loading.
+1. **On modal open (pin click):** A browser warning `Unrecognized feature: 'web-share'` is logged by YouTube's `www-widgetapi.js` (loaded by the YouTube IFrame API). Additionally, Chrome's built-in Cast component extension logs `Failed to get subsystem status for purpose` errors.
 
-2. **On video play:** Multiple uncaught promise errors `Uncaught Error: Attempting to use a disconnected port object` appear in the console (also from a browser extension content script). A network request to `googleads.g.doubleclick.net` returns a 302, which is an ad conversion tracking call triggered by YouTube itself.
+2. **On video play:** Chrome's Cast extension fires an infinite loop of `Uncaught Error: Attempting to use a disconnected port object` promise rejections while the video plays. A network request to `googleads.g.doubleclick.net` returns a 302 (YouTube's own ad tracking).
 
-The goal is to resolve or suppress these issues at the application level in the best way possible, for both development and production environments.
+The goal was to resolve or suppress these issues at the application level where possible.
 
 ## Functional Requirements
 
-- The YouTube IFrame embed must include the necessary `allow` attribute on the iframe to declare the `web-share` permission policy, eliminating the `Unrecognized feature: 'web-share'` warning.
-- The Player component must cleanly destroy the YouTube player instance when the modal is closed or the component unmounts, to minimize stale port/connection errors triggered by browser extensions reacting to lingering player state.
-- The solution must not break existing video playback, modal open/close behavior, or any other player functionality.
-- The fix must work in both the development environment and the production Cloudflare Pages deployment.
-
-## Possible Edge Cases
-
-- The `web-share` permission policy attribute may need to be set on the iframe rendered by the YouTube IFrame API, which is injected dynamically — direct iframe attribute access may be needed post-API initialization.
-- The `Attempting to use a disconnected port object` errors originate from browser extension content scripts (not app code), so they cannot be fully eliminated — only minimized by ensuring the player is properly torn down.
-- The Google Ads 302 request is initiated by YouTube's own embed code and cannot be blocked from the application level; it should be documented as out of scope for this fix.
-- Rapid open/close of the modal could create race conditions in player initialization and teardown.
-- The IFrame API loads asynchronously; teardown must account for cases where the player object may not yet be fully initialized when unmount occurs.
+- Eliminate the `Unrecognized feature: 'web-share'` warning from the console.
+- Maintain video playback and pause-on-sidebar-close functionality.
+- The solution must work in both development (`localhost:9000`) and production (`worldinterests.midri.net`).
 
 ## Acceptance Criteria
 
 - After clicking a map pin, the `Unrecognized feature: 'web-share'` warning no longer appears in the browser console.
-- The `Failed to get subsystem status for purpose` errors in the console are reduced or eliminated when the modal opens.
-- The `Uncaught Error: Attempting to use a disconnected port object` errors in the console are reduced or eliminated when the video is played.
 - The YouTube video plays correctly when the modal is open.
 - The modal opens and closes correctly with no regressions.
-- The fix works in both development (`localhost:9000`) and production (`worldinterests.midri.net`).
-
-## Open Questions
-
-- Is there a specific version of the YouTube IFrame API being targeted, or is the latest always assumed?
-- Are there any constraints on modifying the iframe `allow` attribute after the YouTube IFrame API creates the element, or is pre-configuration via API options preferred?
+- Closing the sidebar pauses the video.
+- The fix works in both development and production.
 
 ## Clarifications
 
-- **Decision A (web-share warning):** Use A1 — add `Permissions-Policy: web-share=self` via `devServer.headers` in webpack for development, and a `_headers` file copied to `dist/` for Cloudflare Pages production.
-- **Decision B (disconnected port errors):** Use B1 — conditionally render `<Player>` only when `isSidebarOpen` is true, so the YouTube iframe is fully torn down (including `player.destroy()`) when the sidebar closes. B2's only advantage would be instant playback resumption on same-video reopen (no re-initialization flash), but B1 is preferred for proper iframe lifecycle management.
-- **Google Ads 302 request:** Confirmed out of scope — cannot be controlled from the application.
-- **URL change relationship:** The errors are unrelated to any recent dev URL configuration changes. The `web-share` warning is from a recent Chromium enforcement change. The disconnected port errors come from a browser extension reacting to YouTube iframes on any origin. The doubleclick 302 is YouTube's own ad tracking, always present when a video plays.
+- **`web-share` warning:** Caused by YouTube's `www-widgetapi.js` checking a Permissions-Policy feature (`web-share`) that Chrome 120+ removed from its feature registry. Adding a `Permissions-Policy: web-share=self` HTTP header was attempted but Chrome rejects the header with a new error (`Error with Permissions-Policy header: Unrecognized feature: 'web-share'`). The only fix is to avoid loading `www-widgetapi.js` entirely.
+- **Chrome Cast extension errors (`content-script.js`, `content-utils.js`):** These come from Chrome's built-in Cast component extension, not a third-party extension. They appear even in incognito mode with all extensions disabled. They fire when Chrome detects a YouTube iframe (on pin click) and loop during playback (Cast polls the iframe's media state through a port that keeps disconnecting). These cannot be fixed from application code — they are a bug in Chrome's internal Cast extension.
+- **Google Ads 302 request:** Out of scope — YouTube's own ad conversion tracking, cannot be blocked from the application.
+- **B1 approach (conditional rendering) caused Chrome crash:** Destroying/recreating the YouTube iframe on each sidebar open/close destabilised Chrome's Cast extension, causing an infinite loop of promise rejections that crashed the browser. Reverted.
+- **`youtube-nocookie.com` via YT.Player `host` option:** Chrome's Cast extension does not discriminate by iframe domain — it monitors all YouTube embeds regardless. Did not help.
 
 ## Analysis
 
 ### Affected Files
 
-**Frontend app (`/home/adriana/PROYECTOS/world-interests`)**
-
-- `src/InfoSidebar/InfoSidebar.jsx` — add `isSidebarOpen &&` to the Player conditional render so the component unmounts on sidebar close, triggering player teardown
-- `webpack.config.js` — add `devServer.headers` with `Permissions-Policy: web-share=self` for the dev server
-- `_headers` (new file, root) — Cloudflare Pages HTTP response headers declaring `Permissions-Policy: web-share=self`
-- `webpack.config.js` CopyWebpackPlugin patterns — add `_headers` to the list of copied files (alongside `_redirects`, `sitemap.xml`, etc.)
-
-**No backend changes required.**
+- `src/Player/Player.jsx` — replaced YouTube IFrame API (`YT.Player`) with a plain `<iframe>` element using `youtube-nocookie.com/embed/{id}` and postMessage-based pause control.
 
 ### Risks & Concerns
 
-- **Player re-initialization flash (B1 trade-off):** When the sidebar reopens for the same video, the `YT.Player` instance is recreated. The YouTube API script is already cached after the first load, so this is fast, but a brief blank frame before the embed renders is expected. This is acceptable given the clean lifecycle benefits.
-- **Race condition on rapid open/close:** If the sidebar is opened before the YouTube IFrame API script finishes loading (first open only), and then closed, `window.onYouTubeIframeAPIReady` will still fire after unmount. The `playerRef.current` will be null (component is unmounted), which could cause a runtime error. This is a pre-existing issue not introduced by this fix; mitigating it is out of scope here but worth noting.
-- **`pauseVideo` in InfoSidebar's useEffect becomes a no-op:** With B1, when `isSidebarOpen` becomes false the Player unmounts before InfoSidebar's effect runs, making `playerRef.current` null and the `pauseVideo` call silently skipped. This is safe and intentional — the player is being destroyed anyway.
-- **Extension errors cannot be fully eliminated:** B1 minimizes the window during which the extension's content script can establish a connection, but errors may still appear briefly on iframe load. This is documented as the best achievable result.
-- **`Permissions-Policy` header scope:** Using `web-share=self` restricts the permission to the same origin only, which is appropriate. The YouTube iframe (cross-origin) receives the permission via the `allow` attribute that the YouTube API sets on its iframe — this chain works once the parent page has the header.
+- **Less programmatic control:** Plain iframe + postMessage only supports sending commands (pause, stop, play). Reading player state (getCurrentTime, getPlayerState) or listening to events (onStateChange) is not available without additional postMessage listener setup. This app only uses `pauseVideo()`, so this is not a concern.
+- **Full iframe reload on video change:** When `idVideo` changes, the iframe `src` changes, causing a full reload instead of a smooth `loadVideoById()` transition. Imperceptible in practice since the user is switching to a different pin/country.
+- **Cast extension errors remain:** Chrome's built-in Cast extension errors on pin click and during playback cannot be eliminated from application code. They don't affect functionality and are invisible to end users (only visible in DevTools).
 
 ### Decisions
 
-- **A1 chosen over A2:** The HTTP headers approach is semantically correct (fixes the permission declaration at the HTTP level) and requires no app-code coupling to YouTube's internal `getIframe()` API. It also works at the page level regardless of how many YouTube embeds may exist.
-- **B1 chosen over B2:** Fully removing the iframe from the DOM when the sidebar is closed eliminates the extension's trigger target, providing the best available reduction of disconnected-port errors. The one-time re-initialization cost on reopen is acceptable.
+- **Plain iframe chosen over YouTube IFrame API:** Avoids loading `www-widgetapi.js` entirely, which is the source of the `web-share` warning. The YouTube IFrame API provides no value for this app's use case (only `pauseVideo` is needed, which works via postMessage).
+- **`youtube-nocookie.com` used as embed domain:** Privacy-enhanced mode. No functional difference for basic embed playback.
+- **Permissions-Policy header approach abandoned:** Chrome 120+ does not recognise `web-share` as a valid Permissions-Policy feature. The header adds a new browser error instead of fixing the warning.
+- **B1 conditional rendering abandoned:** Causes Chrome crash via Cast extension conflict when the iframe is destroyed/recreated.
 
 ## Implementation Plan
 
-- [x] Step 1: Add `Permissions-Policy: web-share=self` to the webpack dev server — modify `devServer` in `webpack.config.js` to include a `headers` object with the policy.
-- [x] Step 2: Create `_headers` file in the project root with the `Permissions-Policy: web-share=self` rule for all routes (`/*`), following the same pattern as `_redirects`.
-- [x] Step 3: Add `_headers` to the `CopyWebpackPlugin` patterns in `webpack.config.js` so it is copied to `dist/` during both dev and production builds.
-- [x] Step 4: Conditionally render `<Player>` in `InfoSidebar.jsx` — prepend `isSidebarOpen &&` to the existing Player conditional so the component mounts only when the sidebar is open and unmounts (triggering `player.destroy()`) when it closes.
-- [ ] Step 5: Manual verification — run `npm run dev`, open DevTools, click a pin, confirm `web-share` warning is gone; close the sidebar, reopen it, confirm no regression in video playback; confirm disconnected port errors are reduced or absent.
+- [x] Step 1: ~~Add `Permissions-Policy: web-share=self` to webpack dev server~~ — REVERTED: Chrome rejects the header.
+- [x] Step 2: ~~Create `_headers` file~~ — REVERTED: removed file.
+- [x] Step 3: ~~Add `_headers` to `CopyWebpackPlugin`~~ — REVERTED: removed entry.
+- [x] Step 4: ~~Conditionally render `<Player>` based on `isSidebarOpen`~~ — REVERTED: caused Chrome crash.
+- [x] Step 5: Revert steps 1–4, replace YouTube IFrame API with plain `<iframe>` + postMessage in `Player.jsx`. Eliminates `www-widgetapi.js` and the `web-share` warning.
+- [x] Step 6: Manual verification — confirmed: `web-share` warning gone, page load clean, video plays, pause on sidebar close works. Cast extension errors on pin click and during playback remain (unfixable from app code).
 
 ## Testing Guidelines
 
-Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or equivalent) and create meaningful tests for the following cases, without going too heavy:
+There are no automated tests or linting configured in this project (per CLAUDE.md). Verification is manual:
 
-- There are no automated tests or linting configured in this project (per CLAUDE.md). Verification should be done manually:
-  - Open the app in a browser with DevTools open.
-  - Click a map pin and confirm no `Unrecognized feature: 'web-share'` warning appears.
-  - Confirm `Failed to get subsystem status` errors are not present or are reduced.
-  - Click play on the embedded video and confirm `Uncaught Error: Attempting to use a disconnected port object` errors are not present or are reduced.
-  - Close and reopen the modal multiple times to confirm no regressions in open/close behavior.
-  - Test in both development and production URLs.
+- Open the app in a browser with DevTools console open.
+- Confirm page load shows no `web-share` or Permissions-Policy errors.
+- Click a map pin and confirm the `Unrecognized feature: 'web-share'` warning does not appear.
+- Play the embedded video and confirm it works correctly.
+- Close the sidebar and confirm the video pauses.
+- Close and reopen the modal multiple times to confirm no regressions.
+- Test in both development (`localhost:9000`) and production (`worldinterests.midri.net`).
+- Note: `Failed to get subsystem status` (on pin click) and `Uncaught (in promise) disconnected port` (during playback) are from Chrome's built-in Cast extension and cannot be eliminated.

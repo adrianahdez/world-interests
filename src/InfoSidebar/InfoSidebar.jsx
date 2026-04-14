@@ -100,7 +100,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar, ca
                 </div>
               </div>
             </div>
-            {isSidebarOpen && mapPoint?.idVideo && mapPoint.idVideo.trim() !== '' && <Player ref={playerRef} idVideo={mapPoint.idVideo} />}
+            {mapPoint?.idVideo && mapPoint.idVideo.trim() !== '' && <Player ref={playerRef} idVideo={mapPoint.idVideo} />}
           </div>
         </div>
       </div>
