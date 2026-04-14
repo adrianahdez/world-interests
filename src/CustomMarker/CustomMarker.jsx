@@ -16,7 +16,7 @@ const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint
       // Create a div icon with the HTML content
       const icon = new L.DivIcon({
         className: 'custom-marker',
-        html: `<div class="custom-marker__container" role="button" aria-label="${ariaLabel}">
+        html: `<div class="custom-marker__container" role="button" tabindex="0" aria-label="${ariaLabel}">
                 ${htmlContent}
               </div>`,
         iconSize: [50, 50],
@@ -34,7 +34,21 @@ const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint
           setMapPoint(mapPoint);
       });
 
+      // Keyboard navigation: Enter or Space opens the sidebar, matching click behaviour.
+      const markerEl = marker.getElement();
+      const handleKeyDown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleSidebar(true);
+          setMapPoint(mapPoint);
+        }
+      };
+      if (markerEl) {
+        markerEl.addEventListener('keydown', handleKeyDown);
+      }
+
       return () => {
+        if (markerEl) markerEl.removeEventListener('keydown', handleKeyDown);
         if (clusterLayerRef?.current) {
           clusterLayerRef.current.removeLayer(marker);
         } else {

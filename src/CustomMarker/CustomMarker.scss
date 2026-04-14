@@ -17,6 +17,12 @@
     -ms-transition: background-color 250ms linear, transform 250ms;
     transition: background-color 250ms linear, transform 250ms;
 
+    &:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.85);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
     &:hover {
       -ms-transform: scale(1.5);
       -webkit-transform: scale(1.5);
