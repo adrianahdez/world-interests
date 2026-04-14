@@ -242,3 +242,9 @@
 .light .map--max-zoom .custom-marker__bg {
   filter: brightness(1.5);
 }
+
+/* Light theme at max zoom: undo the dark-mode hover brightness — behave like other zoom levels */
+.light .map--max-zoom .custom-marker__container:hover .custom-marker__bg,
+.light.map--max-zoom .custom-marker__container:hover .custom-marker__bg {
+  filter: brightness(1.5);
+}

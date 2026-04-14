@@ -26,9 +26,10 @@
   }
 }
 
-.marker-cluster-small  { background-color: rgba(20, 50, 60, 0.45); }
-.marker-cluster-medium { background-color: rgba(20, 50, 60, 0.55); }
-.marker-cluster-large  { background-color: rgba(20, 50, 60, 0.65); }
+/* Outer wrapper must be transparent — the coloured square comes from here */
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large  { background-color: transparent !important; }
 
 .light {
   .marker-cluster div {
@@ -36,9 +37,6 @@
     border-color: rgba(0, 0, 0, 0.2);
   }
   .marker-cluster span { color: rgba(0, 0, 0, 0.85); }
-  .marker-cluster-small  { background-color: rgba(150, 210, 235, 0.45); }
-  .marker-cluster-medium { background-color: rgba(130, 195, 225, 0.55); }
-  .marker-cluster-large  { background-color: rgba(110, 180, 215, 0.65); }
 }
 
 /* Countries with no data for the current category (NO_DATA_INDICATOR_ENABLED) */
