@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, memo, useContext } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo, memo, useContext } from 'react';
 import { MapContainer, useMap } from 'react-leaflet'
 import CustomMarker from '../CustomMarker/CustomMarker';
 import { getCountryLatLon, getData, getFlagFromAlpha2 } from './Points/Data';
@@ -359,12 +359,21 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
 
   const tr = isEs ? translations.es : translations.en;
 
+  // Stable position references per alpha2 — recomputed only when data changes.
+  // getCountryLatLon returns a new array on every call, so without memoisation
+  // a language switch re-render would recreate all markers and drop processPoint styling.
+  const markerPositions = useMemo(() => {
+    const pos = {};
+    Object.keys(data).forEach(a2 => { pos[a2] = getCountryLatLon(a2); });
+    return pos;
+  }, [data]);
+
   // Extracted so the same JSX can be rendered directly or inside MarkerClusterGroup.
   const renderMarkers = () => Object.keys(data).map((alpha2) => {
     const countryData = data[alpha2]?.[0];
     if (!countryData) return null;
 
-    const latLon = getCountryLatLon(alpha2);
+    const latLon = markerPositions[alpha2];
     if (!latLon) return null;
 
     countryData.flag = getFlagFromAlpha2(alpha2 || '');
