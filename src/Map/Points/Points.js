@@ -46,7 +46,7 @@ function setUpPointAttributes(point, minViews, maxViews) {
 
   // More views → more padding (thicker visible border ring) + more opaque background.
   const imagePadding = Math.round(1 + normalized * 7); // 1px (low) → 8px (high)
-  const bgOpacity = 0.35 + normalized * 0.65;          // 0.35 (low) → 1.0 (high)
+  const bgOpacity = 0.65 + normalized * 0.35;          // 0.65 (low) → 1.0 (high)
 
   return { bgColor, bgOpacity, imagePadding };
 }

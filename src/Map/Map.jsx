@@ -144,10 +144,17 @@ function Map({ category, toggleSidebar, setMapPoint }) {
   // processPoint after a new data is fetched, to change their appearance.
   useEffect(() => {
     if (Object.keys(data).length === 0) return;
+
+    // Compute view count range across all pins for relative normalization.
+    const viewCounts = Object.keys(data)
+      .map((alpha2) => Number(data[alpha2][0]?.statistics?.viewCount) || 0);
+    const minViews = Math.min(...viewCounts);
+    const maxViews = Math.max(...viewCounts);
+
     Object.keys(data).map((alpha2) => {
       const countryPoint = data[alpha2][0];
       const latLon = getCountryLatLon(alpha2);
-      processPoint(countryPoint, latLon);
+      processPoint(countryPoint, latLon, minViews, maxViews);
     });
   }, [data]);
 
