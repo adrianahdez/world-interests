@@ -72,10 +72,7 @@ function changePointAppearance(point, pointLatLon, minViews, maxViews) {
     bg[i].style.backgroundColor = hexToRgba(attrs.bgColor, attrs.bgOpacity);
   }
 
-  let imageContainer = markerPoint.querySelector('.image-container');
-  if (imageContainer) {
-    imageContainer.style.padding = attrs.imagePadding + 'px';
-  }
+  markerPoint.style.padding = attrs.imagePadding + 'px';
 }
 
 /**
