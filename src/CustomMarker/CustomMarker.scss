@@ -164,15 +164,22 @@
   filter: brightness(1.5);
 }
 
-/* Low zoom: shrink pins and hide flags */
+/* Low zoom (zoom 2–2.5): shrink pins and hide flags */
 .map--low-zoom {
   .custom-marker__container:not(:hover) {
-    transform: scale(0.4);
+    transform: scale(0.6);
     transform-origin: bottom center;
   }
 
   .flag {
     display: none;
+  }
+}
+
+/* Very low zoom (zoom 1–1.5): pins at their smallest */
+.map--very-low-zoom {
+  .custom-marker__container:not(:hover) {
+    transform: scale(0.4); /* overrides the 0.5 from map--low-zoom */
   }
 }
 

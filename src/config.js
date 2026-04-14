@@ -41,5 +41,6 @@ export const STORAGE_KEY_SIDEBAR  = 'sidebarCountry'; // alpha-2 code of last op
 
 // ─── Zoom Thresholds ─────────────────────────────────────────────────────────
 
-export const ZOOM_LOW  = 3; // below this: scale pins down, hide flags
-export const ZOOM_HIGH = 5; // at this level: reveal channel name + view count directly on pins
+export const ZOOM_VERY_LOW = 2; // below this: pins are at their smallest scale
+export const ZOOM_LOW      = 3; // below this: scale pins down, hide flags
+export const ZOOM_HIGH     = 5; // at this level: reveal channel name + view count directly on pins

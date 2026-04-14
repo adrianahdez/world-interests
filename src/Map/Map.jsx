@@ -8,7 +8,7 @@ import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED } from '../config';
+import { STORAGE_KEY_MAP_VIEW, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED } from '../config';
 
 const DEFAULT_CENTER = [25, 0];
 const DEFAULT_ZOOM = 3;
@@ -50,6 +50,8 @@ function MapViewSaver() {
       const zoom = map.getZoom();
       // Shrink pins and hide flags at low zoom.
       mapContainer.classList.toggle('map--low-zoom', zoom < ZOOM_LOW);
+      // Extra-small pins at very low zoom (below 2).
+      mapContainer.classList.toggle('map--very-low-zoom', zoom < ZOOM_VERY_LOW);
       // At maximum zoom, reveal channel name + view count directly on pins (no hover needed).
       mapContainer.classList.toggle('map--max-zoom', zoom >= ZOOM_HIGH);
     };
