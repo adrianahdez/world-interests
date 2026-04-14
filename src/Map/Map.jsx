@@ -119,12 +119,14 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   const { isEs } = useContext(LanguageContext);
   const [data, setData] = useState({});
   const [mapError, setMapError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // true until first data fetch resolves
   const prevDataRef = useRef({});
   // Tracks whether the sidebar restore has already fired, so it only runs once per session.
   const restoredRef = useRef(false);
 
   useEffect(() => {
     setMapError(false);
+    setIsLoading(true);
     const fetchData = (category) => {
       const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'get-json.php' + '?category=' + category;
       getData(apiUrl)
@@ -134,10 +136,12 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
             prevDataRef.current = result;
             setData(result);
           }
+          setIsLoading(false);
         })
         .catch((error) => {
           console.warn('[WorldInterests] Could not load map data for category "' + category + '":', error.message);
           setMapError(true);
+          setIsLoading(false);
           setData({});
         });
     };
@@ -248,6 +252,11 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
 
   return (
     <div className="map-container">
+      {isLoading && !mapError && (
+        <div className="map-loading-overlay">
+          <div className="map-loading-overlay__spinner" />
+        </div>
+      )}
       {mapError && (
         <div className="map-error-overlay">
           <p>{tr.mapDataUnavailable}</p>

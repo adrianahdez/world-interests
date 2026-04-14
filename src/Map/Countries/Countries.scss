@@ -2,6 +2,28 @@
   filter: brightness(1.5);
 }
 
+.map-loading-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  pointer-events: none;
+
+  &__spinner {
+    width: 52px;
+    height: 52px;
+    border: 5px solid rgba(255, 255, 255, 0.15);
+    border-top-color: rgba(255, 255, 255, 0.75);
+    border-radius: 50%;
+    animation: map-spin 0.75s linear infinite;
+  }
+}
+
+@keyframes map-spin {
+  to { transform: rotate(360deg); }
+}
+
 .map-error-overlay {
   position: absolute;
   top: 50%;
