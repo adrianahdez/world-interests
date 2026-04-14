@@ -113,11 +113,13 @@ function ZoomDebugLabel() {
   );
 }
 
-function Map({ category, toggleSidebar, setMapPoint }) {
+function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   const { isEs } = useContext(LanguageContext);
   const [data, setData] = useState({});
   const [mapError, setMapError] = useState(false);
   const prevDataRef = useRef({});
+  // Tracks whether the sidebar restore has already fired, so it only runs once per session.
+  const restoredRef = useRef(false);
 
   useEffect(() => {
     setMapError(false);
@@ -207,6 +209,19 @@ function Map({ category, toggleSidebar, setMapPoint }) {
       processPoint(countryPoint, latLon, minViews, maxViews);
     });
   }, [data]);
+
+  // Restore the sidebar for the last open country after data loads (once per session).
+  useEffect(() => {
+    if (!restoreRegion || restoredRef.current || Object.keys(data).length === 0) return;
+    const alpha2 = Object.keys(data).find(key => data[key][0]?.regionName === restoreRegion);
+    if (!alpha2) return;
+    restoredRef.current = true; // prevent re-firing on subsequent data refreshes
+    const point = data[alpha2][0];
+    point.flag = getFlagFromAlpha2(alpha2);
+    if (point.channel) point.channel.channelImage = point.channel.channelImage || ImageNotFound;
+    setMapPoint(point);
+    toggleSidebar(true);
+  }, [data, restoreRegion, setMapPoint, toggleSidebar]);
 
   const savedView = loadMapView();
 
