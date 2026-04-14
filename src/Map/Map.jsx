@@ -8,7 +8,7 @@ import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW, ZOOM_LOW, ZOOM_HIGH } from '../config';
+import { STORAGE_KEY_MAP_VIEW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED } from '../config';
 
 const DEFAULT_CENTER = [25, 0];
 const DEFAULT_ZOOM = 3;
@@ -80,6 +80,37 @@ function MapViewSaver() {
   }, [map]);
 
   return null;
+}
+
+// Debug-only component — shows current zoom level at bottom-right of the map.
+// Enabled/disabled by DEBUG_ZOOM_LEVEL_ENABLED in src/config.js.
+function ZoomDebugLabel() {
+  const map = useMap();
+  const [zoom, setZoom] = useState(map.getZoom());
+
+  useEffect(() => {
+    const onZoomEnd = () => setZoom(map.getZoom());
+    map.on('zoomend', onZoomEnd);
+    return () => map.off('zoomend', onZoomEnd);
+  }, [map]);
+
+  return (
+    <div style={{
+      position: 'absolute',
+      bottom: '12px',
+      right: '12px',
+      zIndex: 1000,
+      background: 'rgba(0,0,0,0.55)',
+      color: '#fff',
+      fontSize: '11px',
+      fontFamily: 'monospace',
+      padding: '3px 7px',
+      borderRadius: '4px',
+      pointerEvents: 'none',
+    }}>
+      zoom: {zoom}
+    </div>
+  );
 }
 
 function Map({ category, toggleSidebar, setMapPoint }) {
@@ -207,6 +238,7 @@ function Map({ category, toggleSidebar, setMapPoint }) {
       )}
       <MapContainer {...mapConfig}>
         <MapViewSaver />
+        {DEBUG_ZOOM_LEVEL_ENABLED && <ZoomDebugLabel />}
         {/* This has the GeoJSON component. */}
         <Countries data={data} category={category} />
 
