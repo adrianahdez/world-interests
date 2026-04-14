@@ -38,6 +38,57 @@ function Map({ category, toggleSidebar, setMapPoint }) {
     fetchData(category);
   }, [category]);
 
+  // Retry channel images that fail to load (YouTube CDN 429 rate limiting).
+  // Uses event delegation since marker images live inside Leaflet DivIcons (not React-managed).
+  // Failed images are queued and retried one at a time to avoid triggering rate limits again.
+  useEffect(() => {
+    const retryQueue = [];
+    let retryTimer = null;
+
+    const processQueue = () => {
+      if (retryQueue.length === 0) {
+        retryTimer = null;
+        return;
+      }
+      const img = retryQueue.shift();
+      const originalSrc = img.dataset.originalSrc;
+      if (originalSrc && document.contains(img)) {
+        img.src = originalSrc + (originalSrc.includes('?') ? '&' : '?') + 'retry=' + Date.now();
+      }
+      retryTimer = setTimeout(processQueue, 800);
+    };
+
+    const handleError = (e) => {
+      if (e.target.tagName !== 'IMG' || !e.target.src.includes('ggpht.com')) return;
+      const img = e.target;
+      img.style.visibility = 'hidden';
+      if (!img.dataset.originalSrc) {
+        img.dataset.originalSrc = img.src.split('?retry=')[0];
+      }
+      const retryCount = parseInt(img.dataset.retry || '0');
+      if (retryCount < 5) {
+        img.dataset.retry = String(retryCount + 1);
+        retryQueue.push(img);
+        if (!retryTimer) {
+          retryTimer = setTimeout(processQueue, 1500);
+        }
+      }
+    };
+
+    const handleLoad = (e) => {
+      if (e.target.tagName !== 'IMG' || !e.target.src.includes('ggpht.com')) return;
+      e.target.style.visibility = 'visible';
+    };
+
+    document.addEventListener('error', handleError, true);
+    document.addEventListener('load', handleLoad, true);
+    return () => {
+      document.removeEventListener('error', handleError, true);
+      document.removeEventListener('load', handleLoad, true);
+      if (retryTimer) clearTimeout(retryTimer);
+    };
+  }, []);
+
   // processPoint after a new data is fetched, to change their appearance.
   useEffect(() => {
     if (Object.keys(data).length === 0) return;
@@ -53,6 +104,9 @@ function Map({ category, toggleSidebar, setMapPoint }) {
     zoom: 3,
     minZoom: 1,
     maxZoom: 5,
+    zoomSnap: 0.5,
+    zoomDelta: 0.5,
+    wheelPxPerZoomLevel: 325,
     scrollWheelZoom: true,
     zoomControl: false,
     style: {
@@ -95,7 +149,7 @@ function Map({ category, toggleSidebar, setMapPoint }) {
                 <span className="custom-marker__bg bg-color"></span>
                 <span className="custom-marker__bg-pointer bg-color"></span>
                 <div className="image-container">
-                  <img src={c.channelImage} alt="marker" />
+                  <img src={c.channelImage} alt="marker" loading="lazy" />
                 </div>
                 <span className='flag'>{countryData.flag}</span>
                 <div className="text-container">
