@@ -1,0 +1,41 @@
+// ─── Feature Flags ───────────────────────────────────────────────────────────
+// Set any flag to false to disable the feature entirely (one-line toggle).
+
+// Groups nearby markers into animated cluster badges at low zoom levels.
+export const CLUSTERING_ENABLED        = false;
+
+// Requires Ctrl+scroll (desktop) or two-finger pinch (mobile) to zoom the map,
+// preventing accidental zoom when the user is scrolling the page.
+export const GESTURE_HANDLING_ENABLED  = false;
+
+// Applies a desaturated / dashed polygon style to countries that have no data
+// for the currently selected category.
+export const NO_DATA_INDICATOR_ENABLED = false;
+
+// Toggleable color-gradient overlay that visualises regional trending intensity.
+export const HEATMAP_ENABLED           = false;
+
+// Adds a fullscreen button that expands the map to fill the entire viewport.
+export const FULLSCREEN_ENABLED        = false;
+
+// Replaces Leaflet's discrete zoom steps with smooth incremental scroll zoom.
+export const SMOOTH_ZOOM_ENABLED       = false;
+
+// Disables map fly animations and pin transitions when the OS/browser
+// "prefers-reduced-motion" setting is active.
+export const REDUCED_MOTION_ENABLED    = false;
+
+// ─── localStorage Keys ───────────────────────────────────────────────────────
+// Single source of truth for every key written to localStorage.
+
+export const STORAGE_KEY_MAP_VIEW = 'mapView';       // last map center + zoom
+export const STORAGE_KEY_LANG     = 'isEs';          // UI language (true = Spanish)
+export const STORAGE_KEY_THEME    = 'isDarkMode';    // colour theme (true = dark)
+export const STORAGE_KEY_DIALOG   = 'isDialogOpen';  // category-picker dialog open state
+export const STORAGE_KEY_CATEGORY = 'category';      // last selected category slug
+export const STORAGE_KEY_SIDEBAR  = 'sidebarCountry'; // alpha-2 code of last open country sidebar
+
+// ─── Zoom Thresholds ─────────────────────────────────────────────────────────
+
+export const ZOOM_LOW  = 3; // below this: scale pins down, hide flags
+export const ZOOM_HIGH = 5; // at this level: reveal channel name + view count directly on pins

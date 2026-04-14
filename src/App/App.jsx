@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import { STORAGE_KEY_DIALOG } from '../config';
 import Map from '../Map/Map';
 import Categories from '../Categories/Categories';
 import Footer from '../Footer/Footer';
@@ -27,7 +28,7 @@ export default function App() {
   const toggleDialog = useCallback(() => {
     setIsDialogOpen((prev) => !prev);
     // Save the state in the local storage to remember the user's choice.
-    localStorage.setItem('isDialogOpen', !isDialogOpen);
+    localStorage.setItem(STORAGE_KEY_DIALOG, !isDialogOpen);
   }, [isDialogOpen]);
 
   const toggleSidebar = useCallback((open = true) => {
@@ -58,7 +59,7 @@ export default function App() {
 
   // If the state is not set, return true to show the dialog by default. If the state is set, return the state.
   function setDefaultIsDialogOpen() {
-    const defaultState = localStorage.getItem('isDialogOpen');
+    const defaultState = localStorage.getItem(STORAGE_KEY_DIALOG);
     return defaultState === null ? true : defaultState === 'true';
   }
 
