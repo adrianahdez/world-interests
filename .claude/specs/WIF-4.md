@@ -224,10 +224,124 @@ Each item below is evaluated for user benefit, implementation complexity, UX ris
 
 ## Open Questions
 
-- Should clustering be implemented before or after a potential data-volume increase (i.e., is 200 markers enough to justify it now)?
-- Is a dark tile provider (CartoDB, Stadia) acceptable under their terms for a public app with no API key?
-- Should the minimap be desktop-only from day one, or start hidden on all platforms and be user-toggleable?
+None remaining — all resolved in Clarifications below.
 
 ## Testing Guidelines
 
 No tests apply — this is a research and documentation spec. Verification is reading the document for completeness and accuracy.
+
+## Clarifications
+
+- **Tile layer**: Option A confirmed — keep GeoJSON polygons only, no external tile provider. The current CSS-variable background is the intended aesthetic.
+- **Clustering now**: Yes, implement now. Must be togglable via a single constant in the central config file.
+- **Country hover highlight (Task A)**: Confirmed already working — removed from backlog.
+- **Marker hover tooltip (Task I)**: Confirmed already working via CSS `:hover` on `.custom-marker__container` — removed from backlog.
+- **Task K (dark tiles)**: Removed — no tiles.
+- **Toggle pattern**: Every feature that could be intrusive or experimental must have a single `const FEATURE_X = true/false` in the central config file to enable/disable it. The config file is the first thing to implement.
+- **Gesture handling**: Wanted, must be toggleable via config.
+- **No-data indicator**: Wanted, must be toggleable via config.
+- **Marker clustering**: Middle priority, must be toggleable via config (one line).
+- **Mobile bottom sheet**: Very low priority.
+- **Heatmap**: Low priority, acknowledged as complex.
+- **Sidebar state persistence**: Very high priority.
+- **API retry**: Very high priority, but after simpler tasks.
+- **Zoom detail tiers**: Highest priority (Priority 1), first in the roadmap.
+- **Minimap**: Very low priority.
+- **Smooth wheel zoom, reduced motion**: Lowest priority, uncertain value.
+
+## Feature Priority Table
+
+| # | Feature | Description | Complexity | Priority | Step |
+|---|---------|-------------|------------|----------|------|
+| 1 | **Central config file** | `src/config.js` with all feature flags and localStorage key constants | Low | Prerequisite | 1 |
+| 2 | **Zoom detail tiers** | At zoom 5, reveal channel name and view count on markers directly (no hover needed) | Medium | Highest | 2 |
+| 3 | **Category persistence** | Remember last selected category (Music, Gaming…) across reloads | Low | High | 3 |
+| 4 | **Sidebar state persistence** | Restore open country sidebar after reload | Medium | Very High | 4 |
+| 5 | **Loading spinner** | Non-blocking overlay while data is fetching | Low | High | 5 |
+| 6 | **Gesture handling** | Require Ctrl+scroll / two-finger pinch to zoom; prevents scroll trap | Low | Medium | 6 |
+| 7 | **No-data country indicator** | Desaturated/dashed polygon style for countries with no data in current category | Low | Medium | 7 |
+| 8 | **API retry with backoff** | Retry failed API calls (max 3, 2s/4s/8s delays) with subtle "retrying…" indicator | Medium | Very High | 8 |
+| 9 | **Marker clustering** | Group nearby markers at low zoom into animated cluster badges | Medium | Middle | 9 |
+| 10 | **ARIA labels** | `aria-label` on map container and each marker for screen readers | Low | Medium | 10 |
+| 11 | **Keyboard navigation** | Tab through markers, open sidebar with Enter/Space | Medium | Medium | 11 |
+| 12 | **Heatmap overlay** | Toggleable color-gradient layer showing regional trending intensity | Medium | Low | 12 |
+| 13 | **Pane z-index layering** | Explicit Leaflet panes so polygons always render below markers | Low | Low | 13 |
+| 14 | **Mobile bottom sheet** | Sidebar slides up from bottom on narrow viewports | Medium | Very Low | 14 |
+| 15 | **Fullscreen mode** | Button to expand map to full viewport | Low | Low | 15 |
+| 16 | **Minimap** | Small thumbnail map showing current view region in world context (desktop only) | Medium | Very Low | 16 |
+| 17 | **Smooth wheel zoom** | Incremental scroll zoom replacing discrete Leaflet steps | Low | Lowest | 17 |
+| 18 | **Reduced motion** | Disable animations when `prefers-reduced-motion: reduce` is set | Low | Lowest | 18 |
+
+**Removed from backlog** (already working or decided against):
+- Country hover highlight → already implemented via `onEachFeature` handlers in `geoJsonConfig.js`
+- Marker hover tooltip → already implemented via CSS `:hover` on `.custom-marker__container`
+- Dark tile layer swap → no tiles in this app; GeoJSON-only background is final
+
+---
+
+## Analysis
+
+### Affected Files
+
+**New files to create**
+- `src/config.js` — central feature flags and app constants (localStorage keys, zoom thresholds, toggle booleans)
+
+**Modified — Map layer**
+- `src/Map/Map.jsx` — gesture handling, clustering wrapper, loading spinner, zoom tier class, API retry logic
+- `src/Map/Points/Points.js` — zoom-level detail tier rendering
+- `src/Map/geoJsonConfig.js` — no-data indicator styling
+- `src/Map/Countries/Countries.jsx` — no-data polygon style, pane assignment
+
+**Modified — App / state**
+- `src/App/App.jsx` — category persistence, sidebar state persistence, API retry indicator
+- `src/Common/LanguageContext.jsx` — no changes needed (pattern reference only)
+- `src/Common/ThemeContext.jsx` — no changes needed (pattern reference only)
+
+**Modified — Sidebar**
+- `src/InfoSidebar/InfoSidebar.jsx` — sidebar state persistence (restore country on reload), mobile bottom sheet layout (low priority)
+- `src/GlobalStyles/Components/_sidebars.scss` — mobile bottom sheet styles (low priority)
+
+**Modified — Markers / accessibility**
+- `src/CustomMarker/CustomMarker.jsx` — ARIA labels, keyboard navigation, zoom tier detail reveal
+- `src/CustomMarker/CustomMarker.scss` — zoom tier CSS classes, reduced motion media query (low priority)
+
+**New files (plugins, when needed)**
+- Install `leaflet-gesture-handling`, `leaflet.markercluster` npm packages when those steps are reached
+
+### Risks & Concerns
+
+- **`leaflet.markercluster` + react-leaflet 4.2**: No official react-leaflet wrapper exists; must use `react-leaflet-cluster` (community wrapper) or integrate the raw Leaflet plugin inside a `useEffect`. Verify compatibility before implementing.
+- **Gesture handling plugin**: Injects its own DOM overlay and event interceptors. May conflict with existing `scrollWheelZoom: true` setting in `mapConfig`; the two must be coordinated.
+- **Sidebar state persistence**: The selected country's data changes every time the API is called. Restoring the open country requires re-fetching or confirming the data is still fresh; stale state must be handled gracefully.
+- **Zoom detail tiers**: Extends the WIF-6 zoom-class pattern (`map--low-zoom`). Must not conflict with the existing `MapViewSaver` zoom class logic already in `Map.jsx`.
+- **Category persistence**: The category list is fetched dynamically from the backend. A persisted slug that no longer exists in the current list must be silently discarded and replaced with the default.
+- **No-data indicator**: `geoJsonConfig.js` currently applies a single style to all polygons. Differentiating "has data" vs "no data" requires access to the `data` object inside the GeoJSON style function, which currently receives only `feature`. Requires a factory function or closure pattern.
+
+### Decisions
+
+- **Central config first**: `src/config.js` is the prerequisite for every other feature. It must be implemented before any togglable feature.
+- **Toggle pattern**: All togglable features check `import { FEATURE_X } from '../config'` and short-circuit when false. One-line change to disable.
+- **No tiles**: GeoJSON-only map background is final. Not revisited unless city-level data is added.
+- **Clustering wrapper**: A `const CLUSTERING_ENABLED` flag in config wraps markers in `<MarkerClusterGroup>` when true, bypasses it when false — zero other changes required.
+- **localStorage keys**: All keys (`mapView`, `isEs`, `isDarkMode`, `isDialogOpen`, and new ones for category and sidebar state) are centralised as named constants in `config.js`.
+
+## Implementation Plan
+
+- [ ] Step 1: Create `src/config.js` — define all feature flags (`CLUSTERING_ENABLED`, `GESTURE_HANDLING_ENABLED`, `NO_DATA_INDICATOR_ENABLED`, `HEATMAP_ENABLED`, `FULLSCREEN_ENABLED`, `SMOOTH_ZOOM_ENABLED`, `REDUCED_MOTION_ENABLED`) and all localStorage key constants (`STORAGE_KEY_MAP_VIEW`, `STORAGE_KEY_LANG`, `STORAGE_KEY_THEME`, `STORAGE_KEY_DIALOG`, `STORAGE_KEY_CATEGORY`, `STORAGE_KEY_SIDEBAR`); update existing files that hardcode these keys to import from config.
+- [ ] Step 2: Implement zoom detail tiers — extend the `MapViewSaver`/zoom-class pattern in `src/Map/Map.jsx` and `src/CustomMarker/CustomMarker.scss` to add a `map--max-zoom` class at zoom 5 that reveals channel name and view count labels directly on markers without hover.
+- [ ] Step 3: Implement category persistence — read last category from `STORAGE_KEY_CATEGORY` in `src/App/App.jsx` on mount (validate against current category list); write on every category change.
+- [ ] Step 4: Implement sidebar state persistence — store the open country's `alpha2` key under `STORAGE_KEY_SIDEBAR` in `src/App/App.jsx`; restore on mount by waiting for data to load then reopening the sidebar for that country.
+- [ ] Step 5: Add loading spinner — show a non-blocking overlay in `src/Map/Map.jsx` while `data` is empty and no error has occurred; hide once data arrives or error shows.
+- [ ] Step 6: Add gesture handling — install `leaflet-gesture-handling`; integrate in `src/Map/Map.jsx` behind `GESTURE_HANDLING_ENABLED` flag from config; coordinate with existing `scrollWheelZoom` setting.
+- [ ] Step 7: Add no-data country indicator — refactor `src/Map/geoJsonConfig.js` `setConfig` into a factory that receives the `data` object; apply desaturated/dashed style to countries with no data in the current category; guard behind `NO_DATA_INDICATOR_ENABLED` flag.
+- [ ] Step 8: Implement API retry with exponential backoff — replace the current single `getData` call in `src/Map/Map.jsx` with a retry wrapper (max 3 retries, 2s/4s/8s delays, capped at 30s); show a subtle "retrying…" indicator in the map error overlay.
+- [ ] Step 9: Add marker clustering — install `leaflet.markercluster` (or `react-leaflet-cluster`); wrap markers in `<MarkerClusterGroup>` in `src/Map/Map.jsx` behind `CLUSTERING_ENABLED` constant; style cluster icons to match the app theme.
+- [ ] Step 10: Add ARIA labels — add `aria-label` to the map container in `src/Map/Map.jsx` and to each marker's DOM element in `src/CustomMarker/CustomMarker.jsx`; add `role="region"` to the map wrapper.
+- [ ] Step 11: Add keyboard navigation for markers — add `tabIndex={0}` and `keydown` (Enter/Space) handler to each marker in `src/CustomMarker/CustomMarker.jsx` to open the sidebar.
+- [ ] Step 12: Add heatmap overlay — install `@linkurious/leaflet-heat`; add a toggleable `<HeatmapLayer>` inside `<MapContainer>` in `src/Map/Map.jsx` driven by `HEATMAP_ENABLED` and a UI toggle button; guard behind config flag.
+- [ ] Step 13: Add pane z-index layering — use react-leaflet `<Pane>` in `src/Map/Map.jsx` to explicitly assign GeoJSON polygons to a `polygons` pane (z-index 200) and markers to a `markers` pane (z-index 400).
+- [ ] Step 14: Add mobile bottom sheet sidebar — add responsive CSS in `src/GlobalStyles/Components/_sidebars.scss` for viewports below 768px to position the sidebar as a bottom drawer; add slide-up animation.
+- [ ] Step 15: Add fullscreen mode — install `leaflet.fullscreen`; add control to `src/Map/Map.jsx` behind `FULLSCREEN_ENABLED` flag; adapt sidebar CSS for fullscreen container bounds.
+- [ ] Step 16: Add minimap — install `leaflet-minimap`; mount inside `<MapContainer>` in `src/Map/Map.jsx` on desktop only (hide below 768px viewport); guard behind config flag.
+- [ ] Step 17: Add smooth wheel zoom — install `@luomus/leaflet-smooth-wheel-zoom`; integrate in `src/Map/Map.jsx` behind `SMOOTH_ZOOM_ENABLED` flag; disable default `scrollWheelZoom` when active.
+- [ ] Step 18: Add reduced motion support — add `@media (prefers-reduced-motion: reduce)` rules to `src/CustomMarker/CustomMarker.scss` and `src/GlobalStyles/Components/_sidebars.scss`; pass `animate: false` to Leaflet `setView`/`flyTo` calls when the media query matches; guard behind `REDUCED_MOTION_ENABLED` flag.
