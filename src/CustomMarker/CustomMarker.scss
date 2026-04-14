@@ -81,6 +81,7 @@
       transform: translateX(-50%) rotate(45deg);
       transform-origin: center;
       z-index: 1;
+      filter: brightness(var(--pin-brightness, 0.75));
     }
 
     .image-container {
@@ -136,6 +137,7 @@
 
   &__bg {
     border-radius: 50px;
+    filter: brightness(var(--pin-brightness, 0.75));
   }
 
   .bg-color {
