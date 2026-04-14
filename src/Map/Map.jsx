@@ -8,20 +8,20 @@ import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
+import { STORAGE_KEY_MAP_VIEW } from '../config';
 
-const MAP_VIEW_KEY = 'mapView';
 const DEFAULT_CENTER = [25, 0];
 const DEFAULT_ZOOM = 3;
 
 function saveMapView(center, zoom) {
   try {
-    localStorage.setItem(MAP_VIEW_KEY, JSON.stringify({ center, zoom }));
+    localStorage.setItem(STORAGE_KEY_MAP_VIEW, JSON.stringify({ center, zoom }));
   } catch (_) {}
 }
 
 function loadMapView() {
   try {
-    const raw = localStorage.getItem(MAP_VIEW_KEY);
+    const raw = localStorage.getItem(STORAGE_KEY_MAP_VIEW);
     if (!raw) return null;
     const { center, zoom } = JSON.parse(raw);
     const [lat, lng] = center;
