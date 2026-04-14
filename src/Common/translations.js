@@ -14,6 +14,7 @@ const translations = {
     appMetaTagDescription: "View on a real-time map the most popular YouTube channels in different categories and countries around the world",
     categoriesUnavailable: "Categories are not available right now. Please try again later.",
     mapDataUnavailable: "Map data is not available right now. Please try again later.",
+    retrying: "Retrying",
   },
   es: {
     statsFor: "Estadísticas para ",
@@ -30,6 +31,7 @@ const translations = {
     appMetaTagDescription: "Visualiza en un mapa en tiempo real los canales de YouTube más populares en diferentes categorías y países alrededor del mundo",
     categoriesUnavailable: "Las categorías no están disponibles en este momento. Por favor, inténtalo más tarde.",
     mapDataUnavailable: "Los datos del mapa no están disponibles en este momento. Por favor, inténtalo más tarde.",
+    retrying: "Reintentando",
   },
 };
 
