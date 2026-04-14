@@ -66,7 +66,8 @@ function setUpPointAttributes(point, minViews, maxViews) {
   const normalized = (hasRange && range > 0) ? (viewCount - minViews) / range : 1;
 
   // More views → more padding (thicker visible border ring) + more opaque + brighter ("shining").
-  const imagePadding = Math.round(1 + normalized * 7); // 1px (low) → 8px (high)
+  const curved = Math.pow(normalized, 0.5);             // square root curve — shifts midpoint up
+  const imagePadding = Math.round(1 + curved * 7);     // 1px (low) → 8px (high)
   const bgOpacity = 0.65 + normalized * 0.35;          // 0.65 (low) → 1.0 (high)
   const bgBrightness = 0.55 + normalized * 0.60;       // 0.55 (low) → 1.15 (high, slight shine)
 
