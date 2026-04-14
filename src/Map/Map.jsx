@@ -38,6 +38,35 @@ function Map({ category, toggleSidebar, setMapPoint }) {
     fetchData(category);
   }, [category]);
 
+  // Retry channel images that fail to load (YouTube CDN 429 rate limiting).
+  // Uses event delegation since marker images live inside Leaflet DivIcons (not React-managed).
+  useEffect(() => {
+    const handleError = (e) => {
+      if (e.target.tagName !== 'IMG' || !e.target.src.includes('ggpht.com')) return;
+      const img = e.target;
+      img.style.visibility = 'hidden';
+      const retryCount = parseInt(img.dataset.retry || '0');
+      if (retryCount < 3) {
+        const originalSrc = img.dataset.originalSrc || img.src.split('?retry=')[0];
+        img.dataset.originalSrc = originalSrc;
+        img.dataset.retry = String(retryCount + 1);
+        setTimeout(() => {
+          img.src = originalSrc + (originalSrc.includes('?') ? '&' : '?') + 'retry=' + Date.now();
+        }, 2000 * (retryCount + 1));
+      }
+    };
+    const handleLoad = (e) => {
+      if (e.target.tagName !== 'IMG' || !e.target.src.includes('ggpht.com')) return;
+      e.target.style.visibility = 'visible';
+    };
+    document.addEventListener('error', handleError, true);
+    document.addEventListener('load', handleLoad, true);
+    return () => {
+      document.removeEventListener('error', handleError, true);
+      document.removeEventListener('load', handleLoad, true);
+    };
+  }, []);
+
   // processPoint after a new data is fetched, to change their appearance.
   useEffect(() => {
     if (Object.keys(data).length === 0) return;
@@ -53,6 +82,9 @@ function Map({ category, toggleSidebar, setMapPoint }) {
     zoom: 3,
     minZoom: 1,
     maxZoom: 5,
+    zoomSnap: 0.5,
+    zoomDelta: 0.5,
+    wheelPxPerZoomLevel: 325,
     scrollWheelZoom: true,
     zoomControl: false,
     style: {
