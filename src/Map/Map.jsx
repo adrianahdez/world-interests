@@ -8,7 +8,7 @@ import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW } from '../config';
+import { STORAGE_KEY_MAP_VIEW, ZOOM_LOW, ZOOM_HIGH } from '../config';
 
 const DEFAULT_CENTER = [25, 0];
 const DEFAULT_ZOOM = 3;
@@ -47,7 +47,11 @@ function MapViewSaver() {
 
     const syncZoomClass = () => {
       if (!mapContainer) return;
-      mapContainer.classList.toggle('map--low-zoom', map.getZoom() < 3);
+      const zoom = map.getZoom();
+      // Shrink pins and hide flags at low zoom.
+      mapContainer.classList.toggle('map--low-zoom', zoom < ZOOM_LOW);
+      // At maximum zoom, reveal channel name + view count directly on pins (no hover needed).
+      mapContainer.classList.toggle('map--max-zoom', zoom >= ZOOM_HIGH);
     };
 
     const save = () => {

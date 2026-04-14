@@ -335,7 +335,7 @@ Each step in this spec is implemented on its own Git branch following this patte
 ## Implementation Plan
 
 - [x] Step 1: Create `src/config.js` — define all feature flags (`CLUSTERING_ENABLED`, `GESTURE_HANDLING_ENABLED`, `NO_DATA_INDICATOR_ENABLED`, `HEATMAP_ENABLED`, `FULLSCREEN_ENABLED`, `SMOOTH_ZOOM_ENABLED`, `REDUCED_MOTION_ENABLED`) and all localStorage key constants (`STORAGE_KEY_MAP_VIEW`, `STORAGE_KEY_LANG`, `STORAGE_KEY_THEME`, `STORAGE_KEY_DIALOG`, `STORAGE_KEY_CATEGORY`, `STORAGE_KEY_SIDEBAR`); update existing files that hardcode these keys to import from config.
-- [ ] Step 2: Implement zoom detail tiers — extend the `MapViewSaver`/zoom-class pattern in `src/Map/Map.jsx` and `src/CustomMarker/CustomMarker.scss` to add a `map--max-zoom` class at zoom 5 that reveals channel name and view count labels directly on markers without hover.
+- [x] Step 2: Implement zoom detail tiers — extend the `MapViewSaver`/zoom-class pattern in `src/Map/Map.jsx` and `src/CustomMarker/CustomMarker.scss` to add a `map--max-zoom` class at zoom 5 that reveals channel name and view count labels directly on markers without hover.
 - [ ] Step 3: Implement category persistence — read last category from `STORAGE_KEY_CATEGORY` in `src/App/App.jsx` on mount (validate against current category list); write on every category change.
 - [ ] Step 4: Implement sidebar state persistence — store the open country's `alpha2` key under `STORAGE_KEY_SIDEBAR` in `src/App/App.jsx`; restore on mount by waiting for data to load then reopening the sidebar for that country.
 - [ ] Step 5: Add loading spinner — show a non-blocking overlay in `src/Map/Map.jsx` while `data` is empty and no error has occurred; hide once data arrives or error shows.
