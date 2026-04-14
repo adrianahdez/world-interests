@@ -6,36 +6,18 @@ The data is obtained from the YouTube API, so you can see the most popular chann
 
 ### Categories:
 
-* Music
-* Gaming
-* Film & Animation
-* Autos & Vehicles
-* Pets & Animals
-* Sports
-* Short Movies
-* Travel & Events
-* Videoblogging
-* People & Blogs
-* Comedy
-* Entertainment
-* News & Politics
-* Howto & Style
-* Education
-* Science & Technology
-* Movies
-* Anime/Animation
-* Action/Adventure
-* Classics
-* Documentary
-* Drama
-* Family
-* Foreign
-* Horror
-* Sci-Fi/Fantasy
-* Thriller
-* Shorts
-* Shows
-* Trailers
+| | | |
+|---|---|---|
+| Music | Gaming | Film & Animation |
+| Autos & Vehicles | Pets & Animals | Sports |
+| Short Movies | Travel & Events | Videoblogging |
+| People & Blogs | Comedy | Entertainment |
+| News & Politics | Howto & Style | Education |
+| Science & Technology | Movies | Anime/Animation |
+| Action/Adventure | Classics | Documentary |
+| Drama | Family | Foreign |
+| Horror | Sci-Fi/Fantasy | Thriller |
+| Shorts | Shows | Trailers |
 
 # See it in action
 
