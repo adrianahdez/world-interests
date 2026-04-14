@@ -79,7 +79,7 @@ The goal is to resolve or suppress these issues at the application level in the 
 - [x] Step 1: Add `Permissions-Policy: web-share=self` to the webpack dev server — modify `devServer` in `webpack.config.js` to include a `headers` object with the policy.
 - [x] Step 2: Create `_headers` file in the project root with the `Permissions-Policy: web-share=self` rule for all routes (`/*`), following the same pattern as `_redirects`.
 - [x] Step 3: Add `_headers` to the `CopyWebpackPlugin` patterns in `webpack.config.js` so it is copied to `dist/` during both dev and production builds.
-- [ ] Step 4: Conditionally render `<Player>` in `InfoSidebar.jsx` — prepend `isSidebarOpen &&` to the existing Player conditional so the component mounts only when the sidebar is open and unmounts (triggering `player.destroy()`) when it closes.
+- [x] Step 4: Conditionally render `<Player>` in `InfoSidebar.jsx` — prepend `isSidebarOpen &&` to the existing Player conditional so the component mounts only when the sidebar is open and unmounts (triggering `player.destroy()`) when it closes.
 - [ ] Step 5: Manual verification — run `npm run dev`, open DevTools, click a pin, confirm `web-share` warning is gone; close the sidebar, reopen it, confirm no regression in video playback; confirm disconnected port errors are reduced or absent.
 
 ## Testing Guidelines
