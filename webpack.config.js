@@ -65,6 +65,7 @@ module.exports = (env, argv) => {
           { from: 'sitemap.xml', to: '' }, // Copy the sitemap.xml to the dist folder
           { from: 'screenshot.jpg', to: '' }, // Copy the screenshot.jpg to the dist folder
           { from: '_redirects', to: '' }, // Copy the redirects file to the dist folder
+          { from: '_headers', to: '' }, // Copy the headers file to the dist folder
         ],
       }),
     ],
