@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { STORAGE_KEY_DIALOG } from '../config';
+import { STORAGE_KEY_DIALOG, STORAGE_KEY_CATEGORY } from '../config';
 import Map from '../Map/Map';
 import Categories from '../Categories/Categories';
 import Footer from '../Footer/Footer';
@@ -8,16 +8,21 @@ import Head from '../Head/Head';
 // Header must be loaded after all components to load the theme rules at last and override others.
 import Header from '../Header/Header';
 
-// Helper function to get the category from the URL
-const getCategoryFromUrl = () => {
-  const params = new URLSearchParams(window.location.search);
-  return params.get('category') || 'music'; // Default to 'music' if not present
+// Returns the initial category using this priority: URL param > localStorage > 'music'.
+const getInitialCategory = () => {
+  const urlCategory = new URLSearchParams(window.location.search).get('category');
+  if (urlCategory) return urlCategory;
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY_CATEGORY);
+    if (stored) return stored;
+  } catch (_) {}
+  return 'music';
 };
 
 // Render App.
 export default function App() {
   // Set the initial category based on the URL or default to 'music' for the map to show when the app loads.
-  const [category, setCategory] = useState(getCategoryFromUrl());
+  const [category, setCategory] = useState(getInitialCategory);
   // Category dialog first state. Set to true to show the dialog when the app loads or false to hide it.
   const [isDialogOpen, setIsDialogOpen] = useState(() => setDefaultIsDialogOpen());
 
@@ -35,10 +40,13 @@ export default function App() {
     setIsSidebarOpen(open);
   }, []);
 
-  // Handle updating the category
+  // Handle updating the category — persist to localStorage and sync the URL.
   const handleUpdateCategory = (newCategory) => {
     setCategory(newCategory);
     updateUrlWithCategory(newCategory);
+    try {
+      localStorage.setItem(STORAGE_KEY_CATEGORY, newCategory);
+    } catch (_) {}
   };
 
   // Update the URL with the selected category
