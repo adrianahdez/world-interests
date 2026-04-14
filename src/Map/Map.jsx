@@ -8,7 +8,9 @@ import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED } from '../config';
+import { STORAGE_KEY_MAP_VIEW, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED } from '../config';
+import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css';
+import 'leaflet-gesture-handling';
 
 const DEFAULT_CENTER = [25, 0];
 const DEFAULT_ZOOM = 3;
@@ -239,7 +241,9 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
     zoomSnap: 0.5,
     zoomDelta: 0.5,
     wheelPxPerZoomLevel: 325,
-    scrollWheelZoom: true,
+    // When gesture handling is on, the plugin takes over scroll zoom — disable the default.
+    scrollWheelZoom: !GESTURE_HANDLING_ENABLED,
+    gestureHandling: GESTURE_HANDLING_ENABLED,
     zoomControl: false,
     style: {
       background: 'var(--page-bg)',
