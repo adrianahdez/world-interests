@@ -2,6 +2,15 @@
   filter: brightness(1.5);
 }
 
+/* Countries with no data for the current category (NO_DATA_INDICATOR_ENABLED) */
+.leaflet-container path.country--no-data {
+  filter: saturate(0.15) brightness(1.6);
+}
+
+.leaflet-container path.country--no-data:hover {
+  filter: saturate(0.15) brightness(1.8);
+}
+
 .map-loading-overlay {
   position: absolute;
   top: 50%;
