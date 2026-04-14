@@ -48,7 +48,9 @@ function MapViewSaver() {
     const syncZoomClass = () => {
       if (!mapContainer) return;
       const zoom = map.getZoom();
+      // Shrink pins and hide flags at low zoom.
       mapContainer.classList.toggle('map--low-zoom', zoom < ZOOM_LOW);
+      // At maximum zoom, reveal channel name + view count directly on pins (no hover needed).
       mapContainer.classList.toggle('map--max-zoom', zoom >= ZOOM_HIGH);
     };
 
