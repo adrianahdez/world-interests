@@ -147,21 +147,29 @@ function HoverCountryLabel({ labelRef }) {
 
 // Creates a native Leaflet MarkerClusterGroup, adds it to the map, and stores it in clusterGroupRef
 // so CustomMarker can add markers directly into it. Must render before the markers.
-function ClusterGroupSetup({ clusterGroupRef }) {
+function ClusterGroupSetup({ clusterGroupRef, processAllPointsRef }) {
   const map = useMap();
   useEffect(() => {
     const group = L.markerClusterGroup({
       chunkedLoading: true,
       disableClusteringAtZoom: 4,
       maxClusterRadius: 80,
+      spiderfyOnMaxZoom: false, // zoom to bounds instead of spreading pins with lines
     });
     map.addLayer(group);
     clusterGroupRef.current = group;
+
+    // After each cluster animation (zoom in/out), re-apply padding/opacity/colour
+    // because the cluster group re-creates marker DOM elements on every zoom change.
+    const onAnimationEnd = () => processAllPointsRef.current?.();
+    group.on('animationend', onAnimationEnd);
+
     return () => {
+      group.off('animationend', onAnimationEnd);
       map.removeLayer(group);
       clusterGroupRef.current = null;
     };
-  }, [map, clusterGroupRef]);
+  }, [map, clusterGroupRef, processAllPointsRef]);
   return null;
 }
 
@@ -173,6 +181,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   const [retryCount, setRetryCount] = useState(0); // current retry attempt (0 = first try, 1-3 = retrying)
   const hoverLabelRef = useRef(null); // ref to HoverCountryLabel DOM node — updated directly to avoid re-renders
   const clusterGroupRef = useRef(null); // ref to the native Leaflet MarkerClusterGroup layer
+  const processAllPointsRef = useRef(null); // ref to processPoint runner — called after cluster animation ends
   const prevDataRef = useRef({});
   // Tracks whether the sidebar restore has already fired, so it only runs once per session.
   const restoredRef = useRef(false);
@@ -278,6 +287,8 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   }, []);
 
   // processPoint after a new data is fetched, to change their appearance.
+  // Also keeps processAllPointsRef up to date so ClusterGroupSetup can re-run it after
+  // cluster animation ends (markers are re-created by the cluster group on zoom).
   useEffect(() => {
     if (Object.keys(data).length === 0) return;
 
@@ -287,11 +298,17 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
     const minViews = Math.min(...viewCounts);
     const maxViews = Math.max(...viewCounts);
 
-    Object.keys(data).map((alpha2) => {
-      const countryPoint = data[alpha2][0];
-      const latLon = getCountryLatLon(alpha2);
-      processPoint(countryPoint, latLon, minViews, maxViews);
-    });
+    const runProcessPoint = () => {
+      Object.keys(data).forEach((alpha2) => {
+        const countryPoint = data[alpha2][0];
+        const latLon = getCountryLatLon(alpha2);
+        processPoint(countryPoint, latLon, minViews, maxViews);
+      });
+    };
+
+    // Store so ClusterGroupSetup can call it on animationend.
+    processAllPointsRef.current = runProcessPoint;
+    runProcessPoint();
   }, [data]);
 
   // Restore the sidebar for the last open country after data loads (once per session).
@@ -398,7 +415,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
         <Countries data={data} category={category} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
 
         {/* ClusterGroupSetup must appear before the markers so its effect runs first. */}
-        {CLUSTERING_ENABLED && <ClusterGroupSetup clusterGroupRef={clusterGroupRef} />}
+        {CLUSTERING_ENABLED && <ClusterGroupSetup clusterGroupRef={clusterGroupRef} processAllPointsRef={processAllPointsRef} />}
         {renderMarkers()}
 
       </MapContainer>
