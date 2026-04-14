@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { STORAGE_KEY_DIALOG, STORAGE_KEY_CATEGORY } from '../config';
+import { STORAGE_KEY_DIALOG, STORAGE_KEY_CATEGORY, STORAGE_KEY_SIDEBAR } from '../config';
 import Map from '../Map/Map';
 import Categories from '../Categories/Categories';
 import Footer from '../Footer/Footer';
@@ -30,6 +30,11 @@ export default function App() {
   // InfoSidebar dialog state.
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  // Region name of the last open sidebar country, read on mount to restore it after reload.
+  const [restoreRegion] = useState(() => {
+    try { return localStorage.getItem(STORAGE_KEY_SIDEBAR) || null; } catch (_) { return null; }
+  });
+
   const toggleDialog = useCallback(() => {
     setIsDialogOpen((prev) => !prev);
     // Save the state in the local storage to remember the user's choice.
@@ -38,6 +43,18 @@ export default function App() {
 
   const toggleSidebar = useCallback((open = true) => {
     setIsSidebarOpen(open);
+    // Clear the stored region when the sidebar is explicitly closed.
+    if (!open) {
+      try { localStorage.removeItem(STORAGE_KEY_SIDEBAR); } catch (_) {}
+    }
+  }, []);
+
+  // Wraps setMapPoint to also persist the open country to localStorage.
+  const handleSetMapPoint = useCallback((point) => {
+    setMapPoint(point);
+    try {
+      if (point?.regionName) localStorage.setItem(STORAGE_KEY_SIDEBAR, point.regionName);
+    } catch (_) {}
   }, []);
 
   // Handle updating the category — persist to localStorage and sync the URL.
@@ -91,7 +108,8 @@ export default function App() {
       <Map
         category={category}
         toggleSidebar={toggleSidebar}
-        setMapPoint={setMapPoint}
+        setMapPoint={handleSetMapPoint}
+        restoreRegion={restoreRegion}
       />
       <Footer />
     </div>
