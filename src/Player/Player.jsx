@@ -1,16 +1,11 @@
 import React, { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 import './Player.scss';
 
-// Suppress YouTube's unfixable 'web-share' Permissions-Policy warning.
-// YouTube's www-widgetapi.js checks for a feature that Chrome 120+ removed
-// from its Permissions-Policy registry. This cannot be fixed at the app level.
-const _warn = console.warn.bind(console);
-console.warn = (...args) => {
-  if (typeof args[0] === 'string' && args[0].includes('web-share')) return;
-  _warn(...args);
-};
-
 // Render Player component
+// NOTE: On first pin click, Chrome logs "Unrecognized feature: 'web-share'" — this is a
+// browser-level warning from Chrome's Permissions-Policy parser when YouTube creates an iframe
+// with allow="web-share". It cannot be suppressed from JavaScript (it bypasses console.warn).
+// It appears once per session and does not affect functionality.
 const Player = forwardRef(({ idVideo }, ref) => {
   const playerRef = useRef(null);
   const playerInstance = useRef(null);
