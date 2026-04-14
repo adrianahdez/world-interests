@@ -2,99 +2,121 @@ let mapWidth = 0; // width of the map
 let mapHeight = 0; // height of the map
 let scaleFactor = 0; // scale factor for the map
 
-// Function to convert a character to hexadecimal value
-function convertToHex(v, index) {
-  v = v.toLowerCase().charCodeAt(0);
-  v = (parseInt(255 / 28 * (v - 48) / 5) + index * 50) % 256;
-  v = v.toString(16);
-  if (v.length == 1) v = '0' + v;
-  return v;
+// Curated palette of visually distinct colours for pin backgrounds.
+// Each channel name is hashed to a consistent index so the same name always gets the same colour.
+const COLOR_PALETTE = [
+  'e74c3c', // red
+  'e67e22', // orange
+  'f1c40f', // yellow
+  '2ecc71', // emerald
+  '1abc9c', // turquoise
+  '3498db', // blue
+  '9b59b6', // purple
+  'e91e63', // pink
+  '00bcd4', // cyan
+  'ff5722', // deep orange
+  '8bc34a', // lime green
+  '5c6bc0', // indigo
+  'f06292', // light pink
+  '26c6da', // light cyan
+  'ffa726', // amber
+  '66bb6a', // light green
+  'ab47bc', // medium purple
+  'ef5350', // light red
+  '42a5f5', // light blue
+  '26a69a', // teal
+];
+
+// Deterministic hash: maps a channel name to a consistent palette index.
+function nameToColorIndex(name) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = (hash * 31 + name.charCodeAt(i)) >>> 0;
+  }
+  return hash % COLOR_PALETTE.length;
+}
+
+// Convert a 6-char hex string to an rgba() CSS value with the given opacity.
+function hexToRgba(hex, opacity) {
+  const r = parseInt(hex.slice(0, 2), 16);
+  const g = parseInt(hex.slice(2, 4), 16);
+  const b = parseInt(hex.slice(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 }
 
 /**
- * Set up the point attributes based on the point statistics to change the appearance of the point on the map and give more relevance to the most important/popular points.
+ * Set up the point attributes based on channel name (colour) and viewCount stats (border + opacity).
+ *
+ * @param {Object} point
+ * @param {number} minViews  Minimum viewCount across all visible pins in the current dataset.
+ * @param {number} maxViews  Maximum viewCount across all visible pins in the current dataset.
  */
-function setUpPointAttributes(point, pointLatLon) {
-  // Set up variables
+function setUpPointAttributes(point, minViews, maxViews) {
   let name = point.channel.channelTitle;
-  let value = getRandomFloat(0, 20); // TODO: Get value based on point statistics in a logic way, instead of random
-  let score = getRandomFloat(-2, 2); // TODO: Get value based on point statistics in a logic way, instead of random
 
-  // Set up the point attributes
-  let attributes = null;
-  var size = 0.2 + value / 8; // Calculate size based on value
-  if (size > 1) size = 1;
-  var opa = 0.5 + value / 8; // Calculate opacity based on value
-  if (opa > 0.8) opa = 0.8;
-  var color = 'fff'; // Default color
+  // Pick a colour from the palette deterministically based on the full channel name.
+  // Same name always maps to the same colour; different names spread across the palette.
+  const bgColor = COLOR_PALETTE[nameToColorIndex(name)] || '5962a1';
 
-  // Determine text color based on score
-  if (score < 0 && score >= -1) color = 'd90';
-  else if (score < -1) color = 'a00';
-  else if (score > 0 && score <= 1) color = '78dd73';
-  else if (score > 1) color = '0d0';
+  // Normalize viewCount to 0–1 relative to the current dataset.
+  // Falls back to fully prominent (1) if min/max are not yet available or all pins are equal.
+  const viewCount = Number(point.statistics?.viewCount) || 0;
+  const hasRange = typeof minViews === 'number' && typeof maxViews === 'number';
+  const range = hasRange ? maxViews - minViews : 0;
+  const normalized = (hasRange && range > 0) ? (viewCount - minViews) / range : 1;
 
-  // Determine background color based on name value (first 3 characters) in order to give more relevance to the most important/popular points and the same channel name have the same color at the same time.
-  var bgColor = '#5962a1';
-  if (typeof name[0] !== 'undefined') bgColor = convertToHex(name[0], 0);
-  if (typeof name[1] !== 'undefined') bgColor += convertToHex(name[1], 1);
-  else bgColor += 'cc';
-  if (typeof name[2] !== 'undefined') bgColor += convertToHex(name[2], 2);
-  else bgColor += 'cc';
+  // More views → more padding (thicker visible border ring) + more opaque + brighter ("shining").
+  const imagePadding = Math.round(1 + normalized * 7); // 1px (low) → 8px (high)
+  const bgOpacity = 0.65 + normalized * 0.35;          // 0.65 (low) → 1.0 (high)
+  const bgBrightness = 0.55 + normalized * 0.60;       // 0.55 (low) → 1.15 (high, slight shine)
 
-  attributes = {
-    size: size,
-    opa: opa,
-    color: color,
-    bgColor: bgColor,
-  };
-
-  return attributes;
+  return { bgColor, bgOpacity, imagePadding, bgBrightness };
 }
 
 /**
  * Change the appearance of a point on the map
- * 
+ *
  * @param {Object} point
  * @param {Array} pointLatLon
+ * @param {number} minViews
+ * @param {number} maxViews
  */
-function changePointAppearance(point, pointLatLon) {
+function changePointAppearance(point, pointLatLon, minViews, maxViews) {
   if (typeof point === 'undefined') return;
 
-  let attrs = setUpPointAttributes(point, pointLatLon);
+  let attrs = setUpPointAttributes(point, minViews, maxViews);
 
   let markerPoint = document.querySelector('.custom-marker__point[data-region="' + point.regionName + '"]');
-  let bg = markerPoint.querySelectorAll('.bg-color');
-  let text = markerPoint.querySelector('.text-container');
-  // text.style.color = '#' + attrs.color;
-  for (let i = 0; i < bg.length; i++) {
-    bg[i].style.backgroundColor = '#' + attrs.bgColor;
-  }
-  // markerPoint.style.opacity = attrs.opa;
-}
+  if (!markerPoint) return;
 
-// TODO: Remove this function when integrate with data stats.
-function getRandomFloat(min, max) {
-  return Math.random() * (max - min) + min;
+  let bg = markerPoint.querySelectorAll('.bg-color');
+  for (let i = 0; i < bg.length; i++) {
+    bg[i].style.backgroundColor = hexToRgba(attrs.bgColor, attrs.bgOpacity);
+  }
+
+  markerPoint.style.padding = attrs.imagePadding + 'px';
+  markerPoint.style.setProperty('--pin-brightness', attrs.bgBrightness);
 }
 
 /**
  * Reload values based on window resize and set up the points appearance
- * 
- * @param {Object} point 
- * @param {Array} pointLatLon 
+ *
+ * @param {Object} point
+ * @param {Array} pointLatLon
+ * @param {number} minViews
+ * @param {number} maxViews
  */
-const resize = (point, pointLatLon) => {
+const resize = (point, pointLatLon, minViews, maxViews) => {
   mapWidth = document.getElementById('app').clientWidth; // Get map width
   mapHeight = document.getElementById('app').clientHeight; // Get map height
   if (mapWidth > mapHeight) scaleFactor = mapWidth / 360; // Set scale factor
   else scaleFactor = mapHeight / 360;
 
-  changePointAppearance(point, pointLatLon);
+  changePointAppearance(point, pointLatLon, minViews, maxViews);
 }
 
-export const processPoint = (point, pointLatLon) => {
+export const processPoint = (point, pointLatLon, minViews, maxViews) => {
   // Initial setup
-  resize(point, pointLatLon); // Call resize to set up the map
-  window.addEventListener('resize', resize(point, pointLatLon), { passive: true }); // Resize map on window resize
+  resize(point, pointLatLon, minViews, maxViews); // Call resize to set up the map
+  window.addEventListener('resize', () => resize(point, pointLatLon, minViews, maxViews), { passive: true }); // Resize map on window resize
 }
