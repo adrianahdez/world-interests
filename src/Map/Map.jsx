@@ -152,7 +152,7 @@ function ClusterGroupSetup({ clusterGroupRef, processAllPointsRef }) {
   useEffect(() => {
     const group = L.markerClusterGroup({
       chunkedLoading: true,
-      disableClusteringAtZoom: 4,
+      disableClusteringAtZoom: 3,
       maxClusterRadius: 80,
       spiderfyOnMaxZoom: false, // zoom to bounds instead of spreading pins with lines
     });
