@@ -10,7 +10,7 @@ export const GESTURE_HANDLING_ENABLED  = false;
 
 // Applies a desaturated / dashed polygon style to countries that have no data
 // for the currently selected category.
-export const NO_DATA_INDICATOR_ENABLED = false;
+export const NO_DATA_INDICATOR_ENABLED = true;
 
 // Toggleable color-gradient overlay that visualises regional trending intensity.
 export const HEATMAP_ENABLED           = false;
@@ -44,3 +44,6 @@ export const STORAGE_KEY_SIDEBAR  = 'sidebarCountry'; // alpha-2 code of last op
 export const ZOOM_VERY_LOW = 2; // below this: pins are at their smallest scale
 export const ZOOM_LOW      = 3; // below this: scale pins down, hide flags
 export const ZOOM_HIGH     = 5; // at this level: reveal channel name + view count directly on pins
+
+// Shows the name of the country currently hovered on the map, in a small label at the bottom-right.
+export const COUNTRY_HOVER_LABEL_ENABLED = true;

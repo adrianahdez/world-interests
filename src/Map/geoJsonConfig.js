@@ -1,40 +1,40 @@
-function getColor(d) {
-  return d > 1000 ? '#1d1a16' :
-    d > 500 ? '#292622' :
-      d > 200 ? '#24221e' :
-        d > 100 ? '#191611' :
-          d > 50 ? '#1d1718' :
-            d > 20 ? '#22241e' :
-              d > 10 ? '#191715' :
-                '#161519';
-}
+import { getAlpha2FromAlpha3 } from './Points/Data';
+import { NO_DATA_INDICATOR_ENABLED } from '../config';
 
-export function setConfig({ properties }) {
-  return {
-    weight: 1.3,
-    color: 'var(--country-delimiter-color)',
-    opacity: 1,
-    fillColor: 'var(--country-fill-color)',
-    // fillColor: getColor(properties.density),
-    fillOpacity: 1,
-    dashArray: '3',
-  };
+const BASE_STYLE = {
+  weight: 1.3,
+  color: 'var(--country-delimiter-color)',
+  opacity: 1,
+  fillColor: 'var(--country-fill-color)',
+  fillOpacity: 1,
+  dashArray: '3',
 };
 
-//Here we get access to the layer that was hovered through e.target
-// export function highlightFeature(e) {
-//   var layer = e.target;
+const NO_DATA_STYLE = {
+  weight: 1,
+  color: 'var(--country-delimiter-color)',
+  opacity: 0.5,
+  fillColor: 'var(--country-fill-color)',
+  fillOpacity: 1,
+  dashArray: '5 5',
+  className: 'country--no-data',
+};
 
-//   layer.setStyle({
-//       weight: 5,
-//       color: '#666',
-//       dashArray: '',
-//       fillOpacity: 0.7
-//   });
+/**
+ * Returns a Leaflet GeoJSON style function.
+ * When NO_DATA_INDICATOR_ENABLED is true and data is loaded, countries with
+ * no entry in the current category receive a desaturated/dashed style.
+ */
+export function makeStyleConfig(data) {
+  const hasLoadedData = Object.keys(data).length > 0;
 
-//   layer.bringToFront();
-// }
-
-// function resetHighlight(e) {
-//   geojson.resetStyle(e.target);
-// }
+  return function styleConfig(feature) {
+    if (NO_DATA_INDICATOR_ENABLED && hasLoadedData) {
+      const alpha2 = getAlpha2FromAlpha3(feature.id);
+      if (!alpha2 || !data[alpha2]) {
+        return NO_DATA_STYLE;
+      }
+    }
+    return BASE_STYLE;
+  };
+}

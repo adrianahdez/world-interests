@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, memo, useContext } from 'react';
+import React, { useState, useEffect, useRef, useCallback, memo, useContext } from 'react';
 import { MapContainer, useMap } from 'react-leaflet'
 import CustomMarker from '../CustomMarker/CustomMarker';
 import { getCountryLatLon, getData, getFlagFromAlpha2 } from './Points/Data';
@@ -8,7 +8,7 @@ import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED } from '../config';
+import { STORAGE_KEY_MAP_VIEW, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED } from '../config';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css';
 import 'leaflet-gesture-handling';
 
@@ -117,11 +117,37 @@ function ZoomDebugLabel() {
   );
 }
 
+// Shows the name of the country currently hovered on the map polygon layer.
+// Updated via a DOM ref to avoid re-rendering Map (and its markers) on every hover event.
+// Sits above ZoomDebugLabel. Enabled/disabled by COUNTRY_HOVER_LABEL_ENABLED in src/config.js.
+function HoverCountryLabel({ labelRef }) {
+  return (
+    <div
+      ref={labelRef}
+      style={{
+        display: 'none',
+        position: 'absolute',
+        bottom: '38px',
+        right: '12px',
+        zIndex: 1000,
+        background: 'rgba(0,0,0,0.55)',
+        color: '#fff',
+        fontSize: '11px',
+        fontFamily: 'monospace',
+        padding: '3px 7px',
+        borderRadius: '4px',
+        pointerEvents: 'none',
+      }}
+    />
+  );
+}
+
 function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   const { isEs } = useContext(LanguageContext);
   const [data, setData] = useState({});
   const [mapError, setMapError] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // true until first data fetch resolves
+  const hoverLabelRef = useRef(null); // ref to HoverCountryLabel DOM node — updated directly to avoid re-renders
   const prevDataRef = useRef({});
   // Tracks whether the sidebar restore has already fired, so it only runs once per session.
   const restoredRef = useRef(false);
@@ -231,6 +257,18 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
     toggleSidebar(true);
   }, [data, restoreRegion, setMapPoint, toggleSidebar]);
 
+  // Updates the hover label DOM node directly — avoids re-rendering Map and its markers.
+  const handleCountryHover = useCallback((name) => {
+    const el = hoverLabelRef.current;
+    if (!el) return;
+    if (name) {
+      el.textContent = name;
+      el.style.display = 'block';
+    } else {
+      el.style.display = 'none';
+    }
+  }, []);
+
   const savedView = loadMapView();
 
   const mapConfig = {
@@ -269,8 +307,9 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
       <MapContainer {...mapConfig}>
         <MapViewSaver />
         {DEBUG_ZOOM_LEVEL_ENABLED && <ZoomDebugLabel />}
+        {COUNTRY_HOVER_LABEL_ENABLED && <HoverCountryLabel labelRef={hoverLabelRef} />}
         {/* This has the GeoJSON component. */}
-        <Countries data={data} category={category} />
+        <Countries data={data} category={category} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
 
         {Object.keys(data).map((alpha2) => {
           const countryData = data[alpha2]?.[0];

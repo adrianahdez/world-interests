@@ -3,15 +3,19 @@ import countries from './countries.geo.json';
 import React, { useRef } from 'react';
 import { GeoJSON, useMap } from 'react-leaflet';
 import { getCountryLatLon, getAlpha2FromAlpha3 } from '../Points/Data';
-import { setConfig } from '../geoJsonConfig';
+import { makeStyleConfig } from '../geoJsonConfig';
 
-const Countries = ({ data, category }) => {
+const Countries = ({ data, category, onCountryHover = null }) => {
   const map = useMap();
   const dataRef = useRef(data);
 
   React.useEffect(() => {
     dataRef.current = data;
   }, [data]);
+
+  // Recompute style function when data changes.
+  // Using useMemo so it's only recalculated when data reference changes.
+  const styleFunc = React.useMemo(() => makeStyleConfig(data), [data]);
 
   const handleCountryClick = (event, countryName, alpha2) => {
     const latLon = getCountryLatLon(alpha2);
@@ -36,7 +40,9 @@ const Countries = ({ data, category }) => {
 
     if (countryName && alpha2) {
       layer.on({
-        click: (event) => handleCountryClick(event, countryName, alpha2)
+        click: (event) => handleCountryClick(event, countryName, alpha2),
+        mouseover: () => onCountryHover?.(countryName),
+        mouseout: () => onCountryHover?.(null),
       });
     } else {
       layer.on({
@@ -45,8 +51,12 @@ const Countries = ({ data, category }) => {
     }
   };
 
+  // key forces GeoJSON to remount (and re-apply styles) when the category
+  // changes or when data loads for the first time (0 → N keys).
+  const geoJsonKey = `${category}_${Object.keys(data).length > 0 ? 'loaded' : 'empty'}`;
+
   return (
-    <GeoJSON data={countries} style={setConfig} onEachFeature={onEachCountry} />
+    <GeoJSON key={geoJsonKey} data={countries} style={styleFunc} onEachFeature={onEachCountry} />
   );
 };
 
