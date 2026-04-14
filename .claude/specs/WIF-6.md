@@ -133,7 +133,7 @@ No tests are configured in this project (see CLAUDE.md). Manual verification:
 ## Implementation Plan
 
 - [x] Step 1: Remove dead random code from `src/Map/Points/Points.js` — delete `value`, `score`, `size`, `opa`, `color`, `getRandomFloat`, and all commented-out lines that reference them; leave `bgColor` logic and `changePointAppearance` skeleton intact.
-- [ ] Step 2: Implement stat-based `setUpPointAttributes` in `src/Map/Points/Points.js` — accept `viewCount`, `minViews`, `maxViews`; compute normalized 0–1 value (guard division by zero); return `padding` (1–8px) and `bgOpacity` (0.35–1.0); update `changePointAppearance` to apply padding on `.image-container` and rgba background on `.bg-color` elements.
+- [x] Step 2: Implement stat-based `setUpPointAttributes` in `src/Map/Points/Points.js` — accept `viewCount`, `minViews`, `maxViews`; compute normalized 0–1 value (guard division by zero); return `padding` (1–8px) and `bgOpacity` (0.35–1.0); update `changePointAppearance` to apply padding on `.image-container` and rgba background on `.bg-color` elements.
 - [ ] Step 3: Thread normalization data through `src/Map/Map.jsx` — compute `minViews`/`maxViews` from `data` before the `processPoint` loop; pass them into `processPoint` (and down to `setUpPointAttributes`).
 - [ ] Step 4: Wire sidebar into country clicks in `src/Map/Countries/Countries.jsx` — add `toggleSidebar` and `setMapPoint` props; call `setMapPoint(countryData[0])` then `toggleSidebar(true)` inside `handleCountryClick` after the existing `map.setView` call.
 - [ ] Step 5: Pass `toggleSidebar` and `setMapPoint` from `src/Map/Map.jsx` into `<Countries>`.
