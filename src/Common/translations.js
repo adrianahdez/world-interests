@@ -26,23 +26,6 @@ const translations = {
     flagsLabel: "Flags",
     footerLabel: "Footer",
     settingsLabel: "Map settings",
-    // Category display names keyed by slug — used as frontend translations because the
-    // backend API currently returns English names for all languages.
-    categoryNames: {
-      'film-animation':      'Film & Animation',
-      'autos-vehicles':      'Autos & Vehicles',
-      'music':               'Music',
-      'pets-animals':        'Pets & Animals',
-      'sports':              'Sports',
-      'gaming':              'Gaming',
-      'people-blogs':        'People & Blogs',
-      'comedy':              'Comedy',
-      'entertainment':       'Entertainment',
-      'news-politics':       'News & Politics',
-      'howto-style':         'Howto & Style',
-      'science-technology':  'Science & Technology',
-      'nonprofits-activism': 'Nonprofits & Activism',
-    },
   },
   es: {
     statsFor: "Estadísticas para ",
@@ -71,22 +54,6 @@ const translations = {
     flagsLabel: "Banderas",
     footerLabel: "Pie de página",
     settingsLabel: "Ajustes del mapa",
-    // Traducciones en español de los nombres de categoría — el backend devuelve solo inglés.
-    categoryNames: {
-      'film-animation':      'Cine y animación',
-      'autos-vehicles':      'Autos y vehículos',
-      'music':               'Música',
-      'pets-animals':        'Mascotas y animales',
-      'sports':              'Deportes',
-      'gaming':              'Videojuegos',
-      'people-blogs':        'Personas y blogs',
-      'comedy':              'Comedia',
-      'entertainment':       'Entretenimiento',
-      'news-politics':       'Noticias y política',
-      'howto-style':         'Consejos y estilo',
-      'science-technology':  'Ciencia y tecnología',
-      'nonprofits-activism': 'Sin fines de lucro y activismo',
-    },
   },
 };
 
