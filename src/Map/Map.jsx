@@ -476,6 +476,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
         {COUNTRY_HOVER_LABEL_ENABLED && <HoverCountryLabel labelRef={hoverLabelRef} />}
         {/* country-polygons pane sits at z-index 200, below the marker pane at 400. */}
         <Pane name="country-polygons" style={{ zIndex: 200 }}>
+          {/* This has the GeoJSON component. */}
           <Countries data={data} category={category} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
         </Pane>
 
