@@ -23,6 +23,8 @@ const getInitialCategory = () => {
 export default function App() {
   // Set the initial category based on the URL or default to 'music' for the map to show when the app loads.
   const [category, setCategory] = useState(getInitialCategory);
+  // Display name for the active category — resolved by Categories once its list loads.
+  const [categoryName, setCategoryName] = useState('');
   // Category dialog first state. Set to true to show the dialog when the app loads or false to hide it.
   const [isDialogOpen, setIsDialogOpen] = useState(() => setDefaultIsDialogOpen());
 
@@ -98,12 +100,13 @@ export default function App() {
         isDialogOpen={isDialogOpen}
         toggleDialog={toggleDialog}
         toggleSidebar={toggleSidebar}
+        onCategoryNameChange={setCategoryName}
       />
       <InfoSidebar
         mapPoint={mapPoint}
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
-        category={category}
+        categoryName={categoryName}
       />
       <Map
         category={category}
