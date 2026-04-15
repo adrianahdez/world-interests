@@ -63,7 +63,7 @@ function HeatmapLayer({ data, visible }) {
       return [latLon[0], latLon[1], intensity];
     }).filter(Boolean);
 
-    console.log('[WorldInterests] HeatmapLayer: building with', points.length, 'points');
+    // console.log('[WorldInterests] HeatmapLayer: building with', points.length, 'points');
 
     // setLatLngs replaces the point set and calls redraw() internally,
     // so the canvas is updated in-place without a remove/re-add cycle.

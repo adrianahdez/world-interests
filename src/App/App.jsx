@@ -31,6 +31,9 @@ export default function App() {
   const [isDialogOpen, setIsDialogOpen] = useState(() => setDefaultIsDialogOpen());
 
   const [mapPoint, setMapPoint] = useState(null);
+  // Tracks which country polygon is highlighted. Kept separate from mapPoint so
+  // a polygon click can highlight without opening the sidebar (pin clicks sync both).
+  const [selectedAlpha2, setSelectedAlpha2] = useState(null);
   // Footer visibility — persisted in localStorage. When hidden, --footer-height is set to 0px
   // synchronously to avoid a layout flash. When visible, the ResizeObserver in Footer.jsx owns
   // the value so it stays accurate as the footer grows/shrinks at different viewport widths.
@@ -79,16 +82,19 @@ export default function App() {
 
   const toggleSidebar = useCallback((open = true) => {
     setIsSidebarOpen(open);
-    // Clear the stored region when the sidebar is explicitly closed.
+    // Clear the stored region and polygon highlight when the sidebar is explicitly closed.
     if (!open) {
+      setSelectedAlpha2(null);
       try { localStorage.removeItem(STORAGE_KEY_SIDEBAR); }
       catch (e) { console.warn('[WorldInterests] Could not clear sidebar state:', e.message); }
     }
   }, []);
 
-  // Wraps setMapPoint to also persist the open country to localStorage.
+  // Wraps setMapPoint to also persist the open country to localStorage and sync
+  // the polygon highlight (selectedAlpha2) so pin clicks highlight the country too.
   const handleSetMapPoint = useCallback((point) => {
     setMapPoint(point);
+    setSelectedAlpha2(point?.alpha2 ?? null);
     try {
       if (point?.regionName) localStorage.setItem(STORAGE_KEY_SIDEBAR, point.regionName);
     } catch (e) {
@@ -122,7 +128,7 @@ export default function App() {
   }
 
   return (
-    <MapPointContext.Provider value={{ mapPoint, setMapPoint: handleSetMapPoint }}>
+    <MapPointContext.Provider value={{ mapPoint, setMapPoint: handleSetMapPoint, selectedAlpha2, setSelectedAlpha2 }}>
       <SidebarContext.Provider value={{ isSidebarOpen, toggleSidebar }}>
         <div className='app-container'>
           <Head />

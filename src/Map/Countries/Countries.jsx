@@ -17,9 +17,7 @@ const Countries = ({ data, onCountryHover = null }) => {
   // Holds the mounted Leaflet GeoJSON layer so we can call setStyle() instead of remounting.
   const geoJsonLayerRef = useRef(null);
 
-  const { mapPoint } = useContext(MapPointContext);
-  // Derived from the globally selected map point; null when no country is selected.
-  const selectedAlpha2 = mapPoint?.alpha2 ?? null;
+  const { selectedAlpha2, setSelectedAlpha2 } = useContext(MapPointContext);
 
   useEffect(() => {
     dataRef.current = data;
@@ -31,42 +29,52 @@ const Countries = ({ data, onCountryHover = null }) => {
 
   // Apply updated styles to the existing layer instead of remounting via key.
   // Remounting forces Leaflet to re-process the entire GeoJSON geometry on every
-  // category switch — setStyle() only updates fill/stroke properties.
+  // category switch. setStyle() only updates fill/stroke — className is NOT propagated
+  // to existing paths, so we update classList manually after each setStyle() call.
   useEffect(() => {
-    if (geoJsonLayerRef.current) {
-      geoJsonLayerRef.current.setStyle(styleFunc);
-    }
+    const layer = geoJsonLayerRef.current;
+    if (!layer) return;
+    layer.eachLayer((subLayer) => {
+      const style = styleFunc(subLayer.feature);
+      subLayer.setStyle(style);
+      if (subLayer._path) {
+        subLayer._path.classList.toggle('country--no-data', style.className === 'country--no-data');
+        subLayer._path.classList.remove('country--selected');
+      }
+    });
   }, [styleFunc]);
 
   // Highlight the selected country polygon; reset all others to their base style.
   // Runs after the style reset above (declared later = runs later in same render).
+  // className is not propagated by setStyle(), so classList is updated manually.
   useEffect(() => {
     const layer = geoJsonLayerRef.current;
     if (!layer) return;
     layer.eachLayer((subLayer) => {
       const alpha2 = getAlpha2FromAlpha3(subLayer.feature?.id);
-      if (alpha2 && alpha2 === selectedAlpha2) {
+      const isSelected = alpha2 && alpha2 === selectedAlpha2;
+      if (isSelected) {
         subLayer.setStyle(SELECTED_STYLE);
+        subLayer._path?.classList.add('country--selected');
+        subLayer._path?.classList.remove('country--no-data');
       } else {
-        subLayer.setStyle(styleFunc(subLayer.feature));
+        const style = styleFunc(subLayer.feature);
+        subLayer.setStyle(style);
+        if (subLayer._path) {
+          subLayer._path.classList.toggle('country--no-data', style.className === 'country--no-data');
+          subLayer._path.classList.remove('country--selected');
+        }
       }
     });
   }, [selectedAlpha2, styleFunc]);
 
   const handleCountryClick = (event, countryName, alpha2) => {
     const latLon = getCountryLatLon(alpha2);
-    if (!latLon) {
-      console.error('No se pudo obtener latLon para alpha2:', alpha2);
-      return;
-    }
-    const countryData = dataRef.current[alpha2];
-    if (!countryData) {
-      console.log('No data for:', countryName);
-      return;
-    }
+    if (!latLon) return;
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     map.setView(latLon, map.getZoom(), { animate: !prefersReduced });
+    setSelectedAlpha2(alpha2);
     // TODO: Add code to show the sidebar with the country data
   };
 
