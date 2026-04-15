@@ -33,55 +33,51 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
       {open && (
         <div className="map-settings__panel" role="menu">
           <p className="map-settings__title">{tr.settingsLabel}</p>
-          <div className="map-settings__item" role="menuitem">
+          <label className="map-settings__item" role="menuitem">
             <span className="map-settings__item-label">{tr.clusteringLabel}</span>
-            <label className="map-settings__toggle" aria-label={tr.clusteringLabel}>
+            <span className="map-settings__toggle">
               <input type="checkbox" checked={clusteringEnabled} onChange={onClusteringToggle} />
               <span className="map-settings__toggle-track">
                 <span className="map-settings__toggle-thumb" />
               </span>
-            </label>
-          </div>
-          <div className="map-settings__item" role="menuitem">
+            </span>
+          </label>
+          <label className="map-settings__item" role="menuitem">
             <span className="map-settings__item-label">{tr.fullscreenLabel}</span>
-            <label className="map-settings__toggle" aria-label={tr.fullscreenLabel}>
+            <span className="map-settings__toggle">
               <input type="checkbox" checked={fullscreenEnabled} onChange={onFullscreenToggle} />
               <span className="map-settings__toggle-track">
                 <span className="map-settings__toggle-thumb" />
               </span>
-            </label>
-          </div>
-          <div className="map-settings__item" role="menuitem">
+            </span>
+          </label>
+          <label className="map-settings__item" role="menuitem">
             <span className="map-settings__item-label">{tr.flagsLabel}</span>
-            <label className="map-settings__toggle" aria-label={tr.flagsLabel}>
+            <span className="map-settings__toggle">
               <input type="checkbox" checked={flagsVisible} onChange={onFlagsToggle} />
               <span className="map-settings__toggle-track">
                 <span className="map-settings__toggle-thumb" />
               </span>
-            </label>
-          </div>
-          <div className="map-settings__item" role="menuitem">
+            </span>
+          </label>
+          <label className="map-settings__item" role="menuitem">
             <span className="map-settings__item-label">{tr.footerLabel}</span>
-            <label className="map-settings__toggle" aria-label={tr.footerLabel}>
+            <span className="map-settings__toggle">
               <input type="checkbox" checked={footerVisible} onChange={onFooterToggle} />
               <span className="map-settings__toggle-track">
                 <span className="map-settings__toggle-thumb" />
               </span>
-            </label>
-          </div>
-          <div className="map-settings__item" role="menuitem">
+            </span>
+          </label>
+          <label className="map-settings__item" role="menuitem">
             <span className="map-settings__item-label">{tr.heatmapLabel}</span>
-            <label className="map-settings__toggle" aria-label={tr.heatmapLabel}>
-              <input
-                type="checkbox"
-                checked={heatmapVisible}
-                onChange={onHeatmapToggle}
-              />
+            <span className="map-settings__toggle">
+              <input type="checkbox" checked={heatmapVisible} onChange={onHeatmapToggle} />
               <span className="map-settings__toggle-track">
                 <span className="map-settings__toggle-thumb" />
               </span>
-            </label>
-          </div>
+            </span>
+          </label>
         </div>
       )}
       <button
