@@ -1,3 +1,5 @@
+import { PIN_PADDING_MIN, PIN_PADDING_RANGE, PIN_OPACITY_MIN, PIN_OPACITY_RANGE, PIN_BRIGHTNESS_MIN, PIN_BRIGHTNESS_RANGE } from '../../config';
+
 // Curated palette of visually distinct colours for pin backgrounds.
 // Each channel name is hashed to a consistent index so the same name always gets the same colour.
 const COLOR_PALETTE = [
@@ -63,10 +65,10 @@ export function calculatePointAttributes(point, minViews, maxViews) {
   const normalized = (hasRange && range > 0) ? (viewCount - minViews) / range : 1;
 
   // More views → more padding (thicker visible border ring) + more opaque + brighter ("shining").
-  const curved = Math.pow(normalized, 0.5);         // square root curve — shifts midpoint up toward higher values
-  const imagePadding = Math.round(1 + curved * 7); // 1px (low) → 8px (high)
-  const bgOpacity = 0.75 + curved * 0.25;          // 0.75 (low) → 1.0 (high) — floor high enough for readable text
-  const bgBrightness = 0.55 + normalized * 0.60;   // 0.55 (low) → 1.15 (high, slight shine)
+  const curved = Math.pow(normalized, 0.5);                                   // square root curve — shifts midpoint up toward higher values
+  const imagePadding = Math.round(PIN_PADDING_MIN + curved * PIN_PADDING_RANGE);   // 1px (low) → 8px (high)
+  const bgOpacity = PIN_OPACITY_MIN + curved * PIN_OPACITY_RANGE;               // 0.75 (low) → 1.0 (high) — floor high enough for readable text
+  const bgBrightness = PIN_BRIGHTNESS_MIN + normalized * PIN_BRIGHTNESS_RANGE;  // 0.55 (low) → 1.15 (high, slight shine)
 
   return { bgColor, bgOpacity, imagePadding, bgBrightness };
 }

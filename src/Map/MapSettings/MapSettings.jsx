@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import './MapSettings.scss';
 
 // Floating settings panel anchored to the bottom-left of the map.
@@ -92,5 +93,19 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
     </div>
   );
 }
+
+MapSettings.propTypes = {
+  heatmapVisible: PropTypes.bool.isRequired,
+  onHeatmapToggle: PropTypes.func.isRequired,
+  clusteringEnabled: PropTypes.bool.isRequired,
+  onClusteringToggle: PropTypes.func.isRequired,
+  fullscreenEnabled: PropTypes.bool.isRequired,
+  onFullscreenToggle: PropTypes.func.isRequired,
+  flagsVisible: PropTypes.bool.isRequired,
+  onFlagsToggle: PropTypes.func.isRequired,
+  footerVisible: PropTypes.bool.isRequired,
+  onFooterToggle: PropTypes.func.isRequired,
+  tr: PropTypes.object.isRequired,
+};
 
 export default MapSettings;

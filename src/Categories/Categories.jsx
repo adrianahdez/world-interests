@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, useContext, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import './Categories.scss';
 import { LanguageContext } from '../Common/LanguageContext';
 import { SidebarContext } from '../Common/SidebarContext';
@@ -175,3 +176,11 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
     </dialog>
   );
 }
+
+Categories.propTypes = {
+  category: PropTypes.string.isRequired,
+  setCategory: PropTypes.func.isRequired,
+  isDialogOpen: PropTypes.bool.isRequired,
+  toggleDialog: PropTypes.func.isRequired,
+  onCategoryNameChange: PropTypes.func,
+};

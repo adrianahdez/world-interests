@@ -1,6 +1,7 @@
 // ./countries-and-us-states.geo.json is a file that contains the coordinates of the countries and US states. Not used at the moment.
 import countries from './countries.geo.json';
 import React, { useRef, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { GeoJSON, useMap } from 'react-leaflet';
 import { getCountryLatLon, getAlpha2FromAlpha3 } from '../Points/Data';
 import { makeStyleConfig } from '../geoJsonConfig';
@@ -95,6 +96,11 @@ const Countries = ({ data, onCountryHover = null }) => {
       onEachFeature={onEachCountry}
     />
   );
+};
+
+Countries.propTypes = {
+  data: PropTypes.object.isRequired,
+  onCountryHover: PropTypes.func,
 };
 
 export default Countries;

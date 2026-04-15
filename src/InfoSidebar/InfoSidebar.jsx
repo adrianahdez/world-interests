@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useContext } from 'react';
+import PropTypes from 'prop-types';
 import './InfoSidebar.scss';
 import Player from '../Player/Player';
 import { LanguageContext } from '../Common/LanguageContext';
@@ -120,3 +121,7 @@ export default function InfoSidebar({ categoryName }) {
     </dialog >
   );
 }
+
+InfoSidebar.propTypes = {
+  categoryName: PropTypes.string,
+};

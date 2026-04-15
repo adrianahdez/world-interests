@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo, memo, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { MapContainer, useMap, Pane } from 'react-leaflet'
 import CustomMarker from '../CustomMarker/CustomMarker';
 import { getCountryLatLon, getFlagFromAlpha2 } from './Points/Data';
@@ -444,6 +445,13 @@ function Map({ category, restoreRegion, footerVisible, onFooterToggle }) {
     </div>
   )
 }
+
+Map.propTypes = {
+  category: PropTypes.string.isRequired,
+  restoreRegion: PropTypes.string,
+  footerVisible: PropTypes.bool.isRequired,
+  onFooterToggle: PropTypes.func.isRequired,
+};
 
 export default memo(Map);
 

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { useMap } from 'react-leaflet';
 import { heatLayer } from '@linkurious/leaflet-heat';
 import { getCountryLatLon } from './Points/Data';
@@ -49,5 +50,10 @@ function HeatmapLayer({ data, visible }) {
 
   return null;
 }
+
+HeatmapLayer.propTypes = {
+  data: PropTypes.object.isRequired,
+  visible: PropTypes.bool.isRequired,
+};
 
 export default HeatmapLayer;
