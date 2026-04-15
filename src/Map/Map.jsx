@@ -8,7 +8,7 @@ import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, STORAGE_KEY_FULLSCREEN, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, HEATMAP_ENABLED, FULLSCREEN_ENABLED } from '../config';
+import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, HEATMAP_ENABLED, FULLSCREEN_ENABLED } from '../config';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css';
 import 'leaflet-gesture-handling';
 import L from 'leaflet';
@@ -167,12 +167,10 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
       return v !== null ? v === 'true' : CLUSTERING_ENABLED;
     } catch (_) { return CLUSTERING_ENABLED; }
   });
-  const [fullscreenEnabled, setFullscreenEnabled] = useState(() => {
-    try {
-      const v = localStorage.getItem(STORAGE_KEY_FULLSCREEN);
-      return v !== null ? v === 'true' : FULLSCREEN_ENABLED;
-    } catch (_) { return FULLSCREEN_ENABLED; }
-  });
+  // Fullscreen is intentionally NOT persisted — the browser blocks auto-entering fullscreen
+  // on page load, which would leave the toggle stuck in the ON state without actually being
+  // in fullscreen. Always start from the config default each session.
+  const [fullscreenEnabled, setFullscreenEnabled] = useState(FULLSCREEN_ENABLED);
   const [mapError, setMapError] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // true until first data fetch resolves
   const [retryCount, setRetryCount] = useState(0); // current retry attempt (0 = first try, 1-3 = retrying)
@@ -328,9 +326,6 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   useEffect(() => {
     try { localStorage.setItem(STORAGE_KEY_CLUSTERING, String(clusteringEnabled)); } catch (_) {}
   }, [clusteringEnabled]);
-  useEffect(() => {
-    try { localStorage.setItem(STORAGE_KEY_FULLSCREEN, String(fullscreenEnabled)); } catch (_) {}
-  }, [fullscreenEnabled]);
 
   // Re-apply processPoint styling after clustering toggle — markers are recreated when the
   // cluster group is added/removed, so DOM-level styles need to be reapplied.

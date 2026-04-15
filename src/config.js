@@ -40,7 +40,6 @@ export const STORAGE_KEY_CATEGORY = 'category';      // last selected category s
 export const STORAGE_KEY_SIDEBAR  = 'sidebarCountry'; // alpha-2 code of last open country sidebar
 export const STORAGE_KEY_HEATMAP      = 'heatmapVisible';    // whether the heatmap overlay is on (true/false)
 export const STORAGE_KEY_CLUSTERING   = 'clusteringEnabled'; // whether marker clustering is on (true/false)
-export const STORAGE_KEY_FULLSCREEN   = 'fullscreenEnabled'; // whether the map is in fullscreen (true/false)
 
 // ─── Zoom Thresholds ─────────────────────────────────────────────────────────
 
