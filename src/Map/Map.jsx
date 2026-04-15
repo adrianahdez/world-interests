@@ -8,7 +8,7 @@ import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, HEATMAP_ENABLED } from '../config';
+import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, HEATMAP_ENABLED, FULLSCREEN_ENABLED } from '../config';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css';
 import 'leaflet-gesture-handling';
 import L from 'leaflet';
@@ -156,8 +156,21 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   const { isEs } = useContext(LanguageContext);
   const [data, setData] = useState({});
   const [heatmapVisible, setHeatmapVisible] = useState(() => {
-    try { return localStorage.getItem(STORAGE_KEY_HEATMAP) === 'true'; } catch (_) { return false; }
+    try {
+      const v = localStorage.getItem(STORAGE_KEY_HEATMAP);
+      return v !== null ? v === 'true' : HEATMAP_ENABLED;
+    } catch (_) { return HEATMAP_ENABLED; }
   });
+  const [clusteringEnabled, setClusteringEnabled] = useState(() => {
+    try {
+      const v = localStorage.getItem(STORAGE_KEY_CLUSTERING);
+      return v !== null ? v === 'true' : CLUSTERING_ENABLED;
+    } catch (_) { return CLUSTERING_ENABLED; }
+  });
+  // Fullscreen is intentionally NOT persisted — the browser blocks auto-entering fullscreen
+  // on page load, which would leave the toggle stuck in the ON state without actually being
+  // in fullscreen. Always start from the config default each session.
+  const [fullscreenEnabled, setFullscreenEnabled] = useState(FULLSCREEN_ENABLED);
   const [mapError, setMapError] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // true until first data fetch resolves
   const [retryCount, setRetryCount] = useState(0); // current retry attempt (0 = first try, 1-3 = retrying)
@@ -306,10 +319,42 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
     toggleSidebar(true);
   }, [data, restoreRegion, setMapPoint, toggleSidebar]);
 
-  // Persist heatmap visibility to localStorage so it survives page reloads.
+  // Persist settings to localStorage so they survive page reloads.
   useEffect(() => {
     try { localStorage.setItem(STORAGE_KEY_HEATMAP, String(heatmapVisible)); } catch (_) {}
   }, [heatmapVisible]);
+  useEffect(() => {
+    try { localStorage.setItem(STORAGE_KEY_CLUSTERING, String(clusteringEnabled)); } catch (_) {}
+  }, [clusteringEnabled]);
+
+  // Re-apply processPoint styling after clustering toggle — markers are recreated when the
+  // cluster group is added/removed, so DOM-level styles need to be reapplied.
+  useEffect(() => {
+    const t = setTimeout(() => processAllPointsRef.current?.(), 50);
+    return () => clearTimeout(t);
+  }, [clusteringEnabled]);
+
+  // Sync fullscreen state when the user exits via the Escape key or browser UI.
+  useEffect(() => {
+    const onFullscreenChange = () => {
+      if (!document.fullscreenElement) setFullscreenEnabled(false);
+    };
+    document.addEventListener('fullscreenchange', onFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', onFullscreenChange);
+  }, []);
+
+  // Enter/exit fullscreen directly from the user gesture so the browser allows it.
+  const handleFullscreenToggle = useCallback(() => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.()
+        .then(() => setFullscreenEnabled(true))
+        .catch(() => {});
+    } else {
+      document.exitFullscreen?.()
+        .then(() => setFullscreenEnabled(false))
+        .catch(() => {});
+    }
+  }, []);
 
   // Updates the hover label DOM node directly — avoids re-rendering Map and its markers.
   const handleCountryHover = useCallback((name) => {
@@ -371,7 +416,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
     const c = countryData?.channel;
 
     return latLon && typeof countryData !== 'undefined' ? (
-      <CustomMarker key={alpha2} position={latLon} toggleSidebar={toggleSidebar} mapPoint={countryData} setMapPoint={setMapPoint} clusterLayerRef={CLUSTERING_ENABLED ? clusterGroupRef : null} ariaLabel={`${countryData.regionName}${c.channelTitle ? ` — ${c.channelTitle}` : ''}`}>
+      <CustomMarker key={alpha2} position={latLon} toggleSidebar={toggleSidebar} mapPoint={countryData} setMapPoint={setMapPoint} clusterLayerRef={clusteringEnabled ? clusterGroupRef : null} ariaLabel={`${countryData.regionName}${c.channelTitle ? ` — ${c.channelTitle}` : ''}`}>
         <div className="custom-marker__point" data-region={countryData.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
           <span className="custom-marker__bg bg-color"></span>
           <span className="custom-marker__bg-pointer bg-color"></span>
@@ -403,13 +448,15 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
           <p>{tr.mapDataUnavailable}</p>
         </div>
       )}
-      {HEATMAP_ENABLED && (
-        <MapSettings
-          heatmapVisible={heatmapVisible}
-          onHeatmapToggle={() => setHeatmapVisible(v => !v)}
-          tr={tr}
-        />
-      )}
+      <MapSettings
+        heatmapVisible={heatmapVisible}
+        onHeatmapToggle={() => setHeatmapVisible(v => !v)}
+        clusteringEnabled={clusteringEnabled}
+        onClusteringToggle={() => setClusteringEnabled(v => !v)}
+        fullscreenEnabled={fullscreenEnabled}
+        onFullscreenToggle={handleFullscreenToggle}
+        tr={tr}
+      />
       <MapContainer {...mapConfig}>
         <MapViewSaver />
         {DEBUG_ZOOM_LEVEL_ENABLED && <ZoomDebugLabel />}
@@ -418,7 +465,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
         <Countries data={data} category={category} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
 
         {/* ClusterGroupSetup must appear before the markers so its effect runs first. */}
-        {CLUSTERING_ENABLED && <ClusterGroupSetup clusterGroupRef={clusterGroupRef} processAllPointsRef={processAllPointsRef} />}
+        {clusteringEnabled && <ClusterGroupSetup clusterGroupRef={clusterGroupRef} processAllPointsRef={processAllPointsRef} />}
         {renderMarkers()}
 
         {HEATMAP_ENABLED && <HeatmapLayer data={data} visible={heatmapVisible} />}

@@ -19,6 +19,8 @@ const translations = {
     heatmapShow: "Show heatmap",
     heatmapHide: "Hide heatmap",
     heatmapLabel: "Heatmap",
+    clusteringLabel: "Clustering",
+    fullscreenLabel: "Fullscreen",
     settingsLabel: "Map settings",
   },
   es: {
@@ -41,6 +43,8 @@ const translations = {
     heatmapShow: "Mostrar mapa de calor",
     heatmapHide: "Ocultar mapa de calor",
     heatmapLabel: "Mapa de calor",
+    clusteringLabel: "Agrupación",
+    fullscreenLabel: "Pantalla completa",
     settingsLabel: "Ajustes del mapa",
   },
 };
