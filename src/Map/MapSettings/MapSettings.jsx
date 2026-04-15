@@ -27,14 +27,18 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, tr }) {
     <div className={`map-settings${open ? ' map-settings--open' : ''}`} ref={panelRef}>
       {open && (
         <div className="map-settings__panel" role="menu">
+          <p className="map-settings__title">{tr.settingsLabel}</p>
           <div className="map-settings__item" role="menuitem">
-            <label className="map-settings__label">
+            <span className="map-settings__item-label">{tr.heatmapLabel}</span>
+            <label className="map-settings__toggle" aria-label={tr.heatmapLabel}>
               <input
                 type="checkbox"
                 checked={heatmapVisible}
                 onChange={onHeatmapToggle}
               />
-              <span>{tr.heatmapLabel}</span>
+              <span className="map-settings__toggle-track">
+                <span className="map-settings__toggle-thumb" />
+              </span>
             </label>
           </div>
         </div>
