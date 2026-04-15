@@ -25,6 +25,9 @@ export const SMOOTH_ZOOM_ENABLED       = false;
 // "prefers-reduced-motion" setting is active.
 export const REDUCED_MOTION_ENABLED    = false;
 
+// Shows the country flag emoji on each pin. Can be toggled at runtime via map settings.
+export const FLAGS_VISIBLE           = true;
+
 // Shows a small label at the bottom-right of the map with the current zoom level.
 // Automatically true in development builds and false in production (via webpack NODE_ENV).
 export const DEBUG_ZOOM_LEVEL_ENABLED  = process.env.NODE_ENV === 'development';
@@ -40,6 +43,7 @@ export const STORAGE_KEY_CATEGORY = 'category';      // last selected category s
 export const STORAGE_KEY_SIDEBAR  = 'sidebarCountry'; // alpha-2 code of last open country sidebar
 export const STORAGE_KEY_HEATMAP      = 'heatmapVisible';    // whether the heatmap overlay is on (true/false)
 export const STORAGE_KEY_CLUSTERING   = 'clusteringEnabled'; // whether marker clustering is on (true/false)
+export const STORAGE_KEY_FLAGS        = 'flagsVisible';       // whether pin flag emojis are shown (true/false)
 
 // ─── Zoom Thresholds ─────────────────────────────────────────────────────────
 
