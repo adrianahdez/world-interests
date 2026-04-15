@@ -49,7 +49,7 @@ export default function Footer() {
         <button
           className="footer-toggle"
           onClick={() => setIsOpen(prev => !prev)}
-          aria-label={isOpen ? 'Collapse footer' : 'Expand footer'}
+          aria-label={isOpen ? tr.footerCollapse : tr.footerExpand}
           aria-expanded={isOpen}
         >
           {isOpen ? '▾' : '▴'}
