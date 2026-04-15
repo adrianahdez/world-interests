@@ -45,13 +45,14 @@ function hexToRgba(hex, opacity) {
 }
 
 /**
- * Set up the point attributes based on channel name (colour) and viewCount stats (border + opacity).
+ * Pure function — computes pin appearance attributes from channel stats.
+ * Returns { bgColor, bgOpacity, imagePadding, bgBrightness } with no side effects.
  *
  * @param {Object} point
  * @param {number} minViews  Minimum viewCount across all visible pins in the current dataset.
  * @param {number} maxViews  Maximum viewCount across all visible pins in the current dataset.
  */
-function setUpPointAttributes(point, minViews, maxViews) {
+export function calculatePointAttributes(point, minViews, maxViews) {
   let name = point.channel.channelTitle;
 
   // Pick a colour from the palette deterministically based on the full channel name.
@@ -75,7 +76,9 @@ function setUpPointAttributes(point, minViews, maxViews) {
 }
 
 /**
- * Change the appearance of a point on the map
+ * Apply visual attributes to the DOM element for a given point.
+ * Looks up the marker element by iterating querySelectorAll to avoid
+ * string interpolation in the selector (guards against special chars in regionName).
  *
  * @param {Object} point
  * @param {Array} pointLatLon
@@ -85,9 +88,17 @@ function setUpPointAttributes(point, minViews, maxViews) {
 function changePointAppearance(point, pointLatLon, minViews, maxViews) {
   if (typeof point === 'undefined') return;
 
-  let attrs = setUpPointAttributes(point, minViews, maxViews);
+  let attrs = calculatePointAttributes(point, minViews, maxViews);
 
-  let markerPoint = document.querySelector('.custom-marker__point[data-region="' + point.regionName + '"]');
+  // Find the marker element without string interpolation — safe against regionName containing quotes.
+  const allPoints = document.querySelectorAll('.custom-marker__point');
+  let markerPoint = null;
+  for (let i = 0; i < allPoints.length; i++) {
+    if (allPoints[i].dataset.region === point.regionName) {
+      markerPoint = allPoints[i];
+      break;
+    }
+  }
   if (!markerPoint) return;
 
   let bg = markerPoint.querySelectorAll('.bg-color');
@@ -100,7 +111,8 @@ function changePointAppearance(point, pointLatLon, minViews, maxViews) {
 }
 
 /**
- * Reload values based on window resize and set up the points appearance
+ * Reload values based on window size and apply point appearance.
+ * Called on initial load and from the debounced resize handler in Map.jsx.
  *
  * @param {Object} point
  * @param {Array} pointLatLon
@@ -116,8 +128,17 @@ const resize = (point, pointLatLon, minViews, maxViews) => {
   changePointAppearance(point, pointLatLon, minViews, maxViews);
 }
 
+/**
+ * Apply initial appearance for a single point.
+ * The window resize listener is NOT registered here — it is registered once
+ * in Map.jsx's processAllPoints effect and debounced to prevent the per-point
+ * listener memory leak that accumulated on every category switch.
+ *
+ * @param {Object} point
+ * @param {Array} pointLatLon
+ * @param {number} minViews
+ * @param {number} maxViews
+ */
 export const processPoint = (point, pointLatLon, minViews, maxViews) => {
-  // Initial setup
-  resize(point, pointLatLon, minViews, maxViews); // Call resize to set up the map
-  window.addEventListener('resize', () => resize(point, pointLatLon, minViews, maxViews), { passive: true }); // Resize map on window resize
+  resize(point, pointLatLon, minViews, maxViews);
 }

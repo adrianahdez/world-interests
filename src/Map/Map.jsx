@@ -304,6 +304,8 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
   // processPoint after a new data is fetched, to change their appearance.
   // Also keeps processAllPointsRef up to date so ClusterGroupSetup can re-run it after
   // cluster animation ends (markers are re-created by the cluster group on zoom).
+  // Registers a single debounced resize listener here instead of inside processPoint,
+  // preventing the per-point listener accumulation that caused a memory leak on category switch.
   useEffect(() => {
     if (Object.keys(data).length === 0) return;
 
@@ -324,6 +326,20 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
     // Store so ClusterGroupSetup can call it on animationend.
     processAllPointsRef.current = runProcessPoint;
     runProcessPoint();
+
+    // Single debounced resize listener for all points — registered once per data load,
+    // not once per country. Cleaned up when data changes or component unmounts.
+    let resizeTimer = null;
+    const handleResize = () => {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(runProcessPoint, 300); // 300ms debounce
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (resizeTimer) clearTimeout(resizeTimer);
+    };
   }, [data]);
 
   // Restore the sidebar for the last open country after data loads (once per session).
