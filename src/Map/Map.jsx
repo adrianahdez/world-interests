@@ -165,7 +165,7 @@ function MarkerPaneSetup() {
   return null;
 }
 
-function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
+function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisible, onFooterToggle }) {
   const { isEs } = useContext(LanguageContext);
   const [data, setData] = useState({});
   const [heatmapVisible, setHeatmapVisible] = useState(() => {
@@ -485,6 +485,8 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
         onFullscreenToggle={handleFullscreenToggle}
         flagsVisible={flagsVisible}
         onFlagsToggle={() => setFlagsVisible(v => !v)}
+        footerVisible={footerVisible}
+        onFooterToggle={onFooterToggle}
         tr={tr}
       />
       <MapContainer {...mapConfig}>

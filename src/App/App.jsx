@@ -29,6 +29,18 @@ export default function App() {
   const [isDialogOpen, setIsDialogOpen] = useState(() => setDefaultIsDialogOpen());
 
   const [mapPoint, setMapPoint] = useState(null);
+  // Footer visibility — persisted in localStorage; CSS variable updated synchronously on init
+  // to avoid a layout flash on load when the user previously hid the footer.
+  const [footerVisible, setFooterVisible] = useState(() => {
+    try {
+      const stored = localStorage.getItem('footerVisible');
+      const visible = stored !== null ? stored === 'true' : true;
+      document.documentElement.style.setProperty('--footer-height', visible ? '36px' : '0px');
+      return visible;
+    } catch (_) {
+      return true;
+    }
+  });
   // InfoSidebar dialog state.
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -42,6 +54,15 @@ export default function App() {
     // Save the state in the local storage to remember the user's choice.
     localStorage.setItem(STORAGE_KEY_DIALOG, !isDialogOpen);
   }, [isDialogOpen]);
+
+  const handleFooterToggle = useCallback(() => {
+    setFooterVisible(prev => {
+      const next = !prev;
+      try { localStorage.setItem('footerVisible', next); } catch (_) {}
+      document.documentElement.style.setProperty('--footer-height', next ? '36px' : '0px');
+      return next;
+    });
+  }, []);
 
   const toggleSidebar = useCallback((open = true) => {
     setIsSidebarOpen(open);
@@ -113,8 +134,10 @@ export default function App() {
         toggleSidebar={toggleSidebar}
         setMapPoint={handleSetMapPoint}
         restoreRegion={restoreRegion}
+        footerVisible={footerVisible}
+        onFooterToggle={handleFooterToggle}
       />
-      <Footer />
+      {footerVisible && <Footer />}
     </div>
   );
 }
