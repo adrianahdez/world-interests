@@ -143,7 +143,7 @@
   @include respond-max(767) {
     position: fixed;
     top: auto;
-    bottom: var(--footer-height);
+    bottom: 0;
     z-index: 600; // above footer (z-index: 500) and base sidebar (z-index: 501)
     left: 0;
     right: 0;
