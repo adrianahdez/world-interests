@@ -70,7 +70,7 @@ export default function InfoSidebar({ categoryName }) {
         <h2 className="sidebar__title">{tr.statsFor} {mapPoint?.regionName} <span className='sidebar__flag'>{mapPoint?.flag}</span></h2>
         <div className="sidebar__list">
           <div className='channel-content channel-content__top'>
-            <img src={c?.channelImage} alt="marker" />
+            <img src={c?.channelImage} alt={`${c?.channelTitle ?? 'Channel'} logo`} />
             <div className='channel-content__text'>
 
               <div className='channel-content__text-group mt-0'>

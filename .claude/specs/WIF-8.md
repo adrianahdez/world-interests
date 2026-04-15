@@ -343,7 +343,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 10 — Map UX: selected country polygon highlight**
   `MapPointContext.jsx`: add `selectedAlpha2` derived from `mapPoint` (or store it explicitly). `Countries.jsx`: consume `MapPointContext`, read `selectedAlpha2`. After the GeoJSON layer mounts (using the ref from Step 7), call `layer.eachLayer()` to find the feature matching `selectedAlpha2` and apply a highlight style (distinct `fillColor` or `weight`). When `selectedAlpha2` changes, clear the previous highlight and apply the new one. Add a `.country--selected` CSS class or inline style via `layer.setStyle()`. Add the selected style to `Countries.scss`.
 
-- [ ] **Step 11 — Accessibility fixes**
+- [x] **Step 11 — Accessibility fixes**
   `InfoSidebar.jsx`: change `alt="marker"` → `alt={`${c?.channelTitle ?? 'Channel'} logo`}`. `MapSettings.jsx`: change `role="menu"` → `role="region"` with `aria-label={tr.settingsLabel}`; remove `role="menuitem"` from each `<label>`. `Map.jsx`: add `role="status"` and `aria-live="polite"` to the `.map-loading-overlay` div; add accessible text inside (e.g. the retry message, or a visually-hidden "Loading map data" string). All four button `type="reset"` already fixed in Step 8.
 
 - [ ] **Step 12 — Code quality: constants, null coalescing, dead code, PropTypes**

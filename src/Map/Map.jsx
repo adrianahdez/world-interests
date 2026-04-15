@@ -397,7 +397,7 @@ function Map({ category, restoreRegion, footerVisible, onFooterToggle }) {
   return (
     <div ref={mapContainerRef} className="map-container" role="region" aria-label={tr.mapAriaLabel}>
       {isLoading && !mapError && (
-        <div className="map-loading-overlay">
+        <div className="map-loading-overlay" role="status" aria-live="polite">
           <div className="map-loading-overlay__spinner" />
           {retryCount > 0 && (
             <p className="map-loading-overlay__retry">{tr.retrying} ({retryCount}/3)…</p>
