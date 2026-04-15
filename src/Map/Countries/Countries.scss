@@ -39,6 +39,15 @@
   .marker-cluster span { color: rgba(0, 0, 0, 0.85); }
 }
 
+/* Selected country — polygon clicked via marker or Countries layer click */
+.leaflet-container path.country--selected {
+  filter: brightness(1.9) saturate(1.4);
+}
+
+.leaflet-container path.country--selected:hover {
+  filter: brightness(2.1) saturate(1.4);
+}
+
 /* Countries with no data for the current category (NO_DATA_INDICATOR_ENABLED) */
 .leaflet-container path.country--no-data {
   filter: saturate(0.15) brightness(1.6);

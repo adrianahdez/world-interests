@@ -340,7 +340,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 9 — Map UX: immediate loading feedback on category change**
   `Map.jsx` / `useMapData`: ensure `isLoading` is set to `true` synchronously at the start of each fetch (before the first `await`). Currently it is — but confirm the state setter fires before the next render. In `App.jsx`, when `handleUpdateCategory` is called, the `isLoading` state in `Map` will flip on the next render after `category` prop updates. This is already the correct flow — verify it is visible immediately in the browser and document the finding. If not visible, add an explicit `isLoadingOverride` state in `App` that is set synchronously and cleared once `Map` signals loading has started.
 
-- [ ] **Step 10 — Map UX: selected country polygon highlight**
+- [x] **Step 10 — Map UX: selected country polygon highlight**
   `MapPointContext.jsx`: add `selectedAlpha2` derived from `mapPoint` (or store it explicitly). `Countries.jsx`: consume `MapPointContext`, read `selectedAlpha2`. After the GeoJSON layer mounts (using the ref from Step 7), call `layer.eachLayer()` to find the feature matching `selectedAlpha2` and apply a highlight style (distinct `fillColor` or `weight`). When `selectedAlpha2` changes, clear the previous highlight and apply the new one. Add a `.country--selected` CSS class or inline style via `layer.setStyle()`. Add the selected style to `Countries.scss`.
 
 - [ ] **Step 11 — Accessibility fixes**

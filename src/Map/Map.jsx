@@ -255,6 +255,7 @@ function Map({ category, restoreRegion, footerVisible, onFooterToggle }) {
     restoredRef.current = true; // prevent re-firing on subsequent data refreshes
     const point = data[alpha2][0];
     point.flag = getFlagFromAlpha2(alpha2);
+    point.alpha2 = alpha2;
     if (point.channel) point.channel.channelImage = point.channel.channelImage || ImageNotFound;
     setMapPoint(point);
     toggleSidebar(true);
@@ -371,6 +372,7 @@ function Map({ category, restoreRegion, footerVisible, onFooterToggle }) {
     }
 
     countryData.flag = getFlagFromAlpha2(alpha2 || '');
+    countryData.alpha2 = alpha2;
     c.channelImage = c.channelImage || ImageNotFound;
 
     return (
