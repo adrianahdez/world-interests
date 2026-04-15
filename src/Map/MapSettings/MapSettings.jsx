@@ -7,7 +7,7 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
   const [open, setOpen] = useState(false);
   const panelRef = useRef(null);
 
-  // Close the panel when the user clicks outside of it.
+  // Close the panel when the user clicks outside of it or presses Escape.
   useEffect(() => {
     if (!open) return;
     const handleClickOutside = (e) => {
@@ -15,11 +15,16 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
         setOpen(false);
       }
     };
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
     document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('touchstart', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, [open]);
 
