@@ -4,19 +4,47 @@ import { useMap } from 'react-leaflet';
 import { heatLayer } from '@linkurious/leaflet-heat';
 import { getCountryLatLon } from './Points/Data';
 
+// Heatmap options — radius/blur kept small so density differences between
+// categories are visible (fewer countries → sparser map, not a global blob).
+const HEATMAP_OPTIONS = {
+  radius: 20,
+  blur: 15,
+  maxZoom: 5,
+  max: 1,
+  minOpacity: 0.3,
+  // Blue (low) → orange (mid) → red (high)
+  gradient: { 0.2: '#1a6391', 0.5: '#e05c00', 1.0: '#ff2200' },
+};
+
 // Renders a Leaflet heatmap layer from the loaded data.
 // Intensity per point is the normalised view count (0–1 relative to the max across all countries).
-// Added/removed from the map based on the `visible` prop; rebuilt whenever `data` changes.
+// The layer is created once and updated via setLatLngs() to avoid the remove/re-add cycle
+// that caused the old canvas to persist visually even after map.removeLayer() was called.
 function HeatmapLayer({ data, visible }) {
   const map = useMap();
   const layerRef = useRef(null);
 
+  // Create the layer once on mount, remove on unmount.
   useEffect(() => {
-    if (layerRef.current) {
-      map.removeLayer(layerRef.current);
-      layerRef.current = null;
+    const layer = heatLayer([], HEATMAP_OPTIONS);
+    layerRef.current = layer;
+    return () => {
+      if (layerRef.current) {
+        if (map.hasLayer(layerRef.current)) map.removeLayer(layerRef.current);
+        layerRef.current = null;
+      }
+    };
+  }, [map]);
+
+  // Update points whenever data or visibility changes.
+  useEffect(() => {
+    const layer = layerRef.current;
+    if (!layer) return;
+
+    if (!visible || Object.keys(data).length === 0) {
+      if (map.hasLayer(layer)) map.removeLayer(layer);
+      return;
     }
-    if (!visible || Object.keys(data).length === 0) return;
 
     const viewCounts = Object.keys(data).map(a2 => Number(data[a2][0]?.statistics?.viewCount) || 0);
     const maxViews = Math.max(...viewCounts, 1);
@@ -30,26 +58,10 @@ function HeatmapLayer({ data, visible }) {
 
     console.log('[WorldInterests] HeatmapLayer: building with', points.length, 'points');
 
-    const layer = heatLayer(points, {
-      // radius/blur sized so that density differences between categories are visible:
-      // fewer countries → sparser heatmap, not an indistinct global blob.
-      radius: 20,
-      blur: 15,
-      maxZoom: 5,
-      max: 1,
-      minOpacity: 0.3,
-      // Blue (low) → orange (mid) → red (high)
-      gradient: { 0.2: '#1a6391', 0.5: '#e05c00', 1.0: '#ff2200' },
-    });
-    layer.addTo(map);
-    layerRef.current = layer;
-
-    return () => {
-      if (layerRef.current) {
-        map.removeLayer(layerRef.current);
-        layerRef.current = null;
-      }
-    };
+    // setLatLngs replaces the point set and calls redraw() internally,
+    // so the canvas is updated in-place without a remove/re-add cycle.
+    layer.setLatLngs(points);
+    if (!map.hasLayer(layer)) layer.addTo(map);
   }, [data, visible, map]);
 
   return null;
