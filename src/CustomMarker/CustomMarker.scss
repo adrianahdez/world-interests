@@ -175,6 +175,11 @@
   filter: brightness(1.5);
 }
 
+/* Flags toggle: hide flag emojis when the user disables them via map settings */
+.map--flags-hidden .flag {
+  display: none;
+}
+
 /* Low zoom (zoom 2–2.5): shrink pins and hide flags */
 .map--low-zoom {
   .custom-marker__container {

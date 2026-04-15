@@ -8,7 +8,7 @@ import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, HEATMAP_ENABLED, FULLSCREEN_ENABLED } from '../config';
+import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, STORAGE_KEY_FLAGS, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, HEATMAP_ENABLED, FULLSCREEN_ENABLED, FLAGS_VISIBLE } from '../config';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css';
 import 'leaflet-gesture-handling';
 import L from 'leaflet';
@@ -180,6 +180,12 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
       return v !== null ? v === 'true' : CLUSTERING_ENABLED;
     } catch (_) { return CLUSTERING_ENABLED; }
   });
+  const [flagsVisible, setFlagsVisible] = useState(() => {
+    try {
+      const v = localStorage.getItem(STORAGE_KEY_FLAGS);
+      return v !== null ? v === 'true' : FLAGS_VISIBLE;
+    } catch (_) { return FLAGS_VISIBLE; }
+  });
   // Fullscreen is intentionally NOT persisted — the browser blocks auto-entering fullscreen
   // on page load, which would leave the toggle stuck in the ON state without actually being
   // in fullscreen. Always start from the config default each session.
@@ -188,6 +194,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   const [isLoading, setIsLoading] = useState(true); // true until first data fetch resolves
   const [retryCount, setRetryCount] = useState(0); // current retry attempt (0 = first try, 1-3 = retrying)
   const hoverLabelRef = useRef(null); // ref to HoverCountryLabel DOM node — updated directly to avoid re-renders
+  const mapContainerRef = useRef(null); // ref to the .map-container div — used for imperative class toggling
   const clusterGroupRef = useRef(null); // ref to the native Leaflet MarkerClusterGroup layer
   const processAllPointsRef = useRef(null); // ref to processPoint runner — called after cluster animation ends
   const prevDataRef = useRef({});
@@ -339,6 +346,14 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   useEffect(() => {
     try { localStorage.setItem(STORAGE_KEY_CLUSTERING, String(clusteringEnabled)); } catch (_) {}
   }, [clusteringEnabled]);
+  useEffect(() => {
+    try { localStorage.setItem(STORAGE_KEY_FLAGS, String(flagsVisible)); } catch (_) {}
+  }, [flagsVisible]);
+  // Apply flag visibility class imperatively so React re-renders don't wipe the zoom
+  // classes that MapViewSaver adds to the same element via classList.toggle.
+  useEffect(() => {
+    mapContainerRef.current?.classList.toggle('map--flags-hidden', !flagsVisible);
+  }, [flagsVisible]);
 
   // Re-apply processPoint styling after clustering toggle — markers are recreated when the
   // cluster group is added/removed, so DOM-level styles need to be reapplied.
@@ -447,7 +462,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   });
 
   return (
-    <div className="map-container" role="region" aria-label={tr.mapAriaLabel}>
+    <div ref={mapContainerRef} className="map-container" role="region" aria-label={tr.mapAriaLabel}>
       {isLoading && !mapError && (
         <div className="map-loading-overlay">
           <div className="map-loading-overlay__spinner" />
@@ -468,6 +483,8 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
         onClusteringToggle={() => setClusteringEnabled(v => !v)}
         fullscreenEnabled={fullscreenEnabled}
         onFullscreenToggle={handleFullscreenToggle}
+        flagsVisible={flagsVisible}
+        onFlagsToggle={() => setFlagsVisible(v => !v)}
         tr={tr}
       />
       <MapContainer {...mapConfig}>

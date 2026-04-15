@@ -3,7 +3,7 @@ import './MapSettings.scss';
 
 // Floating settings panel anchored to the bottom-left of the map.
 // Currently exposes the heatmap toggle; add more items to the panel as new features arrive.
-function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClusteringToggle, fullscreenEnabled, onFullscreenToggle, tr }) {
+function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClusteringToggle, fullscreenEnabled, onFullscreenToggle, flagsVisible, onFlagsToggle, tr }) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef(null);
 
@@ -41,6 +41,15 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
             <span className="map-settings__item-label">{tr.fullscreenLabel}</span>
             <label className="map-settings__toggle" aria-label={tr.fullscreenLabel}>
               <input type="checkbox" checked={fullscreenEnabled} onChange={onFullscreenToggle} />
+              <span className="map-settings__toggle-track">
+                <span className="map-settings__toggle-thumb" />
+              </span>
+            </label>
+          </div>
+          <div className="map-settings__item" role="menuitem">
+            <span className="map-settings__item-label">{tr.flagsLabel}</span>
+            <label className="map-settings__toggle" aria-label={tr.flagsLabel}>
+              <input type="checkbox" checked={flagsVisible} onChange={onFlagsToggle} />
               <span className="map-settings__toggle-track">
                 <span className="map-settings__toggle-thumb" />
               </span>
