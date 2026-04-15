@@ -194,6 +194,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   const [isLoading, setIsLoading] = useState(true); // true until first data fetch resolves
   const [retryCount, setRetryCount] = useState(0); // current retry attempt (0 = first try, 1-3 = retrying)
   const hoverLabelRef = useRef(null); // ref to HoverCountryLabel DOM node — updated directly to avoid re-renders
+  const mapContainerRef = useRef(null); // ref to the .map-container div — used for imperative class toggling
   const clusterGroupRef = useRef(null); // ref to the native Leaflet MarkerClusterGroup layer
   const processAllPointsRef = useRef(null); // ref to processPoint runner — called after cluster animation ends
   const prevDataRef = useRef({});
@@ -348,6 +349,11 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   useEffect(() => {
     try { localStorage.setItem(STORAGE_KEY_FLAGS, String(flagsVisible)); } catch (_) {}
   }, [flagsVisible]);
+  // Apply flag visibility class imperatively so React re-renders don't wipe the zoom
+  // classes that MapViewSaver adds to the same element via classList.toggle.
+  useEffect(() => {
+    mapContainerRef.current?.classList.toggle('map--flags-hidden', !flagsVisible);
+  }, [flagsVisible]);
 
   // Re-apply processPoint styling after clustering toggle — markers are recreated when the
   // cluster group is added/removed, so DOM-level styles need to be reapplied.
@@ -456,7 +462,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   });
 
   return (
-    <div className={`map-container${flagsVisible ? '' : ' map--flags-hidden'}`} role="region" aria-label={tr.mapAriaLabel}>
+    <div ref={mapContainerRef} className="map-container" role="region" aria-label={tr.mapAriaLabel}>
       {isLoading && !mapError && (
         <div className="map-loading-overlay">
           <div className="map-loading-overlay__spinner" />
