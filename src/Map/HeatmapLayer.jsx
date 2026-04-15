@@ -46,13 +46,20 @@ function HeatmapLayer({ data, visible }) {
       return;
     }
 
-    const viewCounts = Object.keys(data).map(a2 => Number(data[a2][0]?.statistics?.viewCount) || 0);
+    // Only include entries that have a channel object — same filter as markers.
+    // Backend data can contain country slots without a channel (no trending video
+    // for that category in that country); those must not appear on the heatmap.
+    const entries = Object.keys(data)
+      .map(a2 => ({ a2, entry: data[a2]?.[0] }))
+      .filter(({ entry }) => entry?.channel);
+
+    const viewCounts = entries.map(({ entry }) => Number(entry.statistics?.viewCount) || 0);
     const maxViews = Math.max(...viewCounts, 1);
 
-    const points = Object.keys(data).map(a2 => {
+    const points = entries.map(({ a2, entry }) => {
       const latLon = getCountryLatLon(a2);
       if (!latLon) return null;
-      const intensity = (Number(data[a2][0]?.statistics?.viewCount) || 0) / maxViews;
+      const intensity = (Number(entry.statistics?.viewCount) || 0) / maxViews;
       return [latLon[0], latLon[1], intensity];
     }).filter(Boolean);
 
