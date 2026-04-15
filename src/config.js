@@ -13,7 +13,7 @@ export const GESTURE_HANDLING_ENABLED  = false;
 export const NO_DATA_INDICATOR_ENABLED = true;
 
 // Toggleable color-gradient overlay that visualises regional trending intensity.
-export const HEATMAP_ENABLED           = true;
+export const HEATMAP_ENABLED           = false;
 
 // Adds a fullscreen button that expands the map to fill the entire viewport.
 export const FULLSCREEN_ENABLED        = false;
