@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { STORAGE_KEY_DIALOG, STORAGE_KEY_CATEGORY, STORAGE_KEY_SIDEBAR } from '../config';
+import { STORAGE_KEY_CATEGORY_DIALOG, STORAGE_KEY_SELECTED_CATEGORY, STORAGE_KEY_SIDEBAR } from '../config';
 import Map from '../Map/Map';
 import Categories from '../Categories/Categories';
 import Footer from '../Footer/Footer';
@@ -15,7 +15,7 @@ const getInitialCategory = () => {
   const urlCategory = new URLSearchParams(window.location.search).get('category');
   if (urlCategory) return urlCategory;
   try {
-    const stored = localStorage.getItem(STORAGE_KEY_CATEGORY);
+    const stored = localStorage.getItem(STORAGE_KEY_SELECTED_CATEGORY);
     if (stored) return stored;
   } catch (_) {}
   return 'music';
@@ -59,7 +59,7 @@ export default function App() {
     setIsDialogOpen((prev) => !prev);
     // Save the state in the local storage to remember the user's choice.
     try {
-      localStorage.setItem(STORAGE_KEY_DIALOG, !isDialogOpen);
+      localStorage.setItem(STORAGE_KEY_CATEGORY_DIALOG, !isDialogOpen);
     } catch (e) {
       console.warn('[WorldInterests] Could not save dialog state:', e.message);
     }
@@ -107,7 +107,7 @@ export default function App() {
     setCategory(newCategory);
     updateUrlWithCategory(newCategory);
     try {
-      localStorage.setItem(STORAGE_KEY_CATEGORY, newCategory);
+      localStorage.setItem(STORAGE_KEY_SELECTED_CATEGORY, newCategory);
     } catch (e) {
       console.warn('[WorldInterests] Could not save category:', e.message);
     }
@@ -123,7 +123,7 @@ export default function App() {
 
   // If the state is not set, return true to show the dialog by default. If the state is set, return the state.
   function setDefaultIsDialogOpen() {
-    const defaultState = localStorage.getItem(STORAGE_KEY_DIALOG);
+    const defaultState = localStorage.getItem(STORAGE_KEY_CATEGORY_DIALOG);
     return defaultState === null ? true : defaultState === 'true';
   }
 

@@ -34,8 +34,8 @@ export const DEBUG_ZOOM_LEVEL_ENABLED  = process.env.NODE_ENV === 'development';
 export const STORAGE_KEY_MAP_VIEW = 'mapView';       // last map center + zoom
 export const STORAGE_KEY_LANG     = 'isEs';          // UI language (true = Spanish)
 export const STORAGE_KEY_THEME    = 'isDarkMode';    // colour theme (true = dark)
-export const STORAGE_KEY_DIALOG   = 'isDialogOpen';  // category-picker dialog open state
-export const STORAGE_KEY_CATEGORY = 'category';      // last selected category slug
+export const STORAGE_KEY_CATEGORY_DIALOG   = 'isCategoryDialogOpen';  // category-picker dialog open state
+export const STORAGE_KEY_SELECTED_CATEGORY = 'selectedCategory';      // last selected category slug
 export const STORAGE_KEY_SIDEBAR  = 'sidebarCountry'; // alpha-2 code of last open country sidebar
 export const STORAGE_KEY_HEATMAP      = 'heatmapVisible';    // whether the heatmap overlay is on (true/false)
 export const STORAGE_KEY_CLUSTERING   = 'clusteringEnabled'; // whether marker clustering is on (true/false)
