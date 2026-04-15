@@ -331,7 +331,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 6 — Introduce MapPointContext and SidebarContext**
   Create `src/Common/MapPointContext.jsx` (context + provider, exposes `{ mapPoint, setMapPoint }`). Create `src/Common/SidebarContext.jsx` (context + provider, exposes `{ isSidebarOpen, toggleSidebar }`). Update `App.jsx`: wrap JSX with both providers, remove `mapPoint`/`setMapPoint`/`isSidebarOpen`/`toggleSidebar` props from `Map`, `InfoSidebar`. Update `Map.jsx`: remove those props from its signature; call `useContext(MapPointContext)` and `useContext(SidebarContext)` instead. Update `CustomMarker.jsx`: consume both contexts, remove same props from signature. Update `InfoSidebar.jsx`: consume both contexts, remove props from signature. All five files change together in one commit.
 
-- [ ] **Step 7 — Performance: memoize markers + GeoJSON layer.setStyle()**
+- [x] **Step 7 — Performance: memoize markers + GeoJSON layer.setStyle()**
   `Map.jsx`: wrap `renderMarkers()` output in `useMemo` keyed on `data` (replaces the bare function call). `Countries.jsx`: add `useRef` to capture the Leaflet GeoJSON layer via the `ref` prop. Remove the `key` prop and the `geoJsonKey` variable. In a `useEffect` that depends on `styleFunc`, call `geoJsonLayerRef.current?.setStyle(styleFunc)`. On initial mount the layer ref is null, so the `style` prop on `<GeoJSON>` handles the first render; subsequent changes go through `setStyle()`.
 
 - [ ] **Step 8 — Categories UX: loading state, retry logic, retry button**

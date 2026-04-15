@@ -352,8 +352,9 @@ function Map({ category, restoreRegion, footerVisible, onFooterToggle }) {
     return pos;
   }, [data]);
 
-  // Extracted so the same JSX can be rendered directly or inside MarkerClusterGroup.
-  const renderMarkers = () => Object.keys(data).map((alpha2) => {
+  // Memoized so Leaflet only unmounts/remounts markers when data or clustering mode changes.
+  // Avoids marker flicker on unrelated state updates (settings toggles, hover events, etc.).
+  const markers = useMemo(() => Object.keys(data).map((alpha2) => {
     const countryData = data[alpha2]?.[0];
     if (!countryData) return null;
 
@@ -388,7 +389,8 @@ function Map({ category, restoreRegion, footerVisible, onFooterToggle }) {
         </div>
       </CustomMarker>
     );
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [data, clusteringEnabled]); // markerPositions is derived from data — no separate dep needed
 
   return (
     <div ref={mapContainerRef} className="map-container" role="region" aria-label={tr.mapAriaLabel}>
@@ -425,7 +427,7 @@ function Map({ category, restoreRegion, footerVisible, onFooterToggle }) {
         {/* country-polygons pane sits at z-index 200, below the marker pane at 400. */}
         <Pane name="country-polygons" style={{ zIndex: 200 }}>
           {/* This has the GeoJSON component. */}
-          <Countries data={data} category={category} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
+          <Countries data={data} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
         </Pane>
 
         {/* Creates the map-markers pane (z-index 400) before any markers are added. */}
@@ -433,7 +435,7 @@ function Map({ category, restoreRegion, footerVisible, onFooterToggle }) {
 
         {/* ClusterGroupSetup must appear before the markers so its effect runs first. */}
         {clusteringEnabled && <ClusterGroupSetup clusterGroupRef={clusterGroupRef} processAllPointsRef={processAllPointsRef} />}
-        {renderMarkers()}
+        {markers}
 
         {heatmapVisible && <HeatmapLayer data={data} visible={heatmapVisible} />}
       </MapContainer>

@@ -1,21 +1,32 @@
 // ./countries-and-us-states.geo.json is a file that contains the coordinates of the countries and US states. Not used at the moment.
 import countries from './countries.geo.json';
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { GeoJSON, useMap } from 'react-leaflet';
 import { getCountryLatLon, getAlpha2FromAlpha3 } from '../Points/Data';
 import { makeStyleConfig } from '../geoJsonConfig';
 
-const Countries = ({ data, category, onCountryHover = null }) => {
+const Countries = ({ data, onCountryHover = null }) => {
   const map = useMap();
   const dataRef = useRef(data);
+  // Holds the mounted Leaflet GeoJSON layer so we can call setStyle() instead of remounting.
+  const geoJsonLayerRef = useRef(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     dataRef.current = data;
   }, [data]);
 
   // Recompute style function when data changes.
   // Using useMemo so it's only recalculated when data reference changes.
   const styleFunc = React.useMemo(() => makeStyleConfig(data), [data]);
+
+  // Apply updated styles to the existing layer instead of remounting via key.
+  // Remounting forces Leaflet to re-process the entire GeoJSON geometry on every
+  // category switch — setStyle() only updates fill/stroke properties.
+  useEffect(() => {
+    if (geoJsonLayerRef.current) {
+      geoJsonLayerRef.current.setStyle(styleFunc);
+    }
+  }, [styleFunc]);
 
   const handleCountryClick = (event, countryName, alpha2) => {
     const latLon = getCountryLatLon(alpha2);
@@ -52,12 +63,13 @@ const Countries = ({ data, category, onCountryHover = null }) => {
     }
   };
 
-  // key forces GeoJSON to remount (and re-apply styles) when the category
-  // changes or when data loads for the first time (0 → N keys).
-  const geoJsonKey = `${category}_${Object.keys(data).length > 0 ? 'loaded' : 'empty'}`;
-
   return (
-    <GeoJSON key={geoJsonKey} data={countries} style={styleFunc} onEachFeature={onEachCountry} />
+    <GeoJSON
+      ref={geoJsonLayerRef}
+      data={countries}
+      style={styleFunc}
+      onEachFeature={onEachCountry}
+    />
   );
 };
 
