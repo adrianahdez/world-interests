@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { STORAGE_KEY_DIALOG, STORAGE_KEY_CATEGORY, STORAGE_KEY_SIDEBAR } from '../config';
 import Map from '../Map/Map';
 import Categories from '../Categories/Categories';
@@ -7,6 +7,8 @@ import InfoSidebar from '../InfoSidebar/InfoSidebar';
 import Head from '../Head/Head';
 // Header must be loaded after all components to load the theme rules at last and override others.
 import Header from '../Header/Header';
+import { MapPointContext } from '../Common/MapPointContext';
+import { SidebarContext } from '../Common/SidebarContext';
 
 // Returns the initial category using this priority: URL param > localStorage > 'music'.
 const getInitialCategory = () => {
@@ -29,6 +31,9 @@ export default function App() {
   const [isDialogOpen, setIsDialogOpen] = useState(() => setDefaultIsDialogOpen());
 
   const [mapPoint, setMapPoint] = useState(null);
+  // Tracks which country polygon is highlighted. Kept separate from mapPoint so
+  // a polygon click can highlight without opening the sidebar (pin clicks sync both).
+  const [selectedAlpha2, setSelectedAlpha2] = useState(null);
   // Footer visibility — persisted in localStorage. When hidden, --footer-height is set to 0px
   // synchronously to avoid a layout flash. When visible, the ResizeObserver in Footer.jsx owns
   // the value so it stays accurate as the footer grows/shrinks at different viewport widths.
@@ -53,7 +58,11 @@ export default function App() {
   const toggleDialog = useCallback(() => {
     setIsDialogOpen((prev) => !prev);
     // Save the state in the local storage to remember the user's choice.
-    localStorage.setItem(STORAGE_KEY_DIALOG, !isDialogOpen);
+    try {
+      localStorage.setItem(STORAGE_KEY_DIALOG, !isDialogOpen);
+    } catch (e) {
+      console.warn('[WorldInterests] Could not save dialog state:', e.message);
+    }
   }, [isDialogOpen]);
 
   const handleFooterToggle = useCallback(() => {
@@ -73,18 +82,24 @@ export default function App() {
 
   const toggleSidebar = useCallback((open = true) => {
     setIsSidebarOpen(open);
-    // Clear the stored region when the sidebar is explicitly closed.
+    // Clear the stored region and polygon highlight when the sidebar is explicitly closed.
     if (!open) {
-      try { localStorage.removeItem(STORAGE_KEY_SIDEBAR); } catch (_) {}
+      setSelectedAlpha2(null);
+      try { localStorage.removeItem(STORAGE_KEY_SIDEBAR); }
+      catch (e) { console.warn('[WorldInterests] Could not clear sidebar state:', e.message); }
     }
   }, []);
 
-  // Wraps setMapPoint to also persist the open country to localStorage.
+  // Wraps setMapPoint to also persist the open country to localStorage and sync
+  // the polygon highlight (selectedAlpha2) so pin clicks highlight the country too.
   const handleSetMapPoint = useCallback((point) => {
     setMapPoint(point);
+    setSelectedAlpha2(point?.alpha2 ?? null);
     try {
       if (point?.regionName) localStorage.setItem(STORAGE_KEY_SIDEBAR, point.regionName);
-    } catch (_) {}
+    } catch (e) {
+      console.warn('[WorldInterests] Could not save sidebar country:', e.message);
+    }
   }, []);
 
   // Handle updating the category — persist to localStorage and sync the URL.
@@ -93,7 +108,9 @@ export default function App() {
     updateUrlWithCategory(newCategory);
     try {
       localStorage.setItem(STORAGE_KEY_CATEGORY, newCategory);
-    } catch (_) {}
+    } catch (e) {
+      console.warn('[WorldInterests] Could not save category:', e.message);
+    }
   };
 
   // Update the URL with the selected category
@@ -104,14 +121,6 @@ export default function App() {
     window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
   };
 
-  // Update the category from the URL if it changes. I think this is not necessary.
-  // useEffect(() => {
-  //   const urlCategory = getCategoryFromUrl();
-  //   if (urlCategory !== category) {
-  //     setCategory(urlCategory);
-  //   }
-  // }, [category]);
-
   // If the state is not set, return true to show the dialog by default. If the state is set, return the state.
   function setDefaultIsDialogOpen() {
     const defaultState = localStorage.getItem(STORAGE_KEY_DIALOG);
@@ -119,32 +128,28 @@ export default function App() {
   }
 
   return (
-    <div className='app-container'>
-      <Head />
-      <Header isDialogOpen={isDialogOpen} toggleDialog={toggleDialog} />
-      <Categories
-        category={category}
-        setCategory={handleUpdateCategory}
-        isDialogOpen={isDialogOpen}
-        toggleDialog={toggleDialog}
-        toggleSidebar={toggleSidebar}
-        onCategoryNameChange={setCategoryName}
-      />
-      <InfoSidebar
-        mapPoint={mapPoint}
-        isSidebarOpen={isSidebarOpen}
-        toggleSidebar={toggleSidebar}
-        categoryName={categoryName}
-      />
-      <Map
-        category={category}
-        toggleSidebar={toggleSidebar}
-        setMapPoint={handleSetMapPoint}
-        restoreRegion={restoreRegion}
-        footerVisible={footerVisible}
-        onFooterToggle={handleFooterToggle}
-      />
-      {footerVisible && <Footer />}
-    </div>
+    <MapPointContext.Provider value={{ mapPoint, setMapPoint: handleSetMapPoint, selectedAlpha2, setSelectedAlpha2 }}>
+      <SidebarContext.Provider value={{ isSidebarOpen, toggleSidebar }}>
+        <div className='app-container'>
+          <Head />
+          <Header isDialogOpen={isDialogOpen} toggleDialog={toggleDialog} />
+          <Categories
+            category={category}
+            setCategory={handleUpdateCategory}
+            isDialogOpen={isDialogOpen}
+            toggleDialog={toggleDialog}
+            onCategoryNameChange={setCategoryName}
+          />
+          <InfoSidebar categoryName={categoryName} />
+          <Map
+            category={category}
+            restoreRegion={restoreRegion}
+            footerVisible={footerVisible}
+            onFooterToggle={handleFooterToggle}
+          />
+          {footerVisible && <Footer />}
+        </div>
+      </SidebarContext.Provider>
+    </MapPointContext.Provider>
   );
 }

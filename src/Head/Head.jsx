@@ -15,8 +15,17 @@ const metaTag = {
 };
 
 const addGoogleAnalyticsScript = () => {
+  // In dev builds REACT_APP_GA_ID is not set (it lives only in .env.production).
+  // Warn and skip so dev traffic is never sent to Analytics.
+  if (process.env.NODE_ENV !== 'production' && !process.env.REACT_APP_GA_ID) {
+    console.warn('[WorldInterests] REACT_APP_GA_ID is not set — GA tracking is disabled in this environment. Add it to .env.production to enable tracking in production builds.');
+    return null;
+  }
+  // In production, fall back to the bundled ID if the env var is absent.
+  const gaId = process.env.REACT_APP_GA_ID || 'G-MDKV0QPB8F';
+
   const script = document.createElement('script');
-  script.src = "https://www.googletagmanager.com/gtag/js?id=G-MDKV0QPB8F";
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
   script.async = true;
   document.head.appendChild(script);
 
@@ -25,7 +34,7 @@ const addGoogleAnalyticsScript = () => {
     window.dataLayer = window.dataLayer || [];
     function gtag() { window.dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', 'G-MDKV0QPB8F');
+    gtag('config', gaId);
   };
 
   return script;
@@ -82,7 +91,7 @@ export default function Head() {
     addMetaTags();
 
     return () => {
-      // Clean up: remove the script and meta tags if the component is unmounted
+      // Clean up: remove the script (if GA was initialised) and meta tags on unmount.
       if (script && script.parentNode) {
         document.head.removeChild(script);
       }

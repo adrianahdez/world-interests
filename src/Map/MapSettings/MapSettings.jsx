@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import './MapSettings.scss';
 
 // Floating settings panel anchored to the bottom-left of the map.
@@ -31,9 +32,9 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
   return (
     <div className={`map-settings${open ? ' map-settings--open' : ''}`} ref={panelRef}>
       {open && (
-        <div className="map-settings__panel" role="menu">
+        <div className="map-settings__panel" role="region" aria-label={tr.settingsLabel}>
           <p className="map-settings__title">{tr.settingsLabel}</p>
-          <label className="map-settings__item" role="menuitem">
+          <label className="map-settings__item">
             <span className="map-settings__item-label">{tr.clusteringLabel}</span>
             <span className="map-settings__toggle">
               <input type="checkbox" checked={clusteringEnabled} onChange={onClusteringToggle} />
@@ -42,7 +43,7 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
               </span>
             </span>
           </label>
-          <label className="map-settings__item" role="menuitem">
+          <label className="map-settings__item">
             <span className="map-settings__item-label">{tr.fullscreenLabel}</span>
             <span className="map-settings__toggle">
               <input type="checkbox" checked={fullscreenEnabled} onChange={onFullscreenToggle} />
@@ -51,7 +52,7 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
               </span>
             </span>
           </label>
-          <label className="map-settings__item" role="menuitem">
+          <label className="map-settings__item">
             <span className="map-settings__item-label">{tr.flagsLabel}</span>
             <span className="map-settings__toggle">
               <input type="checkbox" checked={flagsVisible} onChange={onFlagsToggle} />
@@ -60,7 +61,7 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
               </span>
             </span>
           </label>
-          <label className="map-settings__item" role="menuitem">
+          <label className="map-settings__item">
             <span className="map-settings__item-label">{tr.footerLabel}</span>
             <span className="map-settings__toggle">
               <input type="checkbox" checked={footerVisible} onChange={onFooterToggle} />
@@ -69,7 +70,7 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
               </span>
             </span>
           </label>
-          <label className="map-settings__item" role="menuitem">
+          <label className="map-settings__item">
             <span className="map-settings__item-label">{tr.heatmapLabel}</span>
             <span className="map-settings__toggle">
               <input type="checkbox" checked={heatmapVisible} onChange={onHeatmapToggle} />
@@ -92,5 +93,19 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
     </div>
   );
 }
+
+MapSettings.propTypes = {
+  heatmapVisible: PropTypes.bool.isRequired,
+  onHeatmapToggle: PropTypes.func.isRequired,
+  clusteringEnabled: PropTypes.bool.isRequired,
+  onClusteringToggle: PropTypes.func.isRequired,
+  fullscreenEnabled: PropTypes.bool.isRequired,
+  onFullscreenToggle: PropTypes.func.isRequired,
+  flagsVisible: PropTypes.bool.isRequired,
+  onFlagsToggle: PropTypes.func.isRequired,
+  footerVisible: PropTypes.bool.isRequired,
+  onFooterToggle: PropTypes.func.isRequired,
+  tr: PropTypes.object.isRequired,
+};
 
 export default MapSettings;

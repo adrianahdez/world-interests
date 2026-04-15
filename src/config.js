@@ -41,6 +41,28 @@ export const STORAGE_KEY_HEATMAP      = 'heatmapVisible';    // whether the heat
 export const STORAGE_KEY_CLUSTERING   = 'clusteringEnabled'; // whether marker clustering is on (true/false)
 export const STORAGE_KEY_FLAGS        = 'flagsVisible';       // whether pin flag emojis are shown (true/false)
 
+// ─── Marker Icon Geometry ─────────────────────────────────────────────────────
+// DivIcon size and anchor used by CustomMarker. Anchor is bottom-centre so the
+// pin tip sits exactly on the coordinate point.
+export const MARKER_ICON_SIZE   = [50, 50]; // [width, height] in px
+export const MARKER_ICON_ANCHOR = [25, 50]; // [x, y] — half-width, full-height
+
+// ─── Pin Appearance Ranges ────────────────────────────────────────────────────
+// Used in calculatePointAttributes() to scale opacity, brightness, and padding
+// relative to a pin's normalised view count (0 = min, 1 = max in the dataset).
+
+// Image padding (border ring thickness) range in px.
+export const PIN_PADDING_MIN   = 1;  // px at minimum view count
+export const PIN_PADDING_RANGE = 7;  // added px from min → max (1px → 8px)
+
+// Background opacity range (0–1).
+export const PIN_OPACITY_MIN   = 0.75; // fully legible floor
+export const PIN_OPACITY_RANGE = 0.25; // added at max views (→ 1.0)
+
+// CSS filter brightness range.
+export const PIN_BRIGHTNESS_MIN   = 0.55; // dim at low view count
+export const PIN_BRIGHTNESS_RANGE = 0.60; // added at max views (→ 1.15)
+
 // ─── Zoom Thresholds ─────────────────────────────────────────────────────────
 
 export const ZOOM_VERY_LOW = 2; // below this: pins are at their smallest scale

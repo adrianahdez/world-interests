@@ -1,12 +1,17 @@
 import React, { useEffect, useRef, useContext } from 'react';
+import PropTypes from 'prop-types';
 import './InfoSidebar.scss';
 import Player from '../Player/Player';
 import { LanguageContext } from '../Common/LanguageContext';
+import { MapPointContext } from '../Common/MapPointContext';
+import { SidebarContext } from '../Common/SidebarContext';
 import translations from '../Common/translations';
 
 // Render InfoSidebar component
-export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar, categoryName }) {
+export default function InfoSidebar({ categoryName }) {
   const { isEs } = useContext(LanguageContext);
+  const { mapPoint } = useContext(MapPointContext);
+  const { isSidebarOpen, toggleSidebar } = useContext(SidebarContext);
   const sidebarRef = useRef(null);
   const playerRef = useRef(null);
 
@@ -56,7 +61,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar, ca
       <div className="sidebar__content">
         <menu>
           <div className='close-icon'>
-            <button type="reset" className='toggle-btn' onClick={() => toggleSidebar(false)}>
+            <button type="button" className='toggle-btn' onClick={() => toggleSidebar(false)}>
               <span></span>
               <span></span>
               <span></span>
@@ -66,12 +71,12 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar, ca
         <h2 className="sidebar__title">{tr.statsFor} {mapPoint?.regionName} <span className='sidebar__flag'>{mapPoint?.flag}</span></h2>
         <div className="sidebar__list">
           <div className='channel-content channel-content__top'>
-            <img src={c?.channelImage} alt="marker" />
+            <img src={c?.channelImage} alt={`${c?.channelTitle ?? 'Channel'} logo`} />
             <div className='channel-content__text'>
 
               <div className='channel-content__text-group mt-0'>
                 <h3 className='channel-content__heading'>{tr.channelName}</h3>
-                <a target="_blank" href={`https://youtube.com/channel/${c?.channelId}`}>{c?.channelTitle}</a>
+                <a target="_blank" rel="noopener noreferrer" href={`https://youtube.com/channel/${c?.channelId}`}>{c?.channelTitle}</a>
               </div>
 
               <div className='channel-content__text-group mt-0'>
@@ -90,7 +95,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar, ca
             <h2 className="channel-content__subheading">{tr.mostPopularVideo}</h2>
             <div className='channel-content__text'>
 
-              <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
+              <a target="_blank" rel="noopener noreferrer" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
 
               <div className='channel-content__stats'>
                 <div className='channel-content__text-group'>
@@ -116,3 +121,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar, ca
     </dialog >
   );
 }
+
+InfoSidebar.propTypes = {
+  categoryName: PropTypes.string,
+};

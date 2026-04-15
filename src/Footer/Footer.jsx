@@ -35,7 +35,7 @@ export default function Footer() {
           <span className="footer-sep" aria-hidden="true">|</span>
           <span className="footer-dev">
             © {new Date().getFullYear()}. {tr.developedBy}
-            <a target="_blank" href="https://github.com/adrianahdez">Adriana Hernández Regueiro.</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://github.com/adrianahdez">Adriana Hernández Regueiro.</a>
           </span>
         </div>
       </div>

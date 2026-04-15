@@ -10,11 +10,97 @@
   }
 
   .sidebar__error {
-    padding: 20px 30px;
+    
     opacity: 0.75;
     font-size: 14px;
     position: relative;
     z-index: 1;
+
+    @include respond-at(768) {
+      padding: 20px 30px 8px;
+    }
+  }
+
+  // ─── Loading state ────────────────────────────────────────────────────────────
+
+  .sidebar__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 40px 30px;
+    position: relative;
+    z-index: 1;
+
+    p {
+      margin: 0;
+      font-size: 13px;
+      opacity: 0.6;
+    }
+  }
+
+  .sidebar__spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    border-top-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    animation: categories-spin 0.75s linear infinite;
+  }
+
+  @keyframes categories-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  // ─── Error + retry state ──────────────────────────────────────────────────────
+
+  .sidebar__error-state {
+    padding: 4px 30px 20px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sidebar__retry-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: background 150ms, border-color 150ms;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba(224, 92, 0, 0.7);
+      outline-offset: 2px;
+    }
+  }
+
+  .light & {
+    .sidebar__spinner {
+      border-color: rgba(0, 0, 0, 0.12);
+      border-top-color: rgba(0, 0, 0, 0.55);
+    }
+
+    .sidebar__retry-btn {
+      background: rgba(0, 0, 0, 0.06);
+      border-color: rgba(0, 0, 0, 0.15);
+      color: rgba(0, 0, 0, 0.75);
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.12);
+        border-color: rgba(0, 0, 0, 0.25);
+      }
+    }
   }
 
   @include respond-at(768) {

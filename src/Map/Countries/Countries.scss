@@ -2,6 +2,13 @@
   filter: brightness(1.5);
 }
 
+/* The heatmap canvas sits above the SVG polygon layer in the overlay pane.
+   Removing pointer events lets mouse interactions (hover label, clicks) reach
+   the country polygons underneath when the heatmap is active. */
+.leaflet-overlay-pane canvas {
+  pointer-events: none;
+}
+
 /* Cluster badge styling — matches the dark app theme */
 .marker-cluster {
   background-clip: padding-box;
@@ -37,6 +44,30 @@
     border-color: rgba(0, 0, 0, 0.2);
   }
   .marker-cluster span { color: rgba(0, 0, 0, 0.85); }
+}
+
+/* Selected country — polygon clicked via marker or Countries layer click */
+/* Dark theme: brighten to make the selection pop against the dark background */
+.leaflet-container path.country--selected {
+  filter: brightness(1.9) saturate(1.4);
+}
+
+.leaflet-container path.country--selected:hover {
+  filter: brightness(2.1) saturate(1.4);
+}
+
+/* Light theme: darken + boost saturation so the selection is clearly distinct
+   from both the base fill (which is already bright) and the desaturated no-data style */
+.light .leaflet-container path.country--selected {
+  filter: brightness(0.80) saturate(2.2);
+  stroke: #1a4a6e;
+  stroke-opacity: 1;
+}
+
+.light .leaflet-container path.country--selected:hover {
+  filter: brightness(0.70) saturate(2.2);
+  stroke: #1a4a6e;
+  stroke-opacity: 1;
 }
 
 /* Countries with no data for the current category (NO_DATA_INDICATOR_ENABLED) */

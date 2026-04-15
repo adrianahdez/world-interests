@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo, memo, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { MapContainer, useMap, Pane } from 'react-leaflet'
 import CustomMarker from '../CustomMarker/CustomMarker';
-import { getCountryLatLon, getData, getFlagFromAlpha2 } from './Points/Data';
+import { getCountryLatLon, getFlagFromAlpha2 } from './Points/Data';
 import { processPoint } from './Points/Points';
+import { useMapData } from '../hooks/useMapData';
+import { useImageRetry } from '../hooks/useImageRetry';
 import ImageNotFound from '../GlobalStyles/img/image-not-found.png';
 import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
+import { MapPointContext } from '../Common/MapPointContext';
+import { SidebarContext } from '../Common/SidebarContext';
 import translations from '../Common/translations';
 import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, STORAGE_KEY_FLAGS, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, FULLSCREEN_ENABLED, FLAGS_VISIBLE } from '../config';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css';
@@ -23,7 +28,9 @@ const DEFAULT_ZOOM = 3;
 function saveMapView(center, zoom) {
   try {
     localStorage.setItem(STORAGE_KEY_MAP_VIEW, JSON.stringify({ center, zoom }));
-  } catch (_) {}
+  } catch (e) {
+    console.warn('[WorldInterests] Could not save map view to localStorage:', e.message);
+  }
 }
 
 function loadMapView() {
@@ -165,9 +172,12 @@ function MarkerPaneSetup() {
   return null;
 }
 
-function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisible, onFooterToggle }) {
+function Map({ category, restoreRegion, footerVisible, onFooterToggle }) {
   const { isEs } = useContext(LanguageContext);
-  const [data, setData] = useState({});
+  const { setMapPoint } = useContext(MapPointContext);
+  const { toggleSidebar } = useContext(SidebarContext);
+  const { data, isLoading, mapError, retryCount } = useMapData(category);
+  useImageRetry();
   const [heatmapVisible, setHeatmapVisible] = useState(() => {
     try {
       const v = localStorage.getItem(STORAGE_KEY_HEATMAP);
@@ -190,120 +200,18 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
   // on page load, which would leave the toggle stuck in the ON state without actually being
   // in fullscreen. Always start from the config default each session.
   const [fullscreenEnabled, setFullscreenEnabled] = useState(FULLSCREEN_ENABLED);
-  const [mapError, setMapError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // true until first data fetch resolves
-  const [retryCount, setRetryCount] = useState(0); // current retry attempt (0 = first try, 1-3 = retrying)
   const hoverLabelRef = useRef(null); // ref to HoverCountryLabel DOM node — updated directly to avoid re-renders
   const mapContainerRef = useRef(null); // ref to the .map-container div — used for imperative class toggling
   const clusterGroupRef = useRef(null); // ref to the native Leaflet MarkerClusterGroup layer
   const processAllPointsRef = useRef(null); // ref to processPoint runner — called after cluster animation ends
-  const prevDataRef = useRef({});
   // Tracks whether the sidebar restore has already fired, so it only runs once per session.
   const restoredRef = useRef(false);
-
-  useEffect(() => {
-    setMapError(false);
-    setIsLoading(true);
-    setRetryCount(0);
-
-    let cancelled = false;
-    let retryTimer = null;
-    // Exponential backoff delays: 2s, 4s, 8s (max 3 retries).
-    const RETRY_DELAYS = [2000, 4000, 8000];
-
-    const attempt = (attemptIndex) => {
-      const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'get-json.php' + '?category=' + category;
-      getData(apiUrl)
-        .then((result) => {
-          if (cancelled) return;
-          setRetryCount(0);
-          // Only update state when data actually changed to avoid unnecessary re-renders.
-          if (JSON.stringify(result) !== JSON.stringify(prevDataRef.current)) {
-            prevDataRef.current = result;
-            setData(result);
-          }
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          if (cancelled) return;
-          if (attemptIndex < RETRY_DELAYS.length) {
-            // Schedule next retry and show the attempt counter in the UI.
-            setRetryCount(attemptIndex + 1);
-            retryTimer = setTimeout(() => attempt(attemptIndex + 1), RETRY_DELAYS[attemptIndex]);
-          } else {
-            // All retries exhausted — surface the error.
-            console.warn('[WorldInterests] Could not load map data for category "' + category + '" after ' + (RETRY_DELAYS.length + 1) + ' attempts:', error.message);
-            setRetryCount(0);
-            setMapError(true);
-            setIsLoading(false);
-            setData({});
-          }
-        });
-    };
-
-    attempt(0);
-
-    return () => {
-      // Cancel in-flight retries when category changes or component unmounts.
-      cancelled = true;
-      if (retryTimer) clearTimeout(retryTimer);
-    };
-  }, [category]);
-
-  // Retry channel images that fail to load (YouTube CDN 429 rate limiting).
-  // Uses event delegation since marker images live inside Leaflet DivIcons (not React-managed).
-  // Failed images are queued and retried one at a time to avoid triggering rate limits again.
-  useEffect(() => {
-    const retryQueue = [];
-    let retryTimer = null;
-
-    const processQueue = () => {
-      if (retryQueue.length === 0) {
-        retryTimer = null;
-        return;
-      }
-      const img = retryQueue.shift();
-      const originalSrc = img.dataset.originalSrc;
-      if (originalSrc && document.contains(img)) {
-        img.src = originalSrc + (originalSrc.includes('?') ? '&' : '?') + 'retry=' + Date.now();
-      }
-      retryTimer = setTimeout(processQueue, 800);
-    };
-
-    const handleError = (e) => {
-      if (e.target.tagName !== 'IMG' || !e.target.src.includes('ggpht.com')) return;
-      const img = e.target;
-      img.style.visibility = 'hidden';
-      if (!img.dataset.originalSrc) {
-        img.dataset.originalSrc = img.src.split('?retry=')[0];
-      }
-      const retryCount = parseInt(img.dataset.retry || '0');
-      if (retryCount < 5) {
-        img.dataset.retry = String(retryCount + 1);
-        retryQueue.push(img);
-        if (!retryTimer) {
-          retryTimer = setTimeout(processQueue, 1500);
-        }
-      }
-    };
-
-    const handleLoad = (e) => {
-      if (e.target.tagName !== 'IMG' || !e.target.src.includes('ggpht.com')) return;
-      e.target.style.visibility = 'visible';
-    };
-
-    document.addEventListener('error', handleError, true);
-    document.addEventListener('load', handleLoad, true);
-    return () => {
-      document.removeEventListener('error', handleError, true);
-      document.removeEventListener('load', handleLoad, true);
-      if (retryTimer) clearTimeout(retryTimer);
-    };
-  }, []);
 
   // processPoint after a new data is fetched, to change their appearance.
   // Also keeps processAllPointsRef up to date so ClusterGroupSetup can re-run it after
   // cluster animation ends (markers are re-created by the cluster group on zoom).
+  // Registers a single debounced resize listener here instead of inside processPoint,
+  // preventing the per-point listener accumulation that caused a memory leak on category switch.
   useEffect(() => {
     if (Object.keys(data).length === 0) return;
 
@@ -324,6 +232,20 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
     // Store so ClusterGroupSetup can call it on animationend.
     processAllPointsRef.current = runProcessPoint;
     runProcessPoint();
+
+    // Single debounced resize listener for all points — registered once per data load,
+    // not once per country. Cleaned up when data changes or component unmounts.
+    let resizeTimer = null;
+    const handleResize = () => {
+      if (resizeTimer) clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(runProcessPoint, 300); // 300ms debounce
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (resizeTimer) clearTimeout(resizeTimer);
+    };
   }, [data]);
 
   // Restore the sidebar for the last open country after data loads (once per session).
@@ -334,6 +256,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
     restoredRef.current = true; // prevent re-firing on subsequent data refreshes
     const point = data[alpha2][0];
     point.flag = getFlagFromAlpha2(alpha2);
+    point.alpha2 = alpha2;
     if (point.channel) point.channel.channelImage = point.channel.channelImage || ImageNotFound;
     setMapPoint(point);
     toggleSidebar(true);
@@ -341,13 +264,16 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
 
   // Persist settings to localStorage so they survive page reloads.
   useEffect(() => {
-    try { localStorage.setItem(STORAGE_KEY_HEATMAP, String(heatmapVisible)); } catch (_) {}
+    try { localStorage.setItem(STORAGE_KEY_HEATMAP, String(heatmapVisible)); }
+    catch (e) { console.warn('[WorldInterests] Could not save heatmap setting:', e.message); }
   }, [heatmapVisible]);
   useEffect(() => {
-    try { localStorage.setItem(STORAGE_KEY_CLUSTERING, String(clusteringEnabled)); } catch (_) {}
+    try { localStorage.setItem(STORAGE_KEY_CLUSTERING, String(clusteringEnabled)); }
+    catch (e) { console.warn('[WorldInterests] Could not save clustering setting:', e.message); }
   }, [clusteringEnabled]);
   useEffect(() => {
-    try { localStorage.setItem(STORAGE_KEY_FLAGS, String(flagsVisible)); } catch (_) {}
+    try { localStorage.setItem(STORAGE_KEY_FLAGS, String(flagsVisible)); }
+    catch (e) { console.warn('[WorldInterests] Could not save flags setting:', e.message); }
   }, [flagsVisible]);
   // Apply flag visibility class imperatively so React re-renders don't wipe the zoom
   // classes that MapViewSaver adds to the same element via classList.toggle.
@@ -428,23 +354,30 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
     return pos;
   }, [data]);
 
-  // Extracted so the same JSX can be rendered directly or inside MarkerClusterGroup.
-  const renderMarkers = () => Object.keys(data).map((alpha2) => {
+  // Memoized so Leaflet only unmounts/remounts markers when data or clustering mode changes.
+  // Avoids marker flicker on unrelated state updates (settings toggles, hover events, etc.).
+  const markers = useMemo(() => Object.keys(data).map((alpha2) => {
     const countryData = data[alpha2]?.[0];
     if (!countryData) return null;
 
     const latLon = markerPositions[alpha2];
-    if (!latLon) return null;
+    if (!latLon) {
+      console.warn('[WorldInterests] No coordinates found for alpha2:', alpha2);
+      return null;
+    }
+
+    const c = countryData.channel;
+    if (!c) {
+      console.warn('[WorldInterests] No channel data for country:', alpha2, countryData.regionName);
+      return null;
+    }
 
     countryData.flag = getFlagFromAlpha2(alpha2 || '');
+    countryData.alpha2 = alpha2;
+    c.channelImage = c.channelImage || ImageNotFound;
 
-    if (countryData.channel) {
-      countryData.channel.channelImage = countryData.channel.channelImage || ImageNotFound;
-    }
-    const c = countryData?.channel;
-
-    return latLon && typeof countryData !== 'undefined' ? (
-      <CustomMarker key={alpha2} position={latLon} toggleSidebar={toggleSidebar} mapPoint={countryData} setMapPoint={setMapPoint} clusterLayerRef={clusteringEnabled ? clusterGroupRef : null} markerPane="map-markers" ariaLabel={`${countryData.regionName}${c.channelTitle ? ` — ${c.channelTitle}` : ''}`}>
+    return (
+      <CustomMarker key={alpha2} position={latLon} markerData={countryData} clusterLayerRef={clusteringEnabled ? clusterGroupRef : null} markerPane="map-markers" ariaLabel={`${countryData.regionName}${c.channelTitle ? ` — ${c.channelTitle}` : ''}`}>
         <div className="custom-marker__point" data-region={countryData.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
           <span className="custom-marker__bg bg-color"></span>
           <span className="custom-marker__bg-pointer bg-color"></span>
@@ -458,13 +391,14 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
           </div>
         </div>
       </CustomMarker>
-    ) : null;
-  });
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [data, clusteringEnabled]); // markerPositions is derived from data — no separate dep needed
 
   return (
     <div ref={mapContainerRef} className="map-container" role="region" aria-label={tr.mapAriaLabel}>
       {isLoading && !mapError && (
-        <div className="map-loading-overlay">
+        <div className="map-loading-overlay" role="status" aria-live="polite">
           <div className="map-loading-overlay__spinner" />
           {retryCount > 0 && (
             <p className="map-loading-overlay__retry">{tr.retrying} ({retryCount}/3)…</p>
@@ -496,7 +430,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
         {/* country-polygons pane sits at z-index 200, below the marker pane at 400. */}
         <Pane name="country-polygons" style={{ zIndex: 200 }}>
           {/* This has the GeoJSON component. */}
-          <Countries data={data} category={category} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
+          <Countries data={data} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
         </Pane>
 
         {/* Creates the map-markers pane (z-index 400) before any markers are added. */}
@@ -504,13 +438,20 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
 
         {/* ClusterGroupSetup must appear before the markers so its effect runs first. */}
         {clusteringEnabled && <ClusterGroupSetup clusterGroupRef={clusterGroupRef} processAllPointsRef={processAllPointsRef} />}
-        {renderMarkers()}
+        {markers}
 
         {heatmapVisible && <HeatmapLayer data={data} visible={heatmapVisible} />}
       </MapContainer>
     </div>
   )
 }
+
+Map.propTypes = {
+  category: PropTypes.string.isRequired,
+  restoreRegion: PropTypes.string,
+  footerVisible: PropTypes.bool.isRequired,
+  onFooterToggle: PropTypes.func.isRequired,
+};
 
 export default memo(Map);
 

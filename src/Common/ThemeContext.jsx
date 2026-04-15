@@ -13,7 +13,11 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     // Store the theme in the localStorage when it changes. If it's not defined, it will be set to 'true' by default.
-    localStorage.setItem(STORAGE_KEY_THEME, isDarkMode);
+    try {
+      localStorage.setItem(STORAGE_KEY_THEME, isDarkMode);
+    } catch (e) {
+      console.warn('[WorldInterests] Could not save theme preference:', e.message);
+    }
     // Change the class of the document element to 'dark' or 'light' depending on the theme
     document.documentElement.className = isDarkMode ? 'dark' : 'light';
   }, [isDarkMode]);

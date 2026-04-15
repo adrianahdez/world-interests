@@ -1,15 +1,25 @@
 // ./countries-and-us-states.geo.json is a file that contains the coordinates of the countries and US states. Not used at the moment.
 import countries from './countries.geo.json';
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { GeoJSON, useMap } from 'react-leaflet';
 import { getCountryLatLon, getAlpha2FromAlpha3 } from '../Points/Data';
 import { makeStyleConfig } from '../geoJsonConfig';
+import { MapPointContext } from '../../Common/MapPointContext';
 
-const Countries = ({ data, category, onCountryHover = null }) => {
+// Style applied to the GeoJSON sub-layer for the currently selected country.
+// Weight/color are set inline; the class adds the CSS filter for the fill highlight.
+const SELECTED_STYLE = { weight: 2.5, color: 'var(--country-delimiter-color)', opacity: 1, className: 'country--selected' };
+
+const Countries = ({ data, onCountryHover = null }) => {
   const map = useMap();
   const dataRef = useRef(data);
+  // Holds the mounted Leaflet GeoJSON layer so we can call setStyle() instead of remounting.
+  const geoJsonLayerRef = useRef(null);
 
-  React.useEffect(() => {
+  const { selectedAlpha2, setSelectedAlpha2 } = useContext(MapPointContext);
+
+  useEffect(() => {
     dataRef.current = data;
   }, [data]);
 
@@ -17,20 +27,54 @@ const Countries = ({ data, category, onCountryHover = null }) => {
   // Using useMemo so it's only recalculated when data reference changes.
   const styleFunc = React.useMemo(() => makeStyleConfig(data), [data]);
 
+  // Apply updated styles to the existing layer instead of remounting via key.
+  // Remounting forces Leaflet to re-process the entire GeoJSON geometry on every
+  // category switch. setStyle() only updates fill/stroke — className is NOT propagated
+  // to existing paths, so we update classList manually after each setStyle() call.
+  useEffect(() => {
+    const layer = geoJsonLayerRef.current;
+    if (!layer) return;
+    layer.eachLayer((subLayer) => {
+      const style = styleFunc(subLayer.feature);
+      subLayer.setStyle(style);
+      if (subLayer._path) {
+        subLayer._path.classList.toggle('country--no-data', style.className === 'country--no-data');
+        subLayer._path.classList.remove('country--selected');
+      }
+    });
+  }, [styleFunc]);
+
+  // Highlight the selected country polygon; reset all others to their base style.
+  // Runs after the style reset above (declared later = runs later in same render).
+  // className is not propagated by setStyle(), so classList is updated manually.
+  useEffect(() => {
+    const layer = geoJsonLayerRef.current;
+    if (!layer) return;
+    layer.eachLayer((subLayer) => {
+      const alpha2 = getAlpha2FromAlpha3(subLayer.feature?.id);
+      const isSelected = alpha2 && alpha2 === selectedAlpha2;
+      if (isSelected) {
+        subLayer.setStyle(SELECTED_STYLE);
+        subLayer._path?.classList.add('country--selected');
+        subLayer._path?.classList.remove('country--no-data');
+      } else {
+        const style = styleFunc(subLayer.feature);
+        subLayer.setStyle(style);
+        if (subLayer._path) {
+          subLayer._path.classList.toggle('country--no-data', style.className === 'country--no-data');
+          subLayer._path.classList.remove('country--selected');
+        }
+      }
+    });
+  }, [selectedAlpha2, styleFunc]);
+
   const handleCountryClick = (event, countryName, alpha2) => {
     const latLon = getCountryLatLon(alpha2);
-    if (!latLon) {
-      console.error('No se pudo obtener latLon para alpha2:', alpha2);
-      return;
-    }
-    const countryData = dataRef.current[alpha2];
-    if (!countryData) {
-      console.log('No data for:', countryName);
-      return;
-    }
+    if (!latLon) return;
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     map.setView(latLon, map.getZoom(), { animate: !prefersReduced });
+    setSelectedAlpha2(alpha2);
     // TODO: Add code to show the sidebar with the country data
   };
 
@@ -52,13 +96,19 @@ const Countries = ({ data, category, onCountryHover = null }) => {
     }
   };
 
-  // key forces GeoJSON to remount (and re-apply styles) when the category
-  // changes or when data loads for the first time (0 → N keys).
-  const geoJsonKey = `${category}_${Object.keys(data).length > 0 ? 'loaded' : 'empty'}`;
-
   return (
-    <GeoJSON key={geoJsonKey} data={countries} style={styleFunc} onEachFeature={onEachCountry} />
+    <GeoJSON
+      ref={geoJsonLayerRef}
+      data={countries}
+      style={styleFunc}
+      onEachFeature={onEachCountry}
+    />
   );
+};
+
+Countries.propTypes = {
+  data: PropTypes.object.isRequired,
+  onCountryHover: PropTypes.func,
 };
 
 export default Countries;
