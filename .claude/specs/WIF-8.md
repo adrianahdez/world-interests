@@ -337,7 +337,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 8 — Categories UX: loading state, retry logic, retry button**
   `Categories.jsx`: add `isLoadingCategories` state (true while fetch is in-flight). Add `retryTrigger` state (integer counter, increment to retry). Include `retryTrigger` in the `useEffect` dependency array so incrementing it triggers a new fetch attempt. Implement up to 3 retries with fixed 2s delays inside the effect using the same `cancelled` + `retryTimer` pattern from `useMapData`. Show a loading spinner in the list area while `isLoadingCategories` is true. Show a retry button next to the error message when `categoriesError` is true. Add spinner styles to `Categories.scss`. Fix close button `type="reset"` → `type="button"` in `Categories.jsx` (and same fix in `InfoSidebar.jsx`).
 
-- [ ] **Step 9 — Map UX: immediate loading feedback on category change**
+- [x] **Step 9 — Map UX: immediate loading feedback on category change**
   `Map.jsx` / `useMapData`: ensure `isLoading` is set to `true` synchronously at the start of each fetch (before the first `await`). Currently it is — but confirm the state setter fires before the next render. In `App.jsx`, when `handleUpdateCategory` is called, the `isLoading` state in `Map` will flip on the next render after `category` prop updates. This is already the correct flow — verify it is visible immediately in the browser and document the finding. If not visible, add an explicit `isLoadingOverride` state in `App` that is set synchronously and cleared once `Map` signals loading has started.
 
 - [ ] **Step 10 — Map UX: selected country polygon highlight**

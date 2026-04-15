@@ -21,6 +21,11 @@ export function useMapData(category) {
   const prevDataRef = useRef({});
 
   useEffect(() => {
+    // setIsLoading(true) fires synchronously at the top of this effect, which React
+    // schedules as a passive effect (after paint). This means there is a ~1-frame gap
+    // on category switch where old markers are still visible before the overlay appears —
+    // intentional: showing stale content is better UX than a blank map flash.
+    // On initial mount isLoading starts as true (above), so the overlay is immediate.
     setMapError(false);
     setIsLoading(true);
     setRetryCount(0);
