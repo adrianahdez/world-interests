@@ -2,11 +2,15 @@ import React, { useEffect, useRef, useContext } from 'react';
 import './InfoSidebar.scss';
 import Player from '../Player/Player';
 import { LanguageContext } from '../Common/LanguageContext';
+import { MapPointContext } from '../Common/MapPointContext';
+import { SidebarContext } from '../Common/SidebarContext';
 import translations from '../Common/translations';
 
 // Render InfoSidebar component
-export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar, categoryName }) {
+export default function InfoSidebar({ categoryName }) {
   const { isEs } = useContext(LanguageContext);
+  const { mapPoint } = useContext(MapPointContext);
+  const { isSidebarOpen, toggleSidebar } = useContext(SidebarContext);
   const sidebarRef = useRef(null);
   const playerRef = useRef(null);
 

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { STORAGE_KEY_DIALOG, STORAGE_KEY_CATEGORY, STORAGE_KEY_SIDEBAR } from '../config';
 import Map from '../Map/Map';
 import Categories from '../Categories/Categories';
@@ -7,6 +7,8 @@ import InfoSidebar from '../InfoSidebar/InfoSidebar';
 import Head from '../Head/Head';
 // Header must be loaded after all components to load the theme rules at last and override others.
 import Header from '../Header/Header';
+import { MapPointContext } from '../Common/MapPointContext';
+import { SidebarContext } from '../Common/SidebarContext';
 
 // Returns the initial category using this priority: URL param > localStorage > 'music'.
 const getInitialCategory = () => {
@@ -113,14 +115,6 @@ export default function App() {
     window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`);
   };
 
-  // Update the category from the URL if it changes. I think this is not necessary.
-  // useEffect(() => {
-  //   const urlCategory = getCategoryFromUrl();
-  //   if (urlCategory !== category) {
-  //     setCategory(urlCategory);
-  //   }
-  // }, [category]);
-
   // If the state is not set, return true to show the dialog by default. If the state is set, return the state.
   function setDefaultIsDialogOpen() {
     const defaultState = localStorage.getItem(STORAGE_KEY_DIALOG);
@@ -128,32 +122,28 @@ export default function App() {
   }
 
   return (
-    <div className='app-container'>
-      <Head />
-      <Header isDialogOpen={isDialogOpen} toggleDialog={toggleDialog} />
-      <Categories
-        category={category}
-        setCategory={handleUpdateCategory}
-        isDialogOpen={isDialogOpen}
-        toggleDialog={toggleDialog}
-        toggleSidebar={toggleSidebar}
-        onCategoryNameChange={setCategoryName}
-      />
-      <InfoSidebar
-        mapPoint={mapPoint}
-        isSidebarOpen={isSidebarOpen}
-        toggleSidebar={toggleSidebar}
-        categoryName={categoryName}
-      />
-      <Map
-        category={category}
-        toggleSidebar={toggleSidebar}
-        setMapPoint={handleSetMapPoint}
-        restoreRegion={restoreRegion}
-        footerVisible={footerVisible}
-        onFooterToggle={handleFooterToggle}
-      />
-      {footerVisible && <Footer />}
-    </div>
+    <MapPointContext.Provider value={{ mapPoint, setMapPoint: handleSetMapPoint }}>
+      <SidebarContext.Provider value={{ isSidebarOpen, toggleSidebar }}>
+        <div className='app-container'>
+          <Head />
+          <Header isDialogOpen={isDialogOpen} toggleDialog={toggleDialog} />
+          <Categories
+            category={category}
+            setCategory={handleUpdateCategory}
+            isDialogOpen={isDialogOpen}
+            toggleDialog={toggleDialog}
+            onCategoryNameChange={setCategoryName}
+          />
+          <InfoSidebar categoryName={categoryName} />
+          <Map
+            category={category}
+            restoreRegion={restoreRegion}
+            footerVisible={footerVisible}
+            onFooterToggle={handleFooterToggle}
+          />
+          {footerVisible && <Footer />}
+        </div>
+      </SidebarContext.Provider>
+    </MapPointContext.Provider>
   );
 }

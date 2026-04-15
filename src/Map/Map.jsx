@@ -9,6 +9,8 @@ import ImageNotFound from '../GlobalStyles/img/image-not-found.png';
 import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
+import { MapPointContext } from '../Common/MapPointContext';
+import { SidebarContext } from '../Common/SidebarContext';
 import translations from '../Common/translations';
 import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, STORAGE_KEY_FLAGS, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, FULLSCREEN_ENABLED, FLAGS_VISIBLE } from '../config';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css';
@@ -169,8 +171,10 @@ function MarkerPaneSetup() {
   return null;
 }
 
-function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisible, onFooterToggle }) {
+function Map({ category, restoreRegion, footerVisible, onFooterToggle }) {
   const { isEs } = useContext(LanguageContext);
+  const { setMapPoint } = useContext(MapPointContext);
+  const { toggleSidebar } = useContext(SidebarContext);
   const { data, isLoading, mapError, retryCount } = useMapData(category);
   useImageRetry();
   const [heatmapVisible, setHeatmapVisible] = useState(() => {
@@ -369,7 +373,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
     c.channelImage = c.channelImage || ImageNotFound;
 
     return (
-      <CustomMarker key={alpha2} position={latLon} toggleSidebar={toggleSidebar} mapPoint={countryData} setMapPoint={setMapPoint} clusterLayerRef={clusteringEnabled ? clusterGroupRef : null} markerPane="map-markers" ariaLabel={`${countryData.regionName}${c.channelTitle ? ` — ${c.channelTitle}` : ''}`}>
+      <CustomMarker key={alpha2} position={latLon} markerData={countryData} clusterLayerRef={clusteringEnabled ? clusterGroupRef : null} markerPane="map-markers" ariaLabel={`${countryData.regionName}${c.channelTitle ? ` — ${c.channelTitle}` : ''}`}>
         <div className="custom-marker__point" data-region={countryData.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
           <span className="custom-marker__bg bg-color"></span>
           <span className="custom-marker__bg-pointer bg-color"></span>

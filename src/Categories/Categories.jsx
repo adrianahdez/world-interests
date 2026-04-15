@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
 import './Categories.scss';
 import { LanguageContext } from '../Common/LanguageContext';
+import { SidebarContext } from '../Common/SidebarContext';
 import translations from '../Common/translations';
 import { getData } from '../Map/Points/Data';
 
 // Render Categories component
-export default function Categories({ category, setCategory, isDialogOpen, toggleDialog, toggleSidebar, onCategoryNameChange }) {
+export default function Categories({ category, setCategory, isDialogOpen, toggleDialog, onCategoryNameChange }) {
   const { isEs } = useContext(LanguageContext);
+  const { toggleSidebar } = useContext(SidebarContext);
   const dialogRef = useRef(null);
   // The result categoryNames is an array of objects with the category slug and name like this: [{slug: 'music', name: 'Music'}, {slug: 'gaming', name: 'Gaming'}].
   const [categoryNames, setCategoryNames] = useState([]);

@@ -328,7 +328,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 5 — Extract useMapData and useImageRetry hooks**
   Create `src/hooks/useMapData.js`: move the data fetch `useEffect` from `Map.jsx` (lines 204–251) into this hook. Accepts `category`, returns `{ data, isLoading, mapError, retryCount }`. Create `src/hooks/useImageRetry.js`: move the image retry `useEffect` (lines 256–302) into this hook. No arguments, no return value — mounts/unmounts document listeners internally. Update `Map.jsx` to call both hooks and remove the moved logic. File should shrink by ~100 lines.
 
-- [ ] **Step 6 — Introduce MapPointContext and SidebarContext**
+- [x] **Step 6 — Introduce MapPointContext and SidebarContext**
   Create `src/Common/MapPointContext.jsx` (context + provider, exposes `{ mapPoint, setMapPoint }`). Create `src/Common/SidebarContext.jsx` (context + provider, exposes `{ isSidebarOpen, toggleSidebar }`). Update `App.jsx`: wrap JSX with both providers, remove `mapPoint`/`setMapPoint`/`isSidebarOpen`/`toggleSidebar` props from `Map`, `InfoSidebar`. Update `Map.jsx`: remove those props from its signature; call `useContext(MapPointContext)` and `useContext(SidebarContext)` instead. Update `CustomMarker.jsx`: consume both contexts, remove same props from signature. Update `InfoSidebar.jsx`: consume both contexts, remove props from signature. All five files change together in one commit.
 
 - [ ] **Step 7 — Performance: memoize markers + GeoJSON layer.setStyle()**
