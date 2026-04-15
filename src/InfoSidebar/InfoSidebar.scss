@@ -2,6 +2,27 @@
 @use '../GlobalStyles/Components/sidebars' as *;
 @use '../GlobalStyles/Components/close-icon' as *;
 
+// Mobile: slides up from the bottom on open, slides down on close
+@keyframes slide-up-sheet {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes slide-down-sheet {
+  from { transform: translateY(0);    opacity: 1; }
+  to   { transform: translateY(100%); opacity: 0; }
+}
+
+// Desktop: slides in from the right on open, slides out to the right on close.
+// Uses a short offset (60px) + opacity instead of a full translateX(100%) to avoid
+// temporarily expanding the scrollable area and shifting the page layout.
+@keyframes slide-in-from-right {
+  from { transform: translateX(60px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes slide-out-to-right {
+  from { transform: translateX(0);    opacity: 1; }
+  to   { transform: translateX(60px); opacity: 0; }
+}
 
 .sidebar.sidebar--map-point {
   $mobile-breakpoint: 578;
@@ -10,6 +31,15 @@
   /* Fallback if svh is not supported */
   max-height: calc(100vh  - var(--menu-margin-top) - var(--menu-margin-bottom));
   max-height: calc(100svh - var(--menu-margin-top) - var(--menu-margin-bottom));
+
+  // Desktop open: slides in from the right
+  &[open] {
+    animation: slide-in-from-right 300ms cubic-bezier(0.32, 0.72, 0, 1) both;
+  }
+  // Desktop close: slides out to the right
+  &.sidebar--closing {
+    animation: slide-out-to-right 250ms cubic-bezier(0.32, 0.72, 0, 1) both;
+  }
 
   .sidebar__list,
   .channel-content__heading {
@@ -126,5 +156,40 @@
     left: unset;
     max-width: 700px;
     min-width: 700px;
+  }
+
+  // Mobile bottom sheet — slides up from the bottom of the viewport.
+  // Keeps ~35% of the screen for the map to stay visible above the panel.
+  @include respond-max(767) {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    z-index: 600; // above footer (z-index: 500) and base sidebar (z-index: 501)
+    left: 0;
+    right: 0;
+    margin: 0;
+    max-width: 100%;
+    max-height: 82vh;
+    max-height: 82svh;
+    border-radius: 28px 28px 0 0;
+
+    &[open] {
+      animation: slide-up-sheet 300ms cubic-bezier(0.32, 0.72, 0, 1) both;
+    }
+    &.sidebar--closing {
+      animation: slide-down-sheet 250ms cubic-bezier(0.32, 0.72, 0, 1) both;
+    }
+
+    .sidebar__bg {
+      border-radius: 28px 28px 0 0;
+    }
+
+    .sidebar__content {
+      border-radius: 28px 28px 0 0;
+    }
+
+    .sidebar__title {
+      border-radius: 28px 28px 0 0;
+    }
   }
 }

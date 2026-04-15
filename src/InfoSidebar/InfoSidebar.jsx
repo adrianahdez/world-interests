@@ -11,13 +11,22 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar, ca
   const playerRef = useRef(null);
 
   useEffect(() => {
+    const dialog = sidebarRef.current;
     if (isSidebarOpen) {
-      sidebarRef.current.show();
-    } else {
-      sidebarRef.current.close();
+      dialog.classList.remove('sidebar--closing');
+      dialog.show();
+    } else if (dialog.open) {
+      // Play close animation before hiding — pause video immediately so audio stops.
       if (playerRef?.current && typeof playerRef.current.pauseVideo === 'function') {
         playerRef.current.pauseVideo();
       }
+      dialog.classList.add('sidebar--closing');
+      const onAnimationEnd = () => {
+        dialog.classList.remove('sidebar--closing');
+        dialog.close();
+      };
+      dialog.addEventListener('animationend', onAnimationEnd, { once: true });
+      return () => dialog.removeEventListener('animationend', onAnimationEnd);
     }
   }, [isSidebarOpen]);
 
