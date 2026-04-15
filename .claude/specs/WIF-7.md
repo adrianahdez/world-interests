@@ -45,40 +45,32 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 
 ## Clarifications
 
-1. **Layout**: Option A — single horizontal row (title · description · copyright). Most compact; text may wrap on very narrow screens but never truncated or removed.
-2. **Collapsible**: Yes. A toggle button collapses the footer to a thin strip. Open by default. State persisted to `localStorage` (key `'footerOpen'`). No new config constant or feature flag needed.
-3. **Title size**: Can be freely resized to suit the compact layout (no longer needs to be an `h1` at 20px).
+1. **Layout**: Option A — single horizontal row (title | description | copyright). Most compact; text may wrap on very narrow screens but never truncated or removed.
+2. **Hide toggle**: A "Footer" toggle in the MapSettings panel hides/shows the footer completely. Visible by default. State persisted to `localStorage` (key `'footerVisible'`). No new config constant or feature flag needed. A footer-embedded collapse button was considered but discarded — the height difference was only 8px and the collapsed state looked like a confusing empty bar.
+3. **Title size**: Reduced from h1 at 20px to a bold inline span at 12–13px to suit the compact row.
 
 ## Analysis
 
 ### Affected Files
 
-**Footer:**
-- `src/Footer/Footer.jsx` — add collapse state (localStorage `'footerOpen'`, default `true`), toggle button, restructured single-row JSX layout; dynamically update `--footer-height` CSS variable on the root element when state changes
-- `src/Footer/Footer.scss` — rewrite for compact horizontal row layout + collapsed strip state
-
-**Global styles / CSS variable consumers:**
-- `src/GlobalStyles/Components/_theme.scss` — reduce `--footer-height` default values to match new compact open height (~36px); remove desktop breakpoint override since a single-row footer no longer needs a different height at wider viewports
-- `src/main.scss` — no changes needed (consumes `--footer-height` dynamically)
-- `src/GlobalStyles/Components/_sidebars.scss` — no changes needed (consumes `--footer-height` dynamically)
-- `src/Map/MapSettings/MapSettings.scss` — no changes needed (consumes `--footer-height` dynamically)
-
-**Translations:**
-- `src/Common/translations.js` — add `footerCollapse` / `footerExpand` aria-label keys (EN + ES) for the toggle button
+- `src/Footer/Footer.jsx` — simplified to a plain functional component; restructured JSX to a single flex row (title | description | copyright)
+- `src/Footer/Footer.scss` — rewritten for compact horizontal row layout (36px height, centered, `|` separators)
+- `src/App/App.jsx` — added `footerVisible` state (localStorage `'footerVisible'`, default `true`); synchronously sets `--footer-height` in the state initializer to avoid layout flash; passes state + toggle handler to `Map` and conditionally renders `<Footer />`
+- `src/Map/Map.jsx` — accepts and forwards `footerVisible` / `onFooterToggle` props to `MapSettings`
+- `src/Map/MapSettings/MapSettings.jsx` — added "Footer" toggle row
+- `src/GlobalStyles/Components/_theme.scss` — `--footer-height` reduced from 86/100px to 36px; desktop breakpoint override removed
+- `src/Common/translations.js` — added `footerLabel` key (EN: "Footer", ES: "Pie de página")
 
 ### Risks & Concerns
 
-- **`--footer-height` mismatch on first render**: The CSS variable is set in `_theme.scss` and may not match the JS-updated value before the first `useEffect` fires. Fix: set the initial value in `_theme.scss` to the correct compact-open height so CSS and JS agree on mount.
-- **Collapsed height drift**: When collapsed, the footer is a thin strip but `--footer-height` in CSS defaults to the open height. The JS `useEffect` must run on mount (not just on toggle) to apply the correct collapsed height if the user's localStorage says `false`.
-- **Map container height jumps**: `.map-container` height depends on `--footer-height`. When the footer is toggled, the map briefly resizes. This is expected and acceptable — add a CSS `transition` on `.map-container` height if it looks jarring.
-- **Long description on mobile**: On very narrow screens the description may push the footer to 2 visual lines. This is acceptable and still far more compact than the current 3-block stack.
+- **`--footer-height` layout flash**: Mitigated by setting the CSS variable synchronously inside the `useState` initializer in `App.jsx` before first paint.
+- **Long description on mobile**: May wrap to a second visual line on very narrow screens — acceptable and still far more compact than the previous 3-block stack.
 
 ### Decisions
 
-- **Layout**: Single flex row (title + description + copyright) separated by `·` or `|` dividers for clarity. Toggle chevron on the far right.
-- **Collapsed state**: Footer shrinks to a ~28px strip showing only a thin bar and the expand chevron.
-- **`--footer-height` management**: Two approaches were considered: (a) CSS-only with two variables + a class toggle, (b) JS imperatively sets the variable. Chose **(b)** — consistent with how the rest of the app handles dynamic layout (e.g. zoom class toggling); avoids adding a second CSS variable that all consumers would need to know about.
-- **No new config constant**: localStorage key `'footerOpen'` is used directly in `Footer.jsx` as a string literal (per user's preference).
+- **Hide via MapSettings** (not a footer-embedded button): follows the existing pattern for all other map toggles; produces a meaningful space saving (full 36px vs 8px for a collapse strip).
+- **`--footer-height` set to `0px` when hidden**: ensures the map fills the full viewport and no gap remains where the footer was.
+- **No new config constant**: localStorage key `'footerVisible'` is a string literal in `App.jsx` (per user's preference).
 
 ## Implementation Plan
 
