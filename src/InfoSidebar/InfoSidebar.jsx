@@ -60,7 +60,7 @@ export default function InfoSidebar({ categoryName }) {
       <div className="sidebar__content">
         <menu>
           <div className='close-icon'>
-            <button type="reset" className='toggle-btn' onClick={() => toggleSidebar(false)}>
+            <button type="button" className='toggle-btn' onClick={() => toggleSidebar(false)}>
               <span></span>
               <span></span>
               <span></span>

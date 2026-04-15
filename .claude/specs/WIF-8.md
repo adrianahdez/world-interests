@@ -334,7 +334,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 7 — Performance: memoize markers + GeoJSON layer.setStyle()**
   `Map.jsx`: wrap `renderMarkers()` output in `useMemo` keyed on `data` (replaces the bare function call). `Countries.jsx`: add `useRef` to capture the Leaflet GeoJSON layer via the `ref` prop. Remove the `key` prop and the `geoJsonKey` variable. In a `useEffect` that depends on `styleFunc`, call `geoJsonLayerRef.current?.setStyle(styleFunc)`. On initial mount the layer ref is null, so the `style` prop on `<GeoJSON>` handles the first render; subsequent changes go through `setStyle()`.
 
-- [ ] **Step 8 — Categories UX: loading state, retry logic, retry button**
+- [x] **Step 8 — Categories UX: loading state, retry logic, retry button**
   `Categories.jsx`: add `isLoadingCategories` state (true while fetch is in-flight). Add `retryTrigger` state (integer counter, increment to retry). Include `retryTrigger` in the `useEffect` dependency array so incrementing it triggers a new fetch attempt. Implement up to 3 retries with fixed 2s delays inside the effect using the same `cancelled` + `retryTimer` pattern from `useMapData`. Show a loading spinner in the list area while `isLoadingCategories` is true. Show a retry button next to the error message when `categoriesError` is true. Add spinner styles to `Categories.scss`. Fix close button `type="reset"` → `type="button"` in `Categories.jsx` (and same fix in `InfoSidebar.jsx`).
 
 - [ ] **Step 9 — Map UX: immediate loading feedback on category change**
