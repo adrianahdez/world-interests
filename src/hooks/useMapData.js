@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { getData } from '../Map/Points/Data';
 
 // Exponential backoff delays between fetch retries: 2s, 4s, 8s (max 3 retries).
@@ -17,19 +17,12 @@ export function useMapData(category) {
   const [isLoading, setIsLoading] = useState(true);
   const [mapError, setMapError] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
-  // Tracks the previous result to skip re-renders when the data hasn't changed.
-  const prevDataRef = useRef({});
 
   useEffect(() => {
-    // setIsLoading(true) fires synchronously at the top of this effect, which React
-    // schedules as a passive effect (after paint). This means there is a ~1-frame gap
-    // on category switch where old markers are still visible before the overlay appears —
-    // intentional: showing stale content is better UX than a blank map flash.
-    // On initial mount isLoading starts as true (above), so the overlay is immediate.
     // Clear stale data immediately so consumers (e.g. heatmap) don't render
     // previous-category results while the new fetch is in flight.
+    // On initial mount isLoading starts as true (above), so the overlay is immediate.
     setData({});
-    prevDataRef.current = {};
     setMapError(false);
     setIsLoading(true);
     setRetryCount(0);
@@ -43,11 +36,7 @@ export function useMapData(category) {
         .then((result) => {
           if (cancelled) return;
           setRetryCount(0);
-          // Only update state when data actually changed to avoid unnecessary re-renders.
-          if (JSON.stringify(result) !== JSON.stringify(prevDataRef.current)) {
-            prevDataRef.current = result;
-            setData(result);
-          }
+          setData(result);
           setIsLoading(false);
         })
         .catch((error) => {

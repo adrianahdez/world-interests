@@ -11,6 +11,9 @@ import countryCoordinates from '../Countries/country-codes-lat-long-flags-alpha3
 const fetchData = async (url) => {
   const response = await fetch(url,
     {
+      // no-store bypasses the browser HTTP cache so switching categories always
+      // fetches fresh data from the server, regardless of cache-control headers.
+      cache: 'no-store',
       headers: {
         'Content-type': 'application/json',
       },

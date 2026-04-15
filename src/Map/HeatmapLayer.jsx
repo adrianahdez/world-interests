@@ -28,9 +28,13 @@ function HeatmapLayer({ data, visible }) {
       return [latLon[0], latLon[1], intensity];
     }).filter(Boolean);
 
+    console.log('[WorldInterests] HeatmapLayer: building with', points.length, 'points');
+
     const layer = heatLayer(points, {
-      radius: 40,
-      blur: 30,
+      // radius/blur sized so that density differences between categories are visible:
+      // fewer countries → sparser heatmap, not an indistinct global blob.
+      radius: 20,
+      blur: 15,
       maxZoom: 5,
       max: 1,
       minOpacity: 0.3,
