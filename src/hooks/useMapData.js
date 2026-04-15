@@ -26,6 +26,10 @@ export function useMapData(category) {
     // on category switch where old markers are still visible before the overlay appears —
     // intentional: showing stale content is better UX than a blank map flash.
     // On initial mount isLoading starts as true (above), so the overlay is immediate.
+    // Clear stale data immediately so consumers (e.g. heatmap) don't render
+    // previous-category results while the new fetch is in flight.
+    setData({});
+    prevDataRef.current = {};
     setMapError(false);
     setIsLoading(true);
     setRetryCount(0);
