@@ -22,6 +22,7 @@ const translations = {
     clusteringLabel: "Clustering",
     fullscreenLabel: "Fullscreen",
     flagsLabel: "Flags",
+    footerLabel: "Footer",
     settingsLabel: "Map settings",
     // Category display names keyed by slug — used as frontend translations because the
     // backend API currently returns English names for all languages.
@@ -64,6 +65,7 @@ const translations = {
     clusteringLabel: "Agrupación",
     fullscreenLabel: "Pantalla completa",
     flagsLabel: "Banderas",
+    footerLabel: "Pie de página",
     settingsLabel: "Ajustes del mapa",
     // Traducciones en español de los nombres de categoría — el backend devuelve solo inglés.
     categoryNames: {

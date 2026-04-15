@@ -8,7 +8,7 @@ import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, STORAGE_KEY_FLAGS, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, HEATMAP_ENABLED, FULLSCREEN_ENABLED, FLAGS_VISIBLE } from '../config';
+import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, STORAGE_KEY_FLAGS, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, FULLSCREEN_ENABLED, FLAGS_VISIBLE } from '../config';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css';
 import 'leaflet-gesture-handling';
 import L from 'leaflet';
@@ -165,7 +165,7 @@ function MarkerPaneSetup() {
   return null;
 }
 
-function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
+function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisible, onFooterToggle }) {
   const { isEs } = useContext(LanguageContext);
   const [data, setData] = useState({});
   const [heatmapVisible, setHeatmapVisible] = useState(() => {
@@ -485,6 +485,8 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
         onFullscreenToggle={handleFullscreenToggle}
         flagsVisible={flagsVisible}
         onFlagsToggle={() => setFlagsVisible(v => !v)}
+        footerVisible={footerVisible}
+        onFooterToggle={onFooterToggle}
         tr={tr}
       />
       <MapContainer {...mapConfig}>
@@ -504,7 +506,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
         {clusteringEnabled && <ClusterGroupSetup clusterGroupRef={clusterGroupRef} processAllPointsRef={processAllPointsRef} />}
         {renderMarkers()}
 
-        {HEATMAP_ENABLED && <HeatmapLayer data={data} visible={heatmapVisible} />}
+        {heatmapVisible && <HeatmapLayer data={data} visible={heatmapVisible} />}
       </MapContainer>
     </div>
   )
