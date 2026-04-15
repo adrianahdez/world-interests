@@ -2,6 +2,16 @@
 @use '../GlobalStyles/Components/sidebars' as *;
 @use '../GlobalStyles/Components/close-icon' as *;
 
+@keyframes slide-up-sheet {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 
 .sidebar.sidebar--map-point {
   $mobile-breakpoint: 578;
@@ -126,5 +136,36 @@
     left: unset;
     max-width: 700px;
     min-width: 700px;
+  }
+
+  // Mobile bottom sheet — slides up from the bottom of the viewport.
+  // Keeps ~35% of the screen for the map to stay visible above the panel.
+  @include respond-max(767) {
+    position: fixed;
+    top: auto;
+    bottom: var(--footer-height);
+    left: 0;
+    right: 0;
+    margin: 0;
+    max-width: 100%;
+    max-height: 65vh;
+    max-height: 65svh;
+    border-radius: 28px 28px 0 0;
+
+    &[open] {
+      animation: slide-up-sheet 300ms cubic-bezier(0.32, 0.72, 0, 1) both;
+    }
+
+    .sidebar__bg {
+      border-radius: 28px 28px 0 0;
+    }
+
+    .sidebar__content {
+      border-radius: 28px 28px 0 0;
+    }
+
+    .sidebar__title {
+      border-radius: 28px 28px 0 0;
+    }
   }
 }
