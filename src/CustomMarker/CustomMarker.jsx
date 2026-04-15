@@ -4,7 +4,7 @@ import { useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import './CustomMarker.scss';
 
-const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint, clusterLayerRef = null, ariaLabel = '', ...props }) => {
+const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint, clusterLayerRef = null, markerPane = null, ariaLabel = '', ...props }) => {
   const containerRef = useRef(null);
   const map = useMap(); // Get the map instance
 
@@ -26,7 +26,10 @@ const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint
 
       // Add to the cluster group if provided, otherwise directly to the map.
       const target = clusterLayerRef?.current || map;
-      const marker = L.marker(position, { icon }).addTo(target);
+      const markerOptions = { icon };
+      // Assign to the dedicated marker pane (z-index 400) when provided.
+      if (markerPane) markerOptions.pane = markerPane;
+      const marker = L.marker(position, markerOptions).addTo(target);
       marker.on('click', () => {
         // The sidebar will always be opened on marker click
           toggleSidebar(true);
@@ -56,7 +59,7 @@ const CustomMarker = ({ position, children, toggleSidebar, mapPoint, setMapPoint
         }
       };
     }
-  }, [position, map, mapPoint, toggleSidebar, setMapPoint, clusterLayerRef, ariaLabel]);
+  }, [position, map, mapPoint, toggleSidebar, setMapPoint, clusterLayerRef, markerPane, ariaLabel]);
   // }, [children]);
   // }, []);
 

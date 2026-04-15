@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo, memo, useContext } from 'react';
-import { MapContainer, useMap } from 'react-leaflet'
+import { MapContainer, useMap, Pane } from 'react-leaflet'
 import CustomMarker from '../CustomMarker/CustomMarker';
 import { getCountryLatLon, getData, getFlagFromAlpha2 } from './Points/Data';
 import { processPoint } from './Points/Points';
@@ -151,6 +151,19 @@ function ClusterGroupSetup({ clusterGroupRef, processAllPointsRef }) {
   return null;
 }
 
+
+// Creates the 'map-markers' pane at z-index 400, above the default overlayPane (400)
+// and tilePane (200), so markers always render on top of country polygons.
+function MarkerPaneSetup() {
+  const map = useMap();
+  useEffect(() => {
+    if (!map.getPane('map-markers')) {
+      const pane = map.createPane('map-markers');
+      pane.style.zIndex = 400;
+    }
+  }, [map]);
+  return null;
+}
 
 function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   const { isEs } = useContext(LanguageContext);
@@ -416,7 +429,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
     const c = countryData?.channel;
 
     return latLon && typeof countryData !== 'undefined' ? (
-      <CustomMarker key={alpha2} position={latLon} toggleSidebar={toggleSidebar} mapPoint={countryData} setMapPoint={setMapPoint} clusterLayerRef={clusteringEnabled ? clusterGroupRef : null} ariaLabel={`${countryData.regionName}${c.channelTitle ? ` — ${c.channelTitle}` : ''}`}>
+      <CustomMarker key={alpha2} position={latLon} toggleSidebar={toggleSidebar} mapPoint={countryData} setMapPoint={setMapPoint} clusterLayerRef={clusteringEnabled ? clusterGroupRef : null} markerPane="map-markers" ariaLabel={`${countryData.regionName}${c.channelTitle ? ` — ${c.channelTitle}` : ''}`}>
         <div className="custom-marker__point" data-region={countryData.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
           <span className="custom-marker__bg bg-color"></span>
           <span className="custom-marker__bg-pointer bg-color"></span>
@@ -461,8 +474,14 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
         <MapViewSaver />
         {DEBUG_ZOOM_LEVEL_ENABLED && <ZoomDebugLabel />}
         {COUNTRY_HOVER_LABEL_ENABLED && <HoverCountryLabel labelRef={hoverLabelRef} />}
-        {/* This has the GeoJSON component. */}
-        <Countries data={data} category={category} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
+        {/* country-polygons pane sits at z-index 200, below the marker pane at 400. */}
+        <Pane name="country-polygons" style={{ zIndex: 200 }}>
+          {/* This has the GeoJSON component. */}
+          <Countries data={data} category={category} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
+        </Pane>
+
+        {/* Creates the map-markers pane (z-index 400) before any markers are added. */}
+        <MarkerPaneSetup />
 
         {/* ClusterGroupSetup must appear before the markers so its effect runs first. */}
         {clusteringEnabled && <ClusterGroupSetup clusterGroupRef={clusterGroupRef} processAllPointsRef={processAllPointsRef} />}
