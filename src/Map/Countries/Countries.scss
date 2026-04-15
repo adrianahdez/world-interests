@@ -48,6 +48,12 @@
   filter: saturate(0.15) brightness(1.8);
 }
 
+/* Light theme: the pale delimiter colour at 0.5 opacity is invisible — use a darker stroke */
+.light .leaflet-container path.country--no-data {
+  stroke: #3a6e8c;
+  stroke-opacity: 0.85;
+}
+
 
 .map-loading-overlay {
   position: absolute;
