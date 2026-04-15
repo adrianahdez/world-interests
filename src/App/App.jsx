@@ -53,7 +53,11 @@ export default function App() {
   const toggleDialog = useCallback(() => {
     setIsDialogOpen((prev) => !prev);
     // Save the state in the local storage to remember the user's choice.
-    localStorage.setItem(STORAGE_KEY_DIALOG, !isDialogOpen);
+    try {
+      localStorage.setItem(STORAGE_KEY_DIALOG, !isDialogOpen);
+    } catch (e) {
+      console.warn('[WorldInterests] Could not save dialog state:', e.message);
+    }
   }, [isDialogOpen]);
 
   const handleFooterToggle = useCallback(() => {
@@ -75,7 +79,8 @@ export default function App() {
     setIsSidebarOpen(open);
     // Clear the stored region when the sidebar is explicitly closed.
     if (!open) {
-      try { localStorage.removeItem(STORAGE_KEY_SIDEBAR); } catch (_) {}
+      try { localStorage.removeItem(STORAGE_KEY_SIDEBAR); }
+      catch (e) { console.warn('[WorldInterests] Could not clear sidebar state:', e.message); }
     }
   }, []);
 
@@ -84,7 +89,9 @@ export default function App() {
     setMapPoint(point);
     try {
       if (point?.regionName) localStorage.setItem(STORAGE_KEY_SIDEBAR, point.regionName);
-    } catch (_) {}
+    } catch (e) {
+      console.warn('[WorldInterests] Could not save sidebar country:', e.message);
+    }
   }, []);
 
   // Handle updating the category — persist to localStorage and sync the URL.
@@ -93,7 +100,9 @@ export default function App() {
     updateUrlWithCategory(newCategory);
     try {
       localStorage.setItem(STORAGE_KEY_CATEGORY, newCategory);
-    } catch (_) {}
+    } catch (e) {
+      console.warn('[WorldInterests] Could not save category:', e.message);
+    }
   };
 
   // Update the URL with the selected category

@@ -23,7 +23,9 @@ const DEFAULT_ZOOM = 3;
 function saveMapView(center, zoom) {
   try {
     localStorage.setItem(STORAGE_KEY_MAP_VIEW, JSON.stringify({ center, zoom }));
-  } catch (_) {}
+  } catch (e) {
+    console.warn('[WorldInterests] Could not save map view to localStorage:', e.message);
+  }
 }
 
 function loadMapView() {
@@ -357,13 +359,16 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
 
   // Persist settings to localStorage so they survive page reloads.
   useEffect(() => {
-    try { localStorage.setItem(STORAGE_KEY_HEATMAP, String(heatmapVisible)); } catch (_) {}
+    try { localStorage.setItem(STORAGE_KEY_HEATMAP, String(heatmapVisible)); }
+    catch (e) { console.warn('[WorldInterests] Could not save heatmap setting:', e.message); }
   }, [heatmapVisible]);
   useEffect(() => {
-    try { localStorage.setItem(STORAGE_KEY_CLUSTERING, String(clusteringEnabled)); } catch (_) {}
+    try { localStorage.setItem(STORAGE_KEY_CLUSTERING, String(clusteringEnabled)); }
+    catch (e) { console.warn('[WorldInterests] Could not save clustering setting:', e.message); }
   }, [clusteringEnabled]);
   useEffect(() => {
-    try { localStorage.setItem(STORAGE_KEY_FLAGS, String(flagsVisible)); } catch (_) {}
+    try { localStorage.setItem(STORAGE_KEY_FLAGS, String(flagsVisible)); }
+    catch (e) { console.warn('[WorldInterests] Could not save flags setting:', e.message); }
   }, [flagsVisible]);
   // Apply flag visibility class imperatively so React re-renders don't wipe the zoom
   // classes that MapViewSaver adds to the same element via classList.toggle.
@@ -450,16 +455,21 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
     if (!countryData) return null;
 
     const latLon = markerPositions[alpha2];
-    if (!latLon) return null;
+    if (!latLon) {
+      console.warn('[WorldInterests] No coordinates found for alpha2:', alpha2);
+      return null;
+    }
+
+    const c = countryData.channel;
+    if (!c) {
+      console.warn('[WorldInterests] No channel data for country:', alpha2, countryData.regionName);
+      return null;
+    }
 
     countryData.flag = getFlagFromAlpha2(alpha2 || '');
+    c.channelImage = c.channelImage || ImageNotFound;
 
-    if (countryData.channel) {
-      countryData.channel.channelImage = countryData.channel.channelImage || ImageNotFound;
-    }
-    const c = countryData?.channel;
-
-    return latLon && typeof countryData !== 'undefined' ? (
+    return (
       <CustomMarker key={alpha2} position={latLon} toggleSidebar={toggleSidebar} mapPoint={countryData} setMapPoint={setMapPoint} clusterLayerRef={clusteringEnabled ? clusterGroupRef : null} markerPane="map-markers" ariaLabel={`${countryData.regionName}${c.channelTitle ? ` — ${c.channelTitle}` : ''}`}>
         <div className="custom-marker__point" data-region={countryData.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
           <span className="custom-marker__bg bg-color"></span>
@@ -474,7 +484,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
           </div>
         </div>
       </CustomMarker>
-    ) : null;
+    );
   });
 
   return (

@@ -319,7 +319,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 2 — Security hardening (Head.jsx, InfoSidebar.jsx, Footer.jsx, Points.js)**
   `Head.jsx`: replace both hardcoded `'G-MDKV0QPB8F'` strings with `process.env.REACT_APP_GA_ID ?? 'G-MDKV0QPB8F'`; add dev-only `console.warn` if `REACT_APP_GA_ID` is absent. Add `REACT_APP_GA_ID=G-MDKV0QPB8F` to `.env.production` (create if absent). `InfoSidebar.jsx`: add `rel="noopener noreferrer"` to both `target="_blank"` links. `Footer.jsx`: add `rel="noopener noreferrer"` to the GitHub link. `Points.js`: rewrite `changePointAppearance` to find the marker element by iterating `document.querySelectorAll('.custom-marker__point')` and comparing the stored `data-region` via `element.dataset.region` (no string interpolation in the selector).
 
-- [ ] **Step 3 — Defensive null checks + localStorage warnings**
+- [x] **Step 3 — Defensive null checks + localStorage warnings**
   `Map.jsx` `renderMarkers()`: guard `countryData.channel` before accessing `c.channelTitle` (currently crashes if channel is null). Add `console.warn` for missing lat/lon or missing channel. `Map.jsx` `saveMapView`: replace `catch (_) {}` with `catch (e) { console.warn(...) }`. Same for the three settings `useEffect` catches. `App.jsx`: same for `toggleDialog`, `toggleSidebar`, `handleSetMapPoint`, `handleUpdateCategory` localStorage writes. `LanguageContext.jsx` and `ThemeContext.jsx`: replace silent catches with `console.warn`.
 
 - [ ] **Step 4 — Refactor Points.js: pure functions, null guard, cleanup**

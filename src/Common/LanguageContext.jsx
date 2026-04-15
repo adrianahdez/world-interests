@@ -13,7 +13,11 @@ export const LanguageProvider = ({ children }) => {
 
   useEffect(() => {
     // Store the language in the localStorage when it changes. If it's not defined, it will be set to 'false' by default.
-    localStorage.setItem(STORAGE_KEY_LANG, isEs);
+    try {
+      localStorage.setItem(STORAGE_KEY_LANG, isEs);
+    } catch (e) {
+      console.warn('[WorldInterests] Could not save language preference:', e.message);
+    }
   }, [isEs]);
 
   const toggleLanguage = () => {
