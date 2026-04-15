@@ -4,7 +4,6 @@ import React, { useRef } from 'react';
 import { GeoJSON, useMap } from 'react-leaflet';
 import { getCountryLatLon, getAlpha2FromAlpha3 } from '../Points/Data';
 import { makeStyleConfig } from '../geoJsonConfig';
-import { REDUCED_MOTION_ENABLED } from '../../config';
 
 const Countries = ({ data, category, onCountryHover = null }) => {
   const map = useMap();
@@ -30,7 +29,7 @@ const Countries = ({ data, category, onCountryHover = null }) => {
       return;
     }
 
-    const prefersReduced = REDUCED_MOTION_ENABLED || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     map.setView(latLon, map.getZoom(), { animate: !prefersReduced });
     // TODO: Add code to show the sidebar with the country data
   };
