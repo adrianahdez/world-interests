@@ -322,7 +322,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 3 — Defensive null checks + localStorage warnings**
   `Map.jsx` `renderMarkers()`: guard `countryData.channel` before accessing `c.channelTitle` (currently crashes if channel is null). Add `console.warn` for missing lat/lon or missing channel. `Map.jsx` `saveMapView`: replace `catch (_) {}` with `catch (e) { console.warn(...) }`. Same for the three settings `useEffect` catches. `App.jsx`: same for `toggleDialog`, `toggleSidebar`, `handleSetMapPoint`, `handleUpdateCategory` localStorage writes. `LanguageContext.jsx` and `ThemeContext.jsx`: replace silent catches with `console.warn`.
 
-- [ ] **Step 4 — Refactor Points.js: pure functions, null guard, cleanup**
+- [x] **Step 4 — Refactor Points.js: pure functions, null guard, cleanup**
   `Points.js`: extract `calculatePointAttributes` as a clean pure named export (already done as part of Step 1). Add null guard: `const appEl = document.getElementById('app'); mapWidth = appEl?.clientWidth ?? window.innerWidth;`. Remove the module-level mutable `mapWidth`/`mapHeight`/`scaleFactor` — inline them in the resize function since they're not used outside it. Ensure `processPoint` signature stays unchanged so no call sites break.
 
 - [ ] **Step 5 — Extract useMapData and useImageRetry hooks**

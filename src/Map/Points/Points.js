@@ -1,7 +1,3 @@
-let mapWidth = 0; // width of the map
-let mapHeight = 0; // height of the map
-let scaleFactor = 0; // scale factor for the map
-
 // Curated palette of visually distinct colours for pin backgrounds.
 // Each channel name is hashed to a consistent index so the same name always gets the same colour.
 const COLOR_PALETTE = [
@@ -53,7 +49,7 @@ function hexToRgba(hex, opacity) {
  * @param {number} maxViews  Maximum viewCount across all visible pins in the current dataset.
  */
 export function calculatePointAttributes(point, minViews, maxViews) {
-  let name = point.channel.channelTitle;
+  const name = point.channel.channelTitle;
 
   // Pick a colour from the palette deterministically based on the full channel name.
   // Same name always maps to the same colour; different names spread across the palette.
@@ -67,10 +63,10 @@ export function calculatePointAttributes(point, minViews, maxViews) {
   const normalized = (hasRange && range > 0) ? (viewCount - minViews) / range : 1;
 
   // More views → more padding (thicker visible border ring) + more opaque + brighter ("shining").
-  const curved = Math.pow(normalized, 0.5);             // square root curve — shifts midpoint up toward higher values
-  const imagePadding = Math.round(1 + curved * 7);     // 1px (low) → 8px (high)
-  const bgOpacity = 0.75 + curved * 0.25;              // 0.75 (low) → 1.0 (high), square root curve — floor high enough for readable text
-  const bgBrightness = 0.55 + normalized * 0.60;       // 0.55 (low) → 1.15 (high, slight shine)
+  const curved = Math.pow(normalized, 0.5);         // square root curve — shifts midpoint up toward higher values
+  const imagePadding = Math.round(1 + curved * 7); // 1px (low) → 8px (high)
+  const bgOpacity = 0.75 + curved * 0.25;          // 0.75 (low) → 1.0 (high) — floor high enough for readable text
+  const bgBrightness = 0.55 + normalized * 0.60;   // 0.55 (low) → 1.15 (high, slight shine)
 
   return { bgColor, bgOpacity, imagePadding, bgBrightness };
 }
@@ -88,7 +84,7 @@ export function calculatePointAttributes(point, minViews, maxViews) {
 function changePointAppearance(point, pointLatLon, minViews, maxViews) {
   if (typeof point === 'undefined') return;
 
-  let attrs = calculatePointAttributes(point, minViews, maxViews);
+  const attrs = calculatePointAttributes(point, minViews, maxViews);
 
   // Find the marker element without string interpolation — safe against regionName containing quotes.
   const allPoints = document.querySelectorAll('.custom-marker__point');
@@ -101,7 +97,7 @@ function changePointAppearance(point, pointLatLon, minViews, maxViews) {
   }
   if (!markerPoint) return;
 
-  let bg = markerPoint.querySelectorAll('.bg-color');
+  const bg = markerPoint.querySelectorAll('.bg-color');
   for (let i = 0; i < bg.length; i++) {
     bg[i].style.backgroundColor = hexToRgba(attrs.bgColor, attrs.bgOpacity);
   }
@@ -111,8 +107,11 @@ function changePointAppearance(point, pointLatLon, minViews, maxViews) {
 }
 
 /**
- * Reload values based on window size and apply point appearance.
+ * Apply point appearance, re-reading the DOM on each call.
  * Called on initial load and from the debounced resize handler in Map.jsx.
+ * Previously read mapWidth/mapHeight/scaleFactor into module-level state here,
+ * but those values were never consumed by any function — removed as dead code.
+ * Add viewport-dimension reads back here if pin sizing ever depends on them.
  *
  * @param {Object} point
  * @param {Array} pointLatLon
@@ -120,13 +119,8 @@ function changePointAppearance(point, pointLatLon, minViews, maxViews) {
  * @param {number} maxViews
  */
 const resize = (point, pointLatLon, minViews, maxViews) => {
-  mapWidth = document.getElementById('app').clientWidth; // Get map width
-  mapHeight = document.getElementById('app').clientHeight; // Get map height
-  if (mapWidth > mapHeight) scaleFactor = mapWidth / 360; // Set scale factor
-  else scaleFactor = mapHeight / 360;
-
   changePointAppearance(point, pointLatLon, minViews, maxViews);
-}
+};
 
 /**
  * Apply initial appearance for a single point.
@@ -141,4 +135,4 @@ const resize = (point, pointLatLon, minViews, maxViews) => {
  */
 export const processPoint = (point, pointLatLon, minViews, maxViews) => {
   resize(point, pointLatLon, minViews, maxViews);
-}
+};
