@@ -21,10 +21,6 @@ export const FULLSCREEN_ENABLED        = false;
 // Replaces Leaflet's discrete zoom steps with smooth incremental scroll zoom.
 export const SMOOTH_ZOOM_ENABLED       = false;
 
-// Disables map fly animations and pin transitions when the OS/browser
-// "prefers-reduced-motion" setting is active.
-export const REDUCED_MOTION_ENABLED    = false;
-
 // Shows the country flag emoji on each pin. Can be toggled at runtime via map settings.
 export const FLAGS_VISIBLE           = true;
 

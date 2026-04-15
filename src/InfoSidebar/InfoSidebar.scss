@@ -193,3 +193,11 @@
     }
   }
 }
+
+/* Reduced motion: skip all sidebar open/close animations */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar--map-point[open],
+  .sidebar--map-point.sidebar--closing {
+    animation: none !important;
+  }
+}

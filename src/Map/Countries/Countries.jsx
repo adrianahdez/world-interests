@@ -29,7 +29,8 @@ const Countries = ({ data, category, onCountryHover = null }) => {
       return;
     }
 
-    map.setView(latLon, map.getZoom(), { animate: true });
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    map.setView(latLon, map.getZoom(), { animate: !prefersReduced });
     // TODO: Add code to show the sidebar with the country data
   };
 
