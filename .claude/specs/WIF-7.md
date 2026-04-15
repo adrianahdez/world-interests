@@ -83,7 +83,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 ## Implementation Plan
 
 - [x] Step 1: Add collapse state and toggle to `src/Footer/Footer.jsx` — `isOpen` state from `localStorage` (`'footerOpen'`, default `true`); `useEffect` to persist changes and to update `--footer-height` on `document.documentElement` (open: `'36px'`, collapsed: `'28px'`); restructure JSX to a single flex row with title, description, copyright, and a toggle chevron button.
-- [ ] Step 2: Rewrite `src/Footer/Footer.scss` — compact single-row horizontal layout (flex row, items center-aligned, small uniform font size, `gap`-separated); collapsed state (`.footer--collapsed`) hides the content row and shrinks to a thin strip with only the toggle visible; smooth height transition.
+- [x] Step 2: Rewrite `src/Footer/Footer.scss` — compact single-row horizontal layout (flex row, items center-aligned, small uniform font size, `gap`-separated); collapsed state (`.footer--collapsed`) hides the content row and shrinks to a thin strip with only the toggle visible; smooth height transition.
 - [ ] Step 3: Update `src/GlobalStyles/Components/_theme.scss` — change `--footer-height` to `36px` (default) and remove or simplify the `≥604px` breakpoint override (no longer needed for a single-row footer).
 - [ ] Step 4: Add toggle button aria-labels to `src/Common/translations.js` — `footerCollapse` and `footerExpand` keys in both EN and ES.
 - [ ] Step 5: Build verification — run `npm run build` and confirm no errors; visually check footer at mobile and desktop widths, open and collapsed states, and confirm map/sidebar/settings panel remain correctly positioned.
