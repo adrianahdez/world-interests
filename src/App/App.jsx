@@ -23,8 +23,10 @@ const getInitialCategory = () => {
 export default function App() {
   // Set the initial category based on the URL or default to 'music' for the map to show when the app loads.
   const [category, setCategory] = useState(getInitialCategory);
-  // Display name for the active category — resolved by Categories once its list loads.
-  const [categoryName, setCategoryName] = useState('');
+  // Full slug → display-name map for the current language, populated by Categories after each fetch.
+  // Deriving categoryName from the map means it updates instantly on language switch or category change,
+  // and falls back to the slug (instead of empty string) while the API hasn't responded yet.
+  const [categoriesMap, setCategoriesMap] = useState({});
   // Category dialog first state. Set to true to show the dialog when the app loads or false to hide it.
   const [isDialogOpen, setIsDialogOpen] = useState(() => setDefaultIsDialogOpen());
 
@@ -100,13 +102,13 @@ export default function App() {
         isDialogOpen={isDialogOpen}
         toggleDialog={toggleDialog}
         toggleSidebar={toggleSidebar}
-        onCategoryNameChange={setCategoryName}
+        onCategoriesLoad={setCategoriesMap}
       />
       <InfoSidebar
         mapPoint={mapPoint}
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
-        categoryName={categoryName}
+        categoryName={categoriesMap[category] || category}
       />
       <Map
         category={category}

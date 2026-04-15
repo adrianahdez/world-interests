@@ -5,7 +5,7 @@ import translations from '../Common/translations';
 import { getData } from '../Map/Points/Data';
 
 // Render Categories component
-export default function Categories({ category, setCategory, isDialogOpen, toggleDialog, toggleSidebar, onCategoryNameChange }) {
+export default function Categories({ category, setCategory, isDialogOpen, toggleDialog, toggleSidebar, onCategoriesLoad }) {
   const { isEs } = useContext(LanguageContext);
   const dialogRef = useRef(null);
   // The result categoryNames is an array of objects with the category slug and name like this: [{slug: 'music', name: 'Music'}, {slug: 'gaming', name: 'Gaming'}].
@@ -40,9 +40,10 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
 
         setCategoryNames(transformedCategories);
 
-        // Resolve and emit the display name for the currently active category.
-        const active = transformedCategories.find(c => c.slug === category);
-        if (active) onCategoryNameChange?.(active.name);
+        // Emit the full slug→name map so App can derive the active category's display name
+        // instantly for any language switch or category change without another fetch.
+        const map = Object.fromEntries(transformedCategories.map(({ slug, name }) => [slug, name]));
+        onCategoriesLoad?.(map);
       })
       .catch((error) => {
         console.warn('[WorldInterests] Could not load categories:', error.message);
@@ -112,7 +113,6 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
                 <a href="#" className="sidebar__link" data-category={slug} onClick={e => {
                   e.preventDefault();
                   setCategory(slug);
-                  onCategoryNameChange?.(name);
                   toggleSidebar(false);
                   // Close the dialog only if on a mobile device
                   if (isMobile) {
