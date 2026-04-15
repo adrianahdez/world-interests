@@ -13,7 +13,7 @@ export const GESTURE_HANDLING_ENABLED  = false;
 export const NO_DATA_INDICATOR_ENABLED = true;
 
 // Toggleable color-gradient overlay that visualises regional trending intensity.
-export const HEATMAP_ENABLED           = false;
+export const HEATMAP_ENABLED           = true;
 
 // Adds a fullscreen button that expands the map to fill the entire viewport.
 export const FULLSCREEN_ENABLED        = false;
@@ -38,6 +38,7 @@ export const STORAGE_KEY_THEME    = 'isDarkMode';    // colour theme (true = dar
 export const STORAGE_KEY_DIALOG   = 'isDialogOpen';  // category-picker dialog open state
 export const STORAGE_KEY_CATEGORY = 'category';      // last selected category slug
 export const STORAGE_KEY_SIDEBAR  = 'sidebarCountry'; // alpha-2 code of last open country sidebar
+export const STORAGE_KEY_HEATMAP  = 'heatmapVisible'; // whether the heatmap overlay is on (true/false)
 
 // ─── Zoom Thresholds ─────────────────────────────────────────────────────────
 

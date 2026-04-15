@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@linkurious/leaflet-heat": "^0.2.6",
     "dotenv-webpack": "^8.1.0",
     "leaflet": "^1.9.4",
     "leaflet-gesture-handling": "^1.2.2",

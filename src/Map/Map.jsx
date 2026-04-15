@@ -8,12 +8,14 @@ import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED } from '../config';
+import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, HEATMAP_ENABLED } from '../config';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css';
 import 'leaflet-gesture-handling';
 import L from 'leaflet';
 import 'leaflet.markercluster';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
+import HeatmapLayer from './HeatmapLayer';
+import MapSettings from './MapSettings/MapSettings';
 
 const DEFAULT_CENTER = [25, 0];
 const DEFAULT_ZOOM = 3;
@@ -102,19 +104,7 @@ function ZoomDebugLabel() {
   }, [map]);
 
   return (
-    <div style={{
-      position: 'absolute',
-      bottom: '12px',
-      right: '12px',
-      zIndex: 1000,
-      background: 'rgba(0,0,0,0.55)',
-      color: '#fff',
-      fontSize: '11px',
-      fontFamily: 'monospace',
-      padding: '3px 7px',
-      borderRadius: '4px',
-      pointerEvents: 'none',
-    }}>
+    <div className="map-overlay-label map-overlay-label--zoom">
       zoom: {zoom}
     </div>
   );
@@ -127,20 +117,8 @@ function HoverCountryLabel({ labelRef }) {
   return (
     <div
       ref={labelRef}
-      style={{
-        display: 'none',
-        position: 'absolute',
-        bottom: '38px',
-        right: '12px',
-        zIndex: 1000,
-        background: 'rgba(0,0,0,0.55)',
-        color: '#fff',
-        fontSize: '11px',
-        fontFamily: 'monospace',
-        padding: '3px 7px',
-        borderRadius: '4px',
-        pointerEvents: 'none',
-      }}
+      className="map-overlay-label map-overlay-label--country"
+      style={{ display: 'none' }}
     />
   );
 }
@@ -173,9 +151,13 @@ function ClusterGroupSetup({ clusterGroupRef, processAllPointsRef }) {
   return null;
 }
 
+
 function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
   const { isEs } = useContext(LanguageContext);
   const [data, setData] = useState({});
+  const [heatmapVisible, setHeatmapVisible] = useState(() => {
+    try { return localStorage.getItem(STORAGE_KEY_HEATMAP) === 'true'; } catch (_) { return false; }
+  });
   const [mapError, setMapError] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // true until first data fetch resolves
   const [retryCount, setRetryCount] = useState(0); // current retry attempt (0 = first try, 1-3 = retrying)
@@ -324,6 +306,11 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
     toggleSidebar(true);
   }, [data, restoreRegion, setMapPoint, toggleSidebar]);
 
+  // Persist heatmap visibility to localStorage so it survives page reloads.
+  useEffect(() => {
+    try { localStorage.setItem(STORAGE_KEY_HEATMAP, String(heatmapVisible)); } catch (_) {}
+  }, [heatmapVisible]);
+
   // Updates the hover label DOM node directly — avoids re-rendering Map and its markers.
   const handleCountryHover = useCallback((name) => {
     const el = hoverLabelRef.current;
@@ -416,6 +403,13 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
           <p>{tr.mapDataUnavailable}</p>
         </div>
       )}
+      {HEATMAP_ENABLED && (
+        <MapSettings
+          heatmapVisible={heatmapVisible}
+          onHeatmapToggle={() => setHeatmapVisible(v => !v)}
+          tr={tr}
+        />
+      )}
       <MapContainer {...mapConfig}>
         <MapViewSaver />
         {DEBUG_ZOOM_LEVEL_ENABLED && <ZoomDebugLabel />}
@@ -427,6 +421,7 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion }) {
         {CLUSTERING_ENABLED && <ClusterGroupSetup clusterGroupRef={clusterGroupRef} processAllPointsRef={processAllPointsRef} />}
         {renderMarkers()}
 
+        {HEATMAP_ENABLED && <HeatmapLayer data={data} visible={heatmapVisible} />}
       </MapContainer>
     </div>
   )
