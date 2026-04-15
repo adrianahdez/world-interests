@@ -32,10 +32,11 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
           return;
         }
 
-        // Transform the object into an array of categories with slug and name properties
+        // Transform the object into an array of categories, applying frontend translations
+        // because the backend currently returns English names for all languages.
         const transformedCategories = Object.entries(categoriesOfCurrentLanguage).map(([slug, name]) => ({
           slug,
-          name,
+          name: translations[currLang]?.categoryNames?.[slug] || name,
         }));
 
         setCategoryNames(transformedCategories);
