@@ -2,15 +2,26 @@
 @use '../GlobalStyles/Components/sidebars' as *;
 @use '../GlobalStyles/Components/close-icon' as *;
 
+// Mobile: slides up from the bottom on open, slides down on close
 @keyframes slide-up-sheet {
-  from {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes slide-down-sheet {
+  from { transform: translateY(0);    opacity: 1; }
+  to   { transform: translateY(100%); opacity: 0; }
+}
+
+// Desktop: slides in from the right on open, slides out to the right on close.
+// Uses a short offset (60px) + opacity instead of a full translateX(100%) to avoid
+// temporarily expanding the scrollable area and shifting the page layout.
+@keyframes slide-in-from-right {
+  from { transform: translateX(60px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes slide-out-to-right {
+  from { transform: translateX(0);    opacity: 1; }
+  to   { transform: translateX(60px); opacity: 0; }
 }
 
 .sidebar.sidebar--map-point {
@@ -20,6 +31,15 @@
   /* Fallback if svh is not supported */
   max-height: calc(100vh  - var(--menu-margin-top) - var(--menu-margin-bottom));
   max-height: calc(100svh - var(--menu-margin-top) - var(--menu-margin-bottom));
+
+  // Desktop open: slides in from the right
+  &[open] {
+    animation: slide-in-from-right 300ms cubic-bezier(0.32, 0.72, 0, 1) both;
+  }
+  // Desktop close: slides out to the right
+  &.sidebar--closing {
+    animation: slide-out-to-right 250ms cubic-bezier(0.32, 0.72, 0, 1) both;
+  }
 
   .sidebar__list,
   .channel-content__heading {
@@ -155,6 +175,9 @@
 
     &[open] {
       animation: slide-up-sheet 300ms cubic-bezier(0.32, 0.72, 0, 1) both;
+    }
+    &.sidebar--closing {
+      animation: slide-down-sheet 250ms cubic-bezier(0.32, 0.72, 0, 1) both;
     }
 
     .sidebar__bg {
