@@ -72,6 +72,6 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 
 ## Implementation Plan
 
-- [ ] Step 1: Remove `categoryNames` blocks from `src/Common/translations.js` — delete both the `en.categoryNames` and `es.categoryNames` entries and their associated comments.
-- [ ] Step 2: Update `src/Categories/Categories.jsx` — remove the `translations` import, replace the workaround transform with a direct backend name lookup plus English fallback, and remove the stale workaround comment.
-- [ ] Step 3: Manual smoke-test on the dev server — verify the category list renders correctly in both English and Spanish after the language toggle.
+- [x] Step 1: Remove `categoryNames` blocks from `src/Common/translations.js` — delete both the `en.categoryNames` and `es.categoryNames` entries and their associated comments.
+- [x] Step 2: Update `src/Categories/Categories.jsx` — remove the `translations` import, replace the workaround transform with a direct backend name lookup plus English fallback, and remove the stale workaround comment.
+- [x] Step 3: Manual smoke-test on the dev server — verify the category list renders correctly in both English and Spanish after the language toggle.
