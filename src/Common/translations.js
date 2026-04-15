@@ -16,6 +16,10 @@ const translations = {
     mapDataUnavailable: "Map data is not available right now. Please try again later.",
     retrying: "Retrying",
     mapAriaLabel: "Interactive world map showing trending YouTube channels by country",
+    heatmapShow: "Show heatmap",
+    heatmapHide: "Hide heatmap",
+    heatmapLabel: "Heatmap",
+    settingsLabel: "Map settings",
   },
   es: {
     statsFor: "Estadísticas para ",
@@ -34,6 +38,10 @@ const translations = {
     mapDataUnavailable: "Los datos del mapa no están disponibles en este momento. Por favor, inténtalo más tarde.",
     retrying: "Reintentando",
     mapAriaLabel: "Mapa mundial interactivo con los canales de YouTube en tendencia por país",
+    heatmapShow: "Mostrar mapa de calor",
+    heatmapHide: "Ocultar mapa de calor",
+    heatmapLabel: "Mapa de calor",
+    settingsLabel: "Ajustes del mapa",
   },
 };
 

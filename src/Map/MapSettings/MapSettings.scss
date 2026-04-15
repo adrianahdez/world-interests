@@ -1,0 +1,123 @@
+.map-settings {
+  position: absolute;
+  bottom: calc(var(--footer-height) + 12px);
+  left: 12px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+
+  &__trigger {
+    width: 34px;
+    height: 34px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    font-size: 34px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 150ms, border-color 150ms;
+    line-height: 1;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.75);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  &--open &__trigger {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.45);
+  }
+
+  &__panel {
+    background: rgba(10, 20, 30, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 10px 14px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    min-width: 160px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+
+    input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+      accent-color: #e05c00;
+    }
+  }
+}
+
+/* Light theme */
+.light .map-settings {
+  &__trigger {
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    border-color: rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  &--open &__trigger {
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.35);
+  }
+
+  &__panel {
+    background: rgba(240, 244, 248, 0.95);
+    border-color: rgba(0, 0, 0, 0.15);
+  }
+
+  &__label {
+    color: rgba(0, 0, 0, 0.85);
+  }
+}
+
+/* Mobile — slightly larger touch target */
+@media (max-width: 600px) {
+  .map-settings {
+    left: 16px;
+
+    &__trigger {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+
+    &__panel {
+      min-width: 180px;
+      padding: 12px 16px;
+    }
+
+    &__label {
+      font-size: 14px;
+
+      input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}

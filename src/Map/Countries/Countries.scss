@@ -48,6 +48,7 @@
   filter: saturate(0.15) brightness(1.8);
 }
 
+
 .map-loading-overlay {
   position: absolute;
   top: 50%;
@@ -75,6 +76,32 @@
 
 @keyframes map-spin {
   to { transform: rotate(360deg); }
+}
+
+
+/* Shared style for the zoom debug label and country hover label (bottom-right overlays).
+   Background and text colour switch with the theme via the .light class on <html>. */
+.map-overlay-label {
+  position: absolute;
+  right: 12px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.55);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 11px;
+  font-family: monospace;
+  padding: 3px 7px;
+  border-radius: 4px;
+  pointer-events: none;
+  border: 1px solid transparent;
+
+  &--zoom    { bottom: 12px; }
+  &--country { bottom: 38px; }
+}
+
+.light .map-overlay-label {
+  background: rgba(255, 255, 255, 0.82);
+  color: rgba(0, 0, 0, 0.85);
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
 .map-error-overlay {
