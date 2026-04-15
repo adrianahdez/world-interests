@@ -71,7 +71,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar, ca
 
               <div className='channel-content__text-group mt-0'>
                 <h3 className='channel-content__heading'>{tr.channelName}</h3>
-                <a target="_blank" href={`https://youtube.com/channel/${c?.channelId}`}>{c?.channelTitle}</a>
+                <a target="_blank" rel="noopener noreferrer" href={`https://youtube.com/channel/${c?.channelId}`}>{c?.channelTitle}</a>
               </div>
 
               <div className='channel-content__text-group mt-0'>
@@ -90,7 +90,7 @@ export default function InfoSidebar({ mapPoint, isSidebarOpen, toggleSidebar, ca
             <h2 className="channel-content__subheading">{tr.mostPopularVideo}</h2>
             <div className='channel-content__text'>
 
-              <a target="_blank" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
+              <a target="_blank" rel="noopener noreferrer" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
 
               <div className='channel-content__stats'>
                 <div className='channel-content__text-group'>

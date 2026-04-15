@@ -316,7 +316,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 1 — Fix resize listener memory leak (Points.js + Map.jsx)**
   Modify `Points.js`: export `calculatePointAttributes(point, minViews, maxViews)` as a pure named export. Remove `window.addEventListener` from `processPoint`. Keep `changePointAppearance` and `processPoint` for existing callers but have `processPoint` only call `resize()` once (no listener). In `Map.jsx`: in the `useEffect` that calls `runProcessPoint`, register a single debounced `window resize` listener that calls `runProcessPoint()`, stored in a ref so it survives re-renders. Clean up the listener in the effect's return.
 
-- [ ] **Step 2 — Security hardening (Head.jsx, InfoSidebar.jsx, Footer.jsx, Points.js)**
+- [x] **Step 2 — Security hardening (Head.jsx, InfoSidebar.jsx, Footer.jsx, Points.js)**
   `Head.jsx`: replace both hardcoded `'G-MDKV0QPB8F'` strings with `process.env.REACT_APP_GA_ID ?? 'G-MDKV0QPB8F'`; add dev-only `console.warn` if `REACT_APP_GA_ID` is absent. Add `REACT_APP_GA_ID=G-MDKV0QPB8F` to `.env.production` (create if absent). `InfoSidebar.jsx`: add `rel="noopener noreferrer"` to both `target="_blank"` links. `Footer.jsx`: add `rel="noopener noreferrer"` to the GitHub link. `Points.js`: rewrite `changePointAppearance` to find the marker element by iterating `document.querySelectorAll('.custom-marker__point')` and comparing the stored `data-region` via `element.dataset.region` (no string interpolation in the selector).
 
 - [ ] **Step 3 — Defensive null checks + localStorage warnings**
