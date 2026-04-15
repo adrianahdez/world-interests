@@ -175,6 +175,21 @@
   filter: brightness(1.5);
 }
 
+/* Reduced motion: disable pin transitions and hover scale transforms */
+@media (prefers-reduced-motion: reduce) {
+  .custom-marker__container,
+  .custom-marker__point {
+    transition: none !important;
+  }
+
+  .custom-marker__container:hover,
+  .map--low-zoom .custom-marker__container:hover,
+  .map--very-low-zoom .custom-marker__container:hover,
+  .map--max-zoom .custom-marker__container:hover {
+    transform: none !important;
+  }
+}
+
 /* Flags toggle: hide flag emojis when the user disables them via map settings */
 .map--flags-hidden .flag {
   display: none;
