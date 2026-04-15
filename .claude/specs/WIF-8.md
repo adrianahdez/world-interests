@@ -325,7 +325,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 4 — Refactor Points.js: pure functions, null guard, cleanup**
   `Points.js`: extract `calculatePointAttributes` as a clean pure named export (already done as part of Step 1). Add null guard: `const appEl = document.getElementById('app'); mapWidth = appEl?.clientWidth ?? window.innerWidth;`. Remove the module-level mutable `mapWidth`/`mapHeight`/`scaleFactor` — inline them in the resize function since they're not used outside it. Ensure `processPoint` signature stays unchanged so no call sites break.
 
-- [ ] **Step 5 — Extract useMapData and useImageRetry hooks**
+- [x] **Step 5 — Extract useMapData and useImageRetry hooks**
   Create `src/hooks/useMapData.js`: move the data fetch `useEffect` from `Map.jsx` (lines 204–251) into this hook. Accepts `category`, returns `{ data, isLoading, mapError, retryCount }`. Create `src/hooks/useImageRetry.js`: move the image retry `useEffect` (lines 256–302) into this hook. No arguments, no return value — mounts/unmounts document listeners internally. Update `Map.jsx` to call both hooks and remove the moved logic. File should shrink by ~100 lines.
 
 - [ ] **Step 6 — Introduce MapPointContext and SidebarContext**

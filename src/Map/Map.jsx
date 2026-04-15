@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo, memo, useContext } from 'react';
 import { MapContainer, useMap, Pane } from 'react-leaflet'
 import CustomMarker from '../CustomMarker/CustomMarker';
-import { getCountryLatLon, getData, getFlagFromAlpha2 } from './Points/Data';
+import { getCountryLatLon, getFlagFromAlpha2 } from './Points/Data';
 import { processPoint } from './Points/Points';
+import { useMapData } from '../hooks/useMapData';
+import { useImageRetry } from '../hooks/useImageRetry';
 import ImageNotFound from '../GlobalStyles/img/image-not-found.png';
 import './Countries/Countries.scss';
 import Countries from './Countries/Countries';
@@ -169,7 +171,8 @@ function MarkerPaneSetup() {
 
 function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisible, onFooterToggle }) {
   const { isEs } = useContext(LanguageContext);
-  const [data, setData] = useState({});
+  const { data, isLoading, mapError, retryCount } = useMapData(category);
+  useImageRetry();
   const [heatmapVisible, setHeatmapVisible] = useState(() => {
     try {
       const v = localStorage.getItem(STORAGE_KEY_HEATMAP);
@@ -192,116 +195,12 @@ function Map({ category, toggleSidebar, setMapPoint, restoreRegion, footerVisibl
   // on page load, which would leave the toggle stuck in the ON state without actually being
   // in fullscreen. Always start from the config default each session.
   const [fullscreenEnabled, setFullscreenEnabled] = useState(FULLSCREEN_ENABLED);
-  const [mapError, setMapError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // true until first data fetch resolves
-  const [retryCount, setRetryCount] = useState(0); // current retry attempt (0 = first try, 1-3 = retrying)
   const hoverLabelRef = useRef(null); // ref to HoverCountryLabel DOM node — updated directly to avoid re-renders
   const mapContainerRef = useRef(null); // ref to the .map-container div — used for imperative class toggling
   const clusterGroupRef = useRef(null); // ref to the native Leaflet MarkerClusterGroup layer
   const processAllPointsRef = useRef(null); // ref to processPoint runner — called after cluster animation ends
-  const prevDataRef = useRef({});
   // Tracks whether the sidebar restore has already fired, so it only runs once per session.
   const restoredRef = useRef(false);
-
-  useEffect(() => {
-    setMapError(false);
-    setIsLoading(true);
-    setRetryCount(0);
-
-    let cancelled = false;
-    let retryTimer = null;
-    // Exponential backoff delays: 2s, 4s, 8s (max 3 retries).
-    const RETRY_DELAYS = [2000, 4000, 8000];
-
-    const attempt = (attemptIndex) => {
-      const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'get-json.php' + '?category=' + category;
-      getData(apiUrl)
-        .then((result) => {
-          if (cancelled) return;
-          setRetryCount(0);
-          // Only update state when data actually changed to avoid unnecessary re-renders.
-          if (JSON.stringify(result) !== JSON.stringify(prevDataRef.current)) {
-            prevDataRef.current = result;
-            setData(result);
-          }
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          if (cancelled) return;
-          if (attemptIndex < RETRY_DELAYS.length) {
-            // Schedule next retry and show the attempt counter in the UI.
-            setRetryCount(attemptIndex + 1);
-            retryTimer = setTimeout(() => attempt(attemptIndex + 1), RETRY_DELAYS[attemptIndex]);
-          } else {
-            // All retries exhausted — surface the error.
-            console.warn('[WorldInterests] Could not load map data for category "' + category + '" after ' + (RETRY_DELAYS.length + 1) + ' attempts:', error.message);
-            setRetryCount(0);
-            setMapError(true);
-            setIsLoading(false);
-            setData({});
-          }
-        });
-    };
-
-    attempt(0);
-
-    return () => {
-      // Cancel in-flight retries when category changes or component unmounts.
-      cancelled = true;
-      if (retryTimer) clearTimeout(retryTimer);
-    };
-  }, [category]);
-
-  // Retry channel images that fail to load (YouTube CDN 429 rate limiting).
-  // Uses event delegation since marker images live inside Leaflet DivIcons (not React-managed).
-  // Failed images are queued and retried one at a time to avoid triggering rate limits again.
-  useEffect(() => {
-    const retryQueue = [];
-    let retryTimer = null;
-
-    const processQueue = () => {
-      if (retryQueue.length === 0) {
-        retryTimer = null;
-        return;
-      }
-      const img = retryQueue.shift();
-      const originalSrc = img.dataset.originalSrc;
-      if (originalSrc && document.contains(img)) {
-        img.src = originalSrc + (originalSrc.includes('?') ? '&' : '?') + 'retry=' + Date.now();
-      }
-      retryTimer = setTimeout(processQueue, 800);
-    };
-
-    const handleError = (e) => {
-      if (e.target.tagName !== 'IMG' || !e.target.src.includes('ggpht.com')) return;
-      const img = e.target;
-      img.style.visibility = 'hidden';
-      if (!img.dataset.originalSrc) {
-        img.dataset.originalSrc = img.src.split('?retry=')[0];
-      }
-      const retryCount = parseInt(img.dataset.retry || '0');
-      if (retryCount < 5) {
-        img.dataset.retry = String(retryCount + 1);
-        retryQueue.push(img);
-        if (!retryTimer) {
-          retryTimer = setTimeout(processQueue, 1500);
-        }
-      }
-    };
-
-    const handleLoad = (e) => {
-      if (e.target.tagName !== 'IMG' || !e.target.src.includes('ggpht.com')) return;
-      e.target.style.visibility = 'visible';
-    };
-
-    document.addEventListener('error', handleError, true);
-    document.addEventListener('load', handleLoad, true);
-    return () => {
-      document.removeEventListener('error', handleError, true);
-      document.removeEventListener('load', handleLoad, true);
-      if (retryTimer) clearTimeout(retryTimer);
-    };
-  }, []);
 
   // processPoint after a new data is fetched, to change their appearance.
   // Also keeps processAllPointsRef up to date so ClusterGroupSetup can re-run it after
