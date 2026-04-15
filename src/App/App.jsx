@@ -29,13 +29,14 @@ export default function App() {
   const [isDialogOpen, setIsDialogOpen] = useState(() => setDefaultIsDialogOpen());
 
   const [mapPoint, setMapPoint] = useState(null);
-  // Footer visibility — persisted in localStorage; CSS variable updated synchronously on init
-  // to avoid a layout flash on load when the user previously hid the footer.
+  // Footer visibility — persisted in localStorage. When hidden, --footer-height is set to 0px
+  // synchronously to avoid a layout flash. When visible, the ResizeObserver in Footer.jsx owns
+  // the value so it stays accurate as the footer grows/shrinks at different viewport widths.
   const [footerVisible, setFooterVisible] = useState(() => {
     try {
       const stored = localStorage.getItem('footerVisible');
       const visible = stored !== null ? stored === 'true' : true;
-      document.documentElement.style.setProperty('--footer-height', visible ? '36px' : '0px');
+      if (!visible) document.documentElement.style.setProperty('--footer-height', '0px');
       return visible;
     } catch (_) {
       return true;
@@ -59,7 +60,13 @@ export default function App() {
     setFooterVisible(prev => {
       const next = !prev;
       try { localStorage.setItem('footerVisible', next); } catch (_) {}
-      document.documentElement.style.setProperty('--footer-height', next ? '36px' : '0px');
+      // When hiding: lock to 0px immediately. When showing: remove the inline style so the
+      // CSS default kicks in for one frame, then ResizeObserver in Footer.jsx corrects it.
+      if (!next) {
+        document.documentElement.style.setProperty('--footer-height', '0px');
+      } else {
+        document.documentElement.style.removeProperty('--footer-height');
+      }
       return next;
     });
   }, []);

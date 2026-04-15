@@ -5,16 +5,16 @@ footer {
   bottom: 0;
   width: 100vw;
   z-index: 500;
+  // Background on the footer element itself so no gap shows through at any height
+  background-color: var(--footer-fill-color);
 
   .footer-content {
-    background-color: var(--footer-fill-color);
     color: var(--page-text-color);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 0 14px;
-    height: 36px;
+    padding: 8px 14px;
   }
 
   .footer-row {
@@ -22,29 +22,21 @@ footer {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    text-align: center;
     flex-wrap: wrap;
-    gap: 6px;
-    font-size: 12px;
+    gap: 5px;
     line-height: 1.3;
-    overflow: hidden;
   }
 
   .footer-title {
     font-weight: 600;
     white-space: nowrap;
+    font-size: 11px;
   }
 
-  .footer-sep {
-    color: var(--page-text-color);
-    opacity: 0.7;
-    flex-shrink: 0;
-    font-size: 14px;
-    line-height: 1;
-  }
-
-  .footer-desc {
-    flex-shrink: 1;
-    min-width: 0;
+  .footer-desc,
+  .footer-dev {
+    font-size: 9px;
   }
 
   .footer-dev {
@@ -52,14 +44,39 @@ footer {
     flex-shrink: 0;
   }
 
+  // Separators are hidden below 1100px — items may wrap at tablet widths
+  // and a floating | between lines looks wrong. They appear only when the
+  // row is wide enough to stay on a single line.
+  .footer-sep {
+    display: none;
+  }
+
   a {
     color: var(--link-color);
   }
 
+  // ≥768px: bump font sizes, keep wrapping allowed
   @include respond-at(768) {
+    .footer-title {
+      font-size: 12px;
+    }
+
+    .footer-desc,
+    .footer-dev {
+      font-size: 11px;
+    }
+  }
+
+  // ≥1100px: enough room for a single row — enable separators and lock to one line
+  @include respond-at(1100) {
     .footer-row {
-      font-size: 13px;
       flex-wrap: nowrap;
+      text-align: left;
+    }
+
+    .footer-sep {
+      display: inline;
+      opacity: 0.5;
     }
 
     .footer-desc {
