@@ -258,7 +258,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 4 — Frontend: `Countries.jsx` — wire polygon click to open panel**
   In `handleCountryClick`, consume `CountryPanelContext.openCountryPanel(alpha2, countryName, flag)`. Remove the `// TODO` comment. The `setSelectedAlpha2` call already present stays so the polygon highlight fires immediately.
 
-- [ ] **Step 5 — Frontend: `useCountryHistory` hook**
+- [x] **Step 5 — Frontend: `useCountryHistory` hook**
   Create `src/hooks/useCountryHistory.js`. Fetches `REACT_APP_BACKEND_API_URL + api/country/history?country=<alpha2>&category=<slug>&limit=<n>`. Returns `{ data, isLoading, error }`. Uses an `AbortController` to cancel in-flight requests when `alpha2`, `category`, or `limit` changes. Treats a `501` response as an empty state (not an error) so the panel shows "coming soon" rather than a generic failure.
 
 - [ ] **Step 6 — Frontend: MapSettings — N channel setting + translations for it**
