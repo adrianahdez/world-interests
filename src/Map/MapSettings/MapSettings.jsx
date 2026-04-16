@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import './MapSettings.scss';
+import { COUNTRY_CHANNELS_MAX } from '../../config';
 
 // Floating settings panel anchored to the bottom-left of the map.
 // Currently exposes the heatmap toggle; add more items to the panel as new features arrive.
-function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClusteringToggle, fullscreenEnabled, onFullscreenToggle, flagsVisible, onFlagsToggle, footerVisible, onFooterToggle, tr }) {
+function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClusteringToggle, fullscreenEnabled, onFullscreenToggle, flagsVisible, onFlagsToggle, footerVisible, onFooterToggle, countryChannels, onCountryChannelsChange, tr }) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef(null);
 
@@ -79,6 +80,18 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
               </span>
             </span>
           </label>
+          <label className="map-settings__item">
+            <span className="map-settings__item-label">{tr.countryChannelsLabel}</span>
+            <select
+              className="map-settings__select"
+              value={countryChannels}
+              onChange={e => onCountryChannelsChange(Number(e.target.value))}
+            >
+              {Array.from({ length: COUNTRY_CHANNELS_MAX }, (_, i) => i + 1).map(n => (
+                <option key={n} value={n}>{n}</option>
+              ))}
+            </select>
+          </label>
         </div>
       )}
       <button
@@ -105,6 +118,8 @@ MapSettings.propTypes = {
   onFlagsToggle: PropTypes.func.isRequired,
   footerVisible: PropTypes.bool.isRequired,
   onFooterToggle: PropTypes.func.isRequired,
+  countryChannels: PropTypes.number.isRequired,
+  onCountryChannelsChange: PropTypes.func.isRequired,
   tr: PropTypes.object.isRequired,
 };
 

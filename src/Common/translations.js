@@ -26,6 +26,7 @@ const translations = {
     flagsLabel: "Flags",
     footerLabel: "Footer",
     settingsLabel: "Map settings",
+    countryChannelsLabel: "Country top channels",
   },
   es: {
     statsFor: "Estadísticas para ",
@@ -54,6 +55,7 @@ const translations = {
     flagsLabel: "Banderas",
     footerLabel: "Pie de página",
     settingsLabel: "Ajustes del mapa",
+    countryChannelsLabel: "Top canales por país",
   },
 };
 

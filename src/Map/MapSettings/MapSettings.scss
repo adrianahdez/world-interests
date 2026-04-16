@@ -138,6 +138,30 @@
   outline-offset: 2px;
 }
 
+// ─── Inline select (used for numeric settings like country channel count) ─────
+
+.map-settings__select {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 13px;
+  padding: 2px 6px;
+  cursor: pointer;
+  outline: none;
+  flex-shrink: 0;
+
+  &:focus-visible {
+    outline: 2px solid rgba(224, 92, 0, 0.7);
+    outline-offset: 2px;
+  }
+
+  option {
+    background: #0d1b26;
+    color: rgba(255, 255, 255, 0.88);
+  }
+}
+
 // ─── Light theme ─────────────────────────────────────────────────────────────
 
 .light {
@@ -188,6 +212,17 @@
 
   .map-settings__toggle input:checked ~ .map-settings__toggle-track .map-settings__toggle-thumb {
     background: #fff;
+  }
+
+  .map-settings__select {
+    background: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.18);
+    color: rgba(0, 0, 0, 0.8);
+
+    option {
+      background: #f0f6fc;
+      color: rgba(0, 0, 0, 0.8);
+    }
   }
 }
 

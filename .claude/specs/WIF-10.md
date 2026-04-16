@@ -261,7 +261,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 5 — Frontend: `useCountryHistory` hook**
   Create `src/hooks/useCountryHistory.js`. Fetches `REACT_APP_BACKEND_API_URL + api/country/history?country=<alpha2>&category=<slug>&limit=<n>`. Returns `{ data, isLoading, error }`. Uses an `AbortController` to cancel in-flight requests when `alpha2`, `category`, or `limit` changes. Treats a `501` response as an empty state (not an error) so the panel shows "coming soon" rather than a generic failure.
 
-- [ ] **Step 6 — Frontend: MapSettings — N channel setting + translations for it**
+- [x] **Step 6 — Frontend: MapSettings — N channel setting + translations for it**
   Add a `<select>` control (options 1–10) to `MapSettings.jsx` for the channel count. Read initial value from `localStorage` via `STORAGE_KEY_COUNTRY_CHANNELS` (default `COUNTRY_CHANNELS_DEFAULT`). Persist on change. Pass the current value up to `App.jsx` (or keep it in `Map.jsx` state and pass down to `CountryPanel` via context). Add the EN/ES label strings to `translations.js`.
 
 - [ ] **Step 7 — Frontend: remaining `translations.js` strings**

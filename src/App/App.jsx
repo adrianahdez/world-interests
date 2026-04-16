@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { STORAGE_KEY_CATEGORY_DIALOG, STORAGE_KEY_SELECTED_CATEGORY, STORAGE_KEY_SIDEBAR } from '../config';
+import { STORAGE_KEY_CATEGORY_DIALOG, STORAGE_KEY_SELECTED_CATEGORY, STORAGE_KEY_SIDEBAR, STORAGE_KEY_COUNTRY_CHANNELS, COUNTRY_CHANNELS_DEFAULT, COUNTRY_CHANNELS_MAX } from '../config';
 import Map from '../Map/Map';
 import Categories from '../Categories/Categories';
 import Footer from '../Footer/Footer';
@@ -51,6 +51,23 @@ export default function App() {
   });
   // InfoSidebar dialog state.
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Number of top channels to display in the country history panel (1–COUNTRY_CHANNELS_MAX).
+  // Persisted in localStorage so the preference survives page reload.
+  const [countryChannels, setCountryChannels] = useState(() => {
+    try {
+      const stored = parseInt(localStorage.getItem(STORAGE_KEY_COUNTRY_CHANNELS), 10);
+      if (!isNaN(stored) && stored >= 1 && stored <= COUNTRY_CHANNELS_MAX) return stored;
+    } catch (_) {}
+    return COUNTRY_CHANNELS_DEFAULT;
+  });
+
+  const handleCountryChannelsChange = useCallback((n) => {
+    const clamped = Math.max(1, Math.min(COUNTRY_CHANNELS_MAX, Number(n)));
+    setCountryChannels(clamped);
+    try { localStorage.setItem(STORAGE_KEY_COUNTRY_CHANNELS, String(clamped)); }
+    catch (e) { console.warn('[WorldInterests] Could not save country channels setting:', e.message); }
+  }, []);
 
   // Country panel state. selectedCountry holds { alpha2, countryName, flag }.
   const [isCountryPanelOpen, setIsCountryPanelOpen] = useState(false);
@@ -212,7 +229,7 @@ export default function App() {
   return (
     <MapPointContext.Provider value={{ mapPoint, setMapPoint: handleSetMapPoint, selectedAlpha2, setSelectedAlpha2 }}>
       <SidebarContext.Provider value={{ isSidebarOpen, toggleSidebar }}>
-        <CountryPanelContext.Provider value={{ isCountryPanelOpen, selectedCountry, setSelectedCountry, openCountryPanel, closeCountryPanel }}>
+        <CountryPanelContext.Provider value={{ isCountryPanelOpen, selectedCountry, setSelectedCountry, openCountryPanel, closeCountryPanel, countryChannels }}>
           <div className='app-container'>
             <Head />
             <Header isDialogOpen={isDialogOpen} toggleDialog={toggleDialog} />
@@ -229,6 +246,8 @@ export default function App() {
               restoreRegion={restoreRegion}
               footerVisible={footerVisible}
               onFooterToggle={handleFooterToggle}
+              countryChannels={countryChannels}
+              onCountryChannelsChange={handleCountryChannelsChange}
             />
             {footerVisible && <Footer />}
           </div>

@@ -172,7 +172,7 @@ function MarkerPaneSetup() {
   return null;
 }
 
-function Map({ category, restoreRegion, footerVisible, onFooterToggle }) {
+function Map({ category, restoreRegion, footerVisible, onFooterToggle, countryChannels, onCountryChannelsChange }) {
   const { isEs } = useContext(LanguageContext);
   const { setMapPoint } = useContext(MapPointContext);
   const { toggleSidebar } = useContext(SidebarContext);
@@ -421,6 +421,8 @@ function Map({ category, restoreRegion, footerVisible, onFooterToggle }) {
         onFlagsToggle={() => setFlagsVisible(v => !v)}
         footerVisible={footerVisible}
         onFooterToggle={onFooterToggle}
+        countryChannels={countryChannels}
+        onCountryChannelsChange={onCountryChannelsChange}
         tr={tr}
       />
       <MapContainer {...mapConfig}>
@@ -451,6 +453,8 @@ Map.propTypes = {
   restoreRegion: PropTypes.string,
   footerVisible: PropTypes.bool.isRequired,
   onFooterToggle: PropTypes.func.isRequired,
+  countryChannels: PropTypes.number.isRequired,
+  onCountryChannelsChange: PropTypes.func.isRequired,
 };
 
 export default memo(Map);
