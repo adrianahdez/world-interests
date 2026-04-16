@@ -255,7 +255,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 3 — Frontend: `CountryPanelContext` + `App.jsx` wiring**
   Create `src/Common/CountryPanelContext.jsx` with `isCountryPanelOpen`, `selectedCountry` (`{ alpha2, countryName, flag }`), `openCountryPanel`, `closeCountryPanel`. Update `App.jsx`: add the state, wrap in `CountryPanelContext.Provider`, add `pushState` on open, `replaceState` on close, `popstate` listener to close when `country` param disappears, and mutual-exclusion logic (opening country panel calls `setIsSidebarOpen(false)` without clearing `selectedAlpha2`; opening the channel-pin sidebar calls `closeCountryPanel`).
 
-- [ ] **Step 4 — Frontend: `Countries.jsx` — wire polygon click to open panel**
+- [x] **Step 4 — Frontend: `Countries.jsx` — wire polygon click to open panel**
   In `handleCountryClick`, consume `CountryPanelContext.openCountryPanel(alpha2, countryName, flag)`. Remove the `// TODO` comment. The `setSelectedAlpha2` call already present stays so the polygon highlight fires immediately.
 
 - [ ] **Step 5 — Frontend: `useCountryHistory` hook**

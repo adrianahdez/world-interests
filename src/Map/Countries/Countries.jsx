@@ -3,9 +3,10 @@ import countries from './countries.geo.json';
 import React, { useRef, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { GeoJSON, useMap } from 'react-leaflet';
-import { getCountryLatLon, getAlpha2FromAlpha3 } from '../Points/Data';
+import { getCountryLatLon, getAlpha2FromAlpha3, getFlagFromAlpha2 } from '../Points/Data';
 import { makeStyleConfig } from '../geoJsonConfig';
 import { MapPointContext } from '../../Common/MapPointContext';
+import { CountryPanelContext } from '../../Common/CountryPanelContext';
 
 // Style applied to the GeoJSON sub-layer for the currently selected country.
 // Weight/color are set inline; the class adds the CSS filter for the fill highlight.
@@ -17,7 +18,8 @@ const Countries = ({ data, onCountryHover = null }) => {
   // Holds the mounted Leaflet GeoJSON layer so we can call setStyle() instead of remounting.
   const geoJsonLayerRef = useRef(null);
 
-  const { selectedAlpha2, setSelectedAlpha2 } = useContext(MapPointContext);
+  const { selectedAlpha2 } = useContext(MapPointContext);
+  const { openCountryPanel } = useContext(CountryPanelContext);
 
   useEffect(() => {
     dataRef.current = data;
@@ -74,8 +76,8 @@ const Countries = ({ data, onCountryHover = null }) => {
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     map.setView(latLon, map.getZoom(), { animate: !prefersReduced });
-    setSelectedAlpha2(alpha2);
-    // TODO: Add code to show the sidebar with the country data
+    // openCountryPanel sets selectedAlpha2 and handles sidebar mutual exclusion.
+    openCountryPanel(alpha2, countryName, getFlagFromAlpha2(alpha2) ?? '');
   };
 
   // Configure click event for each country
