@@ -264,7 +264,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 6 — Frontend: MapSettings — N channel setting + translations for it**
   Add a `<select>` control (options 1–10) to `MapSettings.jsx` for the channel count. Read initial value from `localStorage` via `STORAGE_KEY_COUNTRY_CHANNELS` (default `COUNTRY_CHANNELS_DEFAULT`). Persist on change. Pass the current value up to `App.jsx` (or keep it in `Map.jsx` state and pass down to `CountryPanel` via context). Add the EN/ES label strings to `translations.js`.
 
-- [ ] **Step 7 — Frontend: remaining `translations.js` strings**
+- [x] **Step 7 — Frontend: remaining `translations.js` strings**
   Add all remaining CountryPanel strings to both EN and ES: panel title format, "Based on data from X day(s)", "Seen X times", "Peak video", "Showing X of Y requested channels", "No historical data available for this country yet.", "Coming soon" / "Data collection in progress", error + retry string, loading aria-label.
 
 - [ ] **Step 8 — Frontend: `CountryPanel` component + SCSS**

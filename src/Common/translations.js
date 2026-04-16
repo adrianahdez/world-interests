@@ -27,6 +27,33 @@ const translations = {
     footerLabel: "Footer",
     settingsLabel: "Map settings",
     countryChannelsLabel: "Country top channels",
+    // ── Country Panel ──────────────────────────────────────────────────────────
+    countryPanelAriaLabel: "Country historical trends panel",
+    countryPanelCategory: "Category:",
+    // "Based on data from X day(s)" — compose as: basedOnData + X + day/days
+    basedOnData: "Based on data from",
+    day: "day",
+    days: "days",
+    // "Last updated X ago" — compose as: lastUpdated + relativeTime
+    lastUpdated: "Last updated",
+    today: "today",
+    yesterday: "yesterday",
+    daysAgo: "days ago",
+    weeksAgo: "weeks ago",
+    monthsAgo: "months ago",
+    // Channel card
+    seenTimes: "times in history",
+    peakVideo: "Peak video",
+    // Partial-data notice: "Showing X of Y requested channels"
+    showingOf: "Showing",
+    ofRequested: "of",
+    requestedChannels: "requested channels",
+    // States
+    countryPanelLoading: "Loading historical data…",
+    countryPanelEmpty: "No historical data available for this country yet.",
+    countryPanelComingSoon: "Historical data for this country is being collected. Check back soon.",
+    countryPanelError: "Could not load historical data.",
+    countryPanelRetry: "Try again",
   },
   es: {
     statsFor: "Estadísticas para ",
@@ -56,6 +83,28 @@ const translations = {
     footerLabel: "Pie de página",
     settingsLabel: "Ajustes del mapa",
     countryChannelsLabel: "Top canales por país",
+    // ── Panel de país ──────────────────────────────────────────────────────────
+    countryPanelAriaLabel: "Panel de tendencias históricas del país",
+    countryPanelCategory: "Categoría:",
+    basedOnData: "Basado en datos de",
+    day: "día",
+    days: "días",
+    lastUpdated: "Actualizado hace",
+    today: "hoy",
+    yesterday: "ayer",
+    daysAgo: "días",
+    weeksAgo: "semanas",
+    monthsAgo: "meses",
+    seenTimes: "veces en el historial",
+    peakVideo: "Vídeo destacado",
+    showingOf: "Mostrando",
+    ofRequested: "de",
+    requestedChannels: "canales solicitados",
+    countryPanelLoading: "Cargando datos históricos…",
+    countryPanelEmpty: "Aún no hay datos históricos disponibles para este país.",
+    countryPanelComingSoon: "Se están recopilando datos históricos para este país. Vuelve pronto.",
+    countryPanelError: "No se pudieron cargar los datos históricos.",
+    countryPanelRetry: "Intentar de nuevo",
   },
 };
 
