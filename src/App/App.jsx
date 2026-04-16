@@ -11,6 +11,7 @@ import { MapPointContext } from '../Common/MapPointContext';
 import { SidebarContext } from '../Common/SidebarContext';
 import { CountryPanelContext } from '../Common/CountryPanelContext';
 import { getCountryLatLon } from '../Map/Points/Data';
+import CountryPanel from '../CountryPanel/CountryPanel';
 
 // Returns the initial category using this priority: URL param > localStorage > 'music'.
 const getInitialCategory = () => {
@@ -241,6 +242,7 @@ export default function App() {
               onCategoryNameChange={setCategoryName}
             />
             <InfoSidebar categoryName={categoryName} />
+            <CountryPanel category={category} categoryName={categoryName} />
             <Map
               category={category}
               restoreRegion={restoreRegion}

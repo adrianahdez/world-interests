@@ -15,11 +15,12 @@ import { useState, useEffect } from 'react';
  * Treats HTTP 501 as an empty/coming-soon state rather than an error so the panel shows
  * a neutral "no data yet" message instead of a red error indicator.
  *
- * @param {string|null} alpha2    ISO 3166-1 alpha-2 country code, e.g. 'ES'
- * @param {string}      category  Category slug, e.g. 'music'
- * @param {number}      limit     Number of channels to request (1–10)
+ * @param {string|null} alpha2        ISO 3166-1 alpha-2 country code, e.g. 'ES'
+ * @param {string}      category      Category slug, e.g. 'music'
+ * @param {number}      limit         Number of channels to request (1–10)
+ * @param {number}      [retryTrigger=0]  Increment to force a re-fetch (used by retry button)
  */
-export function useCountryHistory(alpha2, category, limit) {
+export function useCountryHistory(alpha2, category, limit, retryTrigger = 0) {
   const [data, setData]         = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isEmpty, setIsEmpty]   = useState(false);
@@ -84,7 +85,9 @@ export function useCountryHistory(alpha2, category, limit) {
       });
 
     return () => controller.abort();
-  }, [alpha2, category, limit]);
+  // retryTrigger is intentionally in the dep array — incrementing it re-runs the fetch.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [alpha2, category, limit, retryTrigger]);
 
   return { data, isLoading, isEmpty, error };
 }

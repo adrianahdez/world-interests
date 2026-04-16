@@ -1,0 +1,437 @@
+@use '../GlobalStyles/helpers' as *;
+@use '../GlobalStyles/Components/close-icon' as *;
+
+// ── Open / close animations ───────────────────────────────────────────────────
+
+@keyframes country-panel-in {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes country-panel-out {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.97); }
+}
+
+// ── Dialog shell ──────────────────────────────────────────────────────────────
+
+.country-panel {
+  // Position: fixed over the full viewport, centered with a small inset on desktop.
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  z-index: 600;
+  border: none;
+  padding: 0;
+  background: transparent;
+  overflow: hidden;
+
+  // Full-screen on mobile; ~90% viewport on desktop.
+  width: 100%;
+  height: 100%;
+
+  @include respond-at(768) {
+    width: 90vw;
+    height: 90vh;
+    max-width: 900px;
+    border-radius: 24px;
+  }
+
+  &[open] {
+    display: flex;
+    animation: country-panel-in 250ms cubic-bezier(0.32, 0.72, 0, 1) both;
+  }
+
+  &.country-panel--closing {
+    animation: country-panel-out 200ms cubic-bezier(0.32, 0.72, 0, 1) both;
+  }
+}
+
+// ── Inner layout (flex column: header + scrollable body) ─────────────────────
+
+.country-panel__inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: rgb(10 28 36 / 0.96);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: var(--page-text-color);
+  letter-spacing: 0.4px;
+  line-height: 1.6;
+  overflow: hidden;
+
+  @include respond-at(768) {
+    border-radius: 24px;
+  }
+}
+
+// ── Header (fixed height, never scrolls) ─────────────────────────────────────
+
+.country-panel__header {
+  flex-shrink: 0;
+  padding: 18px 24px 14px;
+  background: var(--panels-fill-color, rgb(10 28 36));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  @include respond-at(768) {
+    padding: 22px 32px 16px;
+    border-radius: 24px 24px 0 0;
+  }
+}
+
+.country-panel__header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.country-panel__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.country-panel__flag {
+  font-size: 28px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.country-panel__country-name {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--white, white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @include respond-at(768) {
+    font-size: 26px;
+  }
+}
+
+// Reuse the global close-icon toggle button — position it at the top-right.
+.country-panel__header-row .close-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.country-panel__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 8px;
+}
+
+.country-panel__meta-item {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+
+  strong {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+  }
+
+  @include respond-at(768) {
+    font-size: 13px;
+  }
+}
+
+// ── Scrollable body ───────────────────────────────────────────────────────────
+
+.country-panel__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px 32px;
+  @include scroll(4px, 100%, transparent, var(--link-color), 0);
+
+  @include respond-at(768) {
+    padding: 24px 32px 40px;
+  }
+}
+
+// ── States: loading / empty / error ──────────────────────────────────────────
+
+.country-panel__state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px 0;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  font-size: 15px;
+
+  p { margin: 0; }
+
+  &--error {
+    color: rgba(255, 120, 100, 0.8);
+  }
+}
+
+.country-panel__spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255, 255, 255, 0.12);
+  border-top-color: var(--link-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.country-panel__retry-btn {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: var(--page-text-color);
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 150ms, border-color 150ms;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+}
+
+// ── Partial-data notice ───────────────────────────────────────────────────────
+
+.country-panel__partial-notice {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 16px;
+  font-style: italic;
+}
+
+// ── Channel list ──────────────────────────────────────────────────────────────
+
+.country-panel__channel-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+// ── Channel card ──────────────────────────────────────────────────────────────
+
+.channel-card {
+  display: flex;
+  gap: 14px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  transition: background 150ms;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.07);
+  }
+}
+
+.channel-card__rank {
+  flex-shrink: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.25);
+  min-width: 32px;
+  line-height: 1;
+  padding-top: 4px;
+}
+
+.channel-card__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+// Channel identity row
+.channel-card__channel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.channel-card__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.channel-card__channel-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.channel-card__channel-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--link-color);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover { text-decoration: underline; }
+}
+
+.channel-card__appearances {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+// Peak video
+.channel-card__video {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.channel-card__video-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  margin: 0;
+}
+
+.channel-card__thumbnail-link {
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 320px;
+}
+
+.channel-card__thumbnail {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.channel-card__video-title {
+  font-size: 14px;
+  color: var(--page-text-color);
+  text-decoration: none;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  &:hover { text-decoration: underline; color: var(--link-color); }
+}
+
+.channel-card__stats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+// ── Light theme overrides ─────────────────────────────────────────────────────
+
+.light {
+  .country-panel__inner {
+    background: rgb(240 246 252 / 0.97);
+  }
+
+  .country-panel__header {
+    background: rgb(240 246 252 / 1);
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+  }
+
+  .country-panel__country-name {
+    color: #000;
+  }
+
+  .country-panel__meta-item {
+    color: rgba(0, 0, 0, 0.45);
+
+    strong { color: rgba(0, 0, 0, 0.75); }
+  }
+
+  .channel-card {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.08);
+
+    &:hover { background: rgba(0, 0, 0, 0.06); }
+  }
+
+  .channel-card__rank {
+    color: rgba(0, 0, 0, 0.2);
+  }
+
+  .channel-card__appearances,
+  .channel-card__stats {
+    color: rgba(0, 0, 0, 0.45);
+  }
+
+  .channel-card__video-label {
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+  .channel-card__video-title {
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .country-panel__partial-notice {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  .country-panel__state {
+    color: rgba(0, 0, 0, 0.45);
+
+    &--error { color: rgba(180, 40, 20, 0.8); }
+  }
+
+  .country-panel__retry-btn {
+    border-color: rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.75);
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.35);
+    }
+  }
+}
+
+// ── Reduced motion ────────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  .country-panel[open],
+  .country-panel.country-panel--closing {
+    animation: none !important;
+  }
+
+  .country-panel__spinner {
+    animation: none;
+    border-top-color: var(--link-color);
+    opacity: 0.6;
+  }
+}
