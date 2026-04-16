@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { STORAGE_KEY_CATEGORY_DIALOG, STORAGE_KEY_SELECTED_CATEGORY, STORAGE_KEY_SIDEBAR } from '../config';
 import Map from '../Map/Map';
 import Categories from '../Categories/Categories';
@@ -9,6 +9,8 @@ import Head from '../Head/Head';
 import Header from '../Header/Header';
 import { MapPointContext } from '../Common/MapPointContext';
 import { SidebarContext } from '../Common/SidebarContext';
+import { CountryPanelContext } from '../Common/CountryPanelContext';
+import { getCountryLatLon } from '../Map/Points/Data';
 
 // Returns the initial category using this priority: URL param > localStorage > 'music'.
 const getInitialCategory = () => {
@@ -50,6 +52,13 @@ export default function App() {
   // InfoSidebar dialog state.
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  // Country panel state. selectedCountry holds { alpha2, countryName, flag }.
+  const [isCountryPanelOpen, setIsCountryPanelOpen] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  // Ref used inside popstate handler to read current open state without stale closure.
+  const isCountryPanelOpenRef = useRef(false);
+  useEffect(() => { isCountryPanelOpenRef.current = isCountryPanelOpen; }, [isCountryPanelOpen]);
+
   // Region name of the last open sidebar country, read on mount to restore it after reload.
   const [restoreRegion] = useState(() => {
     try { return localStorage.getItem(STORAGE_KEY_SIDEBAR) || null; } catch (_) { return null; }
@@ -80,19 +89,35 @@ export default function App() {
     });
   }, []);
 
-  const toggleSidebar = useCallback((open = true) => {
+  // keepHighlight: pass true when closing the sidebar as part of opening the country panel,
+  // so the polygon highlight does not flash off during the panel transition.
+  const toggleSidebar = useCallback((open = true, { keepHighlight = false } = {}) => {
     setIsSidebarOpen(open);
-    // Clear the stored region and polygon highlight when the sidebar is explicitly closed.
-    if (!open) {
+    // Clear the stored region and polygon highlight when the sidebar is explicitly closed,
+    // unless the caller is immediately handing off to the country panel.
+    if (!open && !keepHighlight) {
       setSelectedAlpha2(null);
       try { localStorage.removeItem(STORAGE_KEY_SIDEBAR); }
       catch (e) { console.warn('[WorldInterests] Could not clear sidebar state:', e.message); }
     }
   }, []);
 
+  // Remove the ?country= param from the URL without adding a history entry.
+  const removeCountryParam = useCallback(() => {
+    const params = new URLSearchParams(window.location.search);
+    params.delete('country');
+    const search = params.toString();
+    window.history.replaceState({}, '', window.location.pathname + (search ? '?' + search : ''));
+  }, []);
+
   // Wraps setMapPoint to also persist the open country to localStorage and sync
   // the polygon highlight (selectedAlpha2) so pin clicks highlight the country too.
+  // Also closes the country panel (if open) when a channel pin is clicked.
   const handleSetMapPoint = useCallback((point) => {
+    // Close country panel without clearing selectedAlpha2 — we're about to set it below.
+    setIsCountryPanelOpen(false);
+    setSelectedCountry(null);
+    removeCountryParam();
     setMapPoint(point);
     setSelectedAlpha2(point?.alpha2 ?? null);
     try {
@@ -100,7 +125,64 @@ export default function App() {
     } catch (e) {
       console.warn('[WorldInterests] Could not save sidebar country:', e.message);
     }
+  }, [removeCountryParam]);
+
+  const closeCountryPanel = useCallback(() => {
+    setIsCountryPanelOpen(false);
+    setSelectedCountry(null);
+    setSelectedAlpha2(null);
+    removeCountryParam();
+  }, [removeCountryParam]);
+
+  // Opens the country panel for the given country, closing the channel-pin sidebar first.
+  // keepHighlight=true prevents the polygon selection from flashing off during the handoff.
+  const openCountryPanel = useCallback((alpha2, countryName, flag) => {
+    toggleSidebar(false, { keepHighlight: true });
+    setSelectedCountry({ alpha2, countryName, flag });
+    setSelectedAlpha2(alpha2);
+    setIsCountryPanelOpen(true);
+    // Add a history entry so the browser Back button can close the panel.
+    const params = new URLSearchParams(window.location.search);
+    params.set('country', alpha2);
+    window.history.pushState({ country: alpha2 }, '', window.location.pathname + '?' + params.toString());
+  }, [toggleSidebar]);
+
+  // Close the country panel when the user presses the browser Back button and the
+  // ?country= param is no longer in the URL.
+  useEffect(() => {
+    const handlePopState = () => {
+      if (!isCountryPanelOpenRef.current) return;
+      const params = new URLSearchParams(window.location.search);
+      if (!params.get('country')) {
+        setIsCountryPanelOpen(false);
+        setSelectedCountry(null);
+        setSelectedAlpha2(null);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
+  // On mount: if ?country= is present in the URL, open the panel for that country,
+  // but only if the alpha2 code is known (has coordinates in our dataset).
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const alpha2 = params.get('country');
+    if (!alpha2) return;
+    // Validate: must have coordinates in the dataset (rules out garbage values).
+    if (!getCountryLatLon(alpha2)) {
+      // Silently remove the invalid param so the URL is clean.
+      removeCountryParam();
+      return;
+    }
+    // We don't have the country name or flag at this point — they will be provided
+    // by Countries.jsx when the GeoJSON loads. For now open with alpha2 only; the
+    // panel header will populate once the country data is available via context.
+    setSelectedCountry({ alpha2, countryName: '', flag: '' });
+    setSelectedAlpha2(alpha2);
+    setIsCountryPanelOpen(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // intentionally runs once on mount only
 
   // Handle updating the category — persist to localStorage and sync the URL.
   const handleUpdateCategory = (newCategory) => {
@@ -130,25 +212,27 @@ export default function App() {
   return (
     <MapPointContext.Provider value={{ mapPoint, setMapPoint: handleSetMapPoint, selectedAlpha2, setSelectedAlpha2 }}>
       <SidebarContext.Provider value={{ isSidebarOpen, toggleSidebar }}>
-        <div className='app-container'>
-          <Head />
-          <Header isDialogOpen={isDialogOpen} toggleDialog={toggleDialog} />
-          <Categories
-            category={category}
-            setCategory={handleUpdateCategory}
-            isDialogOpen={isDialogOpen}
-            toggleDialog={toggleDialog}
-            onCategoryNameChange={setCategoryName}
-          />
-          <InfoSidebar categoryName={categoryName} />
-          <Map
-            category={category}
-            restoreRegion={restoreRegion}
-            footerVisible={footerVisible}
-            onFooterToggle={handleFooterToggle}
-          />
-          {footerVisible && <Footer />}
-        </div>
+        <CountryPanelContext.Provider value={{ isCountryPanelOpen, selectedCountry, setSelectedCountry, openCountryPanel, closeCountryPanel }}>
+          <div className='app-container'>
+            <Head />
+            <Header isDialogOpen={isDialogOpen} toggleDialog={toggleDialog} />
+            <Categories
+              category={category}
+              setCategory={handleUpdateCategory}
+              isDialogOpen={isDialogOpen}
+              toggleDialog={toggleDialog}
+              onCategoryNameChange={setCategoryName}
+            />
+            <InfoSidebar categoryName={categoryName} />
+            <Map
+              category={category}
+              restoreRegion={restoreRegion}
+              footerVisible={footerVisible}
+              onFooterToggle={handleFooterToggle}
+            />
+            {footerVisible && <Footer />}
+          </div>
+        </CountryPanelContext.Provider>
       </SidebarContext.Provider>
     </MapPointContext.Provider>
   );

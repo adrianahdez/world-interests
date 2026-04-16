@@ -252,7 +252,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 2 — Frontend: API URL constants + config + URL updates**
   Add `STORAGE_KEY_COUNTRY_CHANNELS`, `COUNTRY_CHANNELS_DEFAULT`, `COUNTRY_CHANNELS_MAX` to `src/config.js`. Update `src/hooks/useMapData.js` to call `/api/trending?category=`. Update `src/Categories/Categories.jsx` to call `/api/categories`. Smoke-test that the map and category list still load.
 
-- [ ] **Step 3 — Frontend: `CountryPanelContext` + `App.jsx` wiring**
+- [x] **Step 3 — Frontend: `CountryPanelContext` + `App.jsx` wiring**
   Create `src/Common/CountryPanelContext.jsx` with `isCountryPanelOpen`, `selectedCountry` (`{ alpha2, countryName, flag }`), `openCountryPanel`, `closeCountryPanel`. Update `App.jsx`: add the state, wrap in `CountryPanelContext.Provider`, add `pushState` on open, `replaceState` on close, `popstate` listener to close when `country` param disappears, and mutual-exclusion logic (opening country panel calls `setIsSidebarOpen(false)` without clearing `selectedAlpha2`; opening the channel-pin sidebar calls `closeCountryPanel`).
 
 - [ ] **Step 4 — Frontend: `Countries.jsx` — wire polygon click to open panel**
