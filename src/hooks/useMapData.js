@@ -31,7 +31,7 @@ export function useMapData(category) {
     let retryTimer = null;
 
     const attempt = (attemptIndex) => {
-      const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'get-json.php?category=' + category;
+      const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'api/trending?category=' + category;
       getData(apiUrl)
         .then((result) => {
           if (cancelled) return;

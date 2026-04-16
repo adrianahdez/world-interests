@@ -249,7 +249,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 1 — Backend: `.htaccess` + front-controller router**
   Rewrite `public/index.php` as a router that dispatches `GET /api/trending` (→ existing `get-json.php` logic) and `GET /api/categories` (→ existing `get-category-list.php` logic). Return a `501 Not Implemented` JSON stub for `GET /api/country/history`. Add `public/.htaccess` to rewrite `/api/*` to `index.php`. Update `CLAUDE.md` endpoint table.
 
-- [ ] **Step 2 — Frontend: API URL constants + config + URL updates**
+- [x] **Step 2 — Frontend: API URL constants + config + URL updates**
   Add `STORAGE_KEY_COUNTRY_CHANNELS`, `COUNTRY_CHANNELS_DEFAULT`, `COUNTRY_CHANNELS_MAX` to `src/config.js`. Update `src/hooks/useMapData.js` to call `/api/trending?category=`. Update `src/Categories/Categories.jsx` to call `/api/categories`. Smoke-test that the map and category list still load.
 
 - [ ] **Step 3 — Frontend: `CountryPanelContext` + `App.jsx` wiring**

@@ -37,9 +37,17 @@ export const STORAGE_KEY_THEME    = 'isDarkMode';    // colour theme (true = dar
 export const STORAGE_KEY_CATEGORY_DIALOG   = 'isCategoryDialogOpen';  // category-picker dialog open state
 export const STORAGE_KEY_SELECTED_CATEGORY = 'selectedCategory';      // last selected category slug
 export const STORAGE_KEY_SIDEBAR  = 'sidebarCountry'; // alpha-2 code of last open country sidebar
-export const STORAGE_KEY_HEATMAP      = 'heatmapVisible';    // whether the heatmap overlay is on (true/false)
-export const STORAGE_KEY_CLUSTERING   = 'clusteringEnabled'; // whether marker clustering is on (true/false)
-export const STORAGE_KEY_FLAGS        = 'flagsVisible';       // whether pin flag emojis are shown (true/false)
+export const STORAGE_KEY_HEATMAP           = 'heatmapVisible';    // whether the heatmap overlay is on (true/false)
+export const STORAGE_KEY_CLUSTERING        = 'clusteringEnabled'; // whether marker clustering is on (true/false)
+export const STORAGE_KEY_FLAGS             = 'flagsVisible';      // whether pin flag emojis are shown (true/false)
+export const STORAGE_KEY_COUNTRY_CHANNELS  = 'countryChannels';   // how many historical channels to show in the country panel (1–10)
+
+// ─── Country Panel ────────────────────────────────────────────────────────────
+
+// Default number of top channels shown in the country history panel.
+export const COUNTRY_CHANNELS_DEFAULT = 3;
+// Maximum number of top channels the user can request in the country history panel.
+export const COUNTRY_CHANNELS_MAX     = 10;
 
 // ─── Marker Icon Geometry ─────────────────────────────────────────────────────
 // DivIcon size and anchor used by CustomMarker. Anchor is bottom-centre so the
