@@ -252,7 +252,17 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
   useEffect(() => {
     if (!restoreChannelAlpha2 || Object.keys(data).length === 0) return;
     const alpha2 = Object.keys(data).find(k => data[k][0]?.channel?.channelId === restoreChannelAlpha2);
-    if (!alpha2) return;
+    if (!alpha2) {
+      // Channel ID in the URL doesn't exist in the loaded data (stale link, manual edit,
+      // or category changed). Strip the param so we don't keep trying to restore it, and
+      // clear the pending state so App.jsx stops handing us the orphan ID.
+      const params = new URLSearchParams(window.location.search);
+      params.delete('channel');
+      const search = params.toString();
+      window.history.replaceState({}, '', window.location.pathname + (search ? '?' + search : ''));
+      onChannelRestored?.();
+      return;
+    }
     const point = data[alpha2][0];
     const p = { ...point, flag: getFlagFromAlpha2(alpha2), alpha2 };
     if (p.channel) p.channel = { ...p.channel, channelImage: p.channel.channelImage || ImageNotFound };
