@@ -172,7 +172,7 @@ function MarkerPaneSetup() {
   return null;
 }
 
-function Map({ category, restoreRegion, footerVisible, onFooterToggle, countryChannels, onCountryChannelsChange }) {
+function Map({ category, categoryName, restoreRegion, footerVisible, onFooterToggle, countryChannels, onCountryChannelsChange }) {
   const { isEs } = useContext(LanguageContext);
   const { setMapPoint } = useContext(MapPointContext);
   const { toggleSidebar } = useContext(SidebarContext);
@@ -410,6 +410,11 @@ function Map({ category, restoreRegion, footerVisible, onFooterToggle, countryCh
           <p>{tr.mapDataUnavailable}</p>
         </div>
       )}
+      {categoryName && (
+        <div className="map-overlay-label map-overlay-label--category-active" aria-label={`${tr.category}${categoryName}`}>
+          {tr.category}{categoryName}
+        </div>
+      )}
       <MapSettings
         heatmapVisible={heatmapVisible}
         onHeatmapToggle={() => setHeatmapVisible(v => !v)}
@@ -450,6 +455,7 @@ function Map({ category, restoreRegion, footerVisible, onFooterToggle, countryCh
 
 Map.propTypes = {
   category: PropTypes.string.isRequired,
+  categoryName: PropTypes.string,
   restoreRegion: PropTypes.string,
   footerVisible: PropTypes.bool.isRequired,
   onFooterToggle: PropTypes.func.isRequired,

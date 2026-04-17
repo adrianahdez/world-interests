@@ -131,8 +131,15 @@
   pointer-events: none;
   border: 1px solid transparent;
 
-  &--zoom    { bottom: 12px; }
-  &--country { bottom: 38px; }
+  // Category badge sits at the bottom; hover and zoom labels stack above it.
+  &--category-active {
+    bottom: 12px;
+    font-family: inherit; // override monospace — category name is a regular word
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+  &--zoom    { bottom: 38px; } // moved up to avoid overlap with category badge
+  &--country { bottom: 64px; } // moved up to stack above zoom in dev mode
 }
 
 .light .map-overlay-label {

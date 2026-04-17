@@ -270,7 +270,7 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
 - [x] **Step 8 — Frontend: `CountryPanel` component + SCSS**
   Create `src/CountryPanel/CountryPanel.jsx` and `CountryPanel.scss`. Full-screen `<dialog>` with: fixed header (country name + flag + category + days notice), scrollable channel list (cards: avatar, channel name link, peak video thumbnail + title + link, stats row, appearances badge, partial-data notice if channels < N), loading skeleton, empty state, error state with retry button. Escape key + close button. Animations: fade-in/scale on open, fade-out on close (reduced-motion aware). Uses `useCountryHistory` internally.
 
-- [ ] **Step 9 — Build verification + manual smoke-test**
+- [x] **Step 9 — Build verification + manual smoke-test**
   Run `npm run build` in `world-interests`. Confirm zero webpack errors. Then start `npm run dev` and work through this checklist before marking the spec done:
 
   **Country panel basics**

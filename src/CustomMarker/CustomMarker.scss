@@ -1,4 +1,8 @@
 .custom-marker {
+  // Transparent bounding-box area (outside the avatar circle) must not steal clicks from
+  // the country polygon layer below. Re-enable pointer events only on the avatar and text.
+  pointer-events: none;
+
   &__container {
     display: flex;
     align-items: center;
@@ -99,6 +103,7 @@
       background-color: #2a2a3a;
       border-radius: 50%;
       overflow: hidden;
+      pointer-events: auto; // only the avatar circle opens the channel panel
     }
 
     .flag {
@@ -124,6 +129,7 @@
       color: var(--page-text-color);
       z-index: 0;
       padding-right: 8px;
+      pointer-events: auto; // visible text at max-zoom or on hover is also clickable
 
       display: none;
       visibility: hidden;
