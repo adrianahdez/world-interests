@@ -166,12 +166,18 @@ export default function App() {
     // Push a history entry so the Back button can close the channel panel.
     // Use the YouTube channel ID so the link identifies the specific channel,
     // not just "whichever channel is #1 in country X right now".
+    // Skip the push when the URL already points to this channel — happens when
+    // handleSetMapPoint is called from the URL restore path (popstate or deep link),
+    // where a push would duplicate the entry and break chained Back navigation.
     const channelId = point?.channel?.channelId;
     if (channelId) {
-      const params = new URLSearchParams(window.location.search);
-      params.set('channel', channelId);
-      params.delete('country');
-      window.history.pushState({ channel: channelId }, '', `${window.location.pathname}?${params.toString()}`);
+      const currentChannel = new URLSearchParams(window.location.search).get('channel');
+      if (currentChannel !== channelId) {
+        const params = new URLSearchParams(window.location.search);
+        params.set('channel', channelId);
+        params.delete('country');
+        window.history.pushState({ channel: channelId }, '', `${window.location.pathname}?${params.toString()}`);
+      }
     }
   }, []);
 
@@ -194,10 +200,15 @@ export default function App() {
     setSelectedAlpha2(alpha2);
     setIsCountryPanelOpen(true);
     // Add a history entry so the browser Back button can close the panel.
-    const params = new URLSearchParams(window.location.search);
-    params.delete('channel');
-    params.set('country', alpha2);
-    window.history.pushState({ country: alpha2 }, '', window.location.pathname + '?' + params.toString());
+    // Skip if the URL already points to this country — avoids duplicate entries
+    // when the same polygon is clicked twice.
+    const currentCountry = new URLSearchParams(window.location.search).get('country');
+    if (currentCountry !== alpha2) {
+      const params = new URLSearchParams(window.location.search);
+      params.delete('channel');
+      params.set('country', alpha2);
+      window.history.pushState({ country: alpha2 }, '', window.location.pathname + '?' + params.toString());
+    }
   }, [toggleSidebar, closeDialogIfMobile, setRestoreRegion]);
 
   // Handle the browser Back/Forward buttons. Category changes, country panel opens, and
