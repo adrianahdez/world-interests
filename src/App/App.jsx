@@ -78,6 +78,8 @@ export default function App() {
   const [restoreRegion, setRestoreRegion] = useState(() => {
     try { return localStorage.getItem(STORAGE_KEY_SIDEBAR) || null; } catch (_) { return null; }
   });
+  // Alpha2 code from a ?channel= URL param — Map.jsx opens the sidebar once map data loads.
+  const [pendingChannelAlpha2, setPendingChannelAlpha2] = useState(null);
 
   const toggleDialog = useCallback(() => {
     setIsDialogOpen((prev) => !prev);
@@ -123,10 +125,12 @@ export default function App() {
     // unless the caller is immediately handing off to the country panel.
     if (!open && !keepHighlight) {
       setSelectedAlpha2(null);
+      setPendingChannelAlpha2(null);
+      removeChannelParam();
       try { localStorage.removeItem(STORAGE_KEY_SIDEBAR); }
       catch (e) { console.warn('[WorldInterests] Could not clear sidebar state:', e.message); }
     }
-  }, [closeDialogIfMobile]);
+  }, [closeDialogIfMobile, removeChannelParam]);
 
   // Remove the ?country= param from the URL without adding a history entry.
   const removeCountryParam = useCallback(() => {
@@ -136,20 +140,36 @@ export default function App() {
     window.history.replaceState({}, '', window.location.pathname + (search ? '?' + search : ''));
   }, []);
 
+  // Remove the ?channel= param from the URL without adding a history entry.
+  const removeChannelParam = useCallback(() => {
+    const params = new URLSearchParams(window.location.search);
+    params.delete('channel');
+    const search = params.toString();
+    window.history.replaceState({}, '', window.location.pathname + (search ? '?' + search : ''));
+  }, []);
+
   // Wraps setMapPoint to also persist the open country to localStorage and sync
   // the polygon highlight (selectedAlpha2) so pin clicks highlight the country too.
-  // Also closes the country panel (if open) when a channel pin is clicked.
+  // Also closes the country panel (if open) when a channel pin is clicked, and adds
+  // a ?channel=<alpha2> history entry so the Back button closes the panel.
   const handleSetMapPoint = useCallback((point) => {
-    // Close country panel without clearing selectedAlpha2 — we're about to set it below.
     setIsCountryPanelOpen(false);
     setSelectedCountry(null);
     removeCountryParam();
+    setPendingChannelAlpha2(null); // clear any pending URL restore
     setMapPoint(point);
     setSelectedAlpha2(point?.alpha2 ?? null);
     try {
       if (point?.regionName) localStorage.setItem(STORAGE_KEY_SIDEBAR, point.regionName);
     } catch (e) {
       console.warn('[WorldInterests] Could not save sidebar country:', e.message);
+    }
+    // Push a history entry so the Back button can close the channel panel.
+    if (point?.alpha2) {
+      const params = new URLSearchParams(window.location.search);
+      params.set('channel', point.alpha2);
+      params.delete('country');
+      window.history.pushState({ channel: point.alpha2 }, '', `${window.location.pathname}?${params.toString()}`);
     }
   }, [removeCountryParam]);
 
@@ -177,12 +197,13 @@ export default function App() {
     window.history.pushState({ country: alpha2 }, '', window.location.pathname + '?' + params.toString());
   }, [toggleSidebar, closeDialogIfMobile, setRestoreRegion]);
 
-  // Handle the browser Back/Forward buttons. Both category changes and country panel opens
-  // use pushState, so popstate must sync all URL-driven state (category + country panel).
+  // Handle the browser Back/Forward buttons. Category changes, country panel opens, and
+  // channel pin opens all use pushState, so popstate syncs all URL-driven state.
   useEffect(() => {
     const handlePopState = () => {
       const params = new URLSearchParams(window.location.search);
       const country = params.get('country');
+      const channel = params.get('channel');
       const urlCategory = params.get('category');
 
       // Sync category from the URL entry we navigated to.
@@ -192,18 +213,27 @@ export default function App() {
       }
 
       if (country && getCountryLatLon(country)) {
-        // A country panel should be visible. If it's a different country, reset the name/flag
-        // so Countries.jsx's effect can re-populate from the GeoJSON.
+        // Country panel — reset name/flag so Countries.jsx can re-populate from GeoJSON.
         setIsCountryPanelOpen(true);
         setSelectedAlpha2(country);
         setSelectedCountry(prev =>
           prev?.alpha2 === country ? prev : { alpha2: country, countryName: '', flag: '' }
         );
+        // Close channel panel
+        setIsSidebarOpen(false);
+        setPendingChannelAlpha2(null);
+      } else if (channel) {
+        // Channel panel — Map.jsx opens the panel once data is (re-)available.
+        setIsCountryPanelOpen(false);
+        setSelectedCountry(null);
+        setPendingChannelAlpha2(channel);
       } else {
-        // No valid country in URL — close the panel.
+        // No panel in URL — close both panels.
         setIsCountryPanelOpen(false);
         setSelectedCountry(null);
         setSelectedAlpha2(null);
+        setIsSidebarOpen(false);
+        setPendingChannelAlpha2(null);
       }
     };
     window.addEventListener('popstate', handlePopState);
@@ -211,27 +241,30 @@ export default function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // On mount: if ?country= is present in the URL, open the panel for that country,
-  // but only if the alpha2 code is known (has coordinates in our dataset).
+  // On mount: restore panels from URL params (?country= or ?channel=).
+  // Only one panel can be active; country takes precedence if both are somehow present.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const alpha2 = params.get('country');
-    if (!alpha2) return;
-    // Validate: must have coordinates in the dataset (rules out garbage values).
-    if (!getCountryLatLon(alpha2)) {
-      // Silently remove the invalid param so the URL is clean.
-      removeCountryParam();
-      return;
+    const country = params.get('country');
+    const channel = params.get('channel');
+
+    if (country) {
+      if (!getCountryLatLon(country)) {
+        removeCountryParam();
+      } else {
+        // Countries.jsx effect fills in name/flag once GeoJSON processes.
+        setRestoreRegion(null);
+        try { localStorage.removeItem(STORAGE_KEY_SIDEBAR); } catch (_) {}
+        setSelectedCountry({ alpha2: country, countryName: '', flag: '' });
+        setSelectedAlpha2(country);
+        setIsCountryPanelOpen(true);
+      }
+    } else if (channel) {
+      // Defer to Map.jsx to open the channel panel once map data loads.
+      setRestoreRegion(null);
+      try { localStorage.removeItem(STORAGE_KEY_SIDEBAR); } catch (_) {}
+      setPendingChannelAlpha2(channel);
     }
-    // We don't have the country name or flag at this point — they will be provided
-    // by Countries.jsx when the GeoJSON loads. For now open with alpha2 only; the
-    // panel header will populate once the country data is available via context.
-    // Also clear sidebar restore state so both panels don't open simultaneously.
-    setRestoreRegion(null);
-    try { localStorage.removeItem(STORAGE_KEY_SIDEBAR); } catch (_) {}
-    setSelectedCountry({ alpha2, countryName: '', flag: '' });
-    setSelectedAlpha2(alpha2);
-    setIsCountryPanelOpen(true);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // intentionally runs once on mount only
 
@@ -280,6 +313,8 @@ export default function App() {
               category={category}
               categoryName={categoryName}
               restoreRegion={restoreRegion}
+              restoreChannelAlpha2={pendingChannelAlpha2}
+              onChannelRestored={() => setPendingChannelAlpha2(null)}
               footerVisible={footerVisible}
               onFooterToggle={handleFooterToggle}
               countryChannels={countryChannels}

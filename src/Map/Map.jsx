@@ -172,7 +172,7 @@ function MarkerPaneSetup() {
   return null;
 }
 
-function Map({ category, categoryName, restoreRegion, footerVisible, onFooterToggle, countryChannels, onCountryChannelsChange }) {
+function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onChannelRestored, footerVisible, onFooterToggle, countryChannels, onCountryChannelsChange }) {
   const { isEs } = useContext(LanguageContext);
   const { setMapPoint } = useContext(MapPointContext);
   const { toggleSidebar } = useContext(SidebarContext);
@@ -261,6 +261,20 @@ function Map({ category, categoryName, restoreRegion, footerVisible, onFooterTog
     setMapPoint(point);
     toggleSidebar(true);
   }, [data, restoreRegion, setMapPoint, toggleSidebar]);
+
+  // Restore the channel panel from a ?channel=<alpha2> URL param (deep-link or Back/Forward).
+  // Fires whenever restoreChannelAlpha2 changes or new data arrives.
+  // onChannelRestored clears the pending alpha2 in App.jsx so this only runs once per navigation.
+  useEffect(() => {
+    if (!restoreChannelAlpha2 || Object.keys(data).length === 0) return;
+    const point = data[restoreChannelAlpha2]?.[0];
+    if (!point) return;
+    const p = { ...point, flag: getFlagFromAlpha2(restoreChannelAlpha2), alpha2: restoreChannelAlpha2 };
+    if (p.channel) p.channel = { ...p.channel, channelImage: p.channel.channelImage || ImageNotFound };
+    setMapPoint(p);
+    toggleSidebar(true);
+    onChannelRestored?.();
+  }, [restoreChannelAlpha2, data, setMapPoint, toggleSidebar, onChannelRestored]);
 
   // Persist settings to localStorage so they survive page reloads.
   useEffect(() => {
@@ -457,6 +471,8 @@ Map.propTypes = {
   category: PropTypes.string.isRequired,
   categoryName: PropTypes.string,
   restoreRegion: PropTypes.string,
+  restoreChannelAlpha2: PropTypes.string,
+  onChannelRestored: PropTypes.func,
   footerVisible: PropTypes.bool.isRequired,
   onFooterToggle: PropTypes.func.isRequired,
   countryChannels: PropTypes.number.isRequired,
