@@ -180,6 +180,12 @@
     left: unset;
     max-width: 700px;
     min-width: 700px;
+
+    // Restore opaque background on desktop so content doesn't bleed through
+    // the title when scrolling (the shared _sidebars partial clears it at 768px).
+    .sidebar__title {
+      background-color: var(--panels-fill-color, black);
+    }
   }
 
   // Mobile bottom sheet — slides up from the bottom of the viewport.

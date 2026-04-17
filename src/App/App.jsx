@@ -155,7 +155,6 @@ export default function App() {
   const handleSetMapPoint = useCallback((point) => {
     setIsCountryPanelOpen(false);
     setSelectedCountry(null);
-    removeCountryParam();
     setPendingChannelAlpha2(null); // clear any pending URL restore
     setMapPoint(point);
     setSelectedAlpha2(point?.alpha2 ?? null);
@@ -174,7 +173,7 @@ export default function App() {
       params.delete('country');
       window.history.pushState({ channel: channelId }, '', `${window.location.pathname}?${params.toString()}`);
     }
-  }, [removeCountryParam]);
+  }, []);
 
   const closeCountryPanel = useCallback(() => {
     setIsCountryPanelOpen(false);
@@ -196,6 +195,7 @@ export default function App() {
     setIsCountryPanelOpen(true);
     // Add a history entry so the browser Back button can close the panel.
     const params = new URLSearchParams(window.location.search);
+    params.delete('channel');
     params.set('country', alpha2);
     window.history.pushState({ country: alpha2 }, '', window.location.pathname + '?' + params.toString());
   }, [toggleSidebar, closeDialogIfMobile, setRestoreRegion]);

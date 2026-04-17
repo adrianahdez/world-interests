@@ -98,36 +98,19 @@ function MapViewSaver() {
   return null;
 }
 
-// Debug-only component — shows current zoom level at bottom-right of the map.
-// Enabled/disabled by DEBUG_ZOOM_LEVEL_ENABLED in src/config.js.
-function ZoomDebugLabel() {
+// Debug-only — stays inside MapContainer to access useMap(), but renders nothing.
+// Updates the external zoomRef DOM node directly to avoid re-rendering Map on zoom.
+function ZoomDebugUpdater({ zoomRef }) {
   const map = useMap();
-  const [zoom, setZoom] = useState(map.getZoom());
-
   useEffect(() => {
-    const onZoomEnd = () => setZoom(map.getZoom());
+    if (zoomRef.current) zoomRef.current.textContent = `zoom: ${map.getZoom()}`;
+    const onZoomEnd = () => {
+      if (zoomRef.current) zoomRef.current.textContent = `zoom: ${map.getZoom()}`;
+    };
     map.on('zoomend', onZoomEnd);
     return () => map.off('zoomend', onZoomEnd);
-  }, [map]);
-
-  return (
-    <div className="map-overlay-label map-overlay-label--zoom">
-      zoom: {zoom}
-    </div>
-  );
-}
-
-// Shows the name of the country currently hovered on the map polygon layer.
-// Updated via a DOM ref to avoid re-rendering Map (and its markers) on every hover event.
-// Sits above ZoomDebugLabel. Enabled/disabled by COUNTRY_HOVER_LABEL_ENABLED in src/config.js.
-function HoverCountryLabel({ labelRef }) {
-  return (
-    <div
-      ref={labelRef}
-      className="map-overlay-label map-overlay-label--country"
-      style={{ display: 'none' }}
-    />
-  );
+  }, [map, zoomRef]);
+  return null;
 }
 
 // Creates a native Leaflet MarkerClusterGroup, adds it to the map, and stores it in clusterGroupRef
@@ -200,7 +183,8 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
   // on page load, which would leave the toggle stuck in the ON state without actually being
   // in fullscreen. Always start from the config default each session.
   const [fullscreenEnabled, setFullscreenEnabled] = useState(FULLSCREEN_ENABLED);
-  const hoverLabelRef = useRef(null); // ref to HoverCountryLabel DOM node — updated directly to avoid re-renders
+  const hoverLabelRef = useRef(null); // ref to hover-country label DOM node — updated directly to avoid re-renders
+  const zoomLabelRef = useRef(null);  // ref to zoom debug label DOM node — updated by ZoomDebugUpdater
   const mapContainerRef = useRef(null); // ref to the .map-container div — used for imperative class toggling
   const clusterGroupRef = useRef(null); // ref to the native Leaflet MarkerClusterGroup layer
   const processAllPointsRef = useRef(null); // ref to processPoint runner — called after cluster animation ends
@@ -425,11 +409,15 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
           <p>{tr.mapDataUnavailable}</p>
         </div>
       )}
-      {categoryName && (
-        <div className="map-overlay-label map-overlay-label--category-active" aria-label={`${tr.category}${categoryName}`}>
-          {tr.category}{categoryName}
-        </div>
-      )}
+      <div className="map-overlay-labels">
+        {categoryName && (
+          <div className="map-overlay-label map-overlay-label--category-active" aria-label={`${tr.category}${categoryName}`}>
+            {tr.category}{categoryName}
+          </div>
+        )}
+        {DEBUG_ZOOM_LEVEL_ENABLED && <div ref={zoomLabelRef} className="map-overlay-label map-overlay-label--zoom" />}
+        {COUNTRY_HOVER_LABEL_ENABLED && <div ref={hoverLabelRef} className="map-overlay-label map-overlay-label--country" style={{ display: 'none' }} />}
+      </div>
       <MapSettings
         heatmapVisible={heatmapVisible}
         onHeatmapToggle={() => setHeatmapVisible(v => !v)}
@@ -447,8 +435,7 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
       />
       <MapContainer {...mapConfig}>
         <MapViewSaver />
-        {DEBUG_ZOOM_LEVEL_ENABLED && <ZoomDebugLabel />}
-        {COUNTRY_HOVER_LABEL_ENABLED && <HoverCountryLabel labelRef={hoverLabelRef} />}
+        {DEBUG_ZOOM_LEVEL_ENABLED && <ZoomDebugUpdater zoomRef={zoomLabelRef} />}
         {/* country-polygons pane sits at z-index 200, below the marker pane at 400. */}
         <Pane name="country-polygons" style={{ zIndex: 200 }}>
           {/* This has the GeoJSON component. */}
