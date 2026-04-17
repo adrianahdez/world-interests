@@ -6,6 +6,7 @@ import { LanguageContext } from '../Common/LanguageContext';
 import { MapPointContext } from '../Common/MapPointContext';
 import { SidebarContext } from '../Common/SidebarContext';
 import translations from '../Common/translations';
+import { IconEye, IconThumbUp, IconComment } from '../Common/Icons';
 
 // Render InfoSidebar component
 export default function InfoSidebar({ categoryName }) {
@@ -68,7 +69,7 @@ export default function InfoSidebar({ categoryName }) {
             </button>
           </div>
         </menu>
-        <h2 className="sidebar__title">{tr.statsFor} {mapPoint?.regionName} <span className='sidebar__flag'>{mapPoint?.flag}</span></h2>
+        <h2 className="sidebar__title">{tr.channelPanelTitle} {mapPoint?.flag} {mapPoint?.regionName}</h2>
         <div className="sidebar__list">
           <div className='channel-content channel-content__top'>
             <img src={c?.channelImage} alt={`${c?.channelTitle ?? 'Channel'} logo`} />
@@ -92,26 +93,14 @@ export default function InfoSidebar({ categoryName }) {
             </div>
           </div>
           <div className='channel-content channel-content__bottom'>
-            <h2 className="channel-content__subheading">{tr.mostPopularVideo}</h2>
             <div className='channel-content__text'>
-
+              <h4 className="channel-content__heading channel-content__video-label">{tr.videoLabel}</h4>
               <a target="_blank" rel="noopener noreferrer" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
 
               <div className='channel-content__stats'>
-                <div className='channel-content__text-group'>
-                  <h4 className='channel-content__heading'>👁️</h4>
-                  <p>{Number(s?.viewCount).toLocaleString()}</p>
-                </div>
-
-                <div className='channel-content__text-group'>
-                  <h4 className='channel-content__heading'>👍🏼</h4>
-                  <p>{Number(s?.likeCount).toLocaleString()}</p>
-                </div>
-
-                <div className='channel-content__text-group'>
-                  <h4 className='channel-content__heading'>💬</h4>
-                  <p>{Number(s?.commentCount).toLocaleString()}</p>
-                </div>
+                <span><IconEye className="stat-icon" /> {Number(s?.viewCount).toLocaleString()}</span>
+                <span><IconThumbUp className="stat-icon" /> {Number(s?.likeCount).toLocaleString()}</span>
+                <span><IconComment className="stat-icon" /> {Number(s?.commentCount).toLocaleString()}</span>
               </div>
             </div>
             {mapPoint?.idVideo && mapPoint.idVideo.trim() !== '' && <Player ref={playerRef} idVideo={mapPoint.idVideo} />}
