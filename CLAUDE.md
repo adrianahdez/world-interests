@@ -4,17 +4,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Build & Dev Commands
 
-- `npm run dev` — development build with file watcher (webpack development mode)
-- `npm run build` — production build to `dist/` (webpack production mode)
-- Dev server runs on port 9000
-- **The dev container runs in watch mode** — do NOT run `npm run build` after every change; webpack rebuilds automatically.
+- `npm run serve` — webpack-dev-server on port 9000 with HMR (what the Docker dev container runs)
+- `npm run dev` — watch-only build to `dist/`, no HTTP server
+- `npm run build` — one-off production build to `dist/`
+- Docker workflow (primary): `docker compose -f compose.dev.yml up -d` starts the container, which runs `npm install && npm run serve`
+- **The dev container runs in watch mode with HMR** — do NOT run `npm run build` after every change; webpack rebuilds and the browser updates automatically.
 
 There are no tests or linting configured in this project.
 
 ## Environment
 
-- Requires a `.env` file with `REACT_APP_BACKEND_API_URL` (loaded via dotenv-webpack)
-- Deployed to Cloudflare Pages from `dist/` on push to `main`
+- Requires a `.env` file with `REACT_APP_BACKEND_API_URL` (loaded via dotenv-webpack). Copy from `.env.example`, which defaults to `http://localhost:8080/` (the backend's local Docker port)
+- Deployed to Cloudflare Pages from `dist/` on push to `main`; `REACT_APP_BACKEND_API_URL` must be set in the Cloudflare Pages dashboard so it's available at build time
 - The `_redirects` file maps the old `world-interests.pages.dev` domain to `worldinterests.midri.net`
 
 ## Architecture
