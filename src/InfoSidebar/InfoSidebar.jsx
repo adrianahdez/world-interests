@@ -94,8 +94,10 @@ export default function InfoSidebar({ categoryName }) {
           </div>
           <div className='channel-content channel-content__bottom'>
             <div className='channel-content__text'>
-              <h4 className="channel-content__heading channel-content__video-label">{tr.videoLabel}</h4>
-              <a target="_blank" rel="noopener noreferrer" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
+              <div className='channel-content__text-group mt-0'>
+                <h4 className="channel-content__heading channel-content__video-label">{tr.videoLabel}</h4>
+                <a target="_blank" rel="noopener noreferrer" href={`https://www.youtube.com/watch?v=${mapPoint?.idVideo}`}>{mapPoint?.videoTitle}</a>
+              </div>
 
               <div className='channel-content__stats'>
                 <span><IconEye className="stat-icon" /> {Number(s?.viewCount).toLocaleString()}</span>
