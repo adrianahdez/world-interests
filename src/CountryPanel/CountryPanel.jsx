@@ -5,20 +5,22 @@ import { CountryPanelContext } from '../Common/CountryPanelContext';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
 import { useCountryHistory } from '../hooks/useCountryHistory';
+import { IconEye, IconThumbUp, IconComment } from '../Common/Icons';
 
-// Returns a human-readable relative time string from an ISO date string.
-// Falls back to null if the date is missing or unparseable.
-function relativeTime(isoDate, tr) {
+// Returns a JSX "Last updated …" label with the time portion in bold.
+// Uses separate lastUpdatedRecent / lastUpdatedAgo keys so Spanish avoids
+// the grammatically wrong "Actualizado hace hoy" construction.
+function buildLastUpdatedLabel(isoDate, tr) {
   if (!isoDate) return null;
   const then = new Date(isoDate);
   if (isNaN(then.getTime())) return null;
   const diffDays = Math.floor((Date.now() - then.getTime()) / 86400000);
-  if (diffDays < 1)  return tr.today;
-  if (diffDays === 1) return tr.yesterday;
-  if (diffDays < 7)  return diffDays + ' ' + tr.daysAgo;
+  if (diffDays < 1)  return <>{tr.lastUpdatedRecent} <strong>{tr.today}</strong></>;
+  if (diffDays === 1) return <>{tr.lastUpdatedRecent} <strong>{tr.yesterday}</strong></>;
+  if (diffDays < 7)  return <>{tr.lastUpdatedAgo} <strong>{diffDays} {tr.daysAgo}</strong></>;
   const weeks = Math.floor(diffDays / 7);
-  if (weeks < 5)     return weeks + ' ' + tr.weeksAgo;
-  return Math.floor(diffDays / 30) + ' ' + tr.monthsAgo;
+  if (weeks < 5)     return <>{tr.lastUpdatedAgo} <strong>{weeks} {tr.weeksAgo}</strong></>;
+  return <>{tr.lastUpdatedAgo} <strong>{Math.floor(diffDays / 30)} {tr.monthsAgo}</strong></>;
 }
 
 // Render CountryPanel component
@@ -68,15 +70,14 @@ export default function CountryPanel({ category, categoryName }) {
   // does not carry over to the next country/category combination.
   useEffect(() => { setRetryTrigger(0); }, [alpha2, category]);
 
+  // "Based on data from X day(s) ago" / "Basado en datos de hace X días" — number bolded.
+  // tr.ago is "ago" in EN and "" in ES (ES bakes "hace" into basedOnData instead).
   const daysLabel = data
-    ? `${tr.basedOnData} ${data.days} ${data.days === 1 ? tr.day : tr.days}`
+    ? <>{tr.basedOnData} <strong>{data.days} {data.days === 1 ? tr.day : tr.days}</strong>{tr.ago ? <> {tr.ago}</> : null}</>
     : null;
 
-  const lastUpdatedLabel = data?.latest_capture_at
-    ? `${tr.lastUpdated} ${relativeTime(data.latest_capture_at, tr)}`
-    : null;
-
-  const showPartialNotice = data && data.channels.length < countryChannels;
+  // "Last updated today / X days ago / …" — time portion bolded.
+  const lastUpdatedLabel = buildLastUpdatedLabel(data?.latest_capture_at ?? null, tr);
 
   const renderBody = () => {
     if (isLoading) {
@@ -108,11 +109,10 @@ export default function CountryPanel({ category, categoryName }) {
 
     return (
       <>
-        {showPartialNotice && (
-          <p className="country-panel__partial-notice">
-            {tr.showingOf} {data.channels.length} {tr.ofRequested} {countryChannels} {tr.requestedChannels}
-          </p>
-        )}
+        {/* Always show channel count so the user knows how many results loaded */}
+        <p className="country-panel__channel-count">
+          {tr.showingOf} {data.channels.length} {tr.ofUpTo} {countryChannels} {tr.channels} {tr.basedOnSettings}
+        </p>
         <ul className="country-panel__channel-list">
           {data.channels.map((ch, i) => (
             <ChannelCard key={ch.youtube_id} channel={ch} rank={i + 1} tr={tr} />
@@ -128,10 +128,9 @@ export default function CountryPanel({ category, categoryName }) {
         {/* ── Fixed header ─────────────────────────────────────────────────── */}
         <div className="country-panel__header">
           <div className="country-panel__header-row">
-            <div className="country-panel__title">
-              {flag && <span className="country-panel__flag">{flag}</span>}
-              <h2 className="country-panel__country-name">{countryName}</h2>
-            </div>
+            <h2 className="country-panel__country-name">
+              {tr.countryPanelTitlePrefix} {flag} {countryName}
+            </h2>
             <div className="close-icon">
               <button type="button" className="toggle-btn" onClick={closeCountryPanel} aria-label="Close">
                 <span></span>
@@ -166,6 +165,7 @@ export default function CountryPanel({ category, categoryName }) {
 
 function ChannelCard({ channel, rank, tr }) {
   const thumbnailUrl = `https://img.youtube.com/vi/${channel.peak_video.youtube_id}/mqdefault.jpg`;
+  const appearances = channel.appearances;
 
   return (
     <li className="channel-card">
@@ -192,7 +192,9 @@ function ChannelCard({ channel, rank, tr }) {
               {channel.title}
             </a>
             <span className="channel-card__appearances">
-              {channel.appearances} {tr.seenTimes}
+              {tr.channelLabel} {appearances}{' '}
+              {appearances === 1 ? tr.channelDayAs : tr.channelDaysAs} #{rank}{' '}
+              {tr.inDataHistory}
             </span>
           </div>
         </div>
@@ -222,9 +224,9 @@ function ChannelCard({ channel, rank, tr }) {
             {channel.peak_video.title}
           </a>
           <div className="channel-card__stats">
-            <span>👁 {Number(channel.peak_video.view_count).toLocaleString()}</span>
-            <span>👍 {Number(channel.peak_video.like_count).toLocaleString()}</span>
-            <span>💬 {Number(channel.peak_video.comment_count).toLocaleString()}</span>
+            <span><IconEye className="channel-card__stat-icon" /> {Number(channel.peak_video.view_count).toLocaleString()}</span>
+            <span><IconThumbUp className="channel-card__stat-icon" /> {Number(channel.peak_video.like_count).toLocaleString()}</span>
+            <span><IconComment className="channel-card__stat-icon" /> {Number(channel.peak_video.comment_count).toLocaleString()}</span>
           </div>
         </div>
 

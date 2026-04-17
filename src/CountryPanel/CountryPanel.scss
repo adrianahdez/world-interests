@@ -20,7 +20,8 @@
   position: fixed;
   inset: 0;
   margin: auto;
-  z-index: 600;
+  // Above the map loading spinner (z-index 1000) so the panel is always readable.
+  z-index: 1001;
   border: none;
   padding: 0;
   background: transparent;
@@ -29,6 +30,11 @@
   // Full-screen on mobile; ~90% viewport on desktop.
   width: 100%;
   height: 100%;
+
+  // On mobile/tablet: render above all map controls (zoom, settings, labels at z-index 1000).
+  @include respond-max(767) {
+    z-index: 1100;
+  }
 
   @include respond-at(768) {
     width: 90vw;
@@ -54,7 +60,8 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background: rgb(10 28 36 / 0.96);
+  // Slightly transparent so the map peeks through; high enough opacity to hide the map spinner.
+  background: rgb(10 28 36 / 0.94);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   color: var(--page-text-color);
@@ -88,38 +95,43 @@
   gap: 16px;
 }
 
-.country-panel__title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
-  min-width: 0;
-}
-
-.country-panel__flag {
-  font-size: 28px;
-  flex-shrink: 0;
-  line-height: 1;
-}
-
+// Panel title: "Trends history for 🇧🇷 Brazil" — styled like the InfoSidebar title.
 .country-panel__country-name {
-  font-size: 22px;
+  font-size: 13px;
   font-weight: 700;
   margin: 0;
   color: var(--white, white);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.3;
+  flex: 1;
+  min-width: 0;
 
   @include respond-at(768) {
-    font-size: 26px;
+    font-size: 20px;
+  }
+
+  @include respond-at(900) {
+    font-size: 24px;
   }
 }
 
-// Reuse the global close-icon toggle button — position it at the top-right.
+// ── Close button — reset browser defaults and match other app toggle buttons ──
+
 .country-panel__header-row .close-icon {
   flex-shrink: 0;
   margin-top: 2px;
+
+  .toggle-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 6px;
+    outline: none;
+
+    // Ensure the X lines are always visible in both themes.
+    span {
+      background: var(--white, white);
+    }
+  }
 }
 
 .country-panel__meta {
@@ -134,7 +146,7 @@
   color: rgba(255, 255, 255, 0.55);
 
   strong {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
   }
 
@@ -205,9 +217,9 @@
   }
 }
 
-// ── Partial-data notice ───────────────────────────────────────────────────────
+// ── Channel count notice (always shown when data loads) ───────────────────────
 
-.country-panel__partial-notice {
+.country-panel__channel-count {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.45);
   margin: 0 0 16px;
@@ -241,12 +253,13 @@
   }
 }
 
+// Rank badge: more prominent (closer to white/black for legibility).
 .channel-card__rank {
   flex-shrink: 0;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.25);
-  min-width: 32px;
+  color: rgba(255, 255, 255, 0.6);
+  min-width: 36px;
   line-height: 1;
   padding-top: 4px;
 }
@@ -296,7 +309,7 @@
 
 .channel-card__appearances {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 // Peak video
@@ -307,9 +320,9 @@
 }
 
 .channel-card__video-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.07em;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.35);
   margin: 0;
@@ -352,13 +365,23 @@
   flex-wrap: wrap;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.55);
+  align-items: center;
+}
+
+// Stat icons (views, likes, comments)
+.channel-card__stat-icon {
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+  flex-shrink: 0;
+  margin-right: 3px;
 }
 
 // ── Light theme overrides ─────────────────────────────────────────────────────
 
 .light {
   .country-panel__inner {
-    background: rgb(240 246 252 / 0.97);
+    background: rgb(255 255 255 / 0.95);
   }
 
   .country-panel__header {
@@ -371,9 +394,9 @@
   }
 
   .country-panel__meta-item {
-    color: rgba(0, 0, 0, 0.45);
+    color: rgba(0, 0, 0, 0.6);
 
-    strong { color: rgba(0, 0, 0, 0.75); }
+    strong { color: rgba(0, 0, 0, 0.85); }
   }
 
   .channel-card {
@@ -383,29 +406,33 @@
     &:hover { background: rgba(0, 0, 0, 0.06); }
   }
 
+  // Rank: closer to black for clear legibility in light mode.
   .channel-card__rank {
-    color: rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.5);
   }
 
-  .channel-card__appearances,
+  .channel-card__appearances {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
   .channel-card__stats {
-    color: rgba(0, 0, 0, 0.45);
+    color: rgba(0, 0, 0, 0.6);
   }
 
   .channel-card__video-label {
-    color: rgba(0, 0, 0, 0.3);
+    color: rgba(0, 0, 0, 0.45);
   }
 
   .channel-card__video-title {
     color: rgba(0, 0, 0, 0.8);
   }
 
-  .country-panel__partial-notice {
-    color: rgba(0, 0, 0, 0.4);
+  .country-panel__channel-count {
+    color: rgba(0, 0, 0, 0.55);
   }
 
   .country-panel__state {
-    color: rgba(0, 0, 0, 0.45);
+    color: rgba(0, 0, 0, 0.55);
 
     &--error { color: rgba(180, 40, 20, 0.8); }
   }

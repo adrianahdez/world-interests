@@ -21,37 +21,56 @@ const translations = {
     heatmapShow: "Show heatmap",
     heatmapHide: "Hide heatmap",
     heatmapLabel: "Heatmap",
-    clusteringLabel: "Clustering",
+    // "Marker clustering" is clearer than plain "Clustering" — pin icon added in MapSettings
+    clusteringLabel: "Marker clustering",
     fullscreenLabel: "Fullscreen",
     flagsLabel: "Flags",
     footerLabel: "Footer",
     settingsLabel: "Map settings",
     countryChannelsLabel: "Country top channels",
+    // ── Channel panel (InfoSidebar) ────────────────────────────────────────────
+    // Used as the panel title: "Today's #1 for 🇲🇽 Mexico"
+    channelPanelTitle: "Today's #1 for",
     // ── Country Panel ──────────────────────────────────────────────────────────
+    // Used as the panel title: "Trends history for 🇧🇷 Brazil"
+    countryPanelTitlePrefix: "Trends history for",
     countryPanelAriaLabel: "Country historical trends panel",
     countryPanelCategory: "Category:",
-    // "Based on data from X day(s)" — compose as: basedOnData + X + day/days
+    // "Based on data from X day(s)" — compose as: basedOnData + bold(X + day/days)
     basedOnData: "Based on data from",
     day: "day",
     days: "days",
-    // "Last updated X ago" — compose as: lastUpdated + relativeTime
-    lastUpdated: "Last updated",
+    // "Last updated …" label — two prefix variants handle today/yesterday vs. X ago
+    // EN uses the same prefix for both; ES uses different prefixes (see es section).
+    lastUpdatedRecent: "Last updated",  // for "today" / "yesterday"
+    lastUpdatedAgo: "Last updated",     // for "X days/weeks/months ago"
     today: "today",
     yesterday: "yesterday",
     daysAgo: "days ago",
     weeksAgo: "weeks ago",
     monthsAgo: "months ago",
-    // Channel card
-    seenTimes: "times in history",
-    peakVideo: "Peak video",
-    // Partial-data notice: "Showing X of Y requested channels"
+    // Suffix appended after the number of days in "Based on data from X days ago"
+    ago: "ago",
+    // Channel count notice suffix: "Showing X of up to N channels (based on your settings)"
+    basedOnSettings: "(based on your settings)",
+    // Prefix label shown above the #1 trending video link in the channel panel
+    videoLabel: "#1 Video:",
+    // Channel card appearances line: "Channel: 4 different days as #2 in data history"
+    channelLabel: "Channel:",
+    channelDayAs: "day as",
+    channelDaysAs: "different days as",
+    inDataHistory: "in data history",
+    // Peak video label
+    peakVideo: "Most viewed video",
+    // Channel count notice (always shown when data loads): "Showing X of up to N channels"
     showingOf: "Showing",
-    ofRequested: "of",
-    requestedChannels: "requested channels",
+    ofUpTo: "of up to",
+    channels: "channels",
     // States
     countryPanelLoading: "Loading historical data…",
     countryPanelEmpty: "No historical data available for this country yet.",
-    countryPanelComingSoon: "Historical data for this country is being collected. Check back soon.",
+    // Generic message — avoids implying data will ever arrive for countries that never trend
+    countryPanelComingSoon: "Historical data for this country is not available yet.",
     countryPanelError: "Could not load historical data.",
     countryPanelRetry: "Try again",
   },
@@ -77,32 +96,47 @@ const translations = {
     heatmapShow: "Mostrar mapa de calor",
     heatmapHide: "Ocultar mapa de calor",
     heatmapLabel: "Mapa de calor",
-    clusteringLabel: "Agrupación",
+    clusteringLabel: "Agrupación de marcadores",
     fullscreenLabel: "Pantalla completa",
     flagsLabel: "Banderas",
     footerLabel: "Pie de página",
     settingsLabel: "Ajustes del mapa",
     countryChannelsLabel: "Top canales por país",
+    // ── Panel de canal (InfoSidebar) ───────────────────────────────────────────
+    channelPanelTitle: "Tendencia #1 hoy en",
     // ── Panel de país ──────────────────────────────────────────────────────────
+    countryPanelTitlePrefix: "Historial de tendencias de",
     countryPanelAriaLabel: "Panel de tendencias históricas del país",
     countryPanelCategory: "Categoría:",
-    basedOnData: "Basado en datos de",
+    // "Basado en datos de hace" includes "hace" so the number follows naturally: "hace 2 días"
+    basedOnData: "Basado en datos de hace",
+    // ago is empty for ES because "hace" is already embedded in basedOnData
+    ago: "",
     day: "día",
     days: "días",
-    lastUpdated: "Actualizado hace",
+    // ES uses "Actualizado hoy/ayer" (no "hace") and "Actualizado hace X días" for relative
+    lastUpdatedRecent: "Actualizado",   // for "hoy" / "ayer" — no "hace"
+    lastUpdatedAgo: "Actualizado hace", // for "X días/semanas/meses" — includes "hace"
     today: "hoy",
     yesterday: "ayer",
     daysAgo: "días",
     weeksAgo: "semanas",
     monthsAgo: "meses",
-    seenTimes: "veces en el historial",
-    peakVideo: "Vídeo destacado",
+    channelLabel: "Canal:",
+    channelDayAs: "día como",
+    channelDaysAs: "días diferentes como",
+    inDataHistory: "en la historia de datos",
+    peakVideo: "Vídeo más visto",
     showingOf: "Mostrando",
-    ofRequested: "de",
-    requestedChannels: "canales solicitados",
+    ofUpTo: "de hasta",
+    channels: "canales",
+    // Channel count notice suffix
+    basedOnSettings: "(según tu configuración)",
+    // Prefix label shown above the #1 trending video link in the channel panel
+    videoLabel: "Video #1:",
     countryPanelLoading: "Cargando datos históricos…",
     countryPanelEmpty: "Aún no hay datos históricos disponibles para este país.",
-    countryPanelComingSoon: "Se están recopilando datos históricos para este país. Vuelve pronto.",
+    countryPanelComingSoon: "Los datos históricos de este país aún no están disponibles.",
     countryPanelError: "No se pudieron cargar los datos históricos.",
     countryPanelRetry: "Intentar de nuevo",
   },
