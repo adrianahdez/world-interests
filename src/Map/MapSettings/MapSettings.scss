@@ -138,28 +138,58 @@
   outline-offset: 2px;
 }
 
-// ─── Inline select (used for numeric settings like country channel count) ─────
+// ─── Pin icon (shown next to clustering label for visual context) ─────────────
 
-.map-settings__select {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 6px;
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 13px;
-  padding: 2px 6px;
-  cursor: pointer;
-  outline: none;
+.map-settings__pin-icon {
+  width: 11px;
+  height: 11px;
+  vertical-align: middle;
+  margin-left: 4px;
   flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.6);
+}
 
-  &:focus-visible {
-    outline: 2px solid rgba(224, 92, 0, 0.7);
-    outline-offset: 2px;
+// ─── +/− stepper (used for numeric settings like country channel count) ───────
+
+.map-settings__stepper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.map-settings__stepper-btn {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.88);
+  border-radius: 4px;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 150ms, border-color 150ms;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.35);
   }
 
-  option {
-    background: #0d1b26;
-    color: rgba(255, 255, 255, 0.88);
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
   }
+}
+
+.map-settings__stepper-value {
+  min-width: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.88);
+  user-select: none;
 }
 
 // ─── Light theme ─────────────────────────────────────────────────────────────
@@ -214,15 +244,23 @@
     background: #fff;
   }
 
-  .map-settings__select {
+  .map-settings__pin-icon {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .map-settings__stepper-btn {
+    border-color: rgba(0, 0, 0, 0.2);
     background: rgba(0, 0, 0, 0.06);
-    border-color: rgba(0, 0, 0, 0.18);
     color: rgba(0, 0, 0, 0.8);
 
-    option {
-      background: #f0f6fc;
-      color: rgba(0, 0, 0, 0.8);
+    &:hover:not(:disabled) {
+      background: rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 0, 0, 0.3);
     }
+  }
+
+  .map-settings__stepper-value {
+    color: rgba(0, 0, 0, 0.8);
   }
 }
 

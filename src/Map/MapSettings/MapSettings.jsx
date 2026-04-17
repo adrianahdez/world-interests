@@ -36,7 +36,13 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
         <div className="map-settings__panel" role="region" aria-label={tr.settingsLabel}>
           <p className="map-settings__title">{tr.settingsLabel}</p>
           <label className="map-settings__item">
-            <span className="map-settings__item-label">{tr.clusteringLabel}</span>
+            <span className="map-settings__item-label">
+              {tr.clusteringLabel}
+              {/* Small pin icon gives users visual context that this controls map pins */}
+              <svg className="map-settings__pin-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+            </span>
             <span className="map-settings__toggle">
               <input type="checkbox" checked={clusteringEnabled} onChange={onClusteringToggle} />
               <span className="map-settings__toggle-track">
@@ -80,18 +86,27 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
               </span>
             </span>
           </label>
-          <label className="map-settings__item">
+          <div className="map-settings__item">
             <span className="map-settings__item-label">{tr.countryChannelsLabel}</span>
-            <select
-              className="map-settings__select"
-              value={countryChannels}
-              onChange={e => onCountryChannelsChange(Number(e.target.value))}
-            >
-              {Array.from({ length: COUNTRY_CHANNELS_MAX }, (_, i) => i + 1).map(n => (
-                <option key={n} value={n}>{n}</option>
-              ))}
-            </select>
-          </label>
+            {/* +/- stepper is faster and more touch-friendly than a select on mobile */}
+            <div className="map-settings__stepper">
+              <button
+                type="button"
+                className="map-settings__stepper-btn"
+                onClick={() => onCountryChannelsChange(countryChannels - 1)}
+                disabled={countryChannels <= 1}
+                aria-label="Decrease"
+              >−</button>
+              <span className="map-settings__stepper-value">{countryChannels}</span>
+              <button
+                type="button"
+                className="map-settings__stepper-btn"
+                onClick={() => onCountryChannelsChange(countryChannels + 1)}
+                disabled={countryChannels >= COUNTRY_CHANNELS_MAX}
+                aria-label="Increase"
+              >+</button>
+            </div>
+          </div>
         </div>
       )}
       <button

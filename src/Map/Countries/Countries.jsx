@@ -19,11 +19,30 @@ const Countries = ({ data, onCountryHover = null }) => {
   const geoJsonLayerRef = useRef(null);
 
   const { selectedAlpha2 } = useContext(MapPointContext);
-  const { openCountryPanel } = useContext(CountryPanelContext);
+  const { openCountryPanel, isCountryPanelOpen, selectedCountry, setSelectedCountry } = useContext(CountryPanelContext);
 
   useEffect(() => {
     dataRef.current = data;
   }, [data]);
+
+  // When the panel opens via a ?country= URL param on page load, selectedCountry has an
+  // empty countryName and flag because the GeoJSON hasn't been queried yet. Scan the static
+  // countries GeoJSON to fill in the name and flag as soon as this component mounts.
+  useEffect(() => {
+    if (!isCountryPanelOpen || !selectedCountry?.alpha2 || selectedCountry.countryName) return;
+    const target = selectedCountry.alpha2;
+    for (const feature of countries.features) {
+      const alpha2 = getAlpha2FromAlpha3(feature.id);
+      if (alpha2 === target) {
+        setSelectedCountry(prev => ({
+          ...prev,
+          countryName: feature.properties.name || target,
+          flag: getFlagFromAlpha2(target) ?? '',
+        }));
+        break;
+      }
+    }
+  }, [isCountryPanelOpen, selectedCountry?.alpha2, selectedCountry?.countryName, setSelectedCountry]);
 
   // Recompute style function when data changes.
   // Using useMemo so it's only recalculated when data reference changes.
