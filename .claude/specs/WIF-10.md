@@ -274,34 +274,34 @@ Follow the repository testing guidelines (for example CLAUDE.md, AGENTS.md, or e
   Run `npm run build` in `world-interests`. Confirm zero webpack errors. Then start `npm run dev` and work through this checklist before marking the spec done:
 
   **Country panel basics**
-  - [ ] Click a country polygon → panel opens full-screen with correct country name and flag
-  - [ ] Panel header shows the active category name
-  - [ ] Panel shows loading state while fetching, then resolves to the "no data yet" empty state (backend stub returns 501)
-  - [ ] "Based on data from X days" and "Last updated X ago" notices are both visible in the header
-  - [ ] Panel closes via the close button
-  - [ ] Panel closes via the Escape key
-  - [ ] The country polygon stays highlighted while the panel is open; highlight clears when panel closes
+  - [x] Click a country polygon → panel opens full-screen with correct country name and flag
+  - [x] Panel header shows the active category name
+  - [x] Panel shows loading state while fetching, then resolves to the "no data yet" empty state (backend stub returns 501)
+  - [x] "Based on data from X days" and "Last updated X ago" notices are both visible in the header
+  - [x] Panel closes via the close button
+  - [x] Panel closes via the Escape key
+  - [x] The country polygon stays highlighted while the panel is open; highlight clears when panel closes
 
   **URL and navigation**
-  - [ ] Opening the panel adds `?country=<alpha2>` to the URL
-  - [ ] Closing the panel removes the `country` param from the URL
-  - [ ] Press browser Back after opening the panel → panel closes, URL returns to `?category=<slug>`
-  - [ ] Load the page with `?country=ES` in the URL → panel opens automatically for Spain
-  - [ ] Load the page with `?country=INVALID` → panel does not open, map loads normally
+  - [x] Opening the panel adds `?country=<alpha2>` to the URL
+  - [x] Closing the panel removes the `country` param from the URL
+  - [x] Press browser Back after opening the panel → panel closes, URL returns to `?category=<slug>`
+  - [x] Load the page with `?country=ES` in the URL → panel opens automatically for Spain
+  - [x] Load the page with `?country=INVALID` → panel does not open, map loads normally
 
   **Mutual exclusion (⚠️ test this carefully)**
-  - [ ] Open a channel-pin sidebar (click any pin) → then click a country polygon → channel sidebar closes, country panel opens, polygon highlight updates correctly
-  - [ ] Open the country panel → then click a channel pin → country panel closes, channel sidebar opens, polygon highlight updates correctly
-  - [ ] No flash of polygon deselection when switching between the two panels
+  - [x] Open a channel-pin sidebar (click any pin) → then click a country polygon → channel sidebar closes, country panel opens, polygon highlight updates correctly
+  - [x] Open the country panel → then click a channel pin → country panel closes, channel sidebar opens, polygon highlight updates correctly
+  - [x] No flash of polygon deselection when switching between the two panels
 
   **N channel setting**
-  - [ ] Open MapSettings → the channel count control is visible and labelled correctly
-  - [ ] Change N → the setting persists across page reload
+  - [x] Open MapSettings → the channel count control is visible and labelled correctly
+  - [x] Change N → the setting persists across page reload
 
   **Category change**
-  - [ ] With the country panel open, switch category → panel re-fetches with new category slug
+  - [x] With the country panel open, switch category → panel re-fetches with new category slug
 
   **Regression**
-  - [ ] Channel-pin `InfoSidebar` still opens and displays correctly (no regression)
-  - [ ] Category list still loads correctly
-  - [ ] Map data still loads correctly (new API URL `/api/trending` works)
+  - [x] Channel-pin `InfoSidebar` still opens and displays correctly (no regression)
+  - [x] Category list still loads correctly
+  - [x] Map data still loads correctly (new API URL `/api/trending` works)
