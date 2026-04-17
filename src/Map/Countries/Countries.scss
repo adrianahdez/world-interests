@@ -116,23 +116,46 @@
 }
 
 
-/* Shared style for the zoom debug label and country hover label (bottom-right overlays).
-   Background and text colour switch with the theme via the .light class on <html>. */
-.map-overlay-label {
+/* Wrapper that stacks all bottom-right overlay labels (category, zoom, country hover).
+   Sits outside MapContainer so all labels share the same positioning context. */
+.map-overlay-labels {
   position: absolute;
+  bottom: calc(var(--footer-height) + 12px);
   right: 12px;
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  pointer-events: none;
+}
+
+/* Shared style for individual overlay labels. */
+.map-overlay-label {
   background: rgba(0, 0, 0, 0.55);
   color: rgba(255, 255, 255, 0.9);
   font-size: 11px;
   font-family: monospace;
   padding: 3px 7px;
   border-radius: 4px;
-  pointer-events: none;
   border: 1px solid transparent;
 
-  &--zoom    { bottom: 12px; }
-  &--country { bottom: 38px; }
+  // Category badge overrides monospace with the page font.
+  &--category-active {
+    font-family: inherit;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+}
+
+/* Dynamic labels (shown/hidden based on user interaction) float above the static
+   overlay-label stack so their appearance doesn't shift the static labels (e.g.
+   category badge) up or down. Currently applied only to the country hover label. */
+.map-overlay-label--dynamic {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 6px;
 }
 
 .light .map-overlay-label {

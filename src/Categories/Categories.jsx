@@ -29,7 +29,7 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
     setCategoriesError(false);
 
     const attempt = (attemptIndex) => {
-      const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'get-category-list.php';
+      const apiUrl = process.env.REACT_APP_BACKEND_API_URL + 'api/categories';
       getData(apiUrl)
         .then((result) => {
           if (cancelled) return;

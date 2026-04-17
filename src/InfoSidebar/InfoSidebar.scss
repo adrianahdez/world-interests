@@ -103,6 +103,7 @@
     &__bottom {
       flex-direction: column;
       align-items: flex-start;
+      padding-top: 14px;
     }
 
     &__text {
@@ -110,6 +111,17 @@
       flex-direction: column;
       flex-grow: 1;
       width: 100%;
+    }
+
+    // Label shown above the #1 trending video link ("Video #1:" / "#1 Video:") —
+    // styled like .channel-content__heading (bold, normal case) for visual consistency.
+    &__video-label {
+      font-size: inherit;
+      font-weight: 600;
+      text-transform: none;
+      letter-spacing: 0;
+      color: inherit;
+      margin: 0 0 2px;
     }
 
     &__text-group {
@@ -121,11 +133,23 @@
       align-items: center;
     }
 
+    // Stats row (views / likes / comments) — same inline pattern as the country panel.
     &__stats {
-      flex-grow: 1;
       display: flex;
-      column-gap: 10px;
-      justify-content: space-between;
+      flex-direction: row;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--page-text-color);
+      opacity: 0.8;
+
+      span {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
     }
 
     &__heading {
@@ -156,6 +180,12 @@
     left: unset;
     max-width: 700px;
     min-width: 700px;
+
+    // Restore opaque background on desktop so content doesn't bleed through
+    // the title when scrolling (the shared _sidebars partial clears it at 768px).
+    .sidebar__title {
+      background-color: var(--panels-fill-color, black);
+    }
   }
 
   // Mobile bottom sheet — slides up from the bottom of the viewport.
@@ -164,7 +194,7 @@
     position: fixed;
     top: auto;
     bottom: 0;
-    z-index: 600; // above footer (z-index: 500) and base sidebar (z-index: 501)
+    z-index: 1100; // above map controls (z-index: 1000), footer (500), base sidebar (501)
     left: 0;
     right: 0;
     margin: 0;
@@ -192,6 +222,14 @@
       border-radius: 28px 28px 0 0;
     }
   }
+}
+
+// Stat icons (views, likes, comments) — inherits currentColor for theme support.
+.stat-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  display: inline-block;
 }
 
 /* Reduced motion: skip all sidebar open/close animations */

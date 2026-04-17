@@ -138,6 +138,60 @@
   outline-offset: 2px;
 }
 
+// ─── Pin icon (shown next to clustering label for visual context) ─────────────
+
+.map-settings__pin-icon {
+  width: 11px;
+  height: 11px;
+  vertical-align: middle;
+  margin-left: 4px;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+// ─── +/− stepper (used for numeric settings like country channel count) ───────
+
+.map-settings__stepper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.map-settings__stepper-btn {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.88);
+  border-radius: 4px;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 150ms, border-color 150ms;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.map-settings__stepper-value {
+  min-width: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.88);
+  user-select: none;
+}
+
 // ─── Light theme ─────────────────────────────────────────────────────────────
 
 .light {
@@ -188,6 +242,25 @@
 
   .map-settings__toggle input:checked ~ .map-settings__toggle-track .map-settings__toggle-thumb {
     background: #fff;
+  }
+
+  .map-settings__pin-icon {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .map-settings__stepper-btn {
+    border-color: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.06);
+    color: rgba(0, 0, 0, 0.8);
+
+    &:hover:not(:disabled) {
+      background: rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .map-settings__stepper-value {
+    color: rgba(0, 0, 0, 0.8);
   }
 }
 

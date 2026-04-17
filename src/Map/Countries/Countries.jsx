@@ -3,9 +3,10 @@ import countries from './countries.geo.json';
 import React, { useRef, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { GeoJSON, useMap } from 'react-leaflet';
-import { getCountryLatLon, getAlpha2FromAlpha3 } from '../Points/Data';
+import { getCountryLatLon, getAlpha2FromAlpha3, getFlagFromAlpha2 } from '../Points/Data';
 import { makeStyleConfig } from '../geoJsonConfig';
 import { MapPointContext } from '../../Common/MapPointContext';
+import { CountryPanelContext } from '../../Common/CountryPanelContext';
 
 // Style applied to the GeoJSON sub-layer for the currently selected country.
 // Weight/color are set inline; the class adds the CSS filter for the fill highlight.
@@ -17,11 +18,31 @@ const Countries = ({ data, onCountryHover = null }) => {
   // Holds the mounted Leaflet GeoJSON layer so we can call setStyle() instead of remounting.
   const geoJsonLayerRef = useRef(null);
 
-  const { selectedAlpha2, setSelectedAlpha2 } = useContext(MapPointContext);
+  const { selectedAlpha2 } = useContext(MapPointContext);
+  const { openCountryPanel, isCountryPanelOpen, selectedCountry, setSelectedCountry } = useContext(CountryPanelContext);
 
   useEffect(() => {
     dataRef.current = data;
   }, [data]);
+
+  // When the panel opens via a ?country= URL param on page load, selectedCountry has an
+  // empty countryName and flag because the GeoJSON hasn't been queried yet. Scan the static
+  // countries GeoJSON to fill in the name and flag as soon as this component mounts.
+  useEffect(() => {
+    if (!isCountryPanelOpen || !selectedCountry?.alpha2 || selectedCountry.countryName) return;
+    const target = selectedCountry.alpha2;
+    for (const feature of countries.features) {
+      const alpha2 = getAlpha2FromAlpha3(feature.id);
+      if (alpha2 === target) {
+        setSelectedCountry(prev => ({
+          ...prev,
+          countryName: feature.properties.name || target,
+          flag: getFlagFromAlpha2(target) ?? '',
+        }));
+        break;
+      }
+    }
+  }, [isCountryPanelOpen, selectedCountry?.alpha2, selectedCountry?.countryName, setSelectedCountry]);
 
   // Recompute style function when data changes.
   // Using useMemo so it's only recalculated when data reference changes.
@@ -74,8 +95,8 @@ const Countries = ({ data, onCountryHover = null }) => {
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     map.setView(latLon, map.getZoom(), { animate: !prefersReduced });
-    setSelectedAlpha2(alpha2);
-    // TODO: Add code to show the sidebar with the country data
+    // openCountryPanel sets selectedAlpha2 and handles sidebar mutual exclusion.
+    openCountryPanel(alpha2, countryName, getFlagFromAlpha2(alpha2) ?? '');
   };
 
   // Configure click event for each country
