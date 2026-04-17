@@ -60,6 +60,8 @@ const translations = {
     channelDayAs: "day as",
     channelDaysAs: "different days as",
     inDataHistory: "in data history",
+    // Overflow suffix in the appearances tooltip: "+ 5 more"
+    andMore: "+ {n} more",
     // Peak video label
     peakVideo: "Most viewed video",
     // Channel count notice (always shown when data loads): "Showing X of up to N channels"
@@ -126,6 +128,7 @@ const translations = {
     channelDayAs: "día como",
     channelDaysAs: "días diferentes como",
     inDataHistory: "en la historia de datos",
+    andMore: "+ {n} más",
     peakVideo: "Vídeo más visto",
     showingOf: "Mostrando",
     ofUpTo: "de hasta",

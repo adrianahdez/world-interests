@@ -6,6 +6,7 @@ import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
 import { useCountryHistory } from '../hooks/useCountryHistory';
 import { IconEye, IconThumbUp, IconComment } from '../Common/Icons';
+import AppearancesTooltip from './AppearancesTooltip';
 
 // Returns a JSX "Last updated …" label with the time portion in bold.
 // Uses separate lastUpdatedRecent / lastUpdatedAgo keys so Spanish avoids
@@ -166,6 +167,7 @@ export default function CountryPanel({ category, categoryName }) {
 function ChannelCard({ channel, rank, tr }) {
   const thumbnailUrl = `https://img.youtube.com/vi/${channel.peak_video.youtube_id}/mqdefault.jpg`;
   const appearances = channel.appearances;
+  const appearanceDates = channel.appearance_dates ?? [];
 
   return (
     <li className="channel-card">
@@ -191,11 +193,13 @@ function ChannelCard({ channel, rank, tr }) {
             >
               {channel.title}
             </a>
-            <span className="channel-card__appearances">
-              {tr.channelLabel} {appearances}{' '}
-              {appearances === 1 ? tr.channelDayAs : tr.channelDaysAs} #{rank}{' '}
-              {tr.inDataHistory}
-            </span>
+            <AppearancesTooltip dates={appearanceDates}>
+              <span className="channel-card__appearances">
+                {tr.channelLabel} {appearances}{' '}
+                {appearances === 1 ? tr.channelDayAs : tr.channelDaysAs} #{rank}{' '}
+                {tr.inDataHistory}
+              </span>
+            </AppearancesTooltip>
           </div>
         </div>
 
