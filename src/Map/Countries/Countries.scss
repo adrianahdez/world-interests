@@ -148,6 +148,16 @@
   }
 }
 
+/* Dynamic labels (shown/hidden based on user interaction) float above the static
+   overlay-label stack so their appearance doesn't shift the static labels (e.g.
+   category badge) up or down. Currently applied only to the country hover label. */
+.map-overlay-label--dynamic {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 6px;
+}
+
 .light .map-overlay-label {
   background: rgba(255, 255, 255, 0.82);
   color: rgba(0, 0, 0, 0.85);

@@ -426,7 +426,7 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
           </div>
         )}
         {DEBUG_ZOOM_LEVEL_ENABLED && <div ref={zoomLabelRef} className="map-overlay-label map-overlay-label--zoom" />}
-        {COUNTRY_HOVER_LABEL_ENABLED && <div ref={hoverLabelRef} className="map-overlay-label map-overlay-label--country" style={{ display: 'none' }} />}
+        {COUNTRY_HOVER_LABEL_ENABLED && <div ref={hoverLabelRef} className="map-overlay-label map-overlay-label--country map-overlay-label--dynamic" style={{ display: 'none' }} />}
       </div>
       <MapSettings
         heatmapVisible={heatmapVisible}
