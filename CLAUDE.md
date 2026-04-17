@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run dev` — development build with file watcher (webpack development mode)
 - `npm run build` — production build to `dist/` (webpack production mode)
 - Dev server runs on port 9000
+- **The dev container runs in watch mode** — do NOT run `npm run build` after every change; webpack rebuilds automatically.
 
 There are no tests or linting configured in this project.
 

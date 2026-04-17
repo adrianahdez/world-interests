@@ -165,11 +165,14 @@ export default function App() {
       console.warn('[WorldInterests] Could not save sidebar country:', e.message);
     }
     // Push a history entry so the Back button can close the channel panel.
-    if (point?.alpha2) {
+    // Use the YouTube channel ID so the link identifies the specific channel,
+    // not just "whichever channel is #1 in country X right now".
+    const channelId = point?.channel?.channelId;
+    if (channelId) {
       const params = new URLSearchParams(window.location.search);
-      params.set('channel', point.alpha2);
+      params.set('channel', channelId);
       params.delete('country');
-      window.history.pushState({ channel: point.alpha2 }, '', `${window.location.pathname}?${params.toString()}`);
+      window.history.pushState({ channel: channelId }, '', `${window.location.pathname}?${params.toString()}`);
     }
   }, [removeCountryParam]);
 

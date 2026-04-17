@@ -262,14 +262,15 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
     toggleSidebar(true);
   }, [data, restoreRegion, setMapPoint, toggleSidebar]);
 
-  // Restore the channel panel from a ?channel=<alpha2> URL param (deep-link or Back/Forward).
-  // Fires whenever restoreChannelAlpha2 changes or new data arrives.
-  // onChannelRestored clears the pending alpha2 in App.jsx so this only runs once per navigation.
+  // Restore the channel panel from a ?channel=<channelId> URL param (deep-link or Back/Forward).
+  // Scans the loaded map data for the entry whose channel.channelId matches.
+  // onChannelRestored clears the pending ID in App.jsx so this only runs once per navigation.
   useEffect(() => {
     if (!restoreChannelAlpha2 || Object.keys(data).length === 0) return;
-    const point = data[restoreChannelAlpha2]?.[0];
-    if (!point) return;
-    const p = { ...point, flag: getFlagFromAlpha2(restoreChannelAlpha2), alpha2: restoreChannelAlpha2 };
+    const alpha2 = Object.keys(data).find(k => data[k][0]?.channel?.channelId === restoreChannelAlpha2);
+    if (!alpha2) return;
+    const point = data[alpha2][0];
+    const p = { ...point, flag: getFlagFromAlpha2(alpha2), alpha2 };
     if (p.channel) p.channel = { ...p.channel, channelImage: p.channel.channelImage || ImageNotFound };
     setMapPoint(p);
     toggleSidebar(true);
