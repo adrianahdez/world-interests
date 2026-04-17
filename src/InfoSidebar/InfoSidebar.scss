@@ -46,11 +46,7 @@
     font-size: 12px;
 
     @include respond-at($mobile-breakpoint) {
-      font-size: 14px;
-    }
-
-    @include respond-at(768) {
-      font-size: 16px;
+      font-size: 13px;
     }
   }
 
@@ -78,7 +74,7 @@
     height: auto;
 
     @include respond-at($mobile-breakpoint) {
-      max-width: 78px;
+      max-width: 64px;
     }
   }
 
