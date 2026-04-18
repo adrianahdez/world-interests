@@ -78,4 +78,4 @@ Root cause identified from codebase exploration — no user decisions required.
 
 ## Implementation Plan
 - [x] Step 1: In `src/Map/Map.jsx` line 253, change `}, [data]);` to `}, [data, isEs]);`
-- [ ] Step 2: Manual QA — load each category, toggle language, confirm all pins retain background color, padding, and filter styles; toggle rapidly; switch category then toggle language.
+- [x] Step 2: Manual QA — load each category, toggle language, confirm all pins retain background color, padding, and filter styles; toggle rapidly; switch category then toggle language.
