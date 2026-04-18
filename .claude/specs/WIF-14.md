@@ -63,7 +63,7 @@ The application has received no intentional SEO treatment since launch. As a SPA
 **Decision: Option C.** No SSR or prerendering. Google executes JavaScript for SPAs and indexes the rendered content. We compensate with a meaningful `<noscript>` fallback in `index.html` and rich static meta content in `<head>`. This is sufficient for a non-news SPA.
 
 ### Q3 — OG Image
-`screenshot.jpg` at the repo root is already wired in `Head.jsx` and copied to `dist/` by webpack. The file is currently outdated (visually). Replacing it is a **manual step outside this implementation**: take a new screenshot at 1200×630 px and overwrite `screenshot.jpg` in the repo root. No code changes needed.
+`screenshot.png` at the repo root is already wired in `Head.jsx` and copied to `dist/` by webpack. The file is currently outdated (visually). Replacing it is a **manual step outside this implementation**: take a new screenshot at 1200×630 px and overwrite `screenshot.png` in the repo root. No code changes needed.
 
 ### Q4 — Sitemap generation
 `generate-sitemap.js` is a standalone `npm run generate-sitemap` dev script. It does **not** hook into `npm run build` or the Cloudflare Pages pipeline, so it never blocks a deploy. The developer runs it manually before pushing when categories change. On failure, the script logs a clear `[sitemap] ERROR:` message and exits with code 1 for awareness — but the deploy is unaffected.
@@ -192,7 +192,7 @@ Category links in `Categories.jsx` updated from `href="#"` to `href="?category=<
   - Update `robots.txt`: add an inline comment above the Sitemap line noting that the URL here must match `REACT_APP_SITE_URL` in `.env.production` — the file itself stays static (CopyPlugin cannot template-process it), but the comment makes the dependency explicit. The generate-sitemap script (step 7) will also write `robots.txt` dynamically using the env var, so after running the script the file will always be in sync
   - Note: `index.html` noscript link and documentation files (`README.md`, `CLAUDE.md`, `_redirects`) are acceptable hardcoded — they are not app code and do not affect SEO signals
 
-- [ ] Manual action (reminder — no code): Replace `screenshot.jpg` at the repo root with an updated screenshot of the app at 1200×630 px. This file is the OG image shown when sharing the URL on social platforms. Until it is replaced the social preview will show the outdated UI.
+- [ ] Manual action (reminder — no code): Replace `screenshot.png` at the repo root with an updated screenshot of the app at 1200×630 px. This file is the OG image shown when sharing the URL on social platforms. Until it is replaced the social preview will show the outdated UI.
 
 ## Testing Guidelines
 

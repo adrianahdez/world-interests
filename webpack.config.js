@@ -100,7 +100,7 @@ module.exports = (env, argv) => {
         patterns: [
           { from: 'favicon.svg', to: '' }, // Copy the favicon.svg to the dist folder
           { from: 'sitemap.xml', to: '' }, // Copy the sitemap.xml to the dist folder
-          { from: 'screenshot.jpg', to: '' }, // Copy the screenshot.jpg to the dist folder
+          { from: 'screenshot.png', to: '' }, // Copy the screenshot.png to the dist folder
           { from: '_redirects', to: '' }, // Copy the redirects file to the dist folder
           { from: 'robots.txt', to: '' }, // Copy the robots.txt to the dist folder
         ],

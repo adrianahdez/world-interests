@@ -123,7 +123,7 @@ export default function Head({ category, categoryName }) {
   // Dynamic meta tags — re-runs whenever language or active category changes.
   useEffect(() => {
     const canonicalUrl = getCanonicalUrl();
-    const screenshotUrl = window.location.origin + '/screenshot.jpg';
+    const screenshotUrl = window.location.origin + '/screenshot.png';
 
     const title = categoryName
       ? `${categoryName} — Trending YouTube | World Interests`
