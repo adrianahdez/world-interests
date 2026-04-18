@@ -13,7 +13,7 @@ import { LanguageContext } from '../Common/LanguageContext';
 import { MapPointContext } from '../Common/MapPointContext';
 import { SidebarContext } from '../Common/SidebarContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, STORAGE_KEY_FLAGS, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, FULLSCREEN_ENABLED, FLAGS_VISIBLE, HEATMAP_ENABLED } from '../config';
+import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, STORAGE_KEY_FLAGS, STORAGE_KEY_LABELS, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, FULLSCREEN_ENABLED, FLAGS_VISIBLE, HEATMAP_ENABLED, LABELS_VISIBLE } from '../config';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css';
 import 'leaflet-gesture-handling';
 import L from 'leaflet';
@@ -179,6 +179,12 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
       return v !== null ? v === 'true' : FLAGS_VISIBLE;
     } catch (_) { return FLAGS_VISIBLE; }
   });
+  const [labelsVisible, setLabelsVisible] = useState(() => {
+    try {
+      const v = localStorage.getItem(STORAGE_KEY_LABELS);
+      return v !== null ? v === 'true' : LABELS_VISIBLE;
+    } catch (_) { return LABELS_VISIBLE; }
+  });
   // Fullscreen is intentionally NOT persisted — the browser blocks auto-entering fullscreen
   // on page load, which would leave the toggle stuck in the ON state without actually being
   // in fullscreen. Always start from the config default each session.
@@ -287,6 +293,10 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
     try { localStorage.setItem(STORAGE_KEY_FLAGS, String(flagsVisible)); }
     catch (e) { console.warn('[WorldInterests] Could not save flags setting:', e.message); }
   }, [flagsVisible]);
+  useEffect(() => {
+    try { localStorage.setItem(STORAGE_KEY_LABELS, String(labelsVisible)); }
+    catch (e) { console.warn('[WorldInterests] Could not save labels setting:', e.message); }
+  }, [labelsVisible]);
   // Apply flag visibility class imperatively so React re-renders don't wipe the zoom
   // classes that MapViewSaver adds to the same element via classList.toggle.
   useEffect(() => {
@@ -451,6 +461,8 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
         onFooterToggle={onFooterToggle}
         countryChannels={countryChannels}
         onCountryChannelsChange={onCountryChannelsChange}
+        labelsVisible={labelsVisible}
+        onLabelsVisibleChange={() => setLabelsVisible(v => !v)}
         tr={tr}
       />
       <MapContainer {...mapConfig}>
