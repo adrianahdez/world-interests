@@ -1,0 +1,13 @@
+{
+  "sources": {
+    "local": {
+      "enabled": true,
+      "path": ".sdd/specs"
+    },
+    "jira": {
+      "enabled": false,
+      "project_key": "",
+      "workspace": ""
+    }
+  }
+}
