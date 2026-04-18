@@ -86,7 +86,7 @@ No other files need to change. `Map.jsx` passes props down to `MapSettings` — 
 
 - [x] Step 1: Create `src/settingsVisibility.js` with 7 `SETTING_*_VISIBLE` constants (all `true`), each with an inline comment explaining its purpose.
 - [x] Step 2: Update `src/Map/MapSettings/MapSettings.jsx` — import the 7 constants and wrap each settings row with a conditional render guard (`{SETTING_X_VISIBLE && <label ...>}`).
-- [ ] Step 3: Manual QA — verify all options visible by default; flip one flag to `false` and confirm that row disappears without affecting the underlying feature or other rows.
+- [x] Step 3: Manual QA — verify all options visible by default; flip one flag to `false` and confirm that row disappears without affecting the underlying feature or other rows.
 
 ## Testing Guidelines
 
