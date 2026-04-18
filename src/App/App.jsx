@@ -313,7 +313,7 @@ export default function App() {
       <SidebarContext.Provider value={{ isSidebarOpen, toggleSidebar }}>
         <CountryPanelContext.Provider value={{ isCountryPanelOpen, selectedCountry, setSelectedCountry, openCountryPanel, closeCountryPanel, countryChannels }}>
           <div className='app-container'>
-            <Head />
+            <Head category={category} categoryName={categoryName} />
             <Header isDialogOpen={isDialogOpen} toggleDialog={toggleDialog} />
             <Categories
               category={category}

@@ -149,7 +149,7 @@ Category links in `Categories.jsx` updated from `href="#"` to `href="?category=<
   - Create `robots.txt` at repo root: `User-agent: *`, `Allow: /`, `Sitemap: https://worldinterests.midri.net/sitemap.xml`
   - Add `{ from: 'robots.txt', to: '' }` to `CopyPlugin` patterns in `webpack.config.js`
 
-- [ ] Step 2: `Head.jsx` + `App.jsx` — Dynamic meta tag system overhaul
+- [x] Step 2: `Head.jsx` + `App.jsx` — Dynamic meta tag system overhaul
   - Add `category` and `categoryName` as props to `Head`; update `App.jsx` to pass them (`<Head category={category} categoryName={categoryName} />`)
   - Split into two `useEffect` calls: one for GA (empty deps, mount only); one for all meta tags (deps: `[isEs, category, categoryName]`)
   - Replace the append pattern with a `upsertMeta(attrs)` helper that uses `querySelector` to update existing tags in place and creates them only when absent
