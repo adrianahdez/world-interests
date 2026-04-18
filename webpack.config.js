@@ -1,12 +1,40 @@
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+// Reads a .env file and returns a plain key→value object without mutating process.env.
+function parseEnvFile(filePath) {
+  const result = {};
+  try {
+    require('fs').readFileSync(filePath, 'utf8')
+      .split('\n')
+      .forEach(line => {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) return;
+        const eq = trimmed.indexOf('=');
+        if (eq === -1) return;
+        const key = trimmed.slice(0, eq).trim();
+        const val = trimmed.slice(eq + 1).trim().replace(/^['"]|['"]$/g, '');
+        if (key) result[key] = val;
+      });
+  } catch (_) {
+    // File absent or unreadable — return empty object.
+  }
+  return result;
+}
+
 module.exports = (env, argv) => {
   const isDevelopment = argv.mode === 'development';
+
+  const prodEnv = parseEnvFile(path.resolve(__dirname, '.env.production'));
+  const prodEnvExists = Object.keys(prodEnv).length > 0;
+  // These are true only in dev when .env.production exists but is missing the var — compiled away in production.
+  const siteUrlMissing = isDevelopment && prodEnvExists && !prodEnv.REACT_APP_SITE_URL;
+  const gaIdMissing    = isDevelopment && prodEnvExists && !prodEnv.REACT_APP_GA_ID;
 
   return {
     entry: './src/index.js',
@@ -47,6 +75,15 @@ module.exports = (env, argv) => {
         path: isDevelopment ? './.env' : './.env.production',
         systemvars: true, // also pick up env vars set by the CI/CD environment (e.g. Cloudflare Pages)
       }),
+      // DefinePlugin is placed after Dotenv so its definitions take precedence for any overlapping keys.
+      new DefinePlugin({
+        // Baked-in booleans; Terser eliminates the warning blocks entirely in production builds.
+        __DEV_WARN_SITE_URL_MISSING__: JSON.stringify(siteUrlMissing),
+        __DEV_WARN_GA_ID_MISSING__:    JSON.stringify(gaIdMissing),
+        // In dev, forcibly blank out REACT_APP_GA_ID so a value accidentally added to .env can never
+        // reach the GA script — GA must only ever read its ID from .env.production in production builds.
+        ...(isDevelopment && { 'process.env.REACT_APP_GA_ID': JSON.stringify('') }),
+      }),
       new HtmlWebpackPlugin({
         template: './index.html',
         inject: 'body', // Inject the script and styles tag in the body, ensuring the load of the assets with the unique generated name by the content hash.
@@ -63,8 +100,9 @@ module.exports = (env, argv) => {
         patterns: [
           { from: 'favicon.svg', to: '' }, // Copy the favicon.svg to the dist folder
           { from: 'sitemap.xml', to: '' }, // Copy the sitemap.xml to the dist folder
-          { from: 'screenshot.jpg', to: '' }, // Copy the screenshot.jpg to the dist folder
+          { from: 'screenshot.png', to: '' }, // Copy the screenshot.png to the dist folder
           { from: '_redirects', to: '' }, // Copy the redirects file to the dist folder
+          { from: 'robots.txt', to: '' }, // Copy the robots.txt to the dist folder
         ],
       }),
     ],

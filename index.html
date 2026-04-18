@@ -4,14 +4,25 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore a real-time interactive map of the #1 trending YouTube channel in every country, organized by category — Music, Gaming, News, Sports, and more. Updated daily.">
+    <meta name="robots" content="index, follow">
     <!-- Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-3771668571647204">
     <link rel="icon" href="favicon.svg" type="image/x-icon">
-    <title>World Interests</title>
+    <!-- Preconnect to YouTube CDN domains used for channel images and thumbnails -->
+    <link rel="preconnect" href="https://ggpht.com" crossorigin>
+    <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
+    <link rel="dns-prefetch" href="https://ggpht.com">
+    <link rel="dns-prefetch" href="https://i.ytimg.com">
+    <title>World Interests — Trending YouTube Channels by Country</title>
   </head>
 
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <noscript>
+        <p>World Interests is an interactive map showing the #1 trending YouTube channel in every country, organized by categories like Music, Gaming, News, Sports, and more. Data is updated daily from the YouTube API. Enable JavaScript to explore the full interactive experience at <a href="https://worldinterests.midri.net/">worldinterests.midri.net</a>.</p>
+      </noscript>
+    </div>
 
     <% if (htmlWebpackPlugin.options.isProd) { %>
     <!-- Cloudflare Web Analytics -->

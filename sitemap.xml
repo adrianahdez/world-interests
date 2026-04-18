@@ -1,16 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
-<url>
-  <loc>https://worldinterests.midri.net/</loc>
-  <lastmod>2024-09-02T14:42:42+00:00</lastmod>
-</url>
-
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://worldinterests.midri.net/</loc>
+    <lastmod>2026-04-18T13:12:18.934Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://worldinterests.midri.net/?category=film-animation</loc>
+    <lastmod>2026-04-18T13:12:18.934Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worldinterests.midri.net/?category=autos-vehicles</loc>
+    <lastmod>2026-04-18T13:12:18.934Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worldinterests.midri.net/?category=music</loc>
+    <lastmod>2026-04-18T13:12:18.934Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worldinterests.midri.net/?category=pets-animals</loc>
+    <lastmod>2026-04-18T13:12:18.934Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worldinterests.midri.net/?category=sports</loc>
+    <lastmod>2026-04-18T13:12:18.934Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worldinterests.midri.net/?category=gaming</loc>
+    <lastmod>2026-04-18T13:12:18.934Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worldinterests.midri.net/?category=people-blogs</loc>
+    <lastmod>2026-04-18T13:12:18.934Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worldinterests.midri.net/?category=comedy</loc>
+    <lastmod>2026-04-18T13:12:18.934Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worldinterests.midri.net/?category=entertainment</loc>
+    <lastmod>2026-04-18T13:12:18.934Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worldinterests.midri.net/?category=news-politics</loc>
+    <lastmod>2026-04-18T13:12:18.934Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worldinterests.midri.net/?category=howto-style</loc>
+    <lastmod>2026-04-18T13:12:18.934Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worldinterests.midri.net/?category=science-technology</loc>
+    <lastmod>2026-04-18T13:12:18.934Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://worldinterests.midri.net/?category=nonprofits-activism</loc>
+    <lastmod>2026-04-18T13:12:18.934Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

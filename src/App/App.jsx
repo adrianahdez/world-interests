@@ -313,7 +313,7 @@ export default function App() {
       <SidebarContext.Provider value={{ isSidebarOpen, toggleSidebar }}>
         <CountryPanelContext.Provider value={{ isCountryPanelOpen, selectedCountry, setSelectedCountry, openCountryPanel, closeCountryPanel, countryChannels }}>
           <div className='app-container'>
-            <Head />
+            <Head category={category} categoryName={categoryName} />
             <Header isDialogOpen={isDialogOpen} toggleDialog={toggleDialog} />
             <Categories
               category={category}
@@ -324,17 +324,20 @@ export default function App() {
             />
             <InfoSidebar categoryName={categoryName} />
             <CountryPanel category={category} categoryName={categoryName} />
-            <Map
-              category={category}
-              categoryName={categoryName}
-              restoreRegion={restoreRegion}
-              restoreChannelAlpha2={pendingChannelAlpha2}
-              onChannelRestored={() => setPendingChannelAlpha2(null)}
-              footerVisible={footerVisible}
-              onFooterToggle={handleFooterToggle}
-              countryChannels={countryChannels}
-              onCountryChannelsChange={handleCountryChannelsChange}
-            />
+            <main className="app-main">
+              <h1 className="sr-only">World Interests — Trending YouTube Channels by Country</h1>
+              <Map
+                category={category}
+                categoryName={categoryName}
+                restoreRegion={restoreRegion}
+                restoreChannelAlpha2={pendingChannelAlpha2}
+                onChannelRestored={() => setPendingChannelAlpha2(null)}
+                footerVisible={footerVisible}
+                onFooterToggle={handleFooterToggle}
+                countryChannels={countryChannels}
+                onCountryChannelsChange={handleCountryChannelsChange}
+              />
+            </main>
             {footerVisible && <Footer />}
           </div>
         </CountryPanelContext.Provider>

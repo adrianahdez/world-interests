@@ -57,7 +57,7 @@ export default function InfoSidebar({ categoryName }) {
   const tr = isEs ? translations.es : translations.en;
 
   return (
-    <dialog ref={sidebarRef} className='sidebar sidebar--map-point'>
+    <dialog ref={sidebarRef} className='sidebar sidebar--map-point' aria-labelledby="infosidebar-title">
       <span className='sidebar__bg'></span>
       <div className="sidebar__content">
         <menu>
@@ -69,10 +69,10 @@ export default function InfoSidebar({ categoryName }) {
             </button>
           </div>
         </menu>
-        <h2 className="sidebar__title">{tr.channelPanelTitle} {mapPoint?.flag} {typeof mapPoint?.regionName === 'object' ? (mapPoint.regionName[isEs ? 'es' : 'en'] ?? mapPoint.regionName.en) : mapPoint?.regionName}</h2>
+        <h2 id="infosidebar-title" className="sidebar__title">{tr.channelPanelTitle} {mapPoint?.flag} {typeof mapPoint?.regionName === 'object' ? (mapPoint.regionName[isEs ? 'es' : 'en'] ?? mapPoint.regionName.en) : mapPoint?.regionName}</h2>
         <div className="sidebar__list">
           <div className='channel-content channel-content__top'>
-            <img src={c?.channelImage} alt={`${c?.channelTitle ?? 'Channel'} logo`} referrerPolicy="no-referrer" />
+            <img src={c?.channelImage} alt={`${c?.channelTitle ?? 'Channel'} logo`} loading="lazy" referrerPolicy="no-referrer" />
             <div className='channel-content__text'>
 
               <div className='channel-content__text-group mt-0'>

@@ -11,7 +11,7 @@ export default function Header({ isDialogOpen, toggleDialog }) {
   const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <header className='header'>
+    <header className='header' aria-label="Site controls">
       <div className={`menu-item ${isDialogOpen === true ? ' close-icon' : ''}`}>
         <div className='toggle-btn' onClick={toggleDialog}>
           <span></span>
