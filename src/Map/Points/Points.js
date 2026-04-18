@@ -89,10 +89,13 @@ function changePointAppearance(point, pointLatLon, minViews, maxViews) {
   const attrs = calculatePointAttributes(point, minViews, maxViews);
 
   // Find the marker element without string interpolation — safe against regionName containing quotes.
+  // data-region is the canonical English name (see Map.jsx); match against regionName.en when
+  // regionName is the new object shape, fall back to the string for older cached JSON.
+  const regionKey = typeof point.regionName === 'object' ? point.regionName?.en : point.regionName;
   const allPoints = document.querySelectorAll('.custom-marker__point');
   let markerPoint = null;
   for (let i = 0; i < allPoints.length; i++) {
-    if (allPoints[i].dataset.region === point.regionName) {
+    if (allPoints[i].dataset.region === regionKey) {
       markerPoint = allPoints[i];
       break;
     }
