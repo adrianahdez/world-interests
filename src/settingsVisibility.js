@@ -28,7 +28,7 @@ export const SETTING_FOOTER_VISIBLE = true;
 // Shows/hides the "Heatmap" toggle in the settings menu.
 // When false, the heatmap behaves according to HEATMAP_ENABLED in config.js
 // and the user cannot change it at runtime.
-export const SETTING_HEATMAP_VISIBLE = true;
+export const SETTING_HEATMAP_VISIBLE = false;
 
 // Shows/hides the "Labels" toggle in the settings menu.
 // When false, label visibility behaves according to LABELS_VISIBLE in config.js
