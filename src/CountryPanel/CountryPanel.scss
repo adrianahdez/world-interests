@@ -90,14 +90,14 @@
 
 .country-panel__header-row {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 16px;
 }
 
 // Panel title: "Trends history for 🇧🇷 Brazil" — styled like the ChannelPanel title.
 .country-panel__country-name {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   margin: 0;
   color: var(--white, white);
@@ -118,7 +118,6 @@
 
 .country-panel__header-row .close-icon {
   flex-shrink: 0;
-  margin-top: 2px;
 
   .toggle-btn {
     border: none;
