@@ -1,3 +1,6 @@
+# If the domain changes, update REACT_APP_SITE_URL in .env.production and run:
+#   npm run generate-sitemap
+# That script will regenerate this file with the correct Sitemap URL.
 User-agent: *
 Allow: /
 Sitemap: https://worldinterests.midri.net/sitemap.xml

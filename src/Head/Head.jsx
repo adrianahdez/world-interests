@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
 
-const SITE_URL = 'https://worldinterests.midri.net';
+const SITE_URL = process.env.REACT_APP_SITE_URL || 'https://worldinterests.midri.net';
 const KEYWORDS = 'YouTube, live, music, videos, channels, countries, map, realtime, popular, trending, top, statistics, data, information, info, categories, free';
 
 const JSON_LD = JSON.stringify({

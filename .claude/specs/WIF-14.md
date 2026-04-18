@@ -186,7 +186,7 @@ Category links in `Categories.jsx` updated from `href="#"` to `href="?category=<
   - Add `npm run generate-sitemap` to the "Other useful commands" list in `README.md` under Local development, with a one-line explanation
   - Run `npm run generate-sitemap` locally (requires dev backend running) and commit the updated `sitemap.xml` as the baseline
 
-- [ ] Step 8: Extract production site URL into env var — `.env.production`, `.env.example`, `src/Head/Head.jsx`, `robots.txt`
+- [x] Step 8: Extract production site URL into env var — `.env.production`, `.env.example`, `src/Head/Head.jsx`, `robots.txt`
   - Add `REACT_APP_SITE_URL=https://worldinterests.midri.net` to `.env.production` and `.env.example` (with a comment explaining its purpose)
   - Update `src/Head/Head.jsx`: change `const SITE_URL = 'https://worldinterests.midri.net'` to `const SITE_URL = process.env.REACT_APP_SITE_URL || 'https://worldinterests.midri.net'` — the fallback preserves behaviour if the var is absent
   - Update `robots.txt`: add an inline comment above the Sitemap line noting that the URL here must match `REACT_APP_SITE_URL` in `.env.production` — the file itself stays static (CopyPlugin cannot template-process it), but the comment makes the dependency explicit. The generate-sitemap script (step 7) will also write `robots.txt` dynamically using the env var, so after running the script the file will always be in sync

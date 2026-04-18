@@ -5,8 +5,37 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+// Reads a .env file and returns a plain key→value object without mutating process.env.
+function parseEnvFile(filePath) {
+  const result = {};
+  try {
+    require('fs').readFileSync(filePath, 'utf8')
+      .split('\n')
+      .forEach(line => {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) return;
+        const eq = trimmed.indexOf('=');
+        if (eq === -1) return;
+        const key = trimmed.slice(0, eq).trim();
+        const val = trimmed.slice(eq + 1).trim().replace(/^['"]|['"]$/g, '');
+        if (key) result[key] = val;
+      });
+  } catch (_) {
+    // File absent or unreadable — return empty object.
+  }
+  return result;
+}
+
 module.exports = (env, argv) => {
   const isDevelopment = argv.mode === 'development';
+
+  if (isDevelopment) {
+    const prodEnv = parseEnvFile(path.resolve(__dirname, '.env.production'));
+    // Warn only when the file exists but the var is absent (i.e. Object.keys > 0 means file was readable).
+    if (Object.keys(prodEnv).length > 0 && !prodEnv.REACT_APP_SITE_URL) {
+      console.warn('[WorldInterests] ⚠️  REACT_APP_SITE_URL is not set in .env.production. Sitemap, robots.txt, and JSON-LD will fall back to the hardcoded URL. Add REACT_APP_SITE_URL=https://your-domain.com to .env.production.');
+    }
+  }
 
   return {
     entry: './src/index.js',

@@ -7,21 +7,25 @@
  * Usage: npm run generate-sitemap
  *
  * Requirements:
- *   - Backend must be running (REACT_APP_BACKEND_API_URL points to it)
- *   - REACT_APP_SITE_URL must be set in .env (falls back to hardcoded value with a warning)
+ *   - Backend must be running (REACT_APP_BACKEND_API_URL set in .env)
+ *   - REACT_APP_SITE_URL must be set in .env.production (warns and uses hardcoded fallback if absent)
  *
  * Run this script whenever categories are added or removed in the backend,
  * then commit the updated sitemap.xml and robots.txt.
  */
 
-const fs   = require('fs');
-const path = require('path');
-const http = require('http');
+const fs    = require('fs');
+const path  = require('path');
+const http  = require('http');
 const https = require('https');
 
-// Simple .env parser — populates process.env without requiring the dotenv package.
-// Keys already set in the environment are never overwritten (env vars take precedence).
-function loadEnvFile(filePath) {
+const ROOT = path.resolve(__dirname, '..');
+
+// Parses a .env file and returns a plain key→value object.
+// Does NOT mutate process.env — use this when you need to read a specific file
+// regardless of what is already set in the environment.
+function parseEnvFile(filePath) {
+  const result = {};
   try {
     fs.readFileSync(filePath, 'utf8')
       .split('\n')
@@ -32,29 +36,42 @@ function loadEnvFile(filePath) {
         if (eq === -1) return;
         const key = trimmed.slice(0, eq).trim();
         const val = trimmed.slice(eq + 1).trim().replace(/^['"]|['"]$/g, '');
-        if (key && !(key in process.env)) process.env[key] = val;
+        if (key) result[key] = val;
       });
   } catch (_) {
-    // File absent or unreadable — silently skip.
+    // File absent or unreadable — return empty object.
   }
+  return result;
 }
 
-const ROOT = path.resolve(__dirname, '..');
+// Populates process.env from a .env file, skipping keys already set in the environment.
+function loadEnvFile(filePath) {
+  const parsed = parseEnvFile(filePath);
+  Object.entries(parsed).forEach(([key, val]) => {
+    if (!(key in process.env)) process.env[key] = val;
+  });
+}
+
+// REACT_APP_BACKEND_API_URL comes from .env (dev config).
 loadEnvFile(path.join(ROOT, '.env'));
-
-const SITE_URL = (process.env.REACT_APP_SITE_URL || '').replace(/\/$/, '');
 const API_BASE = (process.env.REACT_APP_BACKEND_API_URL || '').replace(/\/$/, '');
-
-if (!SITE_URL) {
-  console.warn('[sitemap] WARNING: REACT_APP_SITE_URL is not set — using hardcoded fallback.');
-  console.warn('[sitemap]          Add REACT_APP_SITE_URL to .env so this script is not tied to a hardcoded domain.');
-}
-const resolvedSiteUrl = SITE_URL || 'https://worldinterests.midri.net';
 
 if (!API_BASE) {
   console.error('[sitemap] ERROR: REACT_APP_BACKEND_API_URL is not set. Add it to .env.');
   process.exit(1);
 }
+
+// REACT_APP_SITE_URL must come from .env.production only — never from .env.
+// Reading it from the file directly (not process.env) ensures .env cannot
+// accidentally supply it, even if the developer adds it there by mistake.
+const prodEnv  = parseEnvFile(path.join(ROOT, '.env.production'));
+const SITE_URL = (prodEnv.REACT_APP_SITE_URL || '').replace(/\/$/, '');
+
+if (!SITE_URL) {
+  console.warn('[sitemap] WARNING: REACT_APP_SITE_URL is not set in .env.production — using hardcoded fallback.');
+  console.warn('[sitemap]          Add REACT_APP_SITE_URL=https://your-domain.com to .env.production.');
+}
+const resolvedSiteUrl = SITE_URL || 'https://worldinterests.midri.net';
 
 // Minimal HTTP/HTTPS fetch — no external dependencies required.
 function fetchJson(url) {
@@ -106,7 +123,15 @@ function buildSitemap(siteUrl, slugs) {
 }
 
 function buildRobots(siteUrl) {
-  return `User-agent: *\nAllow: /\nSitemap: ${siteUrl}/sitemap.xml\n`;
+  return [
+    '# If the domain changes, update REACT_APP_SITE_URL in .env.production and run:',
+    '#   npm run generate-sitemap',
+    '# That script will regenerate this file with the correct Sitemap URL.',
+    'User-agent: *',
+    'Allow: /',
+    `Sitemap: ${siteUrl}/sitemap.xml`,
+    '',
+  ].join('\n');
 }
 
 async function run() {
