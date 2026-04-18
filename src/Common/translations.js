@@ -28,6 +28,7 @@ const translations = {
     footerLabel: "Footer",
     settingsLabel: "Map settings",
     countryChannelsLabel: "Country top channels",
+    labelsLabel: "Map labels",
     // ── Channel panel (InfoSidebar) ────────────────────────────────────────────
     // Used as the panel title: "Today's #1 for 🇲🇽 Mexico"
     channelPanelTitle: "Today's #1 for",
@@ -104,6 +105,7 @@ const translations = {
     footerLabel: "Pie de página",
     settingsLabel: "Ajustes del mapa",
     countryChannelsLabel: "Top canales por país",
+    labelsLabel: "Etiquetas del mapa",
     // ── Panel de canal (InfoSidebar) ───────────────────────────────────────────
     channelPanelTitle: "Tendencia #1 hoy en",
     // ── Panel de país ──────────────────────────────────────────────────────────
