@@ -13,7 +13,7 @@ import { LanguageContext } from '../Common/LanguageContext';
 import { MapPointContext } from '../Common/MapPointContext';
 import { SidebarContext } from '../Common/SidebarContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, STORAGE_KEY_FLAGS, STORAGE_KEY_LABELS, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, FULLSCREEN_ENABLED, FLAGS_VISIBLE, HEATMAP_ENABLED, LABELS_VISIBLE } from '../config';
+import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, STORAGE_KEY_FLAGS, STORAGE_KEY_LABELS, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, FULLSCREEN_ENABLED, FLAGS_VISIBLE, HEATMAP_ENABLED, LABELS_VISIBLE, MOST_VIEWED_LABEL_TRUNCATE_LENGTH } from '../config';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css';
 import 'leaflet-gesture-handling';
 import L from 'leaflet';
@@ -142,6 +142,24 @@ function ClusterGroupSetup({ clusterGroupRef, processAllPointsRef }) {
 }
 
 
+function truncateLabel(str, max) {
+  if (!str) return '';
+  return str.length > max ? str.slice(0, max) + '…' : str;
+}
+
+// Exposes map.setView() to components outside MapContainer via a callback ref.
+function MapFlyToSetup({ flyToRef }) {
+  const map = useMap();
+  useEffect(() => {
+    flyToRef.current = (latLon) => {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      map.setView(latLon, map.getZoom(), { animate: !prefersReduced });
+    };
+    return () => { flyToRef.current = null; };
+  }, [map, flyToRef]);
+  return null;
+}
+
 // Creates the 'map-markers' pane at z-index 400, above the default overlayPane (400)
 // and tilePane (200), so markers always render on top of country polygons.
 function MarkerPaneSetup() {
@@ -194,6 +212,7 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
   const mapContainerRef = useRef(null); // ref to the .map-container div — used for imperative class toggling
   const clusterGroupRef = useRef(null); // ref to the native Leaflet MarkerClusterGroup layer
   const processAllPointsRef = useRef(null); // ref to processPoint runner — called after cluster animation ends
+  const flyToRef = useRef(null); // set by MapFlyToSetup; calls map.setView() from outside MapContainer
   // Tracks whether the sidebar restore has already fired, so it only runs once per session.
   const restoredRef = useRef(false);
 
@@ -332,6 +351,14 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
     }
   }, []);
 
+  const handleMostViewedClick = useCallback(() => {
+    if (!mostViewedPoint) return;
+    const latLon = getCountryLatLon(mostViewedPoint.alpha2);
+    if (latLon) flyToRef.current?.(latLon);
+    setMapPoint(mostViewedPoint);
+    toggleSidebar(true);
+  }, [mostViewedPoint, setMapPoint, toggleSidebar]);
+
   // Updates the hover label DOM node directly — avoids re-rendering Map and its markers.
   const handleCountryHover = useCallback((name) => {
     const el = hoverLabelRef.current;
@@ -374,6 +401,26 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
     const pos = {};
     Object.keys(data).forEach(a2 => { pos[a2] = getCountryLatLon(a2); });
     return pos;
+  }, [data]);
+
+  // Find the pin with the highest view count across all countries for the current category.
+  // Ties are broken by array order (first occurrence wins).
+  const mostViewedPoint = useMemo(() => {
+    const alpha2Keys = Object.keys(data);
+    if (alpha2Keys.length === 0) return null;
+    const bestAlpha2 = alpha2Keys.reduce((best, a2) => {
+      const views = parseInt(data[a2][0]?.statistics?.viewCount, 10) || 0;
+      const bestViews = parseInt(data[best][0]?.statistics?.viewCount, 10) || 0;
+      return views > bestViews ? a2 : best;
+    });
+    const point = data[bestAlpha2][0];
+    if (!point?.channel) return null;
+    return {
+      ...point,
+      flag: getFlagFromAlpha2(bestAlpha2),
+      alpha2: bestAlpha2,
+      channel: { ...point.channel, channelImage: point.channel.channelImage || ImageNotFound },
+    };
   }, [data]);
 
   // Memoized so Leaflet only unmounts/remounts markers when data or clustering mode changes.
@@ -439,15 +486,29 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
           <p>{tr.mapDataUnavailable}</p>
         </div>
       )}
-      <div className="map-overlay-labels">
-        {categoryName && (
-          <div className="map-overlay-label map-overlay-label--category-active" aria-label={`${tr.category}${categoryName}`}>
-            {tr.category}{categoryName}
-          </div>
-        )}
-        {DEBUG_ZOOM_LEVEL_ENABLED && <div ref={zoomLabelRef} className="map-overlay-label map-overlay-label--zoom" />}
-        {COUNTRY_HOVER_LABEL_ENABLED && <div ref={hoverLabelRef} className="map-overlay-label map-overlay-label--country map-overlay-label--dynamic" style={{ display: 'none' }} />}
-      </div>
+      {labelsVisible && (
+        <div className="map-overlay-labels">
+          {categoryName && (
+            <div className="map-overlay-label map-overlay-label--category-active" aria-label={`${tr.category}${categoryName}`}>
+              {tr.category}{categoryName}
+            </div>
+          )}
+          {mostViewedPoint && (
+            <button
+              type="button"
+              className="map-overlay-label map-overlay-label--most-viewed"
+              onClick={handleMostViewedClick}
+            >
+              {'🏆 '}
+              {truncateLabel(mostViewedPoint.channel?.channelTitle, MOST_VIEWED_LABEL_TRUNCATE_LENGTH)}
+              {' · '}
+              {truncateLabel(mostViewedPoint.videoTitle, MOST_VIEWED_LABEL_TRUNCATE_LENGTH)}
+            </button>
+          )}
+          {DEBUG_ZOOM_LEVEL_ENABLED && <div ref={zoomLabelRef} className="map-overlay-label map-overlay-label--zoom" />}
+          {COUNTRY_HOVER_LABEL_ENABLED && <div ref={hoverLabelRef} className="map-overlay-label map-overlay-label--country map-overlay-label--dynamic" style={{ display: 'none' }} />}
+        </div>
+      )}
       <MapSettings
         heatmapVisible={heatmapVisible}
         onHeatmapToggle={() => setHeatmapVisible(v => !v)}
@@ -467,6 +528,7 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
       />
       <MapContainer {...mapConfig}>
         <MapViewSaver />
+        <MapFlyToSetup flyToRef={flyToRef} />
         {DEBUG_ZOOM_LEVEL_ENABLED && <ZoomDebugUpdater zoomRef={zoomLabelRef} />}
         {/* country-polygons pane sits at z-index 200, below the marker pane at 400. */}
         <Pane name="country-polygons" style={{ zIndex: 200 }}>
