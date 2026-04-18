@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
-import './InfoSidebar.scss';
+import './ChannelPanel.scss';
 import Player from '../Player/Player';
 import { LanguageContext } from '../Common/LanguageContext';
 import { MapPointContext } from '../Common/MapPointContext';
@@ -8,8 +8,8 @@ import { SidebarContext } from '../Common/SidebarContext';
 import translations from '../Common/translations';
 import { IconEye, IconThumbUp, IconComment } from '../Common/Icons';
 
-// Render InfoSidebar component
-export default function InfoSidebar({ categoryName }) {
+// Render ChannelPanel component
+export default function ChannelPanel({ categoryName }) {
   const { isEs } = useContext(LanguageContext);
   const { mapPoint } = useContext(MapPointContext);
   const { isSidebarOpen, toggleSidebar } = useContext(SidebarContext);
@@ -113,6 +113,6 @@ export default function InfoSidebar({ categoryName }) {
   );
 }
 
-InfoSidebar.propTypes = {
+ChannelPanel.propTypes = {
   categoryName: PropTypes.string,
 };

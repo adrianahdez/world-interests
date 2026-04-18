@@ -9,7 +9,7 @@ import { SidebarContext } from '../Common/SidebarContext';
 import { MARKER_ICON_SIZE, MARKER_ICON_ANCHOR } from '../config';
 
 // markerData: the country data object for THIS marker (not the globally selected mapPoint).
-// When clicked, it is pushed into MapPointContext so InfoSidebar can display it.
+// When clicked, it is pushed into MapPointContext so ChannelPanel can display it.
 const CustomMarker = ({ position, children, markerData, clusterLayerRef = null, markerPane = null, ariaLabel = '', ...props }) => {
   const containerRef = useRef(null);
   const map = useMap();

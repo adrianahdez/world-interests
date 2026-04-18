@@ -3,7 +3,7 @@ import { STORAGE_KEY_CATEGORY_DIALOG, STORAGE_KEY_SELECTED_CATEGORY, STORAGE_KEY
 import Map from '../Map/Map';
 import Categories from '../Categories/Categories';
 import Footer from '../Footer/Footer';
-import InfoSidebar from '../InfoSidebar/InfoSidebar';
+import ChannelPanel from '../ChannelPanel/ChannelPanel';
 import Head from '../Head/Head';
 // Header must be loaded after all components to load the theme rules at last and override others.
 import Header from '../Header/Header';
@@ -50,7 +50,7 @@ export default function App() {
       return true;
     }
   });
-  // InfoSidebar dialog state.
+  // ChannelPanel dialog state.
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // Number of top channels to display in the country history panel (1–COUNTRY_CHANNELS_MAX).
@@ -322,7 +322,7 @@ export default function App() {
               toggleDialog={toggleDialog}
               onCategoryNameChange={setCategoryName}
             />
-            <InfoSidebar categoryName={categoryName} />
+            <ChannelPanel categoryName={categoryName} />
             <CountryPanel category={category} categoryName={categoryName} />
             <main className="app-main">
               <h1 className="sr-only">World Interests — Trending YouTube Channels by Country</h1>
