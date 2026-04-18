@@ -49,9 +49,9 @@ export const STORAGE_KEY_LABELS            = 'labelsVisible';     // whether the
 // ─── Country Panel ────────────────────────────────────────────────────────────
 
 // Default number of top channels shown in the country history panel.
-export const COUNTRY_CHANNELS_DEFAULT = 3;
+export const COUNTRY_CHANNELS_DEFAULT = 10;
 // Maximum number of top channels the user can request in the country history panel.
-export const COUNTRY_CHANNELS_MAX     = 10;
+export const COUNTRY_CHANNELS_MAX     = 20;
 
 // ─── Marker Icon Geometry ─────────────────────────────────────────────────────
 // DivIcon size and anchor used by CustomMarker. Anchor is bottom-centre so the
