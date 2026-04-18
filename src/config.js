@@ -83,6 +83,3 @@ export const ZOOM_HIGH     = 5; // at this level: reveal channel name + view cou
 
 // Shows the name of the country currently hovered on the map, in a small label at the bottom-right.
 export const COUNTRY_HOVER_LABEL_ENABLED = true;
-
-// Max characters shown per field (channel name / video title) in the most-viewed label before truncating with '…'.
-export const MOST_VIEWED_LABEL_TRUNCATE_LENGTH = 28;
