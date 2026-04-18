@@ -250,7 +250,7 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
       window.removeEventListener('resize', handleResize);
       if (resizeTimer) clearTimeout(resizeTimer);
     };
-  }, [data]);
+  }, [data, isEs]);
 
   // Restore the sidebar for the last open country after data loads (once per session).
   useEffect(() => {
