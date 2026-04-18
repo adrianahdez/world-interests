@@ -166,7 +166,7 @@ Category links in `Categories.jsx` updated from `href="#"` to `href="?category=<
   - Change `href="#"` to `href={\`?category=\${slug}\`}` on each category `<a>`
   - Verify the existing `onClick` handler (`e.preventDefault()` + `setCategory`) continues to drive SPA navigation correctly and that the new `href` value does not conflict with any other URL params in the browser's address bar
 
-- [ ] Step 5: Semantic HTML landmark pass — `App.jsx`, `Header/Header.jsx`, `Footer/Footer.jsx`, `InfoSidebar/InfoSidebar.jsx`, `CountryPanel/CountryPanel.jsx`
+- [x] Step 5: Semantic HTML landmark pass — `App.jsx`, `Header/Header.jsx`, `Footer/Footer.jsx`, `InfoSidebar/InfoSidebar.jsx`, `CountryPanel/CountryPanel.jsx`
   - `App.jsx`: change the map region wrapper from `<div className='app-container'>` to keep the div but ensure the map area is wrapped in `<main>`; add a visually-hidden `<h1>` for the app name inside `<main>` (screen-reader anchor)
   - `Header/Header.jsx`: confirm or add `<header>` as the root element; add `<nav aria-label="Primary navigation">` around category and settings buttons
   - `Footer/Footer.jsx`: confirm or add `<footer>` as the root element

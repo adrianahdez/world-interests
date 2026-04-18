@@ -324,17 +324,20 @@ export default function App() {
             />
             <InfoSidebar categoryName={categoryName} />
             <CountryPanel category={category} categoryName={categoryName} />
-            <Map
-              category={category}
-              categoryName={categoryName}
-              restoreRegion={restoreRegion}
-              restoreChannelAlpha2={pendingChannelAlpha2}
-              onChannelRestored={() => setPendingChannelAlpha2(null)}
-              footerVisible={footerVisible}
-              onFooterToggle={handleFooterToggle}
-              countryChannels={countryChannels}
-              onCountryChannelsChange={handleCountryChannelsChange}
-            />
+            <main className="app-main">
+              <h1 className="sr-only">World Interests — Trending YouTube Channels by Country</h1>
+              <Map
+                category={category}
+                categoryName={categoryName}
+                restoreRegion={restoreRegion}
+                restoreChannelAlpha2={pendingChannelAlpha2}
+                onChannelRestored={() => setPendingChannelAlpha2(null)}
+                footerVisible={footerVisible}
+                onFooterToggle={handleFooterToggle}
+                countryChannels={countryChannels}
+                onCountryChannelsChange={handleCountryChannelsChange}
+              />
+            </main>
             {footerVisible && <Footer />}
           </div>
         </CountryPanelContext.Provider>
