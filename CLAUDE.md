@@ -18,6 +18,14 @@ There are no tests or linting configured in this project.
 - Deployed to Cloudflare Pages from `dist/` on push to `main`; `REACT_APP_BACKEND_API_URL` must be set in the Cloudflare Pages dashboard so it's available at build time
 - The `_redirects` file maps the old `world-interests.pages.dev` domain to `worldinterests.midri.net`
 
+## Sitemap
+
+- `npm run generate-sitemap` — fetches the category list from the backend API and rewrites `sitemap.xml` and `robots.txt` in the repo root
+- Run this whenever categories are added or removed in the backend, then **commit both files** so the changes deploy with the next push to `main`
+- Requires the backend to be running and `REACT_APP_BACKEND_API_URL` to be set in `.env`
+- `REACT_APP_SITE_URL` in `.env` controls the domain written into the sitemap and robots.txt (falls back to the hardcoded production URL if unset, with a warning)
+- This script is a dev tool only — it does **not** run automatically during `npm run build` or on Cloudflare Pages
+
 ## Architecture
 
 React 18 app using Leaflet (via react-leaflet) to display an interactive world map showing trending YouTube content per country, categorized by topic (Music, Gaming, etc.).

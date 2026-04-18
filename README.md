@@ -76,6 +76,7 @@ Other useful commands:
 
 - `npm run dev` — development build with file watcher (outputs to `dist/`, no HTTP server)
 - `npm run build` — one-off production build to `dist/`
+- `npm run generate-sitemap` — fetches the category list from the backend API and regenerates `sitemap.xml` and `robots.txt`; run this whenever categories change in the backend, then commit both files
 
 ## Deployment
 

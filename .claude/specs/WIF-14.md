@@ -179,7 +179,7 @@ Category links in `Categories.jsx` updated from `href="#"` to `href="?category=<
   - `InfoSidebar.jsx`: audit all `<img>` elements — verify channel avatar has `alt={channel.title}`, video thumbnail has `alt={channel.peak_video.title}`, and `loading="lazy"` is present on both
   - `CountryPanel.jsx`: audit all `<img>` elements — verify descriptive `alt` text and `loading="lazy"` on channel thumbnails
 
-- [ ] Step 7: Sitemap generation script — `scripts/generate-sitemap.js` (new), `package.json`, `sitemap.xml`, `CLAUDE.md`, `README.md`
+- [x] Step 7: Sitemap generation script — `scripts/generate-sitemap.js` (new), `package.json`, `sitemap.xml`, `CLAUDE.md`, `README.md`
   - Create `scripts/generate-sitemap.js`: Node.js script that fetches `REACT_APP_BACKEND_API_URL + 'api/categories'`, extracts all category slugs, and writes `sitemap.xml` with one `<url>` entry per category (`/?category=<slug>`) plus the root URL; logs `[sitemap] ERROR:` on failure and exits with code 1 (so the developer notices), but never runs automatically
   - Add `"generate-sitemap": "node scripts/generate-sitemap.js"` to `package.json` scripts
   - Add a `## Sitemap` section to `CLAUDE.md` documenting: what `npm run generate-sitemap` does, when to run it (after adding/removing categories in the backend), that it requires the backend to be running and `REACT_APP_BACKEND_API_URL` to be set in `.env`, and that the output `sitemap.xml` must be committed for it to deploy
