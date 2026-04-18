@@ -12,9 +12,12 @@ import { CountryPanelContext } from '../../Common/CountryPanelContext';
 // Weight/color are set inline; the class adds the CSS filter for the fill highlight.
 const SELECTED_STYLE = { weight: 2.5, color: 'var(--country-delimiter-color)', opacity: 1, className: 'country--selected' };
 
-const Countries = ({ data, onCountryHover = null }) => {
+const Countries = ({ data, isEs = false, onCountryHover = null }) => {
   const map = useMap();
   const dataRef = useRef(data);
+  // Hover handlers are bound once in onEachCountry; read current language via ref so
+  // toggling the language mid-session localizes the next hover without rebinding listeners.
+  const isEsRef = useRef(isEs);
   // Holds the mounted Leaflet GeoJSON layer so we can call setStyle() instead of remounting.
   const geoJsonLayerRef = useRef(null);
 
@@ -24,6 +27,10 @@ const Countries = ({ data, onCountryHover = null }) => {
   useEffect(() => {
     dataRef.current = data;
   }, [data]);
+
+  useEffect(() => {
+    isEsRef.current = isEs;
+  }, [isEs]);
 
   // When the panel opens via a ?country= URL param on page load, selectedCountry has an
   // empty countryName and flag because the GeoJSON hasn't been queried yet. Scan the static
@@ -107,7 +114,12 @@ const Countries = ({ data, onCountryHover = null }) => {
     if (countryName && alpha2) {
       layer.on({
         click: (event) => handleCountryClick(event, countryName, alpha2),
-        mouseover: () => onCountryHover?.(countryName),
+        mouseover: () => {
+          const regionName = dataRef.current?.[alpha2]?.[0]?.regionName;
+          const esName = typeof regionName === 'object' ? regionName?.es : null;
+          const label = (isEsRef.current && esName) ? esName : countryName;
+          onCountryHover?.(label);
+        },
         mouseout: () => onCountryHover?.(null),
       });
     } else {
@@ -129,6 +141,7 @@ const Countries = ({ data, onCountryHover = null }) => {
 
 Countries.propTypes = {
   data: PropTypes.object.isRequired,
+  isEs: PropTypes.bool,
   onCountryHover: PropTypes.func,
 };
 

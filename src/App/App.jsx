@@ -159,7 +159,8 @@ export default function App() {
     setMapPoint(point);
     setSelectedAlpha2(point?.alpha2 ?? null);
     try {
-      if (point?.regionName) localStorage.setItem(STORAGE_KEY_SIDEBAR, point.regionName);
+      const regionKey = typeof point?.regionName === 'object' ? point.regionName?.en : point?.regionName;
+      if (regionKey) localStorage.setItem(STORAGE_KEY_SIDEBAR, regionKey);
     } catch (e) {
       console.warn('[WorldInterests] Could not save sidebar country:', e.message);
     }

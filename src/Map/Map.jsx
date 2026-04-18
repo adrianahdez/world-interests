@@ -235,7 +235,10 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
   // Restore the sidebar for the last open country after data loads (once per session).
   useEffect(() => {
     if (!restoreRegion || restoredRef.current || Object.keys(data).length === 0) return;
-    const alpha2 = Object.keys(data).find(key => data[key][0]?.regionName === restoreRegion);
+    const alpha2 = Object.keys(data).find(key => {
+      const rn = data[key][0]?.regionName;
+      return (typeof rn === 'object' ? rn?.en : rn) === restoreRegion;
+    });
     if (!alpha2) return;
     restoredRef.current = true; // prevent re-firing on subsequent data refreshes
     const point = data[alpha2][0];
@@ -385,9 +388,14 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
     countryData.alpha2 = alpha2;
     c.channelImage = c.channelImage || ImageNotFound;
 
+    // Canonical EN key for data-region (DOM lookup + localStorage); localized value for display.
+    const rn = countryData.regionName;
+    const regionEn = typeof rn === 'object' ? (rn?.en ?? '') : (rn ?? '');
+    const regionDisplay = typeof rn === 'object' ? (rn?.[isEs ? 'es' : 'en'] ?? rn?.en ?? '') : (rn ?? '');
+
     return (
-      <CustomMarker key={alpha2} position={latLon} markerData={countryData} clusterLayerRef={clusteringEnabled ? clusterGroupRef : null} markerPane="map-markers" ariaLabel={`${countryData.regionName}${c.channelTitle ? ` — ${c.channelTitle}` : ''}`}>
-        <div className="custom-marker__point" data-region={countryData.regionName} data-user={c.channelUsername} data-channel-id={c.channelId}>
+      <CustomMarker key={alpha2} position={latLon} markerData={countryData} clusterLayerRef={clusteringEnabled ? clusterGroupRef : null} markerPane="map-markers" ariaLabel={`${regionDisplay}${c.channelTitle ? ` — ${c.channelTitle}` : ''}`}>
+        <div className="custom-marker__point" data-region={regionEn} data-user={c.channelUsername} data-channel-id={c.channelId}>
           <span className="custom-marker__bg bg-color"></span>
           <span className="custom-marker__bg-pointer bg-color"></span>
           <div className="image-container">
@@ -396,13 +404,15 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
           <span className='flag'>{countryData.flag}</span>
           <div className="text-container">
             <span className='channel-title'>{c.channelTitle}</span>
-            <span className="location">{countryData.regionName}</span>
+            <span className="location">{regionDisplay}</span>
           </div>
         </div>
       </CustomMarker>
     );
+  // isEs is intentional: language switch must rebuild the DivIcons so labels re-render.
+  // markerPositions is derived from data — no separate dep needed.
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }), [data, clusteringEnabled]); // markerPositions is derived from data — no separate dep needed
+  }), [data, clusteringEnabled, isEs]);
 
   return (
     <div ref={mapContainerRef} className="map-container" role="region" aria-label={tr.mapAriaLabel}>
@@ -449,7 +459,7 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
         {/* country-polygons pane sits at z-index 200, below the marker pane at 400. */}
         <Pane name="country-polygons" style={{ zIndex: 200 }}>
           {/* This has the GeoJSON component. */}
-          <Countries data={data} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
+          <Countries data={data} isEs={isEs} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
         </Pane>
 
         {/* Creates the map-markers pane (z-index 400) before any markers are added. */}
