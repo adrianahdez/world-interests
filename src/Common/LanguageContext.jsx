@@ -18,6 +18,8 @@ export const LanguageProvider = ({ children }) => {
     } catch (e) {
       console.warn('[WorldInterests] Could not save language preference:', e.message);
     }
+    // Keep the html[lang] attribute in sync so screen readers and crawlers see the correct language.
+    document.documentElement.lang = isEs ? 'es' : 'en';
   }, [isEs]);
 
   const toggleLanguage = () => {

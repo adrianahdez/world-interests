@@ -159,7 +159,7 @@ Category links in `Categories.jsx` updated from `href="#"` to `href="?category=<
   - Add `<script type="application/ld+json">` with `WebApplication` + `Dataset` schema on mount (static, not re-injected on category change)
   - Build dynamic `<title>` and `description` per active category: `"{categoryName} — Trending YouTube on World Interests"` (falls back to static value when categoryName is empty)
 
-- [ ] Step 3: `LanguageContext.jsx` — html[lang] sync
+- [x] Step 3: `LanguageContext.jsx` — html[lang] sync
   - Add `useEffect` that sets `document.documentElement.lang = isEs ? 'es' : 'en'` on mount and whenever `isEs` changes
 
 - [ ] Step 4: `Categories.jsx` — Crawlable category links
