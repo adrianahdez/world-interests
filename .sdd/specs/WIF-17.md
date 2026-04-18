@@ -97,7 +97,7 @@ Rename the `InfoSidebar` component to `ChannelPanel` — covering the folder, fi
 - [x] Step 5: Update comments in `src/CountryPanel/CountryPanel.jsx`, `src/CountryPanel/CountryPanel.scss`, `src/Common/SidebarContext.jsx`, `src/Common/MapPointContext.jsx`, `src/Common/CountryPanelContext.jsx`, `src/CustomMarker/CustomMarker.jsx`, `src/Common/translations.js`.
 - [x] Step 6: Verify — grep for `InfoSidebar` across the whole repo; result must be zero matches in `src/`.
 - [x] Step 7: Commit all changes in one commit. Message: `WIF-17: rename InfoSidebar to ChannelPanel`.
-- [ ] Step 8: Manual QA — open channel-pin panel, verify open/close, language toggle, dark/light mode, no layout regressions.
+- [x] Step 8: Manual QA — open channel-pin panel, verify open/close, language toggle, dark/light mode, no layout regressions.
 
 ## Testing Guidelines
 
