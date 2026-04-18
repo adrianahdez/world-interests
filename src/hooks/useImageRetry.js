@@ -34,11 +34,11 @@ export function useImageRetry() {
         img.dataset.originalSrc = img.src.split('?retry=')[0];
       }
       const retryCount = parseInt(img.dataset.retry || '0');
-      if (retryCount < 5) { // max 5 retries per image
+      if (retryCount < 2) { // max 2 retries per image
         img.dataset.retry = String(retryCount + 1);
         retryQueue.push(img);
         if (!retryTimer) {
-          retryTimer = setTimeout(processQueue, 1500);
+          retryTimer = setTimeout(processQueue, 500);
         }
       }
     };
