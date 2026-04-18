@@ -1,3 +1,5 @@
+@use '../../GlobalStyles/helpers' as *;
+
 .leaflet-container path.leaflet-interactive:hover {
   filter: brightness(1.5);
 }
@@ -91,7 +93,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000;
+  z-index: 1100;
   pointer-events: none;
 
   &__spinner {
@@ -117,35 +119,91 @@
 
 
 /* Wrapper that stacks all bottom-right overlay labels (category, zoom, country hover).
-   Sits outside MapContainer so all labels share the same positioning context. */
+   Sits outside MapContainer so all labels share the same positioning context.
+   pointer-events is intentionally NOT set here — it is applied per-label instead,
+   so the clickable most-viewed button can have pointer-events: auto without fighting
+   an inherited none from this ancestor. */
 .map-overlay-labels {
   position: absolute;
   bottom: calc(var(--footer-height) + 12px);
   right: 12px;
-  z-index: 1000;
+  z-index: 1100;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 6px;
-  pointer-events: none;
+
+  // On mobile, arrange labels side by side. wrap-reverse ensures overflow rows appear
+  // above (correct direction for a bottom-anchored container). max-width prevents labels
+  // from ever reaching the settings button on the opposite (left) side.
+  @include respond-max(768) {
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    justify-content: flex-end;
+    align-items: flex-end;
+    max-width: calc(100vw - 76px);
+  }
 }
 
-/* Shared style for individual overlay labels. */
+/* Shared style for individual overlay labels.
+   pointer-events: none here (not on the container) keeps the map interactive
+   under static labels while still allowing the most-viewed button to override it. */
 .map-overlay-label {
   background: rgba(0, 0, 0, 0.55);
   color: rgba(255, 255, 255, 0.9);
-  font-size: 11px;
+  font-size: 12px;
   font-family: monospace;
   padding: 3px 7px;
   border-radius: 4px;
   border: 1px solid transparent;
+  pointer-events: none;
 
   // Category badge overrides monospace with the page font.
   &--category-active {
     font-family: inherit;
-    font-size: 12px;
     letter-spacing: 0.02em;
   }
+
+  // Most-viewed label is a <button> — reset browser defaults and re-enable pointer events.
+  &--most-viewed {
+    pointer-events: auto;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    appearance: none;
+    transition: background 120ms, border-color 120ms;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.75);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+// Each truncated field (channel name / video title) inside the most-viewed label.
+// Per-field max-width + ellipsis keeps both fields visible at any screen width.
+.map-overlay-label__truncated {
+  display: inline-block;
+  max-width: 280px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+
+  @include respond-max(768) {
+    max-width: 90px;
+  }
+}
+
+// Hide the entire labels area without unmounting it, so DOM refs (zoom label, hover label)
+// remain valid and keep receiving updates from their imperative updaters.
+.map-overlay-labels--hidden {
+  display: none;
+}
+
+.light .map-overlay-label--most-viewed:hover {
+  background: rgba(200, 200, 200, 0.92);
+  border-color: rgba(0, 0, 0, 0.2);
 }
 
 /* Dynamic labels (shown/hidden based on user interaction) float above the static
@@ -169,7 +227,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1000;
+  z-index: 1100;
   background: rgb(10 28 36 / 0.75);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);

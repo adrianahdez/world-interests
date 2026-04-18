@@ -28,6 +28,9 @@ export const FLAGS_VISIBLE           = true;
 // Automatically true in development builds and false in production (via webpack NODE_ENV).
 export const DEBUG_ZOOM_LEVEL_ENABLED  = process.env.NODE_ENV === 'development';
 
+// Shows the labels overlay area (category badge, most-viewed, country hover). Can be toggled at runtime via map settings.
+export const LABELS_VISIBLE = true;
+
 // ─── localStorage Keys ───────────────────────────────────────────────────────
 // Single source of truth for every key written to localStorage.
 
@@ -41,6 +44,7 @@ export const STORAGE_KEY_HEATMAP           = 'heatmapVisible';    // whether the
 export const STORAGE_KEY_CLUSTERING        = 'clusteringEnabled'; // whether marker clustering is on (true/false)
 export const STORAGE_KEY_FLAGS             = 'flagsVisible';      // whether pin flag emojis are shown (true/false)
 export const STORAGE_KEY_COUNTRY_CHANNELS  = 'countryChannels';   // how many historical channels to show in the country panel (1–10)
+export const STORAGE_KEY_LABELS            = 'labelsVisible';     // whether the map overlay labels area is shown (true/false)
 
 // ─── Country Panel ────────────────────────────────────────────────────────────
 

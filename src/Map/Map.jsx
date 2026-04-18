@@ -13,7 +13,7 @@ import { LanguageContext } from '../Common/LanguageContext';
 import { MapPointContext } from '../Common/MapPointContext';
 import { SidebarContext } from '../Common/SidebarContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, STORAGE_KEY_FLAGS, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, FULLSCREEN_ENABLED, FLAGS_VISIBLE, HEATMAP_ENABLED } from '../config';
+import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, STORAGE_KEY_FLAGS, STORAGE_KEY_LABELS, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, FULLSCREEN_ENABLED, FLAGS_VISIBLE, HEATMAP_ENABLED, LABELS_VISIBLE } from '../config';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css';
 import 'leaflet-gesture-handling';
 import L from 'leaflet';
@@ -142,6 +142,19 @@ function ClusterGroupSetup({ clusterGroupRef, processAllPointsRef }) {
 }
 
 
+// Exposes map.setView() to components outside MapContainer via a callback ref.
+function MapFlyToSetup({ flyToRef }) {
+  const map = useMap();
+  useEffect(() => {
+    flyToRef.current = (latLon) => {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      map.setView(latLon, map.getZoom(), { animate: !prefersReduced });
+    };
+    return () => { flyToRef.current = null; };
+  }, [map, flyToRef]);
+  return null;
+}
+
 // Creates the 'map-markers' pane at z-index 400, above the default overlayPane (400)
 // and tilePane (200), so markers always render on top of country polygons.
 function MarkerPaneSetup() {
@@ -179,6 +192,12 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
       return v !== null ? v === 'true' : FLAGS_VISIBLE;
     } catch (_) { return FLAGS_VISIBLE; }
   });
+  const [labelsVisible, setLabelsVisible] = useState(() => {
+    try {
+      const v = localStorage.getItem(STORAGE_KEY_LABELS);
+      return v !== null ? v === 'true' : LABELS_VISIBLE;
+    } catch (_) { return LABELS_VISIBLE; }
+  });
   // Fullscreen is intentionally NOT persisted — the browser blocks auto-entering fullscreen
   // on page load, which would leave the toggle stuck in the ON state without actually being
   // in fullscreen. Always start from the config default each session.
@@ -188,6 +207,7 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
   const mapContainerRef = useRef(null); // ref to the .map-container div — used for imperative class toggling
   const clusterGroupRef = useRef(null); // ref to the native Leaflet MarkerClusterGroup layer
   const processAllPointsRef = useRef(null); // ref to processPoint runner — called after cluster animation ends
+  const flyToRef = useRef(null); // set by MapFlyToSetup; calls map.setView() from outside MapContainer
   // Tracks whether the sidebar restore has already fired, so it only runs once per session.
   const restoredRef = useRef(false);
 
@@ -287,6 +307,10 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
     try { localStorage.setItem(STORAGE_KEY_FLAGS, String(flagsVisible)); }
     catch (e) { console.warn('[WorldInterests] Could not save flags setting:', e.message); }
   }, [flagsVisible]);
+  useEffect(() => {
+    try { localStorage.setItem(STORAGE_KEY_LABELS, String(labelsVisible)); }
+    catch (e) { console.warn('[WorldInterests] Could not save labels setting:', e.message); }
+  }, [labelsVisible]);
   // Apply flag visibility class imperatively so React re-renders don't wipe the zoom
   // classes that MapViewSaver adds to the same element via classList.toggle.
   useEffect(() => {
@@ -366,6 +390,39 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
     return pos;
   }, [data]);
 
+  // Find the pin with the highest view count across all countries for the current category.
+  // Ties are broken by array order (first occurrence wins).
+  const mostViewedPoint = useMemo(() => {
+    const alpha2Keys = Object.keys(data);
+    if (alpha2Keys.length === 0) return null;
+    const bestAlpha2 = alpha2Keys.reduce((best, a2) => {
+      const views = parseInt(data[a2][0]?.statistics?.viewCount, 10) || 0;
+      const bestViews = parseInt(data[best][0]?.statistics?.viewCount, 10) || 0;
+      return views > bestViews ? a2 : best;
+    });
+    const point = data[bestAlpha2][0];
+    if (!point?.channel) return null;
+    return {
+      ...point,
+      flag: getFlagFromAlpha2(bestAlpha2),
+      alpha2: bestAlpha2,
+      channel: { ...point.channel, channelImage: point.channel.channelImage || ImageNotFound },
+    };
+  }, [data]);
+
+  // Must be defined after mostViewedPoint so the dep array captures the real value.
+  const handleMostViewedClick = useCallback(() => {
+    if (!mostViewedPoint) return;
+    // Open the sidebar first — matching the order used in CustomMarker to guarantee
+    // the dialog opens even if the map animation below throws unexpectedly.
+    toggleSidebar(true);
+    setMapPoint(mostViewedPoint);
+    try {
+      const latLon = getCountryLatLon(mostViewedPoint.alpha2);
+      if (latLon) flyToRef.current?.(latLon);
+    } catch (_) {}
+  }, [mostViewedPoint, setMapPoint, toggleSidebar]);
+
   // Memoized so Leaflet only unmounts/remounts markers when data or clustering mode changes.
   // Avoids marker flicker on unrelated state updates (settings toggles, hover events, etc.).
   const markers = useMemo(() => Object.keys(data).map((alpha2) => {
@@ -429,13 +486,26 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
           <p>{tr.mapDataUnavailable}</p>
         </div>
       )}
-      <div className="map-overlay-labels">
+      <div className={`map-overlay-labels${labelsVisible ? '' : ' map-overlay-labels--hidden'}`}>
         {categoryName && (
           <div className="map-overlay-label map-overlay-label--category-active" aria-label={`${tr.category}${categoryName}`}>
             {tr.category}{categoryName}
           </div>
         )}
         {DEBUG_ZOOM_LEVEL_ENABLED && <div ref={zoomLabelRef} className="map-overlay-label map-overlay-label--zoom" />}
+        {mostViewedPoint && (
+          <button
+            type="button"
+            className="map-overlay-label map-overlay-label--most-viewed"
+            onClick={handleMostViewedClick}
+            title={categoryName ? `${tr.mostViewedTooltip} ${categoryName}` : undefined}
+          >
+            {'🏆 '}
+            <span className="map-overlay-label__truncated">{mostViewedPoint.channel?.channelTitle}</span>
+            {' · '}
+            <span className="map-overlay-label__truncated">{mostViewedPoint.videoTitle}</span>
+          </button>
+        )}
         {COUNTRY_HOVER_LABEL_ENABLED && <div ref={hoverLabelRef} className="map-overlay-label map-overlay-label--country map-overlay-label--dynamic" style={{ display: 'none' }} />}
       </div>
       <MapSettings
@@ -451,10 +521,13 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
         onFooterToggle={onFooterToggle}
         countryChannels={countryChannels}
         onCountryChannelsChange={onCountryChannelsChange}
+        labelsVisible={labelsVisible}
+        onLabelsVisibleChange={() => setLabelsVisible(v => !v)}
         tr={tr}
       />
       <MapContainer {...mapConfig}>
         <MapViewSaver />
+        <MapFlyToSetup flyToRef={flyToRef} />
         {DEBUG_ZOOM_LEVEL_ENABLED && <ZoomDebugUpdater zoomRef={zoomLabelRef} />}
         {/* country-polygons pane sits at z-index 200, below the marker pane at 400. */}
         <Pane name="country-polygons" style={{ zIndex: 200 }}>

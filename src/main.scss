@@ -43,6 +43,11 @@ h1 small {
 }
 
 .map-container {
+  /* Contain all of Leaflet's internal z-indices (200–1000) within this element
+     so external UI components (sidebars, header, footer) can use small z-index
+     values and still stack above the map without competing with Leaflet's panes. */
+  isolation: isolate;
+
   img {
     width: 100%;
     max-width: 100%;

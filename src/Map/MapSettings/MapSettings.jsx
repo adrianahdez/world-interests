@@ -5,7 +5,7 @@ import { COUNTRY_CHANNELS_MAX } from '../../config';
 
 // Floating settings panel anchored to the bottom-left of the map.
 // Currently exposes the heatmap toggle; add more items to the panel as new features arrive.
-function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClusteringToggle, fullscreenEnabled, onFullscreenToggle, flagsVisible, onFlagsToggle, footerVisible, onFooterToggle, countryChannels, onCountryChannelsChange, tr }) {
+function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClusteringToggle, fullscreenEnabled, onFullscreenToggle, flagsVisible, onFlagsToggle, footerVisible, onFooterToggle, countryChannels, onCountryChannelsChange, labelsVisible, onLabelsVisibleChange, tr }) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef(null);
 
@@ -86,6 +86,15 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
               </span>
             </span>
           </label>
+          <label className="map-settings__item">
+            <span className="map-settings__item-label">{tr.labelsLabel}</span>
+            <span className="map-settings__toggle">
+              <input type="checkbox" checked={labelsVisible} onChange={onLabelsVisibleChange} />
+              <span className="map-settings__toggle-track">
+                <span className="map-settings__toggle-thumb" />
+              </span>
+            </span>
+          </label>
           <div className="map-settings__item">
             <span className="map-settings__item-label">{tr.countryChannelsLabel}</span>
             {/* +/- stepper is faster and more touch-friendly than a select on mobile */}
@@ -135,6 +144,8 @@ MapSettings.propTypes = {
   onFooterToggle: PropTypes.func.isRequired,
   countryChannels: PropTypes.number.isRequired,
   onCountryChannelsChange: PropTypes.func.isRequired,
+  labelsVisible: PropTypes.bool.isRequired,
+  onLabelsVisibleChange: PropTypes.func.isRequired,
   tr: PropTypes.object.isRequired,
 };
 
