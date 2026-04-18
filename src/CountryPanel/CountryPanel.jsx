@@ -32,13 +32,19 @@ export default function CountryPanel({ category, categoryName }) {
   const tr = isEs ? translations.es : translations.en;
 
   const alpha2 = selectedCountry?.alpha2 ?? null;
-  const countryName = selectedCountry?.countryName || alpha2 || '';
   const flag = selectedCountry?.flag || '';
 
   const [retryTrigger, setRetryTrigger] = useState(0);
   const handleRetry = useCallback(() => setRetryTrigger(n => n + 1), []);
 
   const { data, isLoading, isEmpty, error } = useCountryHistory(alpha2, category, countryChannels, retryTrigger);
+
+  // Prefer the localized name from the API; fall back to the GeoJSON name (English) while loading
+  // or when the history endpoint returns country_name_es: null for a region YouTube has no ES for.
+  const localizedApiName = isEs
+    ? (data?.country_name_es || data?.country_name_en)
+    : data?.country_name_en;
+  const countryName = localizedApiName || selectedCountry?.countryName || alpha2 || '';
 
   // Open / close the native <dialog> element, matching the InfoSidebar animation pattern.
   useEffect(() => {
