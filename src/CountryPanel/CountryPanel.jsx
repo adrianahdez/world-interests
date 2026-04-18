@@ -46,7 +46,7 @@ export default function CountryPanel({ category, categoryName }) {
     : data?.country_name_en;
   const countryName = localizedApiName || selectedCountry?.countryName || alpha2 || '';
 
-  // Open / close the native <dialog> element, matching the InfoSidebar animation pattern.
+  // Open / close the native <dialog> element, matching the ChannelPanel animation pattern.
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;

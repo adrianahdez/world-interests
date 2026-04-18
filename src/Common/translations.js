@@ -31,7 +31,7 @@ const translations = {
     labelsLabel: "Map labels",
     // Tooltip on the most-viewed label — composed as: mostViewedTooltip + " " + categoryName
     mostViewedTooltip: "Today's worldwide #1 in",
-    // ── Channel panel (InfoSidebar) ────────────────────────────────────────────
+    // ── Channel panel (ChannelPanel) ───────────────────────────────────────────
     // Used as the panel title: "Today's #1 for 🇲🇽 Mexico"
     channelPanelTitle: "Today's #1 for",
     // ── Country Panel ──────────────────────────────────────────────────────────
@@ -109,7 +109,7 @@ const translations = {
     countryChannelsLabel: "Top canales por país",
     labelsLabel: "Etiquetas del mapa",
     mostViewedTooltip: "El #1 mundial de hoy en",
-    // ── Panel de canal (InfoSidebar) ───────────────────────────────────────────
+    // ── Panel de canal (ChannelPanel) ──────────────────────────────────────────
     channelPanelTitle: "Tendencia #1 hoy en",
     // ── Panel de país ──────────────────────────────────────────────────────────
     countryPanelTitlePrefix: "Historial de tendencias de",

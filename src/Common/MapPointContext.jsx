@@ -11,9 +11,9 @@ import { createContext } from 'react';
  *   opening the sidebar (pin clicks sync both via handleSetMapPoint).
  *
  * State is owned by App.jsx — this context avoids threading props through
- * Map → CustomMarker / Countries → InfoSidebar.
+ * Map → CustomMarker / Countries → ChannelPanel.
  *
- * Consumers: CustomMarker, InfoSidebar, Map (sidebar restore), Countries.
+ * Consumers: CustomMarker, ChannelPanel, Map (sidebar restore), Countries.
  * Provider: App.jsx via <MapPointContext.Provider value={...}>.
  */
 export const MapPointContext = createContext(null);

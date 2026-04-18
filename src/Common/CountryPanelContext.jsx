@@ -8,7 +8,7 @@ import { createContext } from 'react';
  * - isCountryPanelOpen / openCountryPanel / closeCountryPanel: panel visibility.
  * - selectedCountry: { alpha2, countryName, flag } for the country currently shown.
  *
- * openCountryPanel also handles mutual exclusion with InfoSidebar: it closes the
+ * openCountryPanel also handles mutual exclusion with ChannelPanel: it closes the
  * channel-pin sidebar without clearing selectedAlpha2 so the polygon highlight
  * does not flash off during the transition.
  *
