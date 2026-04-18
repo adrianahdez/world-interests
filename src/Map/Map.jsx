@@ -399,7 +399,7 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
           <span className="custom-marker__bg bg-color"></span>
           <span className="custom-marker__bg-pointer bg-color"></span>
           <div className="image-container">
-            <img src={c.channelImage} alt="marker" loading="lazy" />
+            <img src={c.channelImage} alt="marker" loading="lazy" referrerPolicy="no-referrer" />
           </div>
           <span className='flag'>{countryData.flag}</span>
           <div className="text-container">
