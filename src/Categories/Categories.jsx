@@ -141,7 +141,7 @@ export default function Categories({ category, setCategory, isDialogOpen, toggle
       <ul className="sidebar__list">
         {categoryNames.map(({ slug, name }, index) => (
           <li key={index} className={`sidebar__item${category === slug ? ' active' : ''}`}>
-            <a href="#" className="sidebar__link" data-category={slug} onClick={e => {
+            <a href={`?category=${slug}`} className="sidebar__link" data-category={slug} onClick={e => {
               e.preventDefault();
               setCategory(slug);
               onCategoryNameChange?.(name);

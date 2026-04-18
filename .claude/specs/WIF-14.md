@@ -162,7 +162,7 @@ Category links in `Categories.jsx` updated from `href="#"` to `href="?category=<
 - [x] Step 3: `LanguageContext.jsx` — html[lang] sync
   - Add `useEffect` that sets `document.documentElement.lang = isEs ? 'es' : 'en'` on mount and whenever `isEs` changes
 
-- [ ] Step 4: `Categories.jsx` — Crawlable category links
+- [x] Step 4: `Categories.jsx` — Crawlable category links
   - Change `href="#"` to `href={\`?category=\${slug}\`}` on each category `<a>`
   - Verify the existing `onClick` handler (`e.preventDefault()` + `setCategory`) continues to drive SPA navigation correctly and that the new `href` value does not conflict with any other URL params in the browser's address bar
 
