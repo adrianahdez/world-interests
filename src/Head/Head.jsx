@@ -76,22 +76,8 @@ const removeManagedTags = () => {
 };
 
 const addGoogleAnalyticsScript = () => {
-  if (process.env.NODE_ENV !== 'production') {
-    // GA is always disabled in development — dev traffic must never be tracked.
-    if (process.env.REACT_APP_GA_ID) {
-      // Someone added the GA ID to .env — this is a misconfiguration.
-      console.warn('[WorldInterests] ⚠️ REACT_APP_GA_ID IS SET IN THE DEV ENVIRONMENT — THIS SHOULD NEVER HAPPEN. The GA ID must only live in .env.production. Remove it from .env immediately. Dev traffic must never be tracked. GA tracking is disabled for this session.');
-    } else {
-      // Normal dev case: ID absent from .env, as expected.
-      console.warn('[WorldInterests] GA tracking is intentionally disabled in development — this is expected. To ensure production tracking works, verify that REACT_APP_GA_ID is present in .env.production. Do NOT add it to .env (the dev env file).');
-    }
-    return null;
-  }
+  if (process.env.NODE_ENV !== 'production') return null;
 
-  // In production, fall back to the bundled ID if the env var is absent.
-  if (!process.env.REACT_APP_GA_ID) {
-    console.warn('[WorldInterests] REACT_APP_GA_ID is not set in this production build — falling back to the hardcoded ID. Add REACT_APP_GA_ID to .env.production (or the CI/CD environment variables) to use the configured tracking ID.');
-  }
   const gaId = process.env.REACT_APP_GA_ID || 'G-MDKV0QPB8F';
 
   const script = document.createElement('script');

@@ -1,4 +1,5 @@
 const path = require('path');
+const { DefinePlugin } = require('webpack');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
@@ -29,13 +30,11 @@ function parseEnvFile(filePath) {
 module.exports = (env, argv) => {
   const isDevelopment = argv.mode === 'development';
 
-  if (isDevelopment) {
-    const prodEnv = parseEnvFile(path.resolve(__dirname, '.env.production'));
-    // Warn only when the file exists but the var is absent (i.e. Object.keys > 0 means file was readable).
-    if (Object.keys(prodEnv).length > 0 && !prodEnv.REACT_APP_SITE_URL) {
-      console.warn('[WorldInterests] ⚠️  REACT_APP_SITE_URL is not set in .env.production. Sitemap, robots.txt, and JSON-LD will fall back to the hardcoded URL. Add REACT_APP_SITE_URL=https://your-domain.com to .env.production.');
-    }
-  }
+  const prodEnv = parseEnvFile(path.resolve(__dirname, '.env.production'));
+  const prodEnvExists = Object.keys(prodEnv).length > 0;
+  // These are true only in dev when .env.production exists but is missing the var — compiled away in production.
+  const siteUrlMissing = isDevelopment && prodEnvExists && !prodEnv.REACT_APP_SITE_URL;
+  const gaIdMissing    = isDevelopment && prodEnvExists && !prodEnv.REACT_APP_GA_ID;
 
   return {
     entry: './src/index.js',
@@ -75,6 +74,15 @@ module.exports = (env, argv) => {
       new Dotenv({
         path: isDevelopment ? './.env' : './.env.production',
         systemvars: true, // also pick up env vars set by the CI/CD environment (e.g. Cloudflare Pages)
+      }),
+      // DefinePlugin is placed after Dotenv so its definitions take precedence for any overlapping keys.
+      new DefinePlugin({
+        // Baked-in booleans; Terser eliminates the warning blocks entirely in production builds.
+        __DEV_WARN_SITE_URL_MISSING__: JSON.stringify(siteUrlMissing),
+        __DEV_WARN_GA_ID_MISSING__:    JSON.stringify(gaIdMissing),
+        // In dev, forcibly blank out REACT_APP_GA_ID so a value accidentally added to .env can never
+        // reach the GA script — GA must only ever read its ID from .env.production in production builds.
+        ...(isDevelopment && { 'process.env.REACT_APP_GA_ID': JSON.stringify('') }),
       }),
       new HtmlWebpackPlugin({
         template: './index.html',
