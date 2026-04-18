@@ -188,6 +188,7 @@ function ChannelCard({ channel, rank, tr }) {
               src={channel.image_url}
               alt={channel.title}
               loading="lazy"
+              referrerPolicy="no-referrer"
             />
           )}
           <div className="channel-card__channel-info">
