@@ -72,7 +72,7 @@ export default function InfoSidebar({ categoryName }) {
         <h2 className="sidebar__title">{tr.channelPanelTitle} {mapPoint?.flag} {typeof mapPoint?.regionName === 'object' ? (mapPoint.regionName[isEs ? 'es' : 'en'] ?? mapPoint.regionName.en) : mapPoint?.regionName}</h2>
         <div className="sidebar__list">
           <div className='channel-content channel-content__top'>
-            <img src={c?.channelImage} alt={`${c?.channelTitle ?? 'Channel'} logo`} />
+            <img src={c?.channelImage} alt={`${c?.channelTitle ?? 'Channel'} logo`} referrerPolicy="no-referrer" />
             <div className='channel-content__text'>
 
               <div className='channel-content__text-group mt-0'>

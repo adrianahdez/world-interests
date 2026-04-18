@@ -72,7 +72,7 @@ The goal of this bugfix is to reliably display the channel image in the map pin 
 ## Implementation Plan
 
 - [x] Step 1: Add `referrerpolicy="no-referrer"` to the map pin `<img>` in `src/Map/Map.jsx` (line 402).
-- [ ] Step 2: Add `referrerpolicy="no-referrer"` to the InfoSidebar channel `<img>` in `src/InfoSidebar/InfoSidebar.jsx` (line 75).
+- [x] Step 2: Add `referrerpolicy="no-referrer"` to the InfoSidebar channel `<img>` in `src/InfoSidebar/InfoSidebar.jsx` (line 75).
 - [ ] Step 3: Add `referrerpolicy="no-referrer"` to the CountryPanel channel `<img>` in `src/CountryPanel/CountryPanel.jsx` (lines 186–191).
 - [ ] Step 4: Simplify `src/hooks/useImageRetry.js` — reduce max retries to 2 and initial delay to 500ms.
 - [ ] Step 5: Manual verification in the running dev container — confirm that previously broken channel images now load in map pins, InfoSidebar, and CountryPanel without waiting or refreshing.
