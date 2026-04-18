@@ -13,7 +13,7 @@ import { LanguageContext } from '../Common/LanguageContext';
 import { MapPointContext } from '../Common/MapPointContext';
 import { SidebarContext } from '../Common/SidebarContext';
 import translations from '../Common/translations';
-import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, STORAGE_KEY_FLAGS, STORAGE_KEY_LABELS, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, FULLSCREEN_ENABLED, FLAGS_VISIBLE, HEATMAP_ENABLED, LABELS_VISIBLE, MOST_VIEWED_LABEL_TRUNCATE_LENGTH } from '../config';
+import { STORAGE_KEY_MAP_VIEW, STORAGE_KEY_HEATMAP, STORAGE_KEY_CLUSTERING, STORAGE_KEY_FLAGS, STORAGE_KEY_LABELS, ZOOM_VERY_LOW, ZOOM_LOW, ZOOM_HIGH, DEBUG_ZOOM_LEVEL_ENABLED, GESTURE_HANDLING_ENABLED, COUNTRY_HOVER_LABEL_ENABLED, CLUSTERING_ENABLED, FULLSCREEN_ENABLED, FLAGS_VISIBLE, HEATMAP_ENABLED, LABELS_VISIBLE } from '../config';
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css';
 import 'leaflet-gesture-handling';
 import L from 'leaflet';
@@ -141,11 +141,6 @@ function ClusterGroupSetup({ clusterGroupRef, processAllPointsRef }) {
   return null;
 }
 
-
-function truncateLabel(str, max) {
-  if (!str) return '';
-  return str.length > max ? str.slice(0, max) + '…' : str;
-}
 
 // Exposes map.setView() to components outside MapContainer via a callback ref.
 function MapFlyToSetup({ flyToRef }) {
@@ -351,14 +346,6 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
     }
   }, []);
 
-  const handleMostViewedClick = useCallback(() => {
-    if (!mostViewedPoint) return;
-    const latLon = getCountryLatLon(mostViewedPoint.alpha2);
-    if (latLon) flyToRef.current?.(latLon);
-    setMapPoint(mostViewedPoint);
-    toggleSidebar(true);
-  }, [mostViewedPoint, setMapPoint, toggleSidebar]);
-
   // Updates the hover label DOM node directly — avoids re-rendering Map and its markers.
   const handleCountryHover = useCallback((name) => {
     const el = hoverLabelRef.current;
@@ -423,6 +410,19 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
     };
   }, [data]);
 
+  // Must be defined after mostViewedPoint so the dep array captures the real value.
+  const handleMostViewedClick = useCallback(() => {
+    if (!mostViewedPoint) return;
+    // Open the sidebar first — matching the order used in CustomMarker to guarantee
+    // the dialog opens even if the map animation below throws unexpectedly.
+    toggleSidebar(true);
+    setMapPoint(mostViewedPoint);
+    try {
+      const latLon = getCountryLatLon(mostViewedPoint.alpha2);
+      if (latLon) flyToRef.current?.(latLon);
+    } catch (_) {}
+  }, [mostViewedPoint, setMapPoint, toggleSidebar]);
+
   // Memoized so Leaflet only unmounts/remounts markers when data or clustering mode changes.
   // Avoids marker flicker on unrelated state updates (settings toggles, hover events, etc.).
   const markers = useMemo(() => Object.keys(data).map((alpha2) => {
@@ -486,29 +486,28 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
           <p>{tr.mapDataUnavailable}</p>
         </div>
       )}
-      {labelsVisible && (
-        <div className="map-overlay-labels">
-          {categoryName && (
-            <div className="map-overlay-label map-overlay-label--category-active" aria-label={`${tr.category}${categoryName}`}>
-              {tr.category}{categoryName}
-            </div>
-          )}
-          {mostViewedPoint && (
-            <button
-              type="button"
-              className="map-overlay-label map-overlay-label--most-viewed"
-              onClick={handleMostViewedClick}
-            >
-              {'🏆 '}
-              {truncateLabel(mostViewedPoint.channel?.channelTitle, MOST_VIEWED_LABEL_TRUNCATE_LENGTH)}
-              {' · '}
-              {truncateLabel(mostViewedPoint.videoTitle, MOST_VIEWED_LABEL_TRUNCATE_LENGTH)}
-            </button>
-          )}
-          {DEBUG_ZOOM_LEVEL_ENABLED && <div ref={zoomLabelRef} className="map-overlay-label map-overlay-label--zoom" />}
-          {COUNTRY_HOVER_LABEL_ENABLED && <div ref={hoverLabelRef} className="map-overlay-label map-overlay-label--country map-overlay-label--dynamic" style={{ display: 'none' }} />}
-        </div>
-      )}
+      <div className={`map-overlay-labels${labelsVisible ? '' : ' map-overlay-labels--hidden'}`}>
+        {categoryName && (
+          <div className="map-overlay-label map-overlay-label--category-active" aria-label={`${tr.category}${categoryName}`}>
+            {tr.category}{categoryName}
+          </div>
+        )}
+        {DEBUG_ZOOM_LEVEL_ENABLED && <div ref={zoomLabelRef} className="map-overlay-label map-overlay-label--zoom" />}
+        {mostViewedPoint && (
+          <button
+            type="button"
+            className="map-overlay-label map-overlay-label--most-viewed"
+            onClick={handleMostViewedClick}
+            title={categoryName ? `${tr.mostViewedTooltip} ${categoryName}` : undefined}
+          >
+            {'🏆 '}
+            <span className="map-overlay-label__truncated">{mostViewedPoint.channel?.channelTitle}</span>
+            {' · '}
+            <span className="map-overlay-label__truncated">{mostViewedPoint.videoTitle}</span>
+          </button>
+        )}
+        {COUNTRY_HOVER_LABEL_ENABLED && <div ref={hoverLabelRef} className="map-overlay-label map-overlay-label--country map-overlay-label--dynamic" style={{ display: 'none' }} />}
+      </div>
       <MapSettings
         heatmapVisible={heatmapVisible}
         onHeatmapToggle={() => setHeatmapVisible(v => !v)}
