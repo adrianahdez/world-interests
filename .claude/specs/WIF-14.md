@@ -174,7 +174,7 @@ Category links in `Categories.jsx` updated from `href="#"` to `href="?category=<
   - `CountryPanel/CountryPanel.jsx`: confirm or reinforce `<aside>` root; ensure heading hierarchy (`<h2>` panel title, `<h3>` for sub-sections)
   - Verify no SCSS rules use bare tag-type selectors that would break after wrapping elements change
 
-- [ ] Step 6: Image accessibility — `CustomMarker/CustomMarker.jsx`, `InfoSidebar/InfoSidebar.jsx`, `CountryPanel/CountryPanel.jsx`
+- [x] Step 6: Image accessibility — `CustomMarker/CustomMarker.jsx`, `InfoSidebar/InfoSidebar.jsx`, `CountryPanel/CountryPanel.jsx`
   - `CustomMarker.jsx`: replace `alt="marker"` with the channel's name (already available in the marker data); add `loading="lazy"` if absent
   - `InfoSidebar.jsx`: audit all `<img>` elements — verify channel avatar has `alt={channel.title}`, video thumbnail has `alt={channel.peak_video.title}`, and `loading="lazy"` is present on both
   - `CountryPanel.jsx`: audit all `<img>` elements — verify descriptive `alt` text and `loading="lazy"` on channel thumbnails
