@@ -459,7 +459,7 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
         {/* country-polygons pane sits at z-index 200, below the marker pane at 400. */}
         <Pane name="country-polygons" style={{ zIndex: 200 }}>
           {/* This has the GeoJSON component. */}
-          <Countries data={data} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
+          <Countries data={data} isEs={isEs} onCountryHover={COUNTRY_HOVER_LABEL_ENABLED ? handleCountryHover : undefined} />
         </Pane>
 
         {/* Creates the map-markers pane (z-index 400) before any markers are added. */}
