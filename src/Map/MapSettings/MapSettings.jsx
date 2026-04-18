@@ -2,6 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import './MapSettings.scss';
 import { COUNTRY_CHANNELS_MAX } from '../../config';
+import {
+  SETTING_CLUSTERING_VISIBLE,
+  SETTING_FULLSCREEN_VISIBLE,
+  SETTING_FLAGS_VISIBLE,
+  SETTING_FOOTER_VISIBLE,
+  SETTING_HEATMAP_VISIBLE,
+  SETTING_LABELS_VISIBLE,
+  SETTING_COUNTRY_CHANNELS_VISIBLE,
+} from '../../settingsVisibility';
 
 // Floating settings panel anchored to the bottom-left of the map.
 // Currently exposes the heatmap toggle; add more items to the panel as new features arrive.
@@ -35,6 +44,7 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
       {open && (
         <div className="map-settings__panel" role="region" aria-label={tr.settingsLabel}>
           <p className="map-settings__title">{tr.settingsLabel}</p>
+          {SETTING_CLUSTERING_VISIBLE && (
           <label className="map-settings__item">
             <span className="map-settings__item-label">
               {tr.clusteringLabel}
@@ -50,6 +60,8 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
               </span>
             </span>
           </label>
+          )}
+          {SETTING_FULLSCREEN_VISIBLE && (
           <label className="map-settings__item">
             <span className="map-settings__item-label">{tr.fullscreenLabel}</span>
             <span className="map-settings__toggle">
@@ -59,6 +71,8 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
               </span>
             </span>
           </label>
+          )}
+          {SETTING_FLAGS_VISIBLE && (
           <label className="map-settings__item">
             <span className="map-settings__item-label">{tr.flagsLabel}</span>
             <span className="map-settings__toggle">
@@ -68,6 +82,8 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
               </span>
             </span>
           </label>
+          )}
+          {SETTING_FOOTER_VISIBLE && (
           <label className="map-settings__item">
             <span className="map-settings__item-label">{tr.footerLabel}</span>
             <span className="map-settings__toggle">
@@ -77,6 +93,8 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
               </span>
             </span>
           </label>
+          )}
+          {SETTING_HEATMAP_VISIBLE && (
           <label className="map-settings__item">
             <span className="map-settings__item-label">{tr.heatmapLabel}</span>
             <span className="map-settings__toggle">
@@ -86,6 +104,8 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
               </span>
             </span>
           </label>
+          )}
+          {SETTING_LABELS_VISIBLE && (
           <label className="map-settings__item">
             <span className="map-settings__item-label">{tr.labelsLabel}</span>
             <span className="map-settings__toggle">
@@ -95,6 +115,8 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
               </span>
             </span>
           </label>
+          )}
+          {SETTING_COUNTRY_CHANNELS_VISIBLE && (
           <div className="map-settings__item">
             <span className="map-settings__item-label">{tr.countryChannelsLabel}</span>
             {/* +/- stepper is faster and more touch-friendly than a select on mobile */}
@@ -116,6 +138,7 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
               >+</button>
             </div>
           </div>
+          )}
         </div>
       )}
       <button

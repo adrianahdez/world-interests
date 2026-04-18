@@ -55,8 +55,8 @@ Introduce a dedicated set of boolean constants — one per settings menu option 
 
 - **Settings options confirmed (7 total):** Clustering toggle, Fullscreen toggle, Flags toggle, Footer toggle, Heatmap toggle, Labels toggle, Country Channels stepper.
 - **File location (Q1-a):** New file `src/settingsVisibility.js` alongside `src/config.js`. No existing imports change.
-- **Naming convention (Q2-c):** `SETTING_<FEATURE>_ENABLED` — e.g. `SETTING_HEATMAP_ENABLED`, `SETTING_CLUSTERING_ENABLED`. Groups all flags alphabetically and avoids collision with existing `HEATMAP_ENABLED` etc. in `config.js`.
-- **Country Channels stepper (Q3-a):** Include `SETTING_COUNTRY_CHANNELS_ENABLED` for full consistency across all 7 options.
+- **Naming convention (Q2-c):** `SETTING_<FEATURE>_VISIBLE` — e.g. `SETTING_HEATMAP_VISIBLE`, `SETTING_CLUSTERING_VISIBLE`. Groups all flags alphabetically and avoids collision with existing `HEATMAP_ENABLED` etc. in `config.js`.
+- **Country Channels stepper (Q3-a):** Include `SETTING_COUNTRY_CHANNELS_VISIBLE` for full consistency across all 7 options.
 
 ## Analysis
 
@@ -72,7 +72,7 @@ No other files need to change. `Map.jsx` passes props down to `MapSettings` — 
 
 ### Risks & Concerns
 
-- **Name collision:** `SETTING_HEATMAP_ENABLED` vs existing `HEATMAP_ENABLED` in `config.js` — different names, different files, no conflict.
+- **Name collision:** `SETTING_HEATMAP_VISIBLE` vs existing `HEATMAP_ENABLED` in `config.js` — different names, different files, no conflict.
 - **Empty menu:** If all 7 flags are `false`, the panel renders with only the title. No crash risk — the panel `<div>` and title `<p>` are always rendered. Acceptable edge case per spec.
 - **Prop/propTypes cleanup:** Props like `onHeatmapToggle` are still passed from `Map.jsx` even when the heatmap row is hidden. This is intentional — the underlying state and handler remain active; only the UI row is hidden. No prop removal needed.
 
@@ -84,8 +84,8 @@ No other files need to change. `Map.jsx` passes props down to `MapSettings` — 
 
 ## Implementation Plan
 
-- [x] Step 1: Create `src/settingsVisibility.js` with 7 `SETTING_*_ENABLED` constants (all `true`), each with an inline comment explaining its purpose.
-- [ ] Step 2: Update `src/Map/MapSettings/MapSettings.jsx` — import the 7 constants and wrap each settings row with a conditional render guard (`{SETTING_X_ENABLED && <label ...>}`).
+- [x] Step 1: Create `src/settingsVisibility.js` with 7 `SETTING_*_VISIBLE` constants (all `true`), each with an inline comment explaining its purpose.
+- [x] Step 2: Update `src/Map/MapSettings/MapSettings.jsx` — import the 7 constants and wrap each settings row with a conditional render guard (`{SETTING_X_VISIBLE && <label ...>}`).
 - [ ] Step 3: Manual QA — verify all options visible by default; flip one flag to `false` and confirm that row disappears without affecting the underlying feature or other rows.
 
 ## Testing Guidelines
