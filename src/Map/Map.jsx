@@ -472,6 +472,7 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
   }), [data, clusteringEnabled, isEs]);
 
   return (
+    <>
     <div ref={mapContainerRef} className="map-container" role="region" aria-label={tr.mapAriaLabel}>
       {isLoading && !mapError && (
         <div className="map-loading-overlay" role="status" aria-live="polite">
@@ -508,25 +509,6 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
         )}
         {COUNTRY_HOVER_LABEL_ENABLED && <div ref={hoverLabelRef} className="map-overlay-label map-overlay-label--country map-overlay-label--dynamic" style={{ display: 'none' }} />}
       </div>
-      <MapSettings
-        heatmapVisible={heatmapVisible}
-        onHeatmapToggle={() => setHeatmapVisible(v => !v)}
-        clusteringEnabled={clusteringEnabled}
-        onClusteringToggle={() => setClusteringEnabled(v => !v)}
-        fullscreenEnabled={fullscreenEnabled}
-        onFullscreenToggle={handleFullscreenToggle}
-        flagsVisible={flagsVisible}
-        onFlagsToggle={() => setFlagsVisible(v => !v)}
-        footerVisible={footerVisible}
-        onFooterToggle={onFooterToggle}
-        countryChannels={countryChannels}
-        onCountryChannelsChange={onCountryChannelsChange}
-        realtimeChannels={realtimeChannels}
-        onRealtimeChannelsChange={onRealtimeChannelsChange}
-        labelsVisible={labelsVisible}
-        onLabelsVisibleChange={() => setLabelsVisible(v => !v)}
-        tr={tr}
-      />
       <MapContainer {...mapConfig}>
         <MapViewSaver />
         <MapFlyToSetup flyToRef={flyToRef} />
@@ -547,6 +529,29 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
         {heatmapVisible && <HeatmapLayer data={data} visible={heatmapVisible} />}
       </MapContainer>
     </div>
+    {/* Rendered outside .map-container (which is `isolation: isolate`) so the
+        settings panel can stack above the app modals (country/category/channel),
+        which live at z-index ≤ 40. */}
+    <MapSettings
+      heatmapVisible={heatmapVisible}
+      onHeatmapToggle={() => setHeatmapVisible(v => !v)}
+      clusteringEnabled={clusteringEnabled}
+      onClusteringToggle={() => setClusteringEnabled(v => !v)}
+      fullscreenEnabled={fullscreenEnabled}
+      onFullscreenToggle={handleFullscreenToggle}
+      flagsVisible={flagsVisible}
+      onFlagsToggle={() => setFlagsVisible(v => !v)}
+      footerVisible={footerVisible}
+      onFooterToggle={onFooterToggle}
+      countryChannels={countryChannels}
+      onCountryChannelsChange={onCountryChannelsChange}
+      realtimeChannels={realtimeChannels}
+      onRealtimeChannelsChange={onRealtimeChannelsChange}
+      labelsVisible={labelsVisible}
+      onLabelsVisibleChange={() => setLabelsVisible(v => !v)}
+      tr={tr}
+    />
+    </>
   )
 }
 
