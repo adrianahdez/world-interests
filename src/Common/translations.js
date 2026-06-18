@@ -85,6 +85,12 @@ const translations = {
     countryPanelComingSoon: "Historical data for this country is not available yet.",
     countryPanelError: "Could not load historical data.",
     countryPanelRetry: "Try again",
+    // Real-time tab states + labels
+    realtimeLoading: "Loading real-time data…",
+    realtimeComingSoon: "Real-time data for this country is not available yet.",
+    realtimeError: "Could not load real-time data.",
+    countryPanelUpdated: "Updated:",
+    realtimeVideoLabel: "Trending video",
   },
   es: {
     statsFor: "Estadísticas para ",
@@ -159,6 +165,12 @@ const translations = {
     countryPanelLoading: "Cargando datos históricos…",
     countryPanelEmpty: "Aún no hay datos históricos disponibles para este país.",
     countryPanelComingSoon: "Los datos históricos de este país aún no están disponibles.",
+    // Estados y etiquetas de la pestaña en tiempo real
+    realtimeLoading: "Cargando datos en tiempo real…",
+    realtimeComingSoon: "Los datos en tiempo real de este país aún no están disponibles.",
+    realtimeError: "No se pudieron cargar los datos en tiempo real.",
+    countryPanelUpdated: "Actualizado:",
+    realtimeVideoLabel: "Vídeo en tendencia",
     countryPanelError: "No se pudieron cargar los datos históricos.",
     countryPanelRetry: "Intentar de nuevo",
   },

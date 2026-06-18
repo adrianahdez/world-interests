@@ -5,6 +5,7 @@ import { CountryPanelContext } from '../Common/CountryPanelContext';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
 import { useCountryHistory } from '../hooks/useCountryHistory';
+import { useCountryToday } from '../hooks/useCountryToday';
 import { IconEye, IconThumbUp, IconComment } from '../Common/Icons';
 import AppearancesTooltip from './AppearancesTooltip';
 
@@ -26,7 +27,7 @@ function buildLastUpdatedLabel(isoDate, tr) {
 
 // Render CountryPanel component
 export default function CountryPanel({ category, categoryName }) {
-  const { isCountryPanelOpen, selectedCountry, closeCountryPanel, countryChannels } = useContext(CountryPanelContext);
+  const { isCountryPanelOpen, selectedCountry, closeCountryPanel, countryChannels, realtimeChannels } = useContext(CountryPanelContext);
   const { isEs } = useContext(LanguageContext);
   const dialogRef = useRef(null);
   const tr = isEs ? translations.es : translations.en;
@@ -155,11 +156,17 @@ export default function CountryPanel({ category, categoryName }) {
     </>
   );
 
-  // ── Real-time tab content — implemented in the next step.
+  // ── Real-time tab content. Mounted only while the tab is active (so its fetch
+  // and per-second clock start on open and clean up when leaving the tab).
   const renderRealtime = () => (
-    <div className="country-panel__state" role="status">
-      <p>{tr.countryPanelLoading}</p>
-    </div>
+    <RealtimeTab
+      alpha2={alpha2}
+      category={category}
+      categoryName={categoryName}
+      realtimeChannels={realtimeChannels}
+      isEs={isEs}
+      tr={tr}
+    />
   );
 
   return (
@@ -303,6 +310,161 @@ CountryPanel.propTypes = {
 };
 
 ChannelCard.propTypes = {
+  channel: PropTypes.object.isRequired,
+  rank: PropTypes.number.isRequired,
+  tr: PropTypes.object.isRequired,
+};
+
+// ── Real-time tab ───────────────────────────────────────────────────────────────
+// Shows today's live ranking (#1..#N) for the country, fetched once on open.
+// The "Updated:" timestamp is a wall clock ticking every second — a liveness cue,
+// not the data's capture time.
+
+function RealtimeTab({ alpha2, category, categoryName, realtimeChannels, isEs, tr }) {
+  const [retryTrigger, setRetryTrigger] = useState(0);
+  const handleRetry = useCallback(() => setRetryTrigger(n => n + 1), []);
+
+  const { data, isLoading, isEmpty, error } = useCountryToday(alpha2, category, realtimeChannels, retryTrigger);
+
+  // Live wall clock for the "Updated:" label, ticking every second.
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  const locale = isEs ? 'es-ES' : 'en-US';
+  const updatedTime = now.toLocaleTimeString(locale, {
+    hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short',
+  });
+
+  return (
+    <>
+      <div className="country-panel__meta">
+        {categoryName && (
+          <span className="country-panel__meta-item">{tr.countryPanelCategory} <strong>{categoryName}</strong></span>
+        )}
+        {/* No "Based on data…" label here — it does not apply to real-time data. */}
+        <span className="country-panel__meta-item">{tr.countryPanelUpdated} <strong>{updatedTime}</strong></span>
+      </div>
+
+      {isLoading && (
+        <div className="country-panel__state" role="status" aria-live="polite">
+          <div className="country-panel__spinner" aria-label={tr.realtimeLoading} />
+          <p>{tr.realtimeLoading}</p>
+        </div>
+      )}
+
+      {!isLoading && error && (
+        <div className="country-panel__state country-panel__state--error">
+          <p>{tr.realtimeError}</p>
+          <button type="button" className="country-panel__retry-btn" onClick={handleRetry}>
+            {tr.countryPanelRetry}
+          </button>
+        </div>
+      )}
+
+      {!isLoading && !error && isEmpty && (
+        <div className="country-panel__state">
+          <p>{tr.realtimeComingSoon}</p>
+        </div>
+      )}
+
+      {!isLoading && !error && !isEmpty && data && (
+        <>
+          <p className="country-panel__channel-count">
+            {tr.showingOf} {data.channels.length} {tr.ofUpTo} {realtimeChannels} {tr.channels} {tr.basedOnSettings}
+          </p>
+          <ul className="country-panel__channel-list">
+            {data.channels.map((ch, i) => (
+              <RealtimeCard key={`${ch.youtube_id}-${ch.video.youtube_id}`} channel={ch} rank={i + 1} tr={tr} />
+            ))}
+          </ul>
+        </>
+      )}
+    </>
+  );
+}
+
+// One ranked real-time entry: channel identity + its current trending video.
+// Reuses the .channel-card styles; omits the historical appearances/peak labels.
+function RealtimeCard({ channel, rank, tr }) {
+  const video = channel.video;
+  const thumbnailUrl = `https://img.youtube.com/vi/${video.youtube_id}/mqdefault.jpg`;
+
+  return (
+    <li className="channel-card">
+      <div className="channel-card__rank">#{rank}</div>
+      <div className="channel-card__content">
+
+        {/* Channel identity */}
+        <div className="channel-card__channel">
+          {channel.image_url && (
+            <img
+              className="channel-card__avatar"
+              src={channel.image_url}
+              alt={channel.title}
+              loading="lazy"
+              referrerPolicy="no-referrer"
+            />
+          )}
+          <div className="channel-card__channel-info">
+            <a
+              className="channel-card__channel-name"
+              href={`https://youtube.com/channel/${channel.youtube_id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {channel.title}
+            </a>
+          </div>
+        </div>
+
+        {/* Current trending video */}
+        <div className="channel-card__video">
+          <p className="channel-card__video-label">{tr.realtimeVideoLabel}</p>
+          <a
+            href={`https://www.youtube.com/watch?v=${video.youtube_id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="channel-card__thumbnail-link"
+          >
+            <img
+              className="channel-card__thumbnail"
+              src={thumbnailUrl}
+              alt={video.title}
+              loading="lazy"
+            />
+          </a>
+          <a
+            href={`https://www.youtube.com/watch?v=${video.youtube_id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="channel-card__video-title"
+          >
+            {video.title}
+          </a>
+          <div className="channel-card__stats">
+            <span><IconEye className="channel-card__stat-icon" /> {Number(video.view_count).toLocaleString()}</span>
+            <span><IconThumbUp className="channel-card__stat-icon" /> {Number(video.like_count).toLocaleString()}</span>
+            <span><IconComment className="channel-card__stat-icon" /> {Number(video.comment_count).toLocaleString()}</span>
+          </div>
+        </div>
+
+      </div>
+    </li>
+  );
+}
+
+RealtimeTab.propTypes = {
+  alpha2: PropTypes.string,
+  category: PropTypes.string.isRequired,
+  categoryName: PropTypes.string,
+  realtimeChannels: PropTypes.number.isRequired,
+  isEs: PropTypes.bool.isRequired,
+  tr: PropTypes.object.isRequired,
+};
+
+RealtimeCard.propTypes = {
   channel: PropTypes.object.isRequired,
   rank: PropTypes.number.isRequired,
   tr: PropTypes.object.isRequired,
