@@ -41,6 +41,10 @@ const translations = {
     // Used as the panel title: "Trends history for 🇧🇷 Brazil"
     countryPanelTitlePrefix: "Trends history for",
     countryPanelAriaLabel: "Country historical trends panel",
+    // Country panel tabs: real-time (default) vs historical
+    countryPanelTabsAriaLabel: "Real-time and historical views",
+    countryPanelTabRealtime: "Real-time",
+    countryPanelTabHistorical: "Historical",
     countryPanelCategory: "Category:",
     // "Based on data from X day(s)" — compose as: basedOnData + bold(X + day/days)
     basedOnData: "Based on data from",
@@ -120,6 +124,10 @@ const translations = {
     // ── Panel de país ──────────────────────────────────────────────────────────
     countryPanelTitlePrefix: "Historial de tendencias de",
     countryPanelAriaLabel: "Panel de tendencias históricas del país",
+    // Pestañas del panel de país: tiempo real (por defecto) vs histórico
+    countryPanelTabsAriaLabel: "Vistas en tiempo real e histórica",
+    countryPanelTabRealtime: "En vivo",
+    countryPanelTabHistorical: "Histórico",
     countryPanelCategory: "Categoría:",
     // "Basado en datos de hace" includes "hace" so the number follows naturally: "hace 2 días"
     basedOnData: "Basado en datos de hace",

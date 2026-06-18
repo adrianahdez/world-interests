@@ -133,11 +133,47 @@
   }
 }
 
+// ── Tabs (real-time / historical) ─────────────────────────────────────────────
+
+.country-panel__tabs {
+  display: flex;
+  gap: 4px;
+  margin-top: 14px;
+}
+
+.country-panel__tab {
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  border-bottom: 2px solid transparent;
+  transition: color 150ms, border-color 150ms;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  &--active {
+    color: var(--white, white);
+    border-bottom-color: var(--link-color);
+  }
+
+  @include respond-at(768) {
+    font-size: 14px;
+    padding: 9px 16px;
+  }
+}
+
 .country-panel__meta {
   display: flex;
   flex-wrap: wrap;
   gap: 6px 16px;
-  margin-top: 8px;
+  margin-top: 0;
+  margin-bottom: 16px;
 }
 
 .country-panel__meta-item {
@@ -443,6 +479,14 @@
     color: rgba(0, 0, 0, 0.6);
 
     strong { color: rgba(0, 0, 0, 0.85); }
+  }
+
+  .country-panel__tab {
+    color: rgba(0, 0, 0, 0.5);
+
+    &:hover { color: rgba(0, 0, 0, 0.8); }
+
+    &--active { color: #000; }
   }
 
   .channel-card {

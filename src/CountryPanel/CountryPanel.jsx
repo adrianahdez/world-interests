@@ -37,6 +37,10 @@ export default function CountryPanel({ category, categoryName }) {
   const [retryTrigger, setRetryTrigger] = useState(0);
   const handleRetry = useCallback(() => setRetryTrigger(n => n + 1), []);
 
+  // Active tab: 'today' (real-time, default) or 'historical'. Real-time is the
+  // primary view since the app is about live data; historical is secondary.
+  const [activeTab, setActiveTab] = useState('today');
+
   const { data, isLoading, isEmpty, error } = useCountryHistory(alpha2, category, countryChannels, retryTrigger);
 
   // Prefer the localized name from the API; fall back to the GeoJSON name (English) while loading
@@ -76,6 +80,9 @@ export default function CountryPanel({ category, categoryName }) {
   // Reset retryTrigger whenever the country or category changes so stale retry state
   // does not carry over to the next country/category combination.
   useEffect(() => { setRetryTrigger(0); }, [alpha2, category]);
+
+  // Always reopen on the real-time tab when a different country is selected.
+  useEffect(() => { setActiveTab('today'); }, [alpha2]);
 
   // "Based on data from X day(s) ago" / "Basado en datos de hace X días" — number bolded.
   // tr.ago is "ago" in EN and "" in ES (ES bakes "hace" into basedOnData instead).
@@ -129,14 +136,40 @@ export default function CountryPanel({ category, categoryName }) {
     );
   };
 
+  // ── Historical tab: the previous panel content, unchanged. Its own meta
+  // (category / based-on-data / last-updated) sits above the channel list.
+  const renderHistorical = () => (
+    <>
+      <div className="country-panel__meta">
+        {categoryName && (
+          <span className="country-panel__meta-item">{tr.countryPanelCategory} <strong>{categoryName}</strong></span>
+        )}
+        {daysLabel && (
+          <span className="country-panel__meta-item">{daysLabel}</span>
+        )}
+        {lastUpdatedLabel && (
+          <span className="country-panel__meta-item">{lastUpdatedLabel}</span>
+        )}
+      </div>
+      {renderBody()}
+    </>
+  );
+
+  // ── Real-time tab content — implemented in the next step.
+  const renderRealtime = () => (
+    <div className="country-panel__state" role="status">
+      <p>{tr.countryPanelLoading}</p>
+    </div>
+  );
+
   return (
     <dialog ref={dialogRef} className="country-panel" aria-label={tr.countryPanelAriaLabel}>
       <div className="country-panel__inner">
-        {/* ── Fixed header ─────────────────────────────────────────────────── */}
+        {/* ── Fixed header: country name + tabs ─────────────────────────────── */}
         <div className="country-panel__header">
           <div className="country-panel__header-row">
             <h2 className="country-panel__country-name">
-              {tr.countryPanelTitlePrefix} {flag} {countryName}
+              {flag} {countryName}
             </h2>
             <div className="close-icon">
               <button type="button" className="toggle-btn" onClick={closeCountryPanel} aria-label="Close">
@@ -146,22 +179,40 @@ export default function CountryPanel({ category, categoryName }) {
               </button>
             </div>
           </div>
-          <div className="country-panel__meta">
-            {categoryName && (
-              <span className="country-panel__meta-item">{tr.countryPanelCategory} <strong>{categoryName}</strong></span>
-            )}
-            {daysLabel && (
-              <span className="country-panel__meta-item">{daysLabel}</span>
-            )}
-            {lastUpdatedLabel && (
-              <span className="country-panel__meta-item">{lastUpdatedLabel}</span>
-            )}
+          <div className="country-panel__tabs" role="tablist" aria-label={tr.countryPanelTabsAriaLabel}>
+            <button
+              type="button"
+              role="tab"
+              id="country-panel-tab-today"
+              aria-selected={activeTab === 'today'}
+              aria-controls="country-panel-panel-body"
+              className={`country-panel__tab${activeTab === 'today' ? ' country-panel__tab--active' : ''}`}
+              onClick={() => setActiveTab('today')}
+            >
+              {tr.countryPanelTabRealtime}
+            </button>
+            <button
+              type="button"
+              role="tab"
+              id="country-panel-tab-historical"
+              aria-selected={activeTab === 'historical'}
+              aria-controls="country-panel-panel-body"
+              className={`country-panel__tab${activeTab === 'historical' ? ' country-panel__tab--active' : ''}`}
+              onClick={() => setActiveTab('historical')}
+            >
+              {tr.countryPanelTabHistorical}
+            </button>
           </div>
         </div>
 
-        {/* ── Scrollable body ───────────────────────────────────────────────── */}
-        <div className="country-panel__body">
-          {renderBody()}
+        {/* ── Scrollable body (active tab) ──────────────────────────────────── */}
+        <div
+          className="country-panel__body"
+          id="country-panel-panel-body"
+          role="tabpanel"
+          aria-labelledby={activeTab === 'today' ? 'country-panel-tab-today' : 'country-panel-tab-historical'}
+        >
+          {activeTab === 'today' ? renderRealtime() : renderHistorical()}
         </div>
       </div>
     </dialog>
