@@ -176,7 +176,7 @@ export default function CountryPanel({ category, categoryName }) {
         <div className="country-panel__header">
           <div className="country-panel__header-row">
             <h2 className="country-panel__country-name">
-              {flag} {countryName}
+              {tr.countryPanelTitlePrefix} {flag} {countryName}
             </h2>
             <div className="close-icon">
               <button type="button" className="toggle-btn" onClick={closeCountryPanel} aria-label="Close">

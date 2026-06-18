@@ -39,7 +39,7 @@ const translations = {
     channelPanelTitle: "Today's #1 for",
     // ── Country Panel ──────────────────────────────────────────────────────────
     // Used as the panel title: "Trends history for 🇧🇷 Brazil"
-    countryPanelTitlePrefix: "Trends history for",
+    countryPanelTitlePrefix: "Trending in",
     countryPanelAriaLabel: "Country historical trends panel",
     // Country panel tabs: real-time (default) vs historical
     countryPanelTabsAriaLabel: "Real-time and historical views",
@@ -128,7 +128,7 @@ const translations = {
     // ── Panel de canal (ChannelPanel) ──────────────────────────────────────────
     channelPanelTitle: "Tendencia #1 hoy en",
     // ── Panel de país ──────────────────────────────────────────────────────────
-    countryPanelTitlePrefix: "Historial de tendencias de",
+    countryPanelTitlePrefix: "Tendencias en",
     countryPanelAriaLabel: "Panel de tendencias históricas del país",
     // Pestañas del panel de país: tiempo real (por defecto) vs histórico
     countryPanelTabsAriaLabel: "Vistas en tiempo real e histórica",
