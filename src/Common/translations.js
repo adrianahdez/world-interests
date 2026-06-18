@@ -28,6 +28,7 @@ const translations = {
     footerLabel: "Footer",
     settingsLabel: "Map settings",
     countryChannelsLabel: "Country top channels",
+    realtimeChannelsLabel: "Real-time top channels",
     labelsLabel: "Map labels",
     // Tooltip on the most-viewed label — composed as: mostViewedTooltip + " " + categoryName
     mostViewedTooltip: "Today's worldwide #1 in",
@@ -109,6 +110,7 @@ const translations = {
     footerLabel: "Pie de página",
     settingsLabel: "Ajustes del mapa",
     countryChannelsLabel: "Top canales por país",
+    realtimeChannelsLabel: "Top canales en tiempo real",
     labelsLabel: "Etiquetas del mapa",
     mostViewedTooltip: "El #1 mundial de hoy en",
     // Etiqueta accesible del reloj en vivo fijo en la parte superior central

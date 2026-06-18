@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { STORAGE_KEY_CATEGORY_DIALOG, STORAGE_KEY_SELECTED_CATEGORY, STORAGE_KEY_SIDEBAR, STORAGE_KEY_COUNTRY_CHANNELS, COUNTRY_CHANNELS_DEFAULT, COUNTRY_CHANNELS_MAX } from '../config';
+import { STORAGE_KEY_CATEGORY_DIALOG, STORAGE_KEY_SELECTED_CATEGORY, STORAGE_KEY_SIDEBAR, STORAGE_KEY_COUNTRY_CHANNELS, COUNTRY_CHANNELS_DEFAULT, COUNTRY_CHANNELS_MAX, STORAGE_KEY_REALTIME_CHANNELS, REALTIME_CHANNELS_DEFAULT, REALTIME_CHANNELS_MAX } from '../config';
 import Map from '../Map/Map';
 import Categories from '../Categories/Categories';
 import Footer from '../Footer/Footer';
@@ -69,6 +69,24 @@ export default function App() {
     setCountryChannels(clamped);
     try { localStorage.setItem(STORAGE_KEY_COUNTRY_CHANNELS, String(clamped)); }
     catch (e) { console.warn('[WorldInterests] Could not save country channels setting:', e.message); }
+  }, []);
+
+  // Number of channels to display in the real-time (today) tab of the country panel.
+  // Separate from countryChannels because the real-time and historical lists are
+  // conceptually different. Persisted in localStorage like the historical setting.
+  const [realtimeChannels, setRealtimeChannels] = useState(() => {
+    try {
+      const stored = parseInt(localStorage.getItem(STORAGE_KEY_REALTIME_CHANNELS), 10);
+      if (!isNaN(stored) && stored >= 1 && stored <= REALTIME_CHANNELS_MAX) return stored;
+    } catch (_) {}
+    return REALTIME_CHANNELS_DEFAULT;
+  });
+
+  const handleRealtimeChannelsChange = useCallback((n) => {
+    const clamped = Math.max(1, Math.min(REALTIME_CHANNELS_MAX, Number(n)));
+    setRealtimeChannels(clamped);
+    try { localStorage.setItem(STORAGE_KEY_REALTIME_CHANNELS, String(clamped)); }
+    catch (e) { console.warn('[WorldInterests] Could not save realtime channels setting:', e.message); }
   }, []);
 
   // Country panel state. selectedCountry holds { alpha2, countryName, flag }.
@@ -312,7 +330,7 @@ export default function App() {
   return (
     <MapPointContext.Provider value={{ mapPoint, setMapPoint: handleSetMapPoint, selectedAlpha2, setSelectedAlpha2 }}>
       <SidebarContext.Provider value={{ isSidebarOpen, toggleSidebar }}>
-        <CountryPanelContext.Provider value={{ isCountryPanelOpen, selectedCountry, setSelectedCountry, openCountryPanel, closeCountryPanel, countryChannels }}>
+        <CountryPanelContext.Provider value={{ isCountryPanelOpen, selectedCountry, setSelectedCountry, openCountryPanel, closeCountryPanel, countryChannels, realtimeChannels }}>
           <div className='app-container'>
             <Head category={category} categoryName={categoryName} />
             <LiveClock />
@@ -338,6 +356,8 @@ export default function App() {
                 onFooterToggle={handleFooterToggle}
                 countryChannels={countryChannels}
                 onCountryChannelsChange={handleCountryChannelsChange}
+                realtimeChannels={realtimeChannels}
+                onRealtimeChannelsChange={handleRealtimeChannelsChange}
               />
             </main>
             {footerVisible && <Footer />}

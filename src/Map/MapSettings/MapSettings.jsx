@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import './MapSettings.scss';
-import { COUNTRY_CHANNELS_MAX } from '../../config';
+import { COUNTRY_CHANNELS_MAX, REALTIME_CHANNELS_MAX } from '../../config';
 import {
   SETTING_CLUSTERING_VISIBLE,
   SETTING_FULLSCREEN_VISIBLE,
@@ -10,11 +10,12 @@ import {
   SETTING_HEATMAP_VISIBLE,
   SETTING_LABELS_VISIBLE,
   SETTING_COUNTRY_CHANNELS_VISIBLE,
+  SETTING_REALTIME_CHANNELS_VISIBLE,
 } from '../../settingsVisibility';
 
 // Floating settings panel anchored to the bottom-left of the map.
 // Currently exposes the heatmap toggle; add more items to the panel as new features arrive.
-function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClusteringToggle, fullscreenEnabled, onFullscreenToggle, flagsVisible, onFlagsToggle, footerVisible, onFooterToggle, countryChannels, onCountryChannelsChange, labelsVisible, onLabelsVisibleChange, tr }) {
+function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClusteringToggle, fullscreenEnabled, onFullscreenToggle, flagsVisible, onFlagsToggle, footerVisible, onFooterToggle, countryChannels, onCountryChannelsChange, realtimeChannels, onRealtimeChannelsChange, labelsVisible, onLabelsVisibleChange, tr }) {
   const [open, setOpen] = useState(false);
   const panelRef = useRef(null);
 
@@ -139,6 +140,29 @@ function MapSettings({ heatmapVisible, onHeatmapToggle, clusteringEnabled, onClu
             </div>
           </div>
           )}
+          {SETTING_REALTIME_CHANNELS_VISIBLE && (
+          <div className="map-settings__item">
+            <span className="map-settings__item-label">{tr.realtimeChannelsLabel}</span>
+            {/* Controls how many ranked channels the real-time (today) tab shows */}
+            <div className="map-settings__stepper">
+              <button
+                type="button"
+                className="map-settings__stepper-btn"
+                onClick={() => onRealtimeChannelsChange(realtimeChannels - 1)}
+                disabled={realtimeChannels <= 1}
+                aria-label="Decrease"
+              >−</button>
+              <span className="map-settings__stepper-value">{realtimeChannels}</span>
+              <button
+                type="button"
+                className="map-settings__stepper-btn"
+                onClick={() => onRealtimeChannelsChange(realtimeChannels + 1)}
+                disabled={realtimeChannels >= REALTIME_CHANNELS_MAX}
+                aria-label="Increase"
+              >+</button>
+            </div>
+          </div>
+          )}
         </div>
       )}
       <button
@@ -167,6 +191,8 @@ MapSettings.propTypes = {
   onFooterToggle: PropTypes.func.isRequired,
   countryChannels: PropTypes.number.isRequired,
   onCountryChannelsChange: PropTypes.func.isRequired,
+  realtimeChannels: PropTypes.number.isRequired,
+  onRealtimeChannelsChange: PropTypes.func.isRequired,
   labelsVisible: PropTypes.bool.isRequired,
   onLabelsVisibleChange: PropTypes.func.isRequired,
   tr: PropTypes.object.isRequired,

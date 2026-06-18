@@ -168,7 +168,7 @@ function MarkerPaneSetup() {
   return null;
 }
 
-function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onChannelRestored, footerVisible, onFooterToggle, countryChannels, onCountryChannelsChange }) {
+function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onChannelRestored, footerVisible, onFooterToggle, countryChannels, onCountryChannelsChange, realtimeChannels, onRealtimeChannelsChange }) {
   const { isEs } = useContext(LanguageContext);
   const { setMapPoint } = useContext(MapPointContext);
   const { toggleSidebar } = useContext(SidebarContext);
@@ -521,6 +521,8 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
         onFooterToggle={onFooterToggle}
         countryChannels={countryChannels}
         onCountryChannelsChange={onCountryChannelsChange}
+        realtimeChannels={realtimeChannels}
+        onRealtimeChannelsChange={onRealtimeChannelsChange}
         labelsVisible={labelsVisible}
         onLabelsVisibleChange={() => setLabelsVisible(v => !v)}
         tr={tr}
@@ -558,6 +560,8 @@ Map.propTypes = {
   onFooterToggle: PropTypes.func.isRequired,
   countryChannels: PropTypes.number.isRequired,
   onCountryChannelsChange: PropTypes.func.isRequired,
+  realtimeChannels: PropTypes.number.isRequired,
+  onRealtimeChannelsChange: PropTypes.func.isRequired,
 };
 
 export default memo(Map);
