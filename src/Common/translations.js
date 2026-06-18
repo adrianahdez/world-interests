@@ -31,6 +31,8 @@ const translations = {
     labelsLabel: "Map labels",
     // Tooltip on the most-viewed label — composed as: mostViewedTooltip + " " + categoryName
     mostViewedTooltip: "Today's worldwide #1 in",
+    // Accessible label for the fixed top-center live clock (date/time tick visibly)
+    liveClockAriaLabel: "Current local date and time, updating live",
     // ── Channel panel (ChannelPanel) ───────────────────────────────────────────
     // Used as the panel title: "Today's #1 for 🇲🇽 Mexico"
     channelPanelTitle: "Today's #1 for",
@@ -109,6 +111,8 @@ const translations = {
     countryChannelsLabel: "Top canales por país",
     labelsLabel: "Etiquetas del mapa",
     mostViewedTooltip: "El #1 mundial de hoy en",
+    // Etiqueta accesible del reloj en vivo fijo en la parte superior central
+    liveClockAriaLabel: "Fecha y hora local actual, actualizándose en vivo",
     // ── Panel de canal (ChannelPanel) ──────────────────────────────────────────
     channelPanelTitle: "Tendencia #1 hoy en",
     // ── Panel de país ──────────────────────────────────────────────────────────

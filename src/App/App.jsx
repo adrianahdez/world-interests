@@ -12,6 +12,7 @@ import { SidebarContext } from '../Common/SidebarContext';
 import { CountryPanelContext } from '../Common/CountryPanelContext';
 import { getCountryLatLon } from '../Map/Points/Data';
 import CountryPanel from '../CountryPanel/CountryPanel';
+import LiveClock from '../LiveClock/LiveClock';
 
 // Returns the initial category using this priority: URL param > localStorage > 'music'.
 const getInitialCategory = () => {
@@ -314,6 +315,7 @@ export default function App() {
         <CountryPanelContext.Provider value={{ isCountryPanelOpen, selectedCountry, setSelectedCountry, openCountryPanel, closeCountryPanel, countryChannels }}>
           <div className='app-container'>
             <Head category={category} categoryName={categoryName} />
+            <LiveClock />
             <Header isDialogOpen={isDialogOpen} toggleDialog={toggleDialog} />
             <Categories
               category={category}
