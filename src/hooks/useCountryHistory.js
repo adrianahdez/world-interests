@@ -3,24 +3,25 @@ import { useState, useEffect } from 'react';
 /**
  * Fetches historical top-channel data for a given country + category combination.
  *
- * Calls GET /api/country/history?country=<alpha2>&category=<slug>&limit=<n>
+ * Calls GET /api/country/history?country=<alpha2>&category=<slug>&limit=<n>&mode=<videos|channels>
  *
  * Returns:
- *   data       — { days, latest_capture_at, channels } on success; null otherwise.
+ *   data       — { days, latest_capture_at, country_name_*, videos|channels } on success; null otherwise.
  *   isLoading  — true while the request is in flight.
- *   isEmpty    — true when the endpoint returned no channels or a 501 stub response.
+ *   isEmpty    — true when the endpoint returned no items or a 501 stub response.
  *   error      — true on a genuine network or server error (not 501).
  *
- * Cancels any in-flight request when alpha2, category, or limit changes, or on unmount.
+ * Cancels any in-flight request when alpha2, category, limit, or mode changes, or on unmount.
  * Treats HTTP 501 as an empty/coming-soon state rather than an error so the panel shows
  * a neutral "no data yet" message instead of a red error indicator.
  *
  * @param {string|null} alpha2        ISO 3166-1 alpha-2 country code, e.g. 'ES'
  * @param {string}      category      Category slug, e.g. 'music'
- * @param {number}      limit         Number of channels to request (1–10)
+ * @param {number}      limit         Number of items to request
+ * @param {string}      [mode='videos']   Historical view: 'videos' or 'channels'
  * @param {number}      [retryTrigger=0]  Increment to force a re-fetch (used by retry button)
  */
-export function useCountryHistory(alpha2, category, limit, retryTrigger = 0) {
+export function useCountryHistory(alpha2, category, limit, mode = 'videos', retryTrigger = 0) {
   const [data, setData]         = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isEmpty, setIsEmpty]   = useState(false);
@@ -47,7 +48,8 @@ export function useCountryHistory(alpha2, category, limit, retryTrigger = 0) {
       process.env.REACT_APP_BACKEND_API_URL +
       'api/country/history?country=' + encodeURIComponent(alpha2) +
       '&category=' + encodeURIComponent(category) +
-      '&limit=' + encodeURIComponent(limit);
+      '&limit=' + encodeURIComponent(limit) +
+      '&mode=' + encodeURIComponent(mode);
 
     fetch(url, {
       signal: controller.signal,
@@ -67,7 +69,9 @@ export function useCountryHistory(alpha2, category, limit, retryTrigger = 0) {
 
         const json = await res.json();
 
-        if (json.error || !json.data || !json.data.channels || json.data.channels.length === 0) {
+        // The payload key depends on mode: `videos` or `channels`.
+        const items = json?.data?.videos || json?.data?.channels || [];
+        if (json.error || !json.data || items.length === 0) {
           setIsEmpty(true);
           setIsLoading(false);
           return;
@@ -87,7 +91,7 @@ export function useCountryHistory(alpha2, category, limit, retryTrigger = 0) {
     return () => controller.abort();
   // retryTrigger is intentionally in the dep array — incrementing it re-runs the fetch.
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [alpha2, category, limit, retryTrigger]);
+  }, [alpha2, category, limit, mode, retryTrigger]);
 
   return { data, isLoading, isEmpty, error };
 }

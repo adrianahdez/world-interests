@@ -47,6 +47,13 @@ const translations = {
     countryPanelTabsAriaLabel: "Real-time and historical views",
     countryPanelTabRealtime: "Real-time",
     countryPanelTabHistorical: "Historical",
+    // Historical sub-toggle (Videos default | Channels)
+    historicalViewAriaLabel: "Historical view: videos or channels",
+    historicalVideos: "Videos",
+    historicalChannels: "Channels",
+    // "<n> day(s) at #1" appearance count on historical cards
+    dayAtNumberOne: "day at #1",
+    daysAtNumberOne: "days at #1",
     countryPanelCategory: "Category:",
     // "Based on data from X day(s)" — compose as: basedOnData + bold(X + day/days)
     basedOnData: "Based on data from",
@@ -80,6 +87,7 @@ const translations = {
     showingOf: "Showing",
     ofUpTo: "of up to",
     channels: "channels",
+    videosNoun: "videos",  // noun for the "Showing X of up to Y videos" notice
     // States
     countryPanelLoading: "Loading historical data…",
     countryPanelEmpty: "No historical data available for this country yet.",
@@ -138,6 +146,13 @@ const translations = {
     countryPanelTabsAriaLabel: "Vistas en tiempo real e histórica",
     countryPanelTabRealtime: "En vivo",
     countryPanelTabHistorical: "Histórico",
+    // Sub-toggle del histórico (Vídeos por defecto | Canales)
+    historicalViewAriaLabel: "Vista histórica: vídeos o canales",
+    historicalVideos: "Vídeos",
+    historicalChannels: "Canales",
+    // Conteo "<n> día(s) como #1" en las tarjetas del histórico
+    dayAtNumberOne: "día como #1",
+    daysAtNumberOne: "días como #1",
     countryPanelCategory: "Categoría:",
     // "Basado en datos de hace" includes "hace" so the number follows naturally: "hace 2 días"
     basedOnData: "Basado en datos de hace",
@@ -162,6 +177,7 @@ const translations = {
     showingOf: "Mostrando",
     ofUpTo: "de hasta",
     channels: "canales",
+    videosNoun: "vídeos",  // sustantivo para "Mostrando X de hasta Y vídeos"
     // Channel count notice suffix
     basedOnSettings: "(según tu configuración)",
     // Prefix label shown above the #1 trending video link in the channel panel
