@@ -124,6 +124,15 @@ Add a persistent top-center live clock styled identically to the existing map ov
 - Tab labels via translations: EN "Real-time" / "Historical", ES "En vivo" / "Histórico" (final wording confirmable at build).
 - New endpoint name: `/api/country/today`. New setting key: `realtimeChannels`.
 
+**Storage-model refinement (2026-06-18, during build of step 3):**
+Debated whether top-N should live in `trend_snapshots` (one table) or a separate table. Chosen: **single table** (`trend_snapshots` + `position`), accumulating the full top-N history. Rationale:
+- Single source of truth — a future "historical top-N" feature reads one table; a separate table would fragment the ranking (#1 vs #2..#N split) or duplicate the #1 time-series entirely.
+- The only cost is adding a `position = 0 OR position IS NULL` filter to the existing history query to preserve "#1-only" semantics. This is provably output-identical (legacy rows are `NULL`, new #1 is `position 0`, #2..#N excluded) and verified by diffing the history endpoint before/after.
+- **Partial index** removes the 20× volume concern for the history query:
+  `CREATE INDEX idx_..._top1 ON trend_snapshots(country_id, category_id, captured_at) WHERE position = 0 OR position IS NULL` — SQLite indexes only the #1 rows, so the history query touches the same row count as today.
+- `position` stores YouTube's `mostPopular` algorithmic order (array index), NOT a `view_count` re-sort — documented inline on the column.
+- The map's `response-<slug>.json` and `/api/trending` stay at the #1 per region (unchanged). Top-N lives only in the DB.
+
 ## Analysis
 
 ### Affected Files
@@ -143,17 +152,18 @@ Add a persistent top-center live clock styled identically to the existing map ov
 - `src/Common/translations.js` — tab labels, "Real-time" updated/timestamp label, `realtimeChannelsLabel`, tz/date formatting strings (EN/ES).
 
 **Backend (`world-interests-backend`) — modified/new:**
-- `src/Repositories/Database.php` — add nullable `position INTEGER` column to `trend_snapshots` (idempotent migration).
+- `src/Repositories/Database.php` — add nullable `position INTEGER` column to `trend_snapshots` (idempotent migration) + a **partial index** on `(country_id, category_id, captured_at) WHERE position = 0 OR position IS NULL` so the history query stays as fast as today despite 20× rows. Inline comment: the table now stores the ranked top-N per country/category over time; `position` is YouTube's `mostPopular` order (0 = #1), not a `view_count` sort.
 - `src/Services/YoutubeTrendingService.php` — fetch top-N (20) per region instead of 1; `parse_popular_videos` already returns an array.
-- `src/Services/TrendingCollectorService.php` (or `JsonWriterService` call site) — write only the #1 per region to `response-<slug>.json` (preserve current map payload) while persisting all N rows to the DB.
-- `src/Repositories/TrendingSnapshotRepo.php` — insert all N snapshot rows per region with `position` (0-based index from the ranked list).
-- `src/Repositories/TrendingHistoryRepo.php` — new `getCountryToday(country, category, limit)`: select rows from the latest `captured_at` batch for that country/category, ordered by `position`, limited.
+- `src/Services/TrendingCollectorService.php` (or `JsonWriterService` call site) — write only the #1 per region to `response-<slug>.json` (preserve current map payload) while persisting all N rows to the DB with a single shared `captured_at` per run.
+- `src/Repositories/TrendingSnapshotRepo.php` — insert all N snapshot rows per region with `position` (0-based index from the ranked list), shared `captured_at`.
+- `src/Repositories/TrendingHistoryRepo.php` — (a) add `position = 0 OR position IS NULL` filter to the existing `getCountryHistory` so "#1-only" semantics are preserved; (b) new `getCountryToday(country, category, limit)`: latest `captured_at` batch for that country/category, ordered by `position`, limited.
 - `src/Controllers/CountryTodayController.php` — new HTTP handler (mirror `CountryHistoryController`).
 - `public/index.php` — route `GET /api/country/today`.
 
 ### Risks & Concerns
 - **Map payload regression** — if the cron writes top-N to `response-<slug>.json`, the map fetch balloons ~20×. Mitigation: write only `[0]` per region to the JSON; full list goes to the DB only.
-- **Snapshot row volume** — storing 20 rows/region/category/run vs 1 grows `trend_snapshots` ~20×, affecting DB size and history-query performance. Mitigation: monitor; history queries already aggregate by DATE — confirm no slowdown; consider retention later (out of scope).
+- **Snapshot row volume** — storing 20 rows/region/category/run vs 1 grows `trend_snapshots` ~20×. Acceptable for SQLite at this scale (≈6.8k rows over the project's life today). History-query performance protected by the **partial index** on the `position = 0 OR position IS NULL` slice, so it touches the same row count as today.
+- **History semantics change** — the history query now reads a table holding #1..#N, so it MUST filter `position = 0 OR position IS NULL` to keep counting "#1 only". Mitigation: legacy rows are `NULL` (preserved), new #1 is `position 0`; verify output is identical by diffing `/api/country/history` before/after on real data.
 - **Docker rebuild required** — new backend classes (`CountryTodayController`) and `composer` classmap autoload mean the image must be rebuilt (`docker compose -f compose.dev.yml up --build -d`) before the container sees them (per backend CLAUDE.md).
 - **Rank fidelity** — YouTube `mostPopular` order is the trending rank; persist array index as `position` rather than re-sorting by `view_count` (which would distort rank). Existing rows have `position = NULL`; `getCountryToday` must tolerate nulls (order by `position` then fallback).
 - **`/api/country/history` unaffected** — verify the new multi-row snapshots don't change history aggregation results (history counts distinct days / channels; more rows per day for the same channel must not inflate `appearances`). Mitigation: confirm history query dedupes by channel+date.
@@ -163,6 +173,7 @@ Add a persistent top-center live clock styled identically to the existing map ov
 
 ### Decisions
 - Real-time data is DB-backed and on-demand per country (not bundled into the map payload), keeping the map fast and following the established `/api/country/history` pattern.
+- Top-N stored in a single `trend_snapshots` table with a `position` column (not a separate table); history query gets a partial-index-backed `position = 0 OR position IS NULL` filter. See the storage-model refinement in Clarifications for the full rationale.
 - "Today" = latest snapshot batch, not a calendar filter — simplest correct definition for "current trending".
 - "Updated:" timestamp is a client wall clock (liveness cue), explicitly not data freshness (per spec non-goal).
 - Real-time channel-count is a separate setting from historical (`realtimeChannels`), mirroring historical defaults (10 / max 20).
@@ -172,9 +183,9 @@ Add a persistent top-center live clock styled identically to the existing map ov
 <!-- Ordered steps. Each step = one atomic, committable unit. -->
 - [x] Step 1: Add the live clock label component — `src/LiveClock/LiveClock.jsx` + `.scss`, fixed top-center, reusing `.map-overlay-label` styling; renders local date + HH:MM:SS + tz abbreviation via `Intl`, ticking per second with interval cleanup; theme-aware and bilingual. Render it from `src/App/App.jsx`. Add any needed strings to `src/Common/translations.js`.
 - [x] Step 2: Add the new real-time channel-count setting plumbing — `STORAGE_KEY_REALTIME_CHANNELS` / `REALTIME_CHANNELS_DEFAULT` (10) / `REALTIME_CHANNELS_MAX` (20) in `src/config.js`; `SETTING_REALTIME_CHANNELS_VISIBLE` in `src/settingsVisibility.js`; `realtimeChannels` state + handler + localStorage in `src/App/App.jsx`, exposed via `CountryPanelContext` and threaded through `src/Map/Map.jsx`; stepper block + label in `src/Map/MapSettings/MapSettings.jsx` and `realtimeChannelsLabel` in translations.
-- [ ] Step 3 (backend): Add idempotent `position INTEGER` (nullable) column to `trend_snapshots` in `src/Repositories/Database.php`.
-- [ ] Step 4 (backend): In `src/Services/YoutubeTrendingService.php` fetch top-N (20) per region; persist all N rows per region with 0-based `position` via `src/Repositories/TrendingSnapshotRepo.php`; ensure the `response-<slug>.json` written for the map keeps only the #1 video per region. Verify `/api/trending` payload unchanged and `/api/country/history` results unchanged.
-- [ ] Step 5 (backend): Add `getCountryToday(country, category, limit)` to `src/Repositories/TrendingHistoryRepo.php` (latest `captured_at` batch for the country/category, ordered by `position`, limited); add `src/Controllers/CountryTodayController.php` mirroring `CountryHistoryController`; route `GET /api/country/today` in `public/index.php`. Rebuild the Docker image and verify with curl.
+- [x] Step 3 (backend): In `src/Repositories/Database.php` add the idempotent `position INTEGER` (nullable) column to `trend_snapshots` + a partial index `(country_id, category_id, captured_at) WHERE position = 0 OR position IS NULL`. Add inline comments: the table stores the ranked top-N per country/category over time, `position` is YouTube's `mostPopular` order (0 = #1), not a `view_count` sort.
+- [ ] Step 4 (backend): In `src/Services/YoutubeTrendingService.php` fetch top-N (20) per region; persist all N rows per region with 0-based `position` and a single shared `captured_at` per run via `src/Repositories/TrendingSnapshotRepo.php`; ensure the `response-<slug>.json` written for the map keeps only the #1 video per region. Verify `/api/trending` payload unchanged.
+- [ ] Step 5 (backend): Add the `position = 0 OR position IS NULL` filter to the existing `getCountryHistory` in `src/Repositories/TrendingHistoryRepo.php` and verify `/api/country/history` output is identical to before (diff on real data); add `getCountryToday(country, category, limit)` (latest `captured_at` batch for the country/category, ordered by `position`, limited); add `src/Controllers/CountryTodayController.php` mirroring `CountryHistoryController`; route `GET /api/country/today` in `public/index.php`. Rebuild the Docker image and verify both endpoints with curl.
 - [ ] Step 6 (frontend): Add `src/hooks/useCountryToday.js` calling `/api/country/today?country=&category=&limit=`, mirroring `useCountryHistory` (loading / empty / 501 / error / abort-on-change semantics).
 - [ ] Step 7 (frontend): Refactor `src/CountryPanel/CountryPanel.jsx` into a tabbed layout — shared country-name header above a two-tab bar; move the entire existing historical body verbatim into Tab 2 (no functional change, still uses `countryChannels`); add tab state defaulting to the real-time tab and resetting on country change. Add tab-bar styles to `src/CountryPanel/CountryPanel.scss` and tab labels to translations.
 - [ ] Step 8 (frontend): Implement Tab 1 (real-time) content — consume `useCountryToday` with `realtimeChannels`; render ranked video cards (#1..#N), the `"Category: <name>"` label, a live-updating `"Updated: <local time> <tz>"` label (per-second interval with cleanup), NO "Based on data" label, and the `"Showing X of up to Y channels"` notice reading `realtimeChannels`; include loading / empty / error+retry states mirroring the historical tab.
