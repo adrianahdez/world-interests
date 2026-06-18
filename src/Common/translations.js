@@ -32,6 +32,8 @@ const translations = {
     labelsLabel: "Map labels",
     // Tooltip on the most-viewed label — composed as: mostViewedTooltip + " " + categoryName
     mostViewedTooltip: "Today's worldwide #1 in",
+    // Desktop-only prefix on the 🏆 label (hidden on mobile)
+    worldwideNumberOne: "Worldwide #1:",
     // Accessible label for the fixed top-center live clock (date/time tick visibly)
     liveClockAriaLabel: "Current local date and time, updating live",
     // ── Channel panel (ChannelPanel) ───────────────────────────────────────────
@@ -123,6 +125,8 @@ const translations = {
     realtimeChannelsLabel: "Top canales en tiempo real",
     labelsLabel: "Etiquetas del mapa",
     mostViewedTooltip: "El #1 mundial de hoy en",
+    // Prefijo solo-escritorio en la etiqueta 🏆 (oculto en móvil)
+    worldwideNumberOne: "#1 mundial:",
     // Etiqueta accesible del reloj en vivo fijo en la parte superior central
     liveClockAriaLabel: "Fecha y hora local actual, actualizándose en vivo",
     // ── Panel de canal (ChannelPanel) ──────────────────────────────────────────

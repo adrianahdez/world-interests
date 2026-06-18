@@ -180,6 +180,15 @@
   }
 }
 
+// "Worldwide #1:" prefix — clarifies the 🏆 label on desktop, hidden on mobile to save space.
+.map-overlay-label__prefix {
+  font-weight: 600;
+
+  @include respond-max(768) {
+    display: none;
+  }
+}
+
 // Each truncated field (channel name / video title) inside the most-viewed label.
 // Per-field max-width + ellipsis keeps both fields visible at any screen width.
 .map-overlay-label__truncated {

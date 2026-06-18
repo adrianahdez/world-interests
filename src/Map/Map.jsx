@@ -390,22 +390,42 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
     return pos;
   }, [data]);
 
-  // Find the pin with the highest view count across all countries for the current category.
-  // Ties are broken by array order (first occurrence wins).
+  // The worldwide #1: the video that is the #1 trending in the MOST countries right now
+  // (breadth). This reflects trending dominance, not raw views — YouTube's mostPopular
+  // order is opaque/per-region, so "topping the most countries" is the honest global signal.
+  // Tiebreak by highest view count; the representative country shown is the highest-views one.
   const mostViewedPoint = useMemo(() => {
     const alpha2Keys = Object.keys(data);
     if (alpha2Keys.length === 0) return null;
-    const bestAlpha2 = alpha2Keys.reduce((best, a2) => {
-      const views = parseInt(data[a2][0]?.statistics?.viewCount, 10) || 0;
-      const bestViews = parseInt(data[best][0]?.statistics?.viewCount, 10) || 0;
-      return views > bestViews ? a2 : best;
-    });
-    const point = data[bestAlpha2][0];
-    if (!point?.channel) return null;
+
+    // idVideo -> { count: countries topped, views: best view count, alpha2: that country }
+    const byVideo = {};
+    for (const a2 of alpha2Keys) {
+      const p = data[a2]?.[0];
+      if (!p?.idVideo || !p.channel) continue;
+      const views = parseInt(p.statistics?.viewCount, 10) || 0;
+      const entry = byVideo[p.idVideo];
+      if (!entry) {
+        byVideo[p.idVideo] = { count: 1, views, alpha2: a2 };
+      } else {
+        entry.count += 1;
+        if (views > entry.views) { entry.views = views; entry.alpha2 = a2; }
+      }
+    }
+
+    let best = null;
+    for (const entry of Object.values(byVideo)) {
+      if (!best || entry.count > best.count || (entry.count === best.count && entry.views > best.views)) {
+        best = entry;
+      }
+    }
+    if (!best) return null;
+
+    const point = data[best.alpha2][0];
     return {
       ...point,
-      flag: getFlagFromAlpha2(bestAlpha2),
-      alpha2: bestAlpha2,
+      flag: getFlagFromAlpha2(best.alpha2),
+      alpha2: best.alpha2,
       channel: { ...point.channel, channelImage: point.channel.channelImage || ImageNotFound },
     };
   }, [data]);
@@ -502,6 +522,8 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
             title={categoryName ? `${tr.mostViewedTooltip} ${categoryName}` : undefined}
           >
             {'🏆 '}
+            {/* "Worldwide #1:" prefix — desktop only (hidden ≤768px to save space). */}
+            <span className="map-overlay-label__prefix">{tr.worldwideNumberOne} </span>
             <span className="map-overlay-label__truncated">{mostViewedPoint.channel?.channelTitle}</span>
             {' · '}
             <span className="map-overlay-label__truncated">{mostViewedPoint.videoTitle}</span>
