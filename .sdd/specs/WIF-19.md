@@ -108,6 +108,17 @@ Add a persistent top-center live clock styled identically to the existing map ov
 ## Clarifications
 <!-- User's answers to open questions and decisions -->
 
+**Re-plan (2026-06-18, #2): backfill `position` NULL→0, and rename the panel title.**
+- **Backfill `position`:** legacy rows were left `NULL` by the `ADD COLUMN` migration, but they ARE the #1 (the old cron only stored the #1). NULL has no semantic value here. Decision: idempotent `UPDATE trend_snapshots SET position = 0 WHERE position IS NULL` in `initSchema`, then **simplify every `(position = 0 OR position IS NULL)` filter to `position = 0`** (queries + partial index). The cron always inserts an explicit `position`, so no new NULLs appear. This revisits steps 3 & 5 (already committed) via new forward commits — no history rewrite.
+- **Panel title:** both tabs show trending content, so the bare `{flag} {country}` header is renamed to **EN "Trending in {flag} {country}" / ES "Tendencias en {flag} {country}"** to orient the user. Reuse the now-orphaned `countryPanelTitlePrefix` key.
+- Decided NOT to build views/likes/comments leaderboards: that data (derived only from trending #1s) is a biased sample and would mislead; trending stays the focus. `getCountryHistory` (views-ordered) is kept dormant only as cheap optionality.
+
+**Re-plan (2026-06-18): change the historical tab's ordering criterion.**
+Trigger: the historical tab orders channels by `total_views = SUM(view_count)`, which double-counts a video's cumulative views across the days it was #1 — unintuitive. Goal: order more consistently with the Today tab (strongest first).
+- **YouTube `mostPopular` order is opaque and NOT reproducible** for the historical aggregate: it's an undocumented popularity blend (view velocity, engagement, recency — not raw views), and the historical rows are all #1 (`position = 0 OR NULL`), so there is no per-row rank to sort by. So we cannot order history "the same way YouTube does".
+- **Decision — order by `appearances DESC`** (number of days the channel was #1), tiebreak by peak views (`MAX(view_count) DESC`). Closest in spirit to Today (most dominant first) and intuitive. `position = 0` and `position IS NULL` rows both count as #1 appearances (NULL = legacy pre-migration #1s), treated identically; `position >= 1` rows stay excluded.
+- **Decision — keep `getCountryHistory` (the views-ordered method) but mark it unused**, for a possible future "by views" tab. Extract the shared query into a private helper with a parameterized `ORDER BY`; both `getCountryHistory` (unused) and the new method are thin wrappers. The controller switches to the new method. Minimal change = just the order criterion.
+
 **Backend investigation (resolved during planning):**
 - `/api/trending?category=<slug>` already serves the latest snapshot, but the cron fetches only the **single** most popular video per region (`get_videos(..., 1)` in `YoutubeTrendingService`). The Map consumes this file and uses only `data[alpha2][0]`.
 - The `trend_snapshots` table stores one row per (category, country, video, captured_at) and has **no rank/position column**.
@@ -160,6 +171,13 @@ Debated whether top-N should live in `trend_snapshots` (one table) or a separate
 - `src/Controllers/CountryTodayController.php` — new HTTP handler (mirror `CountryHistoryController`).
 - `public/index.php` — route `GET /api/country/today`.
 
+**Backend — re-plan (2026-06-18, historical ordering):**
+- `src/Repositories/TrendingHistoryRepo.php` — extract the `getCountryHistory` query into a private helper with a parameterized `ORDER BY`; `getCountryHistory` becomes a thin wrapper kept **unused** (commented, for a future "by views" tab); add a new method (e.g. `getCountryHistoryByAppearances`) ordering by `appearances DESC, MAX(view_count) DESC`. The helper's `ranked` CTE must expose the tiebreak column (`max_views`) and carry the order columns to the final `SELECT`.
+- `src/Controllers/CountryHistoryController.php` — call the new appearances-ordered method instead of `getCountryHistory` (response shape unchanged).
+- `src/Repositories/Database.php` — idempotent backfill `UPDATE … SET position = 0 WHERE position IS NULL`; replace the partial index predicate `WHERE position = 0 OR position IS NULL` with `WHERE position = 0` (drop old / create new, idempotently).
+- All `(position = 0 OR position IS NULL)` filters (in `getCountryHistory`/the new helper, `getHistory`) simplified to `position = 0`.
+- `src/CountryPanel/CountryPanel.jsx` + `src/Common/translations.js` — panel title → "Trending in {flag} {country}" / "Tendencias en {flag} {country}" (reuse `countryPanelTitlePrefix`).
+
 ### Risks & Concerns
 - **Map payload regression** — if the cron writes top-N to `response-<slug>.json`, the map fetch balloons ~20×. Mitigation: write only `[0]` per region to the JSON; full list goes to the DB only.
 - **Snapshot row volume** — storing 20 rows/region/category/run vs 1 grows `trend_snapshots` ~20×. Acceptable for SQLite at this scale (≈6.8k rows over the project's life today). History-query performance protected by the **partial index** on the `position = 0 OR position IS NULL` slice, so it touches the same row count as today.
@@ -170,10 +188,16 @@ Debated whether top-N should live in `trend_snapshots` (one table) or a separate
 - **Timer leaks** — both the live clock and the modal "Updated:" label use per-second intervals; must clear on unmount.
 - **Top-center clock overlap** — fixed top-center label may collide with header/controls on mobile. Mitigation: responsive offsets, test ≤768px.
 - **No automated tests** — all verification manual per CLAUDE.md.
+- **Historical order changes for users (2026-06-18)** — the historical tab will reorder from "by total views" to "by times #1". Intended, but it is a visible behavior change; verify on a country with several historical channels.
+- **Tie determinism (2026-06-18)** — with sparse data many channels share `appearances = 1`; without a tiebreak the order would be arbitrary. The `MAX(view_count) DESC` tiebreak makes it deterministic.
+- **Dead code kept intentionally (2026-06-18)** — `getCountryHistory` becomes unused; confirm nothing else calls it (only `CountryHistoryController`, which is being switched; the legacy `get-history.php` uses the separate `getHistory`). Leave it with an "unused — kept for future by-views tab" comment.
+- **Partial-index swap (2026-06-18 #2)** — changing the index predicate needs DROP + CREATE (CREATE INDEX IF NOT EXISTS won't alter an existing one). Use a new index name + `DROP INDEX IF EXISTS` on the old, so it stays idempotent without rebuilding every boot. Run the backfill `UPDATE` before/alongside so the `position = 0` predicate covers all #1 rows. Verify the history query still uses the partial index (`EXPLAIN QUERY PLAN`).
+- **Backfill safety (2026-06-18 #2)** — `UPDATE … WHERE position IS NULL` is cheap (idempotent, matches 0 rows after first run; runs once per process boot, not per request). Low risk.
 
 ### Decisions
 - Real-time data is DB-backed and on-demand per country (not bundled into the map payload), keeping the map fast and following the established `/api/country/history` pattern.
 - Top-N stored in a single `trend_snapshots` table with a `position` column (not a separate table); history query gets a partial-index-backed `position = 0 OR position IS NULL` filter. See the storage-model refinement in Clarifications for the full rationale.
+- Historical tab orders by `appearances DESC` (times at #1), tiebreak peak views — not by summed views, and not by YouTube's opaque `mostPopular` order (which isn't reproducible). Views-ordered method retained but unused for a future tab. See the 2026-06-18 re-plan entry in Clarifications.
 - "Today" = latest snapshot batch, not a calendar filter — simplest correct definition for "current trending".
 - "Updated:" timestamp is a client wall clock (liveness cue), explicitly not data freshness (per spec non-goal).
 - Real-time channel-count is a separate setting from historical (`realtimeChannels`), mirroring historical defaults (10 / max 20).
@@ -190,3 +214,7 @@ Debated whether top-N should live in `trend_snapshots` (one table) or a separate
 - [x] Step 7 (frontend): Refactor `src/CountryPanel/CountryPanel.jsx` into a tabbed layout — shared country-name header above a two-tab bar; move the entire existing historical body verbatim into Tab 2 (no functional change, still uses `countryChannels`); add tab state defaulting to the real-time tab and resetting on country change. Add tab-bar styles to `src/CountryPanel/CountryPanel.scss` and tab labels to translations.
 - [x] Step 8 (frontend): Implement Tab 1 (real-time) content — consume `useCountryToday` with `realtimeChannels`; render ranked video cards (#1..#N), the `"Category: <name>"` label, a live-updating `"Updated: <local time> <tz>"` label (per-second interval with cleanup), NO "Based on data" label, and the `"Showing X of up to Y channels"` notice reading `realtimeChannels`; include loading / empty / error+retry states mirroring the historical tab.
 - [x] Step 9: Manual QA per CLAUDE.md Testing Guidelines (frontend in the watch-mode dev container; backend via cron + curl). Confirm no timer leaks, both themes/languages, mobile layout for the top-center clock, and that historical Tab 2 + `/api/trending` + `/api/country/history` are unchanged.
+- [x] Step 10 (backend): In `src/Repositories/Database.php`, add an idempotent backfill `UPDATE {$snapshots} SET position = 0 WHERE position IS NULL` (legacy #1 rows get an explicit rank), and replace the partial index with one predicated on `WHERE position = 0` — new index name + `DROP INDEX IF EXISTS` the old `idx_trend_snapshots_top1`, so it's idempotent without rebuilding each boot. Build this first of the new steps (later filters assume no NULLs remain).
+- [ ] Step 11 (backend): In `src/Repositories/TrendingHistoryRepo.php`, extract the `getCountryHistory` query into a private helper taking a parameterized `ORDER BY` (expose `max_views = MAX(view_count)` in the `ranked` CTE, carried to the final `SELECT`; filter simplified to `position = 0`). Turn `getCountryHistory` into a thin wrapper ordering by `total_views DESC`, commented as currently unused (kept for a future "by views" tab). Add a new method (e.g. `getCountryHistoryByAppearances`) ordering by `appearances DESC, max_views DESC`. Simplify the `getHistory` filter to `position = 0` too. Response shape unchanged. Point `src/Controllers/CountryHistoryController.php` at the new method.
+- [ ] Step 12 (backend): Rebuild the Docker image; verify the backfill (no `position IS NULL` rows remain), that `EXPLAIN QUERY PLAN` still uses the partial index, that `/api/country/history` returns channels ordered by times-at-#1 (curl a country with several historical channels), and that `getCountryToday`, `/api/trending`, and the Today tab are unaffected.
+- [ ] Step 13 (frontend): Rename the country panel title — reuse the orphaned `countryPanelTitlePrefix` in `src/Common/translations.js` (EN "Trending in" / ES "Tendencias en") and render it before `{flag} {countryName}` in `src/CountryPanel/CountryPanel.jsx`. Verify in the running app (both languages).
