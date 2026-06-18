@@ -37,6 +37,7 @@ React 18 app using Leaflet (via react-leaflet) to display an interactive world m
 3. **Categories** (`src/Categories/Categories.jsx`) fetches the category list from the backend (`get-category-list.php`); categories are bilingual (EN/ES) and returned as `{en: {slug: name}, es: {slug: name}}`
 4. **Data utilities** (`src/Map/Points/Data.js`) handle API fetching and country coordinate lookups using a static JSON mapping of alpha-2/alpha-3 codes to lat/lon/flags
 5. **Countries** (`src/Map/Countries/Countries.jsx`) renders GeoJSON polygons with click-to-center behavior
+6. **CountryPanel** (`src/CountryPanel/CountryPanel.jsx`) opens on polygon click with two tabs: a default **Real-time** tab (today's ranked top-N, via `useCountryToday` → `GET /api/country/today`) and a **Historical** tab (all-time aggregates, via `useCountryHistory` → `GET /api/country/history`). Each tab has its own channel-count setting (`realtimeChannels` / `countryChannels`). A fixed top-center **LiveClock** (`src/LiveClock/LiveClock.jsx`) shows the ticking local date/time to reinforce that data is real-time.
 
 ### Context Providers
 
