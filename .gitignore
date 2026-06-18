@@ -259,3 +259,6 @@ $RECYCLE.BIN/
 
 dist/
 .sdd/specs/.cache/
+
+# Playwright MCP test artifacts (screenshots, console/network logs)
+.playwright-mcp/
