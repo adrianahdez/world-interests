@@ -1,18 +1,13 @@
-# Graph Report - world-interests  (2026-06-19)
+# Graph Report - .  (2026-06-19)
 
 ## Corpus Check
-- 75 files · ~141,617 words
+- 82 files · ~141,325 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 318 nodes · 523 edges · 32 communities (16 shown, 16 thin omitted)
-- Extraction: 89% EXTRACTED · 11% INFERRED · 0% AMBIGUOUS · INFERRED: 59 edges (avg confidence: 0.88)
-- Token cost: 0 input · 0 output
-
-## Graph Freshness
-- Built from commit: `76f69fc9`
-- Run `git rev-parse HEAD` and compare to check if the graph is stale.
-- Run `graphify update .` after code changes (no API cost).
+- 305 nodes · 511 edges · 30 communities (14 shown, 16 thin omitted)
+- Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 59 edges (avg confidence: 0.88)
+- Token cost: 371,291 input · 2,800 output
 
 ## Community Hubs (Navigation)
 - [[_COMMUNITY_Map Rendering & Data|Map Rendering & Data]]
@@ -45,8 +40,6 @@
 - [[_COMMUNITY_Spec Template|Spec Template]]
 - [[_COMMUNITY_Settings Flags|Settings Flags]]
 - [[_COMMUNITY_Country Utilities|Country Utilities]]
-- [[_COMMUNITY_Community 30|Community 30]]
-- [[_COMMUNITY_Community 31|Community 31]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `LanguageContext` - 18 edges
@@ -57,8 +50,8 @@
 6. `WIF-8: Codebase Audit And Quality Improvements` - 10 edges
 7. `CountryPanel()` - 9 edges
 8. `Countries` - 9 edges
-9. `ChannelPanel()` - 8 edges
-10. `Countries()` - 8 edges
+9. `App()` - 8 edges
+10. `ChannelPanel()` - 8 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `WIF-17: Rename InfoSidebar To ChannelPanel` --references--> `App()`  [INFERRED]
@@ -91,19 +84,19 @@
 - **Data Display Pipeline (Category → Markers → Details)** — screenshot_left_sidebar, screenshot_custom_markers, screenshot_right_panel, screenshot_video_thumbnails [INFERRED 0.85]
 - **Real-Time Data Context** — screenshot_real_time_indicator, screenshot_live_clock, screenshot_video_thumbnails, screenshot_ranking_display [INFERRED 0.75]
 
-## Communities (32 total, 16 thin omitted)
+## Communities (30 total, 16 thin omitted)
 
 ### Community 0 - "Map Rendering & Data"
 Cohesion: 0.09
-Nodes (27): CountryPanelContext, Countries(), SELECTED_STYLE, CustomMarker(), useImageRetry(), RETRY_DELAYS, useMapData(), useMapData Hook (+19 more)
+Nodes (29): CountryPanelContext, MapPointContext, Countries(), SELECTED_STYLE, CustomMarker(), Real-Time Data Update Pattern, useImageRetry(), RETRY_DELAYS (+21 more)
 
 ### Community 1 - "App Shell & Navigation"
-Cohesion: 0.11
-Nodes (21): App(), Categories(), CATEGORY_RETRY_DELAYS, ChannelPanel(), LanguageContext, SidebarContext, ThemeContext, translations (+13 more)
+Cohesion: 0.10
+Nodes (25): App(), Categories(), CATEGORY_RETRY_DELAYS, ChannelPanel(), ChannelPanel Component, IconComment(), IconEye(), IconThumbUp() (+17 more)
 
 ### Community 2 - "Global Configuration"
-Cohesion: 0.09
-Nodes (25): App Component, Categories Component, ChannelPanel Component, IconComment(), IconEye(), IconThumbUp(), LanguageProvider(), MapPointContext (+17 more)
+Cohesion: 0.07
+Nodes (29): App Component, Categories Component, LanguageProvider(), ThemeContext, ThemeProvider(), Feature Flags & Configuration, CountryPanel Component, Mutual Panel Exclusivity Pattern (+21 more)
 
 ### Community 3 - "Backend & Architecture"
 Cohesion: 0.08
@@ -149,33 +142,25 @@ Nodes (5): AppearancesTooltip(), formatDate(), formatRange(), groupAppearanceDat
 Cohesion: 0.40
 Nodes (5): GET /api/country/history, GET /api/country/today, useCountryHistory, useCountryRanking, useCountryToday
 
-### Community 30 - "Community 30"
-Cohesion: 0.12
-Nodes (14): 1. Think Before Coding, 2. Simplicity First, 3. Surgical Changes, 4. Goal-Driven Execution, Architecture, Backend, Build & Dev Commands, Component Organization (+6 more)
-
-### Community 31 - "Community 31"
-Cohesion: 0.20
-Nodes (8): Feature Flags & Configuration, CompressionWebpackPlugin, CopyWebpackPlugin, { DefinePlugin }, Dotenv, HtmlWebpackPlugin, path, TerserPlugin
-
 ## Knowledge Gaps
-- **115 isolated node(s):** `Build & Dev Commands`, `Environment`, `Sitemap`, `Data Flow`, `Context Providers` (+110 more)
+- **103 isolated node(s):** `name`, `@linkurious/leaflet-heat`, `dotenv-webpack`, `leaflet`, `leaflet-gesture-handling` (+98 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **16 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `App Component` connect `Global Configuration` to `Community 31`?**
-  _High betweenness centrality (0.038) - this node is a cross-community bridge._
-- **Why does `Map` connect `Leaflet Integration` to `Global Configuration`?**
-  _High betweenness centrality (0.033) - this node is a cross-community bridge._
-- **Why does `Feature Flags & Configuration` connect `Community 31` to `Global Configuration`?**
-  _High betweenness centrality (0.029) - this node is a cross-community bridge._
+- **Why does `App Component` connect `Global Configuration` to `Map Rendering & Data`, `App Shell & Navigation`?**
+  _High betweenness centrality (0.042) - this node is a cross-community bridge._
+- **Why does `Map` connect `Leaflet Integration` to `Map Rendering & Data`, `App Shell & Navigation`, `Global Configuration`?**
+  _High betweenness centrality (0.036) - this node is a cross-community bridge._
 - **Are the 8 inferred relationships involving `LanguageContext` (e.g. with `App()` and `ChannelPanel()`) actually correct?**
   _`LanguageContext` has 8 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 5 inferred relationships involving `Map()` (e.g. with `App()` and `Countries()`) actually correct?**
   _`Map()` has 5 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `Build & Dev Commands`, `Environment`, `Sitemap` to the rest of the system?**
-  _121 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `name`, `@linkurious/leaflet-heat`, `dotenv-webpack` to the rest of the system?**
+  _111 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Map Rendering & Data` be split into smaller, more focused modules?**
-  _Cohesion score 0.08879492600422834 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.0851063829787234 - nodes in this community are weakly interconnected._
+- **Should `App Shell & Navigation` be split into smaller, more focused modules?**
+  _Cohesion score 0.09871794871794871 - nodes in this community are weakly interconnected._

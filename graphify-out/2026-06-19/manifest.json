@@ -1,417 +1,412 @@
 {
-  ".claude/settings.local.json": {
+  "/home/adriana/PROYECTOS/world-interests/.claude/settings.local.json": {
     "mtime": 1781865095.319883,
     "ast_hash": "2df81f5f9d1cb3bc248a575f50a2fb0f",
     "semantic_hash": "2df81f5f9d1cb3bc248a575f50a2fb0f"
   },
-  ".sdd/config.json": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/config.json": {
     "mtime": 1776532098.8254726,
     "ast_hash": "fdfdd0f4d239be3812a6e42e10d66765",
     "semantic_hash": "fdfdd0f4d239be3812a6e42e10d66765"
   },
-  "_example_of_response-music.json": {
+  "/home/adriana/PROYECTOS/world-interests/_example_of_response-music.json": {
     "mtime": 1776095686.5960145,
     "ast_hash": "d41b4ade6e4370ab2108088928282aff",
     "semantic_hash": "d41b4ade6e4370ab2108088928282aff"
   },
-  "package.json": {
+  "/home/adriana/PROYECTOS/world-interests/package.json": {
     "mtime": 1776521469.1164923,
     "ast_hash": "d02ee89a40c426be4f83ae0674e3cba5",
     "semantic_hash": "d02ee89a40c426be4f83ae0674e3cba5"
   },
-  "scripts/generate-sitemap.js": {
+  "/home/adriana/PROYECTOS/world-interests/scripts/generate-sitemap.js": {
     "mtime": 1776521469.1224003,
     "ast_hash": "79cb1aa12b7e20fab38f5cd2c3b9fb3e",
     "semantic_hash": "79cb1aa12b7e20fab38f5cd2c3b9fb3e"
   },
-  "src/App/App.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/App/App.jsx": {
     "mtime": 1781790708.1465569,
     "ast_hash": "c6163d4f1ee202907ca884f72a75f211",
     "semantic_hash": "c6163d4f1ee202907ca884f72a75f211"
   },
-  "src/Categories/Categories.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Categories/Categories.jsx": {
     "mtime": 1776521469.1227567,
     "ast_hash": "d5ac3e60b2217b8a66b9d3e000f2b738",
     "semantic_hash": "d5ac3e60b2217b8a66b9d3e000f2b738"
   },
-  "src/ChannelPanel/ChannelPanel.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/ChannelPanel/ChannelPanel.jsx": {
     "mtime": 1776534897.6724672,
     "ast_hash": "d9961f4766c0d480174dee55dccd2471",
     "semantic_hash": "d9961f4766c0d480174dee55dccd2471"
   },
-  "src/Common/CountryPanelContext.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Common/CountryPanelContext.jsx": {
     "mtime": 1776534897.6725473,
     "ast_hash": "f15282214166b7f6c21a39157c18aee4",
     "semantic_hash": "f15282214166b7f6c21a39157c18aee4"
   },
-  "src/Common/Icons.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Common/Icons.jsx": {
     "mtime": 1776434391.001762,
     "ast_hash": "76e9bd3d723b4ec80400a4617788ac58",
     "semantic_hash": "76e9bd3d723b4ec80400a4617788ac58"
   },
-  "src/Common/LanguageContext.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Common/LanguageContext.jsx": {
     "mtime": 1776521469.122831,
     "ast_hash": "34ebda131e56e6d85529379fead7947c",
     "semantic_hash": "34ebda131e56e6d85529379fead7947c"
   },
-  "src/Common/MapPointContext.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Common/MapPointContext.jsx": {
     "mtime": 1776534897.6725473,
     "ast_hash": "e698445dc3d2e133c8869eafc90c830d",
     "semantic_hash": "e698445dc3d2e133c8869eafc90c830d"
   },
-  "src/Common/SidebarContext.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Common/SidebarContext.jsx": {
     "mtime": 1776534897.67278,
     "ast_hash": "08208474332aeef8ad619c00dceddc0f",
     "semantic_hash": "08208474332aeef8ad619c00dceddc0f"
   },
-  "src/Common/ThemeContext.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Common/ThemeContext.jsx": {
     "mtime": 1776257622.3105206,
     "ast_hash": "ae50fea7bc1f05b77cd3c230c3752335",
     "semantic_hash": "ae50fea7bc1f05b77cd3c230c3752335"
   },
-  "src/Common/translations.js": {
+  "/home/adriana/PROYECTOS/world-interests/src/Common/translations.js": {
     "mtime": 1781858717.1600842,
     "ast_hash": "6635027816d9127c1fff473cdd497f6e",
     "semantic_hash": "6635027816d9127c1fff473cdd497f6e"
   },
-  "src/CountryPanel/AppearancesTooltip.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/CountryPanel/AppearancesTooltip.jsx": {
     "mtime": 1776459861.8163593,
     "ast_hash": "cd09c5a0f87cd23174574bc67518189b",
     "semantic_hash": "cd09c5a0f87cd23174574bc67518189b"
   },
-  "src/CountryPanel/CountryPanel.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/CountryPanel/CountryPanel.jsx": {
     "mtime": 1781858792.73268,
     "ast_hash": "9a9b106b11f5ccb972eb221684c6ffb9",
     "semantic_hash": "9a9b106b11f5ccb972eb221684c6ffb9"
   },
-  "src/CountryPanel/groupAppearanceDates.js": {
+  "/home/adriana/PROYECTOS/world-interests/src/CountryPanel/groupAppearanceDates.js": {
     "mtime": 1781822291.4569218,
     "ast_hash": "b955ae70cc10b06437b56ce5d974f26c",
     "semantic_hash": "b955ae70cc10b06437b56ce5d974f26c"
   },
-  "src/CustomMarker/CustomMarker.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/CustomMarker/CustomMarker.jsx": {
     "mtime": 1776534897.673166,
     "ast_hash": "aeef454b1fd538f336a9702fe1a66f09",
     "semantic_hash": "aeef454b1fd538f336a9702fe1a66f09"
   },
-  "src/Footer/Footer.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Footer/Footer.jsx": {
     "mtime": 1776257622.3107896,
     "ast_hash": "2a70de9ccf35e5deb7587695282ccc3e",
     "semantic_hash": "2a70de9ccf35e5deb7587695282ccc3e"
   },
-  "src/Head/Head.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Head/Head.jsx": {
     "mtime": 1776521469.122914,
     "ast_hash": "5a69088f0404760ff1cee5e148862990",
     "semantic_hash": "5a69088f0404760ff1cee5e148862990"
   },
-  "src/Header/Header.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Header/Header.jsx": {
     "mtime": 1776521469.1229892,
     "ast_hash": "f846fb4bc9416bba9c3d423e6f3c1fe1",
     "semantic_hash": "f846fb4bc9416bba9c3d423e6f3c1fe1"
   },
-  "src/Header/MoonIcon.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Header/MoonIcon.jsx": {
     "mtime": 1776095686.6029978,
     "ast_hash": "c7d30e5a026a2004cd86f0c61566d0bf",
     "semantic_hash": "c7d30e5a026a2004cd86f0c61566d0bf"
   },
-  "src/Header/SunIcon.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Header/SunIcon.jsx": {
     "mtime": 1776095686.6029978,
     "ast_hash": "6af16aa5867b6cf5b232d8e84fc4373e",
     "semantic_hash": "6af16aa5867b6cf5b232d8e84fc4373e"
   },
-  "src/LiveClock/LiveClock.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/LiveClock/LiveClock.jsx": {
     "mtime": 1781790285.0593424,
     "ast_hash": "a541cbab80341c3b9bf3ca80f849636a",
     "semantic_hash": "a541cbab80341c3b9bf3ca80f849636a"
   },
-  "src/Map/Countries/Countries.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Map/Countries/Countries.jsx": {
     "mtime": 1776471518.5982282,
     "ast_hash": "97ce8c9c037bf1f4a5b072f50eaae762",
     "semantic_hash": "97ce8c9c037bf1f4a5b072f50eaae762"
   },
-  "src/Map/Countries/countries-and-us-states.geo.json": {
+  "/home/adriana/PROYECTOS/world-interests/src/Map/Countries/countries-and-us-states.geo.json": {
     "mtime": 1776095686.6032734,
     "ast_hash": "dee5bc9f366ea8be5cd82aa619a907ff",
     "semantic_hash": "dee5bc9f366ea8be5cd82aa619a907ff"
   },
-  "src/Map/Countries/countries.geo.json": {
+  "/home/adriana/PROYECTOS/world-interests/src/Map/Countries/countries.geo.json": {
     "mtime": 1776095686.6039398,
     "ast_hash": "9fdca94ef7b6bb7f63799d2fc5341e66",
     "semantic_hash": "9fdca94ef7b6bb7f63799d2fc5341e66"
   },
-  "src/Map/Countries/country-codes-lat-long-flags-alpha3.json": {
+  "/home/adriana/PROYECTOS/world-interests/src/Map/Countries/country-codes-lat-long-flags-alpha3.json": {
     "mtime": 1776095686.6039398,
     "ast_hash": "5eba946275d601d1629ee61a7436b536",
     "semantic_hash": "5eba946275d601d1629ee61a7436b536"
   },
-  "src/Map/HeatmapLayer.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Map/HeatmapLayer.jsx": {
     "mtime": 1776257622.3112712,
     "ast_hash": "fa6f7bca9852c5c53a5070d2f49bc339",
     "semantic_hash": "fa6f7bca9852c5c53a5070d2f49bc339"
   },
-  "src/Map/Map.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Map/Map.jsx": {
     "mtime": 1781822543.919754,
     "ast_hash": "e70fa18a86ffe2f33ac913f1ea0ced04",
     "semantic_hash": "e70fa18a86ffe2f33ac913f1ea0ced04"
   },
-  "src/Map/MapSettings/MapSettings.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Map/MapSettings/MapSettings.jsx": {
     "mtime": 1781790753.7851307,
     "ast_hash": "9640c23a82246a490e6845e5eef7d90e",
     "semantic_hash": "9640c23a82246a490e6845e5eef7d90e"
   },
-  "src/Map/Points/Data.js": {
+  "/home/adriana/PROYECTOS/world-interests/src/Map/Points/Data.js": {
     "mtime": 1776257622.311661,
     "ast_hash": "417b1f95fbf1d279f6145a27d30b98ec",
     "semantic_hash": "417b1f95fbf1d279f6145a27d30b98ec"
   },
-  "src/Map/Points/Points.js": {
+  "/home/adriana/PROYECTOS/world-interests/src/Map/Points/Points.js": {
     "mtime": 1776471518.5985444,
     "ast_hash": "2e7769c67db26ed9d52c73595ba0cce1",
     "semantic_hash": "2e7769c67db26ed9d52c73595ba0cce1"
   },
-  "src/Map/geoJsonConfig.js": {
+  "/home/adriana/PROYECTOS/world-interests/src/Map/geoJsonConfig.js": {
     "mtime": 1776204177.1012821,
     "ast_hash": "970ea3151beadd62d003ce26d4747428",
     "semantic_hash": "970ea3151beadd62d003ce26d4747428"
   },
-  "src/Player/Player.jsx": {
+  "/home/adriana/PROYECTOS/world-interests/src/Player/Player.jsx": {
     "mtime": 1776179378.443142,
     "ast_hash": "7e910d56db5a042826356d5c2d98698e",
     "semantic_hash": "7e910d56db5a042826356d5c2d98698e"
   },
-  "src/config.js": {
+  "/home/adriana/PROYECTOS/world-interests/src/config.js": {
     "mtime": 1781790664.0280435,
     "ast_hash": "f5a6bda725e4bb8cbb5d0a36087e3734",
     "semantic_hash": "f5a6bda725e4bb8cbb5d0a36087e3734"
   },
-  "src/hooks/useCountryHistory.js": {
+  "/home/adriana/PROYECTOS/world-interests/src/hooks/useCountryHistory.js": {
     "mtime": 1781858825.6026108,
     "ast_hash": "8e95cc9e6f69632f5aec9cc3857a0d5a",
     "semantic_hash": "8e95cc9e6f69632f5aec9cc3857a0d5a"
   },
-  "src/hooks/useCountryRanking.js": {
+  "/home/adriana/PROYECTOS/world-interests/src/hooks/useCountryRanking.js": {
     "mtime": 1781858808.674153,
     "ast_hash": "4a4e3871168182ceffa11ae3864e212c",
     "semantic_hash": "4a4e3871168182ceffa11ae3864e212c"
   },
-  "src/hooks/useCountryToday.js": {
+  "/home/adriana/PROYECTOS/world-interests/src/hooks/useCountryToday.js": {
     "mtime": 1781858817.4218729,
     "ast_hash": "7aff068364dbc4439869248eb2e0426b",
     "semantic_hash": "7aff068364dbc4439869248eb2e0426b"
   },
-  "src/hooks/useImageRetry.js": {
+  "/home/adriana/PROYECTOS/world-interests/src/hooks/useImageRetry.js": {
     "mtime": 1776473450.8424861,
     "ast_hash": "90eb3c4d1eb54b4d11bb0b9852c749be",
     "semantic_hash": "90eb3c4d1eb54b4d11bb0b9852c749be"
   },
-  "src/hooks/useMapData.js": {
+  "/home/adriana/PROYECTOS/world-interests/src/hooks/useMapData.js": {
     "mtime": 1776434391.0031552,
     "ast_hash": "32fcaa253c104c38e9a8978f040e8d0d",
     "semantic_hash": "32fcaa253c104c38e9a8978f040e8d0d"
   },
-  "src/index.js": {
+  "/home/adriana/PROYECTOS/world-interests/src/index.js": {
     "mtime": 1776521469.1232646,
     "ast_hash": "96ed4a1873f09fdf772d1fa0574fb7a1",
     "semantic_hash": "96ed4a1873f09fdf772d1fa0574fb7a1"
   },
-  "src/settingsVisibility.js": {
+  "/home/adriana/PROYECTOS/world-interests/src/settingsVisibility.js": {
     "mtime": 1781790673.7437282,
     "ast_hash": "2a9ca5f93bd583ea0c6c558507af4ed6",
     "semantic_hash": "2a9ca5f93bd583ea0c6c558507af4ed6"
   },
-  "webpack.config.js": {
+  "/home/adriana/PROYECTOS/world-interests/webpack.config.js": {
     "mtime": 1776521469.123408,
     "ast_hash": "acd2b6350ad832c25c6b77314e171a15",
     "semantic_hash": "acd2b6350ad832c25c6b77314e171a15"
   },
-  ".claude/commands/spec-build.md": {
+  "/home/adriana/PROYECTOS/world-interests/.claude/commands/spec-build.md": {
     "mtime": 1776532098.8116758,
     "ast_hash": "ecb35dce79e5311aeb5b41a2a0522e78",
     "semantic_hash": "ecb35dce79e5311aeb5b41a2a0522e78"
   },
-  ".claude/commands/spec-draft.md": {
+  "/home/adriana/PROYECTOS/world-interests/.claude/commands/spec-draft.md": {
     "mtime": 1776532098.812676,
     "ast_hash": "b7a36615d8f08f6031e18b01d2e1adfe",
     "semantic_hash": "b7a36615d8f08f6031e18b01d2e1adfe"
   },
-  ".claude/commands/spec-plan.md": {
+  "/home/adriana/PROYECTOS/world-interests/.claude/commands/spec-plan.md": {
     "mtime": 1776532098.8146758,
     "ast_hash": "1f0f598e8f3bc6e846bf9caa5f5ba246",
     "semantic_hash": "1f0f598e8f3bc6e846bf9caa5f5ba246"
   },
-  ".claude/commands/spec-status.md": {
+  "/home/adriana/PROYECTOS/world-interests/.claude/commands/spec-status.md": {
     "mtime": 1776532098.8156757,
     "ast_hash": "9665b848b808721fdd6a1428ee9198ae",
     "semantic_hash": "9665b848b808721fdd6a1428ee9198ae"
   },
-  ".claude/skills/spec-caveman/SKILL.md": {
+  "/home/adriana/PROYECTOS/world-interests/.claude/skills/spec-caveman/SKILL.md": {
     "mtime": 1776532098.8216565,
     "ast_hash": "3f3652cb69d84e8bad8e809ef27bdc4e",
     "semantic_hash": "3f3652cb69d84e8bad8e809ef27bdc4e"
   },
-  ".claude/skills/spec-source/SKILL.md": {
+  "/home/adriana/PROYECTOS/world-interests/.claude/skills/spec-source/SKILL.md": {
     "mtime": 1776532098.8232572,
     "ast_hash": "7e989d2e7773f59f1a37f6495d21ad6f",
     "semantic_hash": "7e989d2e7773f59f1a37f6495d21ad6f"
   },
-  ".sdd/sources.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/sources.md": {
     "mtime": 1776532098.8232572,
     "ast_hash": "a6a2ed3b0820546f93ad73c668715213",
     "semantic_hash": "a6a2ed3b0820546f93ad73c668715213"
   },
-  ".sdd/specs/WIF-1.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-1.md": {
     "mtime": 1776114291.200747,
     "ast_hash": "7eae96f7651af371a2bb1aea8a857fea",
     "semantic_hash": "7eae96f7651af371a2bb1aea8a857fea"
   },
-  ".sdd/specs/WIF-10.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-10.md": {
     "mtime": 1776434391.0012815,
     "ast_hash": "8d6f5d72890d656228e81ebc9bc3b6ff",
     "semantic_hash": "8d6f5d72890d656228e81ebc9bc3b6ff"
   },
-  ".sdd/specs/WIF-11.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-11.md": {
     "mtime": 1776459861.815976,
     "ast_hash": "1ec2c54ee26d269e0808497dd2bb1fce",
     "semantic_hash": "1ec2c54ee26d269e0808497dd2bb1fce"
   },
-  ".sdd/specs/WIF-12.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-12.md": {
     "mtime": 1776473450.8419478,
     "ast_hash": "27fbce770eb468a966e638d1507a9fa0",
     "semantic_hash": "27fbce770eb468a966e638d1507a9fa0"
   },
-  ".sdd/specs/WIF-13.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-13.md": {
     "mtime": 1776476068.4185827,
     "ast_hash": "cabedf8894f4d19d7a662f0f58cbb137",
     "semantic_hash": "cabedf8894f4d19d7a662f0f58cbb137"
   },
-  ".sdd/specs/WIF-14.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-14.md": {
     "mtime": 1776521469.1158915,
     "ast_hash": "f18502cc6bde9dd0dde0469493b30216",
     "semantic_hash": "f18502cc6bde9dd0dde0469493b30216"
   },
-  ".sdd/specs/WIF-15.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-15.md": {
     "mtime": 1776531159.9893088,
     "ast_hash": "6ae5d71e0b3230837deaf998008c43b5",
     "semantic_hash": "6ae5d71e0b3230837deaf998008c43b5"
   },
-  ".sdd/specs/WIF-16.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-16.md": {
     "mtime": 1776533974.044755,
     "ast_hash": "ca5887760bec6cf48dcfb93d75ef5790",
     "semantic_hash": "ca5887760bec6cf48dcfb93d75ef5790"
   },
-  ".sdd/specs/WIF-17.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-17.md": {
     "mtime": 1776534897.671853,
     "ast_hash": "fe90acfc3796f2c3659f7faec803ea9c",
     "semantic_hash": "fe90acfc3796f2c3659f7faec803ea9c"
   },
-  ".sdd/specs/WIF-18.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-18.md": {
     "mtime": 1776539491.904674,
     "ast_hash": "fda948fdda866d89ac77dff9cfcfd266",
     "semantic_hash": "fda948fdda866d89ac77dff9cfcfd266"
   },
-  ".sdd/specs/WIF-19.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-19.md": {
     "mtime": 1781857041.5618186,
     "ast_hash": "38397228c4cdfcb3fa485fdff635aaa3",
     "semantic_hash": "38397228c4cdfcb3fa485fdff635aaa3"
   },
-  ".sdd/specs/WIF-2.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-2.md": {
     "mtime": 1776124365.5864184,
     "ast_hash": "8f330d7e0fa50cd52b1995d3afe07ff2",
     "semantic_hash": "8f330d7e0fa50cd52b1995d3afe07ff2"
   },
-  ".sdd/specs/WIF-3.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-3.md": {
     "mtime": 1776172250.083354,
     "ast_hash": "564546f8b213ba90dff83b2aa138d3c5",
     "semantic_hash": "564546f8b213ba90dff83b2aa138d3c5"
   },
-  ".sdd/specs/WIF-4.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-4.md": {
     "mtime": 1776219191.6048312,
     "ast_hash": "108a6cd307f4f6e8dcad30bee826dc93",
     "semantic_hash": "108a6cd307f4f6e8dcad30bee826dc93"
   },
-  ".sdd/specs/WIF-5.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-5.md": {
     "mtime": 1776182766.6735678,
     "ast_hash": "1b120d584dacf2c4f0eec5c0d9ca6221",
     "semantic_hash": "1b120d584dacf2c4f0eec5c0d9ca6221"
   },
-  ".sdd/specs/WIF-6.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-6.md": {
     "mtime": 1776190050.6035361,
     "ast_hash": "96ed0691a7767282e312eea46bd45664",
     "semantic_hash": "96ed0691a7767282e312eea46bd45664"
   },
-  ".sdd/specs/WIF-7.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-7.md": {
     "mtime": 1776222301.264684,
     "ast_hash": "ee7b97bc77ba5802297aa901d8c20616",
     "semantic_hash": "ee7b97bc77ba5802297aa901d8c20616"
   },
-  ".sdd/specs/WIF-8.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-8.md": {
     "mtime": 1776257622.3087926,
     "ast_hash": "0c3f149bc53cbd95914957d34bc3753e",
     "semantic_hash": "0c3f149bc53cbd95914957d34bc3753e"
   },
-  ".sdd/specs/WIF-9.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/WIF-9.md": {
     "mtime": 1776292719.5397,
     "ast_hash": "eb7e3b3b5fb374e4a38517007dd3c325",
     "semantic_hash": "eb7e3b3b5fb374e4a38517007dd3c325"
   },
-  ".sdd/specs/template/spec.md": {
+  "/home/adriana/PROYECTOS/world-interests/.sdd/specs/template/spec.md": {
     "mtime": 1776532098.8248181,
     "ast_hash": "c75c33af4f814148cc78478b55a4d3fb",
     "semantic_hash": "c75c33af4f814148cc78478b55a4d3fb"
   },
-  "CLAUDE.md": {
-    "mtime": 1781866767.1128197,
-    "ast_hash": "8d2e5ba26f0e3031dc3f7dfc7558a4df",
-    "semantic_hash": ""
+  "/home/adriana/PROYECTOS/world-interests/CLAUDE.md": {
+    "mtime": 1781857060.2906244,
+    "ast_hash": "07d2f02c988cd5c2326afbcc145a6c83",
+    "semantic_hash": "07d2f02c988cd5c2326afbcc145a6c83"
   },
-  "README.md": {
+  "/home/adriana/PROYECTOS/world-interests/README.md": {
     "mtime": 1776521469.1162064,
     "ast_hash": "c60c161c953d1221cc337cce3e39209c",
     "semantic_hash": "c60c161c953d1221cc337cce3e39209c"
   },
-  "compose.dev.yml": {
+  "/home/adriana/PROYECTOS/world-interests/compose.dev.yml": {
     "mtime": 1776114291.2009952,
     "ast_hash": "fe2dc21c9c86af7551088cca70252c85",
     "semantic_hash": "fe2dc21c9c86af7551088cca70252c85"
   },
-  "index.html": {
+  "/home/adriana/PROYECTOS/world-interests/index.html": {
     "mtime": 1776521469.1163907,
     "ast_hash": "6c7de7d7e84b8ec9f1626f0ab60b939d",
     "semantic_hash": "6c7de7d7e84b8ec9f1626f0ab60b939d"
   },
-  "robots.txt": {
+  "/home/adriana/PROYECTOS/world-interests/robots.txt": {
     "mtime": 1776521469.1165514,
     "ast_hash": "b0470c83351d67e85d5462c430aa1ede",
     "semantic_hash": "b0470c83351d67e85d5462c430aa1ede"
   },
-  "favicon.svg": {
+  "/home/adriana/PROYECTOS/world-interests/favicon.svg": {
     "mtime": 1776095686.5960145,
     "ast_hash": "537bf1c91ff6bb4d6ee449916a5bc113",
     "semantic_hash": "537bf1c91ff6bb4d6ee449916a5bc113"
   },
-  "screenshot.png": {
+  "/home/adriana/PROYECTOS/world-interests/screenshot.png": {
     "mtime": 1776521469.122241,
     "ast_hash": "ebd7102bfe9fcdb892984c2e7e818a46",
     "semantic_hash": "ebd7102bfe9fcdb892984c2e7e818a46"
   },
-  "src/GlobalStyles/img/image-not-found.png": {
+  "/home/adriana/PROYECTOS/world-interests/src/GlobalStyles/img/image-not-found.png": {
     "mtime": 1776095686.6019619,
     "ast_hash": "240048cf320579e81748c75e276b9cd8",
     "semantic_hash": "240048cf320579e81748c75e276b9cd8"
   },
-  "src/GlobalStyles/img/logo-svg.svg": {
+  "/home/adriana/PROYECTOS/world-interests/src/GlobalStyles/img/logo-svg.svg": {
     "mtime": 1776095686.6021626,
     "ast_hash": "537bf1c91ff6bb4d6ee449916a5bc113",
     "semantic_hash": "537bf1c91ff6bb4d6ee449916a5bc113"
   },
-  "src/GlobalStyles/img/logo-transparent.png": {
+  "/home/adriana/PROYECTOS/world-interests/src/GlobalStyles/img/logo-transparent.png": {
     "mtime": 1776095686.6021626,
     "ast_hash": "80ee93e15157a8c2863e1e9e76544eed",
     "semantic_hash": "80ee93e15157a8c2863e1e9e76544eed"
-  },
-  ".claude/settings.json": {
-    "mtime": 1781866767.1131406,
-    "ast_hash": "e1073342e958ac9f00716938c8f165e3",
-    "semantic_hash": ""
   }
 }
