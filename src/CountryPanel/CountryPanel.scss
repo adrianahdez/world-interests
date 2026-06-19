@@ -137,29 +137,37 @@
 
 .country-panel__tabs {
   display: flex;
-  gap: 4px;
+  gap: 6px;
   margin-top: 14px;
 }
 
+// Old flat-tab look, with a subtle outline so they read as clickable (not labels).
 .country-panel__tab {
   appearance: none;
-  border: none;
-  background: transparent;
   cursor: pointer;
   padding: 8px 14px;
   font-size: 13px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.5);
-  border-bottom: 2px solid transparent;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
   transition: color 150ms, border-color 150ms;
 
   &:hover {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.85);
+    border-color: rgba(255, 255, 255, 0.3);
   }
 
+  &:focus-visible {
+    outline: 2px solid var(--link-color);
+    outline-offset: 2px;
+  }
+
+  // Active: just the text brightens and the border takes the accent colour — subtle, no fill.
   &--active {
     color: var(--white, white);
-    border-bottom-color: var(--link-color);
+    border-color: var(--link-color);
   }
 
   @include respond-at(768) {
@@ -192,12 +200,21 @@
   border-radius: 999px;
   transition: background 150ms, color 150ms;
 
-  &:hover {
+  // Only brighten inactive pills on hover — the active pill keeps its white text
+  // on the accent background (otherwise hover would darken it, hurting contrast).
+  &:not(.country-panel__subtab--active):hover {
     color: rgba(255, 255, 255, 0.9);
   }
 
+  &:focus-visible {
+    outline: 2px solid var(--link-color);
+    outline-offset: 2px;
+  }
+
+  // Explicit white (not var(--white), which is black in light theme) so the label
+  // stays readable on the accent-coloured pill in both themes.
   &--active {
-    color: var(--white, white);
+    color: #fff;
     background: var(--link-color);
   }
 
@@ -528,11 +545,36 @@
   }
 
   .country-panel__tab {
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.55);
+    border-color: rgba(0, 0, 0, 0.18);
 
-    &:hover { color: rgba(0, 0, 0, 0.8); }
+    &:hover {
+      color: #000;
+      border-color: rgba(0, 0, 0, 0.3);
+    }
 
-    &--active { color: #000; }
+    &--active {
+      color: #000;
+      border-color: var(--link-color);
+    }
+  }
+
+  .country-panel__subtabs {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.12);
+  }
+
+  .country-panel__subtab {
+    color: rgba(0, 0, 0, 0.6);
+
+    // Hover only on inactive pills (see base rule) so the active pill's white
+    // label survives hover on the accent background.
+    &:not(.country-panel__subtab--active):hover { color: #000; }
+
+    // Needs to be explicit here: this `.light .country-panel__subtab` selector
+    // outranks the base `--active` rule, so without it the active label would
+    // render dark on the accent pill (unreadable in light theme).
+    &--active { color: #fff; }
   }
 
   .channel-card {
