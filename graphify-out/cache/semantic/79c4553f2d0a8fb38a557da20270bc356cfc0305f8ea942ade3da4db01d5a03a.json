@@ -1,0 +1,1 @@
+{"nodes": [{"id": "hooks_usemapidata_usemapidata", "label": "useMapData Hook", "file_type": "code", "source_file": "src/hooks/useMapData.js"}], "edges": [{"source": "hooks_usemapidata_usemapidata", "target": "mappoints_data_getdata", "relation": "calls", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/hooks/useMapData.js"}], "hyperedges": []}
