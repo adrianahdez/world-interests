@@ -80,8 +80,8 @@
     "semantic_hash": "cd09c5a0f87cd23174574bc67518189b"
   },
   "src/CountryPanel/CountryPanel.jsx": {
-    "mtime": 1781887334.710173,
-    "ast_hash": "7efbf5ce744581c6784c3e7edbe6114b",
+    "mtime": 1781888762.0855973,
+    "ast_hash": "7b6be64b29c4b115d9e905c9487e389f",
     "semantic_hash": ""
   },
   "src/CountryPanel/groupAppearanceDates.js": {
@@ -310,8 +310,8 @@
     "semantic_hash": "fda948fdda866d89ac77dff9cfcfd266"
   },
   ".sdd/specs/WIF-19.md": {
-    "mtime": 1781887425.342593,
-    "ast_hash": "5cd247fe938b1d64b5b9dfa3fe07c6eb",
+    "mtime": 1781888832.0743635,
+    "ast_hash": "d9d8089f471d96b677f38a9dbabe71b0",
     "semantic_hash": ""
   },
   ".sdd/specs/WIF-2.md": {
@@ -425,8 +425,8 @@
     "semantic_hash": ""
   },
   "src/LiveTimestamp/LiveTimestamp.jsx": {
-    "mtime": 1781884317.6166449,
-    "ast_hash": "9e647e58fd4f0b407dec0279eb6c26f2",
+    "mtime": 1781888750.905954,
+    "ast_hash": "b0499bb137d3d19b9125f0267e3cb7b3",
     "semantic_hash": ""
   },
   "src/InfoTooltip/InfoTooltip.jsx": {
