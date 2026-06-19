@@ -51,6 +51,8 @@ const translations = {
     historicalViewAriaLabel: "Historical view: videos or channels",
     historicalVideos: "Videos",
     historicalChannels: "Channels",
+    historicalInfoVideos: "Ranked by distinct days at #1. Ties broken by most recent appearance.",
+    historicalInfoChannels: "Channels ranked by distinct days at #1. Ties broken by most recent appearance.",
     // "<n> day(s) at #1" appearance count on historical cards
     dayAtNumberOne: "day at #1",
     daysAtNumberOne: "days at #1",
@@ -141,6 +143,8 @@ const translations = {
     historicalViewAriaLabel: "Vista histórica: vídeos o canales",
     historicalVideos: "Vídeos",
     historicalChannels: "Canales",
+    historicalInfoVideos: "Ordenado por días distintos en #1. Empates resueltos por aparición más reciente.",
+    historicalInfoChannels: "Canales ordenados por días distintos en #1. Empates resueltos por aparición más reciente.",
     // Conteo "<n> día(s) como #1" en las tarjetas del histórico
     dayAtNumberOne: "día como #1",
     daysAtNumberOne: "días como #1",
