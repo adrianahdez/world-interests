@@ -137,7 +137,7 @@ const translations = {
     countryPanelAriaLabel: "Panel de tendencias históricas del país",
     // Pestañas del panel de país: tiempo real (por defecto) vs histórico
     countryPanelTabsAriaLabel: "Vistas en tiempo real e histórica",
-    countryPanelTabRealtime: "En vivo",
+    countryPanelTabRealtime: "En tiempo real",
     countryPanelTabHistorical: "Histórico",
     // Sub-toggle del histórico (Vídeos por defecto | Canales)
     historicalViewAriaLabel: "Vista histórica: vídeos o canales",

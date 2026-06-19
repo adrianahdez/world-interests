@@ -45,9 +45,9 @@
     "semantic_hash": "f15282214166b7f6c21a39157c18aee4"
   },
   "src/Common/Icons.jsx": {
-    "mtime": 1776434391.001762,
-    "ast_hash": "76e9bd3d723b4ec80400a4617788ac58",
-    "semantic_hash": "76e9bd3d723b4ec80400a4617788ac58"
+    "mtime": 1781887050.8092475,
+    "ast_hash": "fa1cb713bb6c898c56631174bafd6dcf",
+    "semantic_hash": ""
   },
   "src/Common/LanguageContext.jsx": {
     "mtime": 1776521469.122831,
@@ -70,9 +70,9 @@
     "semantic_hash": "ae50fea7bc1f05b77cd3c230c3752335"
   },
   "src/Common/translations.js": {
-    "mtime": 1781858717.1600842,
-    "ast_hash": "6635027816d9127c1fff473cdd497f6e",
-    "semantic_hash": "6635027816d9127c1fff473cdd497f6e"
+    "mtime": 1781888034.462831,
+    "ast_hash": "82f6de39eb38c56f16dc346d491b4555",
+    "semantic_hash": ""
   },
   "src/CountryPanel/AppearancesTooltip.jsx": {
     "mtime": 1776459861.8163593,
@@ -80,8 +80,8 @@
     "semantic_hash": "cd09c5a0f87cd23174574bc67518189b"
   },
   "src/CountryPanel/CountryPanel.jsx": {
-    "mtime": 1781884344.7525756,
-    "ast_hash": "53103bd8a0dc3b7dfeea061cc18cbb92",
+    "mtime": 1781887334.710173,
+    "ast_hash": "7efbf5ce744581c6784c3e7edbe6114b",
     "semantic_hash": ""
   },
   "src/CountryPanel/groupAppearanceDates.js": {
@@ -150,8 +150,8 @@
     "semantic_hash": "fa6f7bca9852c5c53a5070d2f49bc339"
   },
   "src/Map/Map.jsx": {
-    "mtime": 1781880052.6448772,
-    "ast_hash": "dcab0468bd71db20a81ad06c4eff5ff4",
+    "mtime": 1781888045.4494693,
+    "ast_hash": "acce64030b4a265bb80dd7b981e15784",
     "semantic_hash": ""
   },
   "src/Map/MapSettings/MapSettings.jsx": {
@@ -180,9 +180,9 @@
     "semantic_hash": "7e910d56db5a042826356d5c2d98698e"
   },
   "src/config.js": {
-    "mtime": 1781790664.0280435,
-    "ast_hash": "f5a6bda725e4bb8cbb5d0a36087e3734",
-    "semantic_hash": "f5a6bda725e4bb8cbb5d0a36087e3734"
+    "mtime": 1781888088.0121107,
+    "ast_hash": "e1e48bd13038eb73dcaba971fb18642c",
+    "semantic_hash": ""
   },
   "src/hooks/useCountryHistory.js": {
     "mtime": 1781858825.6026108,
@@ -310,8 +310,8 @@
     "semantic_hash": "fda948fdda866d89ac77dff9cfcfd266"
   },
   ".sdd/specs/WIF-19.md": {
-    "mtime": 1781884369.9113107,
-    "ast_hash": "eae0fb75ef2d1159cb80d4aab2a7435e",
+    "mtime": 1781887425.342593,
+    "ast_hash": "5cd247fe938b1d64b5b9dfa3fe07c6eb",
     "semantic_hash": ""
   },
   ".sdd/specs/WIF-2.md": {
@@ -427,6 +427,11 @@
   "src/LiveTimestamp/LiveTimestamp.jsx": {
     "mtime": 1781884317.6166449,
     "ast_hash": "9e647e58fd4f0b407dec0279eb6c26f2",
+    "semantic_hash": ""
+  },
+  "src/InfoTooltip/InfoTooltip.jsx": {
+    "mtime": 1781887101.9316134,
+    "ast_hash": "446d1a5e214122e1a325f0289371d6f6",
     "semantic_hash": ""
   }
 }
