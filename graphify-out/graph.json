@@ -216,6 +216,236 @@
   },
   "nodes": [
     {
+      "label": "WIF-19.md",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "specs_wif_19",
+      "community": 17,
+      "norm_label": "wif-19.md"
+    },
+    {
+      "label": "Spec: Realtime Country Modal And Live Clock",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L10",
+      "_origin": "ast",
+      "id": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
+      "community": 17,
+      "norm_label": "spec: realtime country modal and live clock"
+    },
+    {
+      "label": "Context / Background",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "specs_wif_19_context_background",
+      "community": 17,
+      "norm_label": "context / background"
+    },
+    {
+      "label": "Summary",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "specs_wif_19_summary",
+      "community": 17,
+      "norm_label": "summary"
+    },
+    {
+      "label": "Functional Requirements",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "specs_wif_19_functional_requirements",
+      "community": 17,
+      "norm_label": "functional requirements"
+    },
+    {
+      "label": "A. Live clock label",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "specs_wif_19_a_live_clock_label",
+      "community": 17,
+      "norm_label": "a. live clock label"
+    },
+    {
+      "label": "B. Country modal \u2014 structure",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L32",
+      "_origin": "ast",
+      "id": "specs_wif_19_b_country_modal_structure",
+      "community": 17,
+      "norm_label": "b. country modal \u2014 structure"
+    },
+    {
+      "label": "C. Country modal \u2014 Tab 1 (real-time / today)",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "specs_wif_19_c_country_modal_tab_1_real_time_today",
+      "community": 17,
+      "norm_label": "c. country modal \u2014 tab 1 (real-time / today)"
+    },
+    {
+      "label": "D. Country modal \u2014 Tab 2 (historical)",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L45",
+      "_origin": "ast",
+      "id": "specs_wif_19_d_country_modal_tab_2_historical",
+      "community": 17,
+      "norm_label": "d. country modal \u2014 tab 2 (historical)"
+    },
+    {
+      "label": "E. New real-time channel-count setting",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "specs_wif_19_e_new_real_time_channel_count_setting",
+      "community": 17,
+      "norm_label": "e. new real-time channel-count setting"
+    },
+    {
+      "label": "Non-Goals / Out of Scope",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L55",
+      "_origin": "ast",
+      "id": "specs_wif_19_non_goals_out_of_scope",
+      "community": 17,
+      "norm_label": "non-goals / out of scope"
+    },
+    {
+      "label": "Possible Edge Cases",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L61",
+      "_origin": "ast",
+      "id": "specs_wif_19_possible_edge_cases",
+      "community": 17,
+      "norm_label": "possible edge cases"
+    },
+    {
+      "label": "Acceptance Criteria",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L72",
+      "_origin": "ast",
+      "id": "specs_wif_19_acceptance_criteria",
+      "community": 17,
+      "norm_label": "acceptance criteria"
+    },
+    {
+      "label": "Open Questions",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L80",
+      "_origin": "ast",
+      "id": "specs_wif_19_open_questions",
+      "community": 17,
+      "norm_label": "open questions"
+    },
+    {
+      "label": "Dependencies",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L88",
+      "_origin": "ast",
+      "id": "specs_wif_19_dependencies",
+      "community": 17,
+      "norm_label": "dependencies"
+    },
+    {
+      "label": "Success Metrics",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L92",
+      "_origin": "ast",
+      "id": "specs_wif_19_success_metrics",
+      "community": 17,
+      "norm_label": "success metrics"
+    },
+    {
+      "label": "Testing Guidelines",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L95",
+      "_origin": "ast",
+      "id": "specs_wif_19_testing_guidelines",
+      "community": 17,
+      "norm_label": "testing guidelines"
+    },
+    {
+      "label": "Clarifications",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L108",
+      "_origin": "ast",
+      "id": "specs_wif_19_clarifications",
+      "community": 17,
+      "norm_label": "clarifications"
+    },
+    {
+      "label": "Analysis",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L167",
+      "_origin": "ast",
+      "id": "specs_wif_19_analysis",
+      "community": 17,
+      "norm_label": "analysis"
+    },
+    {
+      "label": "Affected Files",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L169",
+      "_origin": "ast",
+      "id": "specs_wif_19_affected_files",
+      "community": 17,
+      "norm_label": "affected files"
+    },
+    {
+      "label": "Risks & Concerns",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L207",
+      "_origin": "ast",
+      "id": "specs_wif_19_risks_concerns",
+      "community": 17,
+      "norm_label": "risks & concerns"
+    },
+    {
+      "label": "Decisions",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L223",
+      "_origin": "ast",
+      "id": "specs_wif_19_decisions",
+      "community": 17,
+      "norm_label": "decisions"
+    },
+    {
+      "label": "Implementation Plan",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L232",
+      "_origin": "ast",
+      "id": "specs_wif_19_implementation_plan",
+      "community": 17,
+      "norm_label": "implementation plan"
+    },
+    {
       "label": "CountryPanel.jsx",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
@@ -266,30 +496,20 @@
       "norm_label": "countrypanel()"
     },
     {
-      "label": "LiveTimestamp()",
-      "file_type": "code",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L176",
-      "_origin": "ast",
-      "id": "countrypanel_countrypanel_livetimestamp",
-      "community": 1,
-      "norm_label": "livetimestamp()"
-    },
-    {
       "label": "RealtimeTab()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L195",
+      "source_location": "L178",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_realtimetab",
-      "community": 4,
+      "community": 1,
       "norm_label": "realtimetab()"
     },
     {
       "label": "HistoricalTab()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L267",
+      "source_location": "L250",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_historicaltab",
       "community": 1,
@@ -299,7 +519,7 @@
       "label": "ChannelIdentity()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L380",
+      "source_location": "L363",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_channelidentity",
       "community": 1,
@@ -309,7 +529,7 @@
       "label": "VideoCard()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L421",
+      "source_location": "L404",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_videocard",
       "community": 1,
@@ -319,11 +539,51 @@
       "label": "ChannelCard()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L463",
+      "source_location": "L446",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_channelcard",
       "community": 1,
       "norm_label": "channelcard()"
+    },
+    {
+      "label": "LiveTimestamp.jsx",
+      "file_type": "code",
+      "source_file": "src/LiveTimestamp/LiveTimestamp.jsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "livetimestamp_livetimestamp",
+      "community": 1,
+      "norm_label": "livetimestamp.jsx"
+    },
+    {
+      "label": "LiveTimestamp()",
+      "file_type": "code",
+      "source_file": "src/LiveTimestamp/LiveTimestamp.jsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "livetimestamp_livetimestamp_livetimestamp",
+      "community": 1,
+      "norm_label": "livetimestamp()"
+    },
+    {
+      "label": "useCountryRanking.js",
+      "file_type": "code",
+      "source_file": "src/hooks/useCountryRanking.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "hooks_usecountryranking",
+      "community": 1,
+      "norm_label": "usecountryranking.js"
+    },
+    {
+      "label": "useCountryRanking()",
+      "file_type": "code",
+      "source_file": "src/hooks/useCountryRanking.js",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "hooks_usecountryranking_usecountryranking",
+      "community": 1,
+      "norm_label": "usecountryranking()"
     },
     {
       "label": "LiveClock.jsx",
@@ -331,9 +591,9 @@
       "source_file": "src/LiveClock/LiveClock.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "liveclock_liveclock",
       "community": 1,
-      "norm_label": "liveclock.jsx"
+      "norm_label": "liveclock.jsx",
+      "id": "liveclock_liveclock"
     },
     {
       "label": "LiveClock()",
@@ -341,9 +601,9 @@
       "source_file": "src/LiveClock/LiveClock.jsx",
       "source_location": "L11",
       "_origin": "ast",
-      "id": "liveclock_liveclock_liveclock",
       "community": 1,
-      "norm_label": "liveclock()"
+      "norm_label": "liveclock()",
+      "id": "liveclock_liveclock_liveclock"
     },
     {
       "label": "useNow.js",
@@ -351,9 +611,9 @@
       "source_file": "src/hooks/useNow.js",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "hooks_usenow",
       "community": 1,
-      "norm_label": "usenow.js"
+      "norm_label": "usenow.js",
+      "id": "hooks_usenow"
     },
     {
       "label": "useNow()",
@@ -361,239 +621,9 @@
       "source_file": "src/hooks/useNow.js",
       "source_location": "L6",
       "_origin": "ast",
-      "id": "hooks_usenow_usenow",
       "community": 1,
-      "norm_label": "usenow()"
-    },
-    {
-      "label": "WIF-19.md",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "wif-19.md",
-      "id": "specs_wif_19"
-    },
-    {
-      "label": "Spec: Realtime Country Modal And Live Clock",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L10",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "spec: realtime country modal and live clock",
-      "id": "specs_wif_19_spec_realtime_country_modal_and_live_clock"
-    },
-    {
-      "label": "Context / Background",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L12",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "context / background",
-      "id": "specs_wif_19_context_background"
-    },
-    {
-      "label": "Summary",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L20",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "summary",
-      "id": "specs_wif_19_summary"
-    },
-    {
-      "label": "Functional Requirements",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L23",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "functional requirements",
-      "id": "specs_wif_19_functional_requirements"
-    },
-    {
-      "label": "A. Live clock label",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L25",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "a. live clock label",
-      "id": "specs_wif_19_a_live_clock_label"
-    },
-    {
-      "label": "B. Country modal \u2014 structure",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L32",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "b. country modal \u2014 structure",
-      "id": "specs_wif_19_b_country_modal_structure"
-    },
-    {
-      "label": "C. Country modal \u2014 Tab 1 (real-time / today)",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L38",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "c. country modal \u2014 tab 1 (real-time / today)",
-      "id": "specs_wif_19_c_country_modal_tab_1_real_time_today"
-    },
-    {
-      "label": "D. Country modal \u2014 Tab 2 (historical)",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L45",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "d. country modal \u2014 tab 2 (historical)",
-      "id": "specs_wif_19_d_country_modal_tab_2_historical"
-    },
-    {
-      "label": "E. New real-time channel-count setting",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L50",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "e. new real-time channel-count setting",
-      "id": "specs_wif_19_e_new_real_time_channel_count_setting"
-    },
-    {
-      "label": "Non-Goals / Out of Scope",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L55",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "non-goals / out of scope",
-      "id": "specs_wif_19_non_goals_out_of_scope"
-    },
-    {
-      "label": "Possible Edge Cases",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L61",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "possible edge cases",
-      "id": "specs_wif_19_possible_edge_cases"
-    },
-    {
-      "label": "Acceptance Criteria",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L72",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "acceptance criteria",
-      "id": "specs_wif_19_acceptance_criteria"
-    },
-    {
-      "label": "Open Questions",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L80",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "open questions",
-      "id": "specs_wif_19_open_questions"
-    },
-    {
-      "label": "Dependencies",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L88",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "dependencies",
-      "id": "specs_wif_19_dependencies"
-    },
-    {
-      "label": "Success Metrics",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L92",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "success metrics",
-      "id": "specs_wif_19_success_metrics"
-    },
-    {
-      "label": "Testing Guidelines",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L95",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "testing guidelines",
-      "id": "specs_wif_19_testing_guidelines"
-    },
-    {
-      "label": "Clarifications",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L108",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "clarifications",
-      "id": "specs_wif_19_clarifications"
-    },
-    {
-      "label": "Analysis",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L167",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "analysis",
-      "id": "specs_wif_19_analysis"
-    },
-    {
-      "label": "Affected Files",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L169",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "affected files",
-      "id": "specs_wif_19_affected_files"
-    },
-    {
-      "label": "Risks & Concerns",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L207",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "risks & concerns",
-      "id": "specs_wif_19_risks_concerns"
-    },
-    {
-      "label": "Decisions",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L223",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "decisions",
-      "id": "specs_wif_19_decisions"
-    },
-    {
-      "label": "Implementation Plan",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L232",
-      "_origin": "ast",
-      "community": 17,
-      "norm_label": "implementation plan",
-      "id": "specs_wif_19_implementation_plan"
+      "norm_label": "usenow()",
+      "id": "hooks_usenow_usenow"
     },
     {
       "label": "Map.jsx",
@@ -881,7 +911,7 @@
       "source_file": "package.json",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "package.json",
       "id": "package"
     },
@@ -891,7 +921,7 @@
       "source_file": "package.json",
       "source_location": "L2",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "name",
       "id": "package_name"
     },
@@ -901,7 +931,7 @@
       "source_file": "package.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "dependencies",
       "id": "package_dependencies"
     },
@@ -911,7 +941,7 @@
       "source_file": "package.json",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "@linkurious/leaflet-heat",
       "id": "package_dependencies_linkurious_leaflet_heat"
     },
@@ -921,7 +951,7 @@
       "source_file": "package.json",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "dotenv-webpack",
       "id": "package_dependencies_dotenv_webpack"
     },
@@ -931,7 +961,7 @@
       "source_file": "package.json",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "leaflet",
       "id": "package_dependencies_leaflet"
     },
@@ -941,7 +971,7 @@
       "source_file": "package.json",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "leaflet-gesture-handling",
       "id": "package_dependencies_leaflet_gesture_handling"
     },
@@ -951,7 +981,7 @@
       "source_file": "package.json",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "prop-types",
       "id": "package_dependencies_prop_types"
     },
@@ -961,7 +991,7 @@
       "source_file": "package.json",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "react",
       "id": "package_dependencies_react"
     },
@@ -971,7 +1001,7 @@
       "source_file": "package.json",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "react-dom",
       "id": "package_dependencies_react_dom"
     },
@@ -981,7 +1011,7 @@
       "source_file": "package.json",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "react-leaflet",
       "id": "package_dependencies_react_leaflet"
     },
@@ -991,7 +1021,7 @@
       "source_file": "package.json",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "react-leaflet-cluster",
       "id": "package_dependencies_react_leaflet_cluster"
     },
@@ -1171,7 +1201,7 @@
       "source_file": "package.json",
       "source_location": "L32",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "scripts",
       "id": "package_scripts"
     },
@@ -1181,7 +1211,7 @@
       "source_file": "package.json",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "build",
       "id": "package_scripts_build"
     },
@@ -1191,7 +1221,7 @@
       "source_file": "package.json",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "dev",
       "id": "package_scripts_dev"
     },
@@ -1201,7 +1231,7 @@
       "source_file": "package.json",
       "source_location": "L35",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "serve",
       "id": "package_scripts_serve"
     },
@@ -1211,7 +1241,7 @@
       "source_file": "package.json",
       "source_location": "L36",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "generate-sitemap",
       "id": "package_scripts_generate_sitemap"
     },
@@ -1371,7 +1401,7 @@
       "source_file": "src/App/App.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "app.jsx",
       "id": "app_app"
     },
@@ -1381,7 +1411,7 @@
       "source_file": "src/App/App.jsx",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "getinitialcategory()",
       "id": "app_app_getinitialcategory"
     },
@@ -1401,7 +1431,7 @@
       "source_file": "src/Categories/Categories.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "categories.jsx",
       "id": "categories_categories"
     },
@@ -1411,7 +1441,7 @@
       "source_file": "src/Categories/Categories.jsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "category_retry_delays",
       "id": "categories_categories_category_retry_delays"
     },
@@ -1421,7 +1451,7 @@
       "source_file": "src/Categories/Categories.jsx",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "categories()",
       "id": "categories_categories_categories"
     },
@@ -1451,7 +1481,7 @@
       "source_file": "src/Common/CountryPanelContext.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "countrypanelcontext.jsx",
       "id": "common_countrypanelcontext"
     },
@@ -1461,7 +1491,7 @@
       "source_file": "src/Common/CountryPanelContext.jsx",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "countrypanelcontext",
       "id": "common_countrypanelcontext_countrypanelcontext"
     },
@@ -1511,7 +1541,7 @@
       "source_file": "src/Common/LanguageContext.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 11,
       "norm_label": "languagecontext.jsx",
       "id": "common_languagecontext"
     },
@@ -1521,7 +1551,7 @@
       "source_file": "src/Common/LanguageContext.jsx",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "languagecontext",
       "id": "common_languagecontext_languagecontext"
     },
@@ -1541,7 +1571,7 @@
       "source_file": "src/Common/MapPointContext.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "mappointcontext.jsx",
       "id": "common_mappointcontext"
     },
@@ -1551,7 +1581,7 @@
       "source_file": "src/Common/MapPointContext.jsx",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "mappointcontext",
       "id": "common_mappointcontext_mappointcontext"
     },
@@ -1561,7 +1591,7 @@
       "source_file": "src/Common/SidebarContext.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "sidebarcontext.jsx",
       "id": "common_sidebarcontext"
     },
@@ -1571,7 +1601,7 @@
       "source_file": "src/Common/SidebarContext.jsx",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "sidebarcontext",
       "id": "common_sidebarcontext_sidebarcontext"
     },
@@ -1651,7 +1681,7 @@
       "source_file": "src/CountryPanel/groupAppearanceDates.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 12,
+      "community": 1,
       "norm_label": "groupappearancedates.js",
       "id": "countrypanel_groupappearancedates"
     },
@@ -1661,7 +1691,7 @@
       "source_file": "src/CountryPanel/groupAppearanceDates.js",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 12,
+      "community": 1,
       "norm_label": "isconsecutive()",
       "id": "countrypanel_groupappearancedates_isconsecutive"
     },
@@ -1671,7 +1701,7 @@
       "source_file": "src/CountryPanel/groupAppearanceDates.js",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 12,
+      "community": 1,
       "norm_label": "formatdate()",
       "id": "countrypanel_groupappearancedates_formatdate"
     },
@@ -1681,7 +1711,7 @@
       "source_file": "src/CountryPanel/groupAppearanceDates.js",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 12,
+      "community": 1,
       "norm_label": "formatrange()",
       "id": "countrypanel_groupappearancedates_formatrange"
     },
@@ -1691,7 +1721,7 @@
       "source_file": "src/CountryPanel/groupAppearanceDates.js",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 12,
+      "community": 1,
       "norm_label": "groupappearancedates()",
       "id": "countrypanel_groupappearancedates_groupappearancedates"
     },
@@ -1701,7 +1731,7 @@
       "source_file": "src/CustomMarker/CustomMarker.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "custommarker.jsx",
       "id": "custommarker_custommarker"
     },
@@ -1711,7 +1741,7 @@
       "source_file": "src/CustomMarker/CustomMarker.jsx",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 4,
+      "community": 0,
       "norm_label": "custommarker()",
       "id": "custommarker_custommarker_custommarker"
     },
@@ -1721,7 +1751,7 @@
       "source_file": "src/Footer/Footer.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 6,
       "norm_label": "footer.jsx",
       "id": "footer_footer"
     },
@@ -1731,7 +1761,7 @@
       "source_file": "src/Footer/Footer.jsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "footer()",
       "id": "footer_footer_footer"
     },
@@ -1741,7 +1771,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "head.jsx",
       "id": "head_head"
     },
@@ -1751,7 +1781,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "json_ld",
       "id": "head_head_json_ld"
     },
@@ -1761,7 +1791,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "getcanonicalurl()",
       "id": "head_head_getcanonicalurl"
     },
@@ -1771,7 +1801,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L43",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "upserttag()",
       "id": "head_head_upserttag"
     },
@@ -1781,7 +1811,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "managed_selectors",
       "id": "head_head_managed_selectors"
     },
@@ -1791,7 +1821,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L71",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "removemanagedtags()",
       "id": "head_head_removemanagedtags"
     },
@@ -1801,7 +1831,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L78",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "addgoogleanalyticsscript()",
       "id": "head_head_addgoogleanalyticsscript"
     },
@@ -1811,7 +1841,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L98",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "head()",
       "id": "head_head_head"
     },
@@ -2161,7 +2191,7 @@
       "source_file": "src/config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "config.js",
       "id": "src_config"
     },
@@ -2171,7 +2201,7 @@
       "source_file": "src/config.js",
       "source_location": "L65",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "marker_icon_size",
       "id": "src_config_marker_icon_size"
     },
@@ -2181,7 +2211,7 @@
       "source_file": "src/config.js",
       "source_location": "L66",
       "_origin": "ast",
-      "community": 0,
+      "community": 6,
       "norm_label": "marker_icon_anchor",
       "id": "src_config_marker_icon_anchor"
     },
@@ -2191,7 +2221,7 @@
       "source_file": "src/hooks/useCountryHistory.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 1,
       "norm_label": "usecountryhistory.js",
       "id": "hooks_usecountryhistory"
     },
@@ -2201,29 +2231,9 @@
       "source_file": "src/hooks/useCountryHistory.js",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 4,
+      "community": 1,
       "norm_label": "usecountryhistory()",
       "id": "hooks_usecountryhistory_usecountryhistory"
-    },
-    {
-      "label": "useCountryRanking.js",
-      "file_type": "code",
-      "source_file": "src/hooks/useCountryRanking.js",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 4,
-      "norm_label": "usecountryranking.js",
-      "id": "hooks_usecountryranking"
-    },
-    {
-      "label": "useCountryRanking()",
-      "file_type": "code",
-      "source_file": "src/hooks/useCountryRanking.js",
-      "source_location": "L23",
-      "_origin": "ast",
-      "community": 4,
-      "norm_label": "usecountryranking()",
-      "id": "hooks_usecountryranking_usecountryranking"
     },
     {
       "label": "useCountryToday.js",
@@ -2231,7 +2241,7 @@
       "source_file": "src/hooks/useCountryToday.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 1,
       "norm_label": "usecountrytoday.js",
       "id": "hooks_usecountrytoday"
     },
@@ -2241,7 +2251,7 @@
       "source_file": "src/hooks/useCountryToday.js",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 4,
+      "community": 1,
       "norm_label": "usecountrytoday()",
       "id": "hooks_usecountrytoday_usecountrytoday"
     },
@@ -2251,7 +2261,7 @@
       "source_file": "src/hooks/useImageRetry.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 4,
+      "community": 0,
       "norm_label": "useimageretry.js",
       "id": "hooks_useimageretry"
     },
@@ -2261,7 +2271,7 @@
       "source_file": "src/hooks/useImageRetry.js",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 4,
+      "community": 0,
       "norm_label": "useimageretry()",
       "id": "hooks_useimageretry_useimageretry"
     },
@@ -2440,7 +2450,7 @@
       "file_type": "code",
       "source_file": "src/App/App.jsx",
       "source_location": "line 29",
-      "community": 31,
+      "community": 6,
       "norm_label": "app component",
       "id": "app_app_appcomponent"
     },
@@ -2449,7 +2459,7 @@
       "file_type": "code",
       "source_file": "src/Categories/Categories.jsx",
       "source_location": "line 13",
-      "community": 1,
+      "community": 6,
       "norm_label": "categories component",
       "id": "categories_categoriescomponent"
     },
@@ -2521,7 +2531,7 @@
       "file_type": "rationale",
       "source_file": "src/App/App.jsx",
       "source_location": "line 29",
-      "community": 0,
+      "community": 6,
       "norm_label": "real-time data update pattern",
       "id": "design_realtime_data_pattern"
     },
@@ -2548,7 +2558,7 @@
       "file_type": "rationale",
       "source_file": "src/Common/CountryPanelContext.jsx",
       "source_location": "line 11",
-      "community": 0,
+      "community": 6,
       "norm_label": "mutual panel exclusivity pattern",
       "id": "design_panel_exclusivity"
     },
@@ -2557,7 +2567,7 @@
       "file_type": "rationale",
       "source_file": "src/App/App.jsx",
       "source_location": "line 154",
-      "community": 31,
+      "community": 6,
       "norm_label": "url parameter state synchronization",
       "id": "design_url_state_sync"
     },
@@ -2575,7 +2585,7 @@
       "file_type": "code",
       "source_file": "src/Footer/Footer.jsx",
       "source_location": null,
-      "community": 1,
+      "community": 11,
       "norm_label": "footer",
       "id": "src_Footer_footer"
     },
@@ -2584,7 +2594,7 @@
       "file_type": "code",
       "source_file": "src/Head/Head.jsx",
       "source_location": null,
-      "community": 1,
+      "community": 11,
       "norm_label": "head",
       "id": "src_Head_head"
     },
@@ -2647,7 +2657,7 @@
       "file_type": "code",
       "source_file": "src/Map/MapSettings/MapSettings.jsx",
       "source_location": null,
-      "community": 1,
+      "community": 11,
       "norm_label": "mapsettings",
       "id": "src_MapSettings_mapsettings"
     },
@@ -2715,20 +2725,11 @@
       "id": "src_hooks_usecountryhistory"
     },
     {
-      "label": "useCountryRanking",
-      "file_type": "code",
-      "source_file": "src/hooks/useCountryRanking.js",
-      "source_location": null,
-      "community": 13,
-      "norm_label": "usecountryranking",
-      "id": "src_hooks_usecountryranking"
-    },
-    {
       "label": "useCountryToday",
       "file_type": "code",
       "source_file": "src/hooks/useCountryToday.js",
       "source_location": null,
-      "community": 13,
+      "community": 12,
       "norm_label": "usecountrytoday",
       "id": "src_hooks_usecountrytoday"
     },
@@ -2782,7 +2783,7 @@
       "file_type": "concept",
       "source_file": null,
       "source_location": null,
-      "community": 13,
+      "community": 12,
       "norm_label": "get /api/country/today",
       "id": "api_backend_today"
     },
@@ -2873,7 +2874,7 @@
       "label": "WIF-10: Country Panel With Trending Stats",
       "file_type": "document",
       "source_file": ".sdd/specs/WIF-10.md",
-      "community": 4,
+      "community": 6,
       "norm_label": "wif-10: country panel with trending stats",
       "id": "sdd_specs_wif10_country_panel"
     },
@@ -2897,7 +2898,7 @@
       "label": "WIF-13: GA Warning Message Misleading In Dev",
       "file_type": "document",
       "source_file": ".sdd/specs/WIF-13.md",
-      "community": 1,
+      "community": 4,
       "norm_label": "wif-13: ga warning message misleading in dev",
       "id": "sdd_specs_wif13_ga_warning"
     },
@@ -2905,7 +2906,7 @@
       "label": "WIF-14: SEO And Performance Optimization",
       "file_type": "document",
       "source_file": ".sdd/specs/WIF-14.md",
-      "community": 1,
+      "community": 4,
       "norm_label": "wif-14: seo and performance optimization",
       "id": "sdd_specs_wif14_seo_perf"
     },
@@ -2921,7 +2922,7 @@
       "label": "WIF-16: Map Pin Style Loss on Language Change",
       "file_type": "document",
       "source_file": ".sdd/specs/WIF-16.md",
-      "community": 0,
+      "community": 4,
       "norm_label": "wif-16: map pin style loss on language change",
       "id": "sdd_specs_wif16_pin_style"
     },
@@ -3600,556 +3601,6 @@
   ],
   "links": [
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App/App.jsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_app",
-      "target": "countrypanel_countrypanel"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "common_countrypanelcontext"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "common_countrypanelcontext_countrypanelcontext"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "common_icons"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "common_icons_iconcomment"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "common_icons_iconeye"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "common_icons_iconthumbup"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "common_languagecontext"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "common_languagecontext_languagecontext"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "common_translations"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L6",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "common_translations_translations"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "countrypanel_appearancestooltip"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "countrypanel_appearancestooltip_appearancestooltip"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "countrypanel_countrypanel_buildlastupdatedlabel"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L455",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "countrypanel_countrypanel_channelcard"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L372",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "countrypanel_countrypanel_channelidentity"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L40",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "countrypanel_countrypanel_countrypanel"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L29",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "countrypanel_countrypanel_daysatnumberone"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L259",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "countrypanel_countrypanel_historicaltab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L175",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "countrypanel_countrypanel_livetimestamp"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L34",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "countrypanel_countrypanel_localizedname"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L176",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "countrypanel_countrypanel_realtimetab"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L413",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "countrypanel_countrypanel_videocard"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "hooks_usecountryhistory"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L7",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "hooks_usecountryhistory_usecountryhistory"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "hooks_usecountrytoday"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "hooks_usecountrytoday_usecountrytoday"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "hooks_usenow",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L9",
-      "weight": 1.0,
-      "source": "countrypanel_countrypanel",
-      "target": "hooks_usenow_usenow",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L271",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel_historicaltab",
-      "target": "countrypanel_countrypanel_buildlastupdatedlabel"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L395",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel_channelidentity",
-      "target": "countrypanel_countrypanel_daysatnumberone"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App/App.jsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_app",
-      "target": "countrypanel_countrypanel_countrypanel"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source": "countrypanel_countrypanel_countrypanel",
-      "target": "channelpanel_channelpanel_channelpanel"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source": "countrypanel_countrypanel_countrypanel",
-      "target": "common_languagecontext_languagecontext"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source": "countrypanel_countrypanel_countrypanel",
-      "target": "hooks_usecountryhistory_usecountryhistory"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "src/Map/Map.jsx",
-      "source": "map_map_map",
-      "target": "countrypanel_countrypanel_countrypanel"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".sdd/specs/WIF-10.md",
-      "source": "sdd_specs_wif10_country_panel",
-      "target": "countrypanel_countrypanel_countrypanel"
-    },
-    {
-      "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": ".sdd/specs/WIF-11.md",
-      "source": "sdd_specs_wif11_tooltip",
-      "target": "countrypanel_countrypanel_countrypanel"
-    },
-    {
-      "relation": "references",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": ".sdd/specs/WIF-12.md",
-      "source": "sdd_specs_wif12_image_loading",
-      "target": "countrypanel_countrypanel_countrypanel"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L177",
-      "weight": 1.0,
-      "source": "countrypanel_countrypanel_livetimestamp",
-      "target": "hooks_usenow_usenow",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L180",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel_realtimetab",
-      "target": "hooks_usecountrytoday_usecountrytoday"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L264",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "countrypanel_countrypanel_historicaltab",
-      "target": "hooks_usecountryhistory_usecountryhistory"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App/App.jsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_app",
-      "target": "liveclock_liveclock"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "liveclock_liveclock",
-      "target": "common_languagecontext"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "liveclock_liveclock",
-      "target": "common_languagecontext_languagecontext"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "liveclock_liveclock",
-      "target": "common_translations"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "liveclock_liveclock",
-      "target": "common_translations_translations"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "liveclock_liveclock",
-      "target": "hooks_usenow",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "liveclock_liveclock",
-      "target": "hooks_usenow_usenow",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "liveclock_liveclock",
-      "target": "liveclock_liveclock_liveclock"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App/App.jsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_app",
-      "target": "liveclock_liveclock_liveclock"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "source": "liveclock_liveclock_liveclock",
-      "target": "hooks_usenow_usenow"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useNow.js",
-      "source_location": "L6",
-      "weight": 1.0,
-      "source": "hooks_usenow",
-      "target": "hooks_usenow_usenow",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": ".sdd/specs/WIF-19.md",
@@ -4368,6 +3819,654 @@
       "confidence_score": 1.0,
       "source": "specs_wif_19_analysis",
       "target": "specs_wif_19_risks_concerns"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App/App.jsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_app",
+      "target": "countrypanel_countrypanel"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "common_countrypanelcontext"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "common_countrypanelcontext_countrypanelcontext"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "common_icons"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "common_icons_iconcomment"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "common_icons_iconeye"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "common_icons_iconthumbup"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "common_languagecontext"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "common_languagecontext_languagecontext"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "common_translations"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "common_translations_translations"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "countrypanel_appearancestooltip"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "countrypanel_appearancestooltip_appearancestooltip"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "countrypanel_countrypanel_buildlastupdatedlabel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L455",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "countrypanel_countrypanel_channelcard"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L372",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "countrypanel_countrypanel_channelidentity"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L40",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "countrypanel_countrypanel_countrypanel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "countrypanel_countrypanel_daysatnumberone"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L259",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "countrypanel_countrypanel_historicaltab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "countrypanel_countrypanel_localizedname"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L176",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "countrypanel_countrypanel_realtimetab"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L413",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "countrypanel_countrypanel_videocard"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "hooks_usecountryhistory"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L7",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "hooks_usecountryhistory_usecountryhistory"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "hooks_usecountrytoday"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "hooks_usecountrytoday_usecountrytoday"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "hooks_usenow"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "hooks_usenow_usenow"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "livetimestamp_livetimestamp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "livetimestamp_livetimestamp_livetimestamp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L271",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel_historicaltab",
+      "target": "countrypanel_countrypanel_buildlastupdatedlabel"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L395",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel_channelidentity",
+      "target": "countrypanel_countrypanel_daysatnumberone"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App/App.jsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_app",
+      "target": "countrypanel_countrypanel_countrypanel"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source": "countrypanel_countrypanel_countrypanel",
+      "target": "channelpanel_channelpanel_channelpanel"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source": "countrypanel_countrypanel_countrypanel",
+      "target": "common_languagecontext_languagecontext"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source": "countrypanel_countrypanel_countrypanel",
+      "target": "hooks_usecountryhistory_usecountryhistory"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "src/Map/Map.jsx",
+      "source": "map_map_map",
+      "target": "countrypanel_countrypanel_countrypanel"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".sdd/specs/WIF-10.md",
+      "source": "sdd_specs_wif10_country_panel",
+      "target": "countrypanel_countrypanel_countrypanel"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": ".sdd/specs/WIF-11.md",
+      "source": "sdd_specs_wif11_tooltip",
+      "target": "countrypanel_countrypanel_countrypanel"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": ".sdd/specs/WIF-12.md",
+      "source": "sdd_specs_wif12_image_loading",
+      "target": "countrypanel_countrypanel_countrypanel"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L180",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel_realtimetab",
+      "target": "hooks_usecountrytoday_usecountrytoday"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L264",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "countrypanel_countrypanel_historicaltab",
+      "target": "hooks_usecountryhistory_usecountryhistory"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveTimestamp/LiveTimestamp.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "livetimestamp_livetimestamp",
+      "target": "common_languagecontext_languagecontext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveTimestamp/LiveTimestamp.jsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "livetimestamp_livetimestamp",
+      "target": "livetimestamp_livetimestamp_livetimestamp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useCountryHistory.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usecountryhistory",
+      "target": "hooks_usecountryranking"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useCountryRanking.js",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usecountryranking",
+      "target": "hooks_usecountryranking_usecountryranking"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useCountryToday.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usecountrytoday",
+      "target": "hooks_usecountryranking"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useCountryHistory.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usecountryhistory",
+      "target": "hooks_usecountryranking_usecountryranking"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/hooks/useCountryHistory.js",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "hooks_usecountryhistory_usecountryhistory",
+      "target": "hooks_usecountryranking_usecountryranking"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useCountryToday.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usecountrytoday",
+      "target": "hooks_usecountryranking_usecountryranking"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/hooks/useCountryToday.js",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "hooks_usecountrytoday_usecountrytoday",
+      "target": "hooks_usecountryranking_usecountryranking"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App/App.jsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_app",
+      "target": "liveclock_liveclock"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "liveclock_liveclock",
+      "target": "common_languagecontext"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "liveclock_liveclock",
+      "target": "common_languagecontext_languagecontext"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "liveclock_liveclock",
+      "target": "common_translations"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "liveclock_liveclock",
+      "target": "common_translations_translations"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "liveclock_liveclock",
+      "target": "hooks_usenow"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "liveclock_liveclock",
+      "target": "hooks_usenow_usenow"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "liveclock_liveclock",
+      "target": "liveclock_liveclock_liveclock"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App/App.jsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_app",
+      "target": "liveclock_liveclock_liveclock"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "liveclock_liveclock_liveclock",
+      "target": "hooks_usenow_usenow"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useNow.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "hooks_usenow",
+      "target": "hooks_usenow_usenow"
     },
     {
       "relation": "imports_from",
@@ -7782,88 +7881,12 @@
       "target": "hooks_usecountryhistory_usecountryhistory"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useCountryHistory.js",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "hooks_usecountryhistory",
-      "target": "hooks_usecountryranking"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useCountryHistory.js",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "hooks_usecountryhistory",
-      "target": "hooks_usecountryranking_usecountryranking"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/hooks/useCountryHistory.js",
-      "source_location": "L25",
-      "weight": 1.0,
-      "source": "hooks_usecountryhistory_usecountryhistory",
-      "target": "hooks_usecountryranking_usecountryranking"
-    },
-    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".sdd/specs/WIF-10.md",
       "source": "sdd_specs_wif10_country_panel",
       "target": "hooks_usecountryhistory_usecountryhistory"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useCountryRanking.js",
-      "source_location": "L23",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "hooks_usecountryranking",
-      "target": "hooks_usecountryranking_usecountryranking"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useCountryToday.js",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "hooks_usecountrytoday",
-      "target": "hooks_usecountryranking"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/hooks/useCountryToday.js",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "hooks_usecountrytoday",
-      "target": "hooks_usecountryranking_usecountryranking"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/hooks/useCountryToday.js",
-      "source_location": "L22",
-      "weight": 1.0,
-      "source": "hooks_usecountrytoday_usecountrytoday",
-      "target": "hooks_usecountryranking_usecountryranking"
     },
     {
       "relation": "contains",
@@ -8230,24 +8253,6 @@
       "source_location": "line 18",
       "source": "src_hooks_usecountryhistory",
       "target": "api_backend_history"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/hooks/useCountryHistory.js",
-      "source_location": "line 25",
-      "source": "src_hooks_usecountryhistory",
-      "target": "src_hooks_usecountryranking"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/hooks/useCountryToday.js",
-      "source_location": "line 22",
-      "source": "src_hooks_usecountrytoday",
-      "target": "src_hooks_usecountryranking"
     },
     {
       "relation": "references",
@@ -9116,5 +9121,5 @@
       "source_file": "screenshot.png"
     }
   ],
-  "built_at_commit": "975e2716bf11295c444415123aa3e95301710628"
+  "built_at_commit": "ed1e21801b6c781b21fc66bb4724487ab2fc08bd"
 }

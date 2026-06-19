@@ -216,280 +216,50 @@
   },
   "nodes": [
     {
-      "label": "WIF-19.md",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "specs_wif_19",
-      "community": 17,
-      "norm_label": "wif-19.md"
-    },
-    {
-      "label": "Spec: Realtime Country Modal And Live Clock",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L10",
-      "_origin": "ast",
-      "id": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "community": 17,
-      "norm_label": "spec: realtime country modal and live clock"
-    },
-    {
-      "label": "Context / Background",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L12",
-      "_origin": "ast",
-      "id": "specs_wif_19_context_background",
-      "community": 17,
-      "norm_label": "context / background"
-    },
-    {
-      "label": "Summary",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L20",
-      "_origin": "ast",
-      "id": "specs_wif_19_summary",
-      "community": 17,
-      "norm_label": "summary"
-    },
-    {
-      "label": "Functional Requirements",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L23",
-      "_origin": "ast",
-      "id": "specs_wif_19_functional_requirements",
-      "community": 17,
-      "norm_label": "functional requirements"
-    },
-    {
-      "label": "A. Live clock label",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L25",
-      "_origin": "ast",
-      "id": "specs_wif_19_a_live_clock_label",
-      "community": 17,
-      "norm_label": "a. live clock label"
-    },
-    {
-      "label": "B. Country modal \u2014 structure",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L32",
-      "_origin": "ast",
-      "id": "specs_wif_19_b_country_modal_structure",
-      "community": 17,
-      "norm_label": "b. country modal \u2014 structure"
-    },
-    {
-      "label": "C. Country modal \u2014 Tab 1 (real-time / today)",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L38",
-      "_origin": "ast",
-      "id": "specs_wif_19_c_country_modal_tab_1_real_time_today",
-      "community": 17,
-      "norm_label": "c. country modal \u2014 tab 1 (real-time / today)"
-    },
-    {
-      "label": "D. Country modal \u2014 Tab 2 (historical)",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L45",
-      "_origin": "ast",
-      "id": "specs_wif_19_d_country_modal_tab_2_historical",
-      "community": 17,
-      "norm_label": "d. country modal \u2014 tab 2 (historical)"
-    },
-    {
-      "label": "E. New real-time channel-count setting",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L50",
-      "_origin": "ast",
-      "id": "specs_wif_19_e_new_real_time_channel_count_setting",
-      "community": 17,
-      "norm_label": "e. new real-time channel-count setting"
-    },
-    {
-      "label": "Non-Goals / Out of Scope",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L55",
-      "_origin": "ast",
-      "id": "specs_wif_19_non_goals_out_of_scope",
-      "community": 17,
-      "norm_label": "non-goals / out of scope"
-    },
-    {
-      "label": "Possible Edge Cases",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L61",
-      "_origin": "ast",
-      "id": "specs_wif_19_possible_edge_cases",
-      "community": 17,
-      "norm_label": "possible edge cases"
-    },
-    {
-      "label": "Acceptance Criteria",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L72",
-      "_origin": "ast",
-      "id": "specs_wif_19_acceptance_criteria",
-      "community": 17,
-      "norm_label": "acceptance criteria"
-    },
-    {
-      "label": "Open Questions",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L80",
-      "_origin": "ast",
-      "id": "specs_wif_19_open_questions",
-      "community": 17,
-      "norm_label": "open questions"
-    },
-    {
-      "label": "Dependencies",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L88",
-      "_origin": "ast",
-      "id": "specs_wif_19_dependencies",
-      "community": 17,
-      "norm_label": "dependencies"
-    },
-    {
-      "label": "Success Metrics",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L92",
-      "_origin": "ast",
-      "id": "specs_wif_19_success_metrics",
-      "community": 17,
-      "norm_label": "success metrics"
-    },
-    {
-      "label": "Testing Guidelines",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L95",
-      "_origin": "ast",
-      "id": "specs_wif_19_testing_guidelines",
-      "community": 17,
-      "norm_label": "testing guidelines"
-    },
-    {
-      "label": "Clarifications",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L108",
-      "_origin": "ast",
-      "id": "specs_wif_19_clarifications",
-      "community": 17,
-      "norm_label": "clarifications"
-    },
-    {
-      "label": "Analysis",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L167",
-      "_origin": "ast",
-      "id": "specs_wif_19_analysis",
-      "community": 17,
-      "norm_label": "analysis"
-    },
-    {
-      "label": "Affected Files",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L169",
-      "_origin": "ast",
-      "id": "specs_wif_19_affected_files",
-      "community": 17,
-      "norm_label": "affected files"
-    },
-    {
-      "label": "Risks & Concerns",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L207",
-      "_origin": "ast",
-      "id": "specs_wif_19_risks_concerns",
-      "community": 17,
-      "norm_label": "risks & concerns"
-    },
-    {
-      "label": "Decisions",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L223",
-      "_origin": "ast",
-      "id": "specs_wif_19_decisions",
-      "community": 17,
-      "norm_label": "decisions"
-    },
-    {
-      "label": "Implementation Plan",
-      "file_type": "document",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L232",
-      "_origin": "ast",
-      "id": "specs_wif_19_implementation_plan",
-      "community": 17,
-      "norm_label": "implementation plan"
-    },
-    {
       "label": "CountryPanel.jsx",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
       "source_location": "L1",
       "_origin": "ast",
       "id": "countrypanel_countrypanel",
-      "community": 4,
+      "community": 1,
       "norm_label": "countrypanel.jsx"
     },
     {
       "label": "buildLastUpdatedLabel()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L15",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_buildlastupdatedlabel",
-      "community": 4,
+      "community": 1,
       "norm_label": "buildlastupdatedlabel()"
     },
     {
       "label": "daysAtNumberOne()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L29",
+      "source_location": "L30",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_daysatnumberone",
-      "community": 4,
+      "community": 1,
       "norm_label": "daysatnumberone()"
     },
     {
       "label": "localizedName()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L34",
+      "source_location": "L35",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_localizedname",
-      "community": 4,
+      "community": 1,
       "norm_label": "localizedname()"
     },
     {
       "label": "CountryPanel()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L40",
+      "source_location": "L41",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_countrypanel",
       "community": 4,
@@ -499,17 +269,17 @@
       "label": "LiveTimestamp()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L175",
+      "source_location": "L176",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_livetimestamp",
-      "community": 4,
+      "community": 1,
       "norm_label": "livetimestamp()"
     },
     {
       "label": "RealtimeTab()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L198",
+      "source_location": "L195",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_realtimetab",
       "community": 4,
@@ -519,41 +289,311 @@
       "label": "HistoricalTab()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L270",
+      "source_location": "L267",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_historicaltab",
-      "community": 4,
+      "community": 1,
       "norm_label": "historicaltab()"
     },
     {
       "label": "ChannelIdentity()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L383",
+      "source_location": "L380",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_channelidentity",
-      "community": 4,
+      "community": 1,
       "norm_label": "channelidentity()"
     },
     {
       "label": "VideoCard()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L424",
+      "source_location": "L421",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_videocard",
-      "community": 4,
+      "community": 1,
       "norm_label": "videocard()"
     },
     {
       "label": "ChannelCard()",
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
-      "source_location": "L466",
+      "source_location": "L463",
       "_origin": "ast",
       "id": "countrypanel_countrypanel_channelcard",
-      "community": 4,
+      "community": 1,
       "norm_label": "channelcard()"
+    },
+    {
+      "label": "LiveClock.jsx",
+      "file_type": "code",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "liveclock_liveclock",
+      "community": 1,
+      "norm_label": "liveclock.jsx"
+    },
+    {
+      "label": "LiveClock()",
+      "file_type": "code",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L11",
+      "_origin": "ast",
+      "id": "liveclock_liveclock_liveclock",
+      "community": 1,
+      "norm_label": "liveclock()"
+    },
+    {
+      "label": "useNow.js",
+      "file_type": "code",
+      "source_file": "src/hooks/useNow.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "hooks_usenow",
+      "community": 1,
+      "norm_label": "usenow.js"
+    },
+    {
+      "label": "useNow()",
+      "file_type": "code",
+      "source_file": "src/hooks/useNow.js",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "hooks_usenow_usenow",
+      "community": 1,
+      "norm_label": "usenow()"
+    },
+    {
+      "label": "WIF-19.md",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "wif-19.md",
+      "id": "specs_wif_19"
+    },
+    {
+      "label": "Spec: Realtime Country Modal And Live Clock",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L10",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "spec: realtime country modal and live clock",
+      "id": "specs_wif_19_spec_realtime_country_modal_and_live_clock"
+    },
+    {
+      "label": "Context / Background",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L12",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "context / background",
+      "id": "specs_wif_19_context_background"
+    },
+    {
+      "label": "Summary",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L20",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "summary",
+      "id": "specs_wif_19_summary"
+    },
+    {
+      "label": "Functional Requirements",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L23",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "functional requirements",
+      "id": "specs_wif_19_functional_requirements"
+    },
+    {
+      "label": "A. Live clock label",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L25",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "a. live clock label",
+      "id": "specs_wif_19_a_live_clock_label"
+    },
+    {
+      "label": "B. Country modal \u2014 structure",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L32",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "b. country modal \u2014 structure",
+      "id": "specs_wif_19_b_country_modal_structure"
+    },
+    {
+      "label": "C. Country modal \u2014 Tab 1 (real-time / today)",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L38",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "c. country modal \u2014 tab 1 (real-time / today)",
+      "id": "specs_wif_19_c_country_modal_tab_1_real_time_today"
+    },
+    {
+      "label": "D. Country modal \u2014 Tab 2 (historical)",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L45",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "d. country modal \u2014 tab 2 (historical)",
+      "id": "specs_wif_19_d_country_modal_tab_2_historical"
+    },
+    {
+      "label": "E. New real-time channel-count setting",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L50",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "e. new real-time channel-count setting",
+      "id": "specs_wif_19_e_new_real_time_channel_count_setting"
+    },
+    {
+      "label": "Non-Goals / Out of Scope",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L55",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "non-goals / out of scope",
+      "id": "specs_wif_19_non_goals_out_of_scope"
+    },
+    {
+      "label": "Possible Edge Cases",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L61",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "possible edge cases",
+      "id": "specs_wif_19_possible_edge_cases"
+    },
+    {
+      "label": "Acceptance Criteria",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L72",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "acceptance criteria",
+      "id": "specs_wif_19_acceptance_criteria"
+    },
+    {
+      "label": "Open Questions",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L80",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "open questions",
+      "id": "specs_wif_19_open_questions"
+    },
+    {
+      "label": "Dependencies",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L88",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "dependencies",
+      "id": "specs_wif_19_dependencies"
+    },
+    {
+      "label": "Success Metrics",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L92",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "success metrics",
+      "id": "specs_wif_19_success_metrics"
+    },
+    {
+      "label": "Testing Guidelines",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L95",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "testing guidelines",
+      "id": "specs_wif_19_testing_guidelines"
+    },
+    {
+      "label": "Clarifications",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L108",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "clarifications",
+      "id": "specs_wif_19_clarifications"
+    },
+    {
+      "label": "Analysis",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L167",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "analysis",
+      "id": "specs_wif_19_analysis"
+    },
+    {
+      "label": "Affected Files",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L169",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "affected files",
+      "id": "specs_wif_19_affected_files"
+    },
+    {
+      "label": "Risks & Concerns",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L207",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "risks & concerns",
+      "id": "specs_wif_19_risks_concerns"
+    },
+    {
+      "label": "Decisions",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L223",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "decisions",
+      "id": "specs_wif_19_decisions"
+    },
+    {
+      "label": "Implementation Plan",
+      "file_type": "document",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L232",
+      "_origin": "ast",
+      "community": 17,
+      "norm_label": "implementation plan",
+      "id": "specs_wif_19_implementation_plan"
     },
     {
       "label": "Map.jsx",
@@ -561,9 +601,9 @@
       "source_file": "src/Map/Map.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "map_map",
       "community": 0,
-      "norm_label": "map.jsx"
+      "norm_label": "map.jsx",
+      "id": "map_map"
     },
     {
       "label": "DEFAULT_CENTER",
@@ -571,9 +611,9 @@
       "source_file": "src/Map/Map.jsx",
       "source_location": "L25",
       "_origin": "ast",
-      "id": "map_map_default_center",
       "community": 0,
-      "norm_label": "default_center"
+      "norm_label": "default_center",
+      "id": "map_map_default_center"
     },
     {
       "label": "saveMapView()",
@@ -581,9 +621,9 @@
       "source_file": "src/Map/Map.jsx",
       "source_location": "L28",
       "_origin": "ast",
-      "id": "map_map_savemapview",
       "community": 0,
-      "norm_label": "savemapview()"
+      "norm_label": "savemapview()",
+      "id": "map_map_savemapview"
     },
     {
       "label": "loadMapView()",
@@ -591,9 +631,9 @@
       "source_file": "src/Map/Map.jsx",
       "source_location": "L36",
       "_origin": "ast",
-      "id": "map_map_loadmapview",
       "community": 0,
-      "norm_label": "loadmapview()"
+      "norm_label": "loadmapview()",
+      "id": "map_map_loadmapview"
     },
     {
       "label": "MapViewSaver()",
@@ -601,9 +641,9 @@
       "source_file": "src/Map/Map.jsx",
       "source_location": "L55",
       "_origin": "ast",
-      "id": "map_map_mapviewsaver",
       "community": 0,
-      "norm_label": "mapviewsaver()"
+      "norm_label": "mapviewsaver()",
+      "id": "map_map_mapviewsaver"
     },
     {
       "label": "ZoomDebugUpdater()",
@@ -611,9 +651,9 @@
       "source_file": "src/Map/Map.jsx",
       "source_location": "L103",
       "_origin": "ast",
-      "id": "map_map_zoomdebugupdater",
       "community": 0,
-      "norm_label": "zoomdebugupdater()"
+      "norm_label": "zoomdebugupdater()",
+      "id": "map_map_zoomdebugupdater"
     },
     {
       "label": "ClusterGroupSetup()",
@@ -621,9 +661,9 @@
       "source_file": "src/Map/Map.jsx",
       "source_location": "L118",
       "_origin": "ast",
-      "id": "map_map_clustergroupsetup",
       "community": 0,
-      "norm_label": "clustergroupsetup()"
+      "norm_label": "clustergroupsetup()",
+      "id": "map_map_clustergroupsetup"
     },
     {
       "label": "MapFlyToSetup()",
@@ -631,9 +671,9 @@
       "source_file": "src/Map/Map.jsx",
       "source_location": "L146",
       "_origin": "ast",
-      "id": "map_map_mapflytosetup",
       "community": 0,
-      "norm_label": "mapflytosetup()"
+      "norm_label": "mapflytosetup()",
+      "id": "map_map_mapflytosetup"
     },
     {
       "label": "MarkerPaneSetup()",
@@ -641,9 +681,9 @@
       "source_file": "src/Map/Map.jsx",
       "source_location": "L160",
       "_origin": "ast",
-      "id": "map_map_markerpanesetup",
       "community": 0,
-      "norm_label": "markerpanesetup()"
+      "norm_label": "markerpanesetup()",
+      "id": "map_map_markerpanesetup"
     },
     {
       "label": "Map()",
@@ -651,9 +691,9 @@
       "source_file": "src/Map/Map.jsx",
       "source_location": "L171",
       "_origin": "ast",
-      "id": "map_map_map",
       "community": 0,
-      "norm_label": "map()"
+      "norm_label": "map()",
+      "id": "map_map_map"
     },
     {
       "label": "copilot-instructions.md",
@@ -961,7 +1001,7 @@
       "source_file": "package.json",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "devdependencies",
       "id": "package_devdependencies"
     },
@@ -971,7 +1011,7 @@
       "source_file": "package.json",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "@babel/core",
       "id": "package_devdependencies_babel_core"
     },
@@ -981,7 +1021,7 @@
       "source_file": "package.json",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "@babel/preset-env",
       "id": "package_devdependencies_babel_preset_env"
     },
@@ -991,7 +1031,7 @@
       "source_file": "package.json",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "@babel/preset-react",
       "id": "package_devdependencies_babel_preset_react"
     },
@@ -1001,7 +1041,7 @@
       "source_file": "package.json",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "babel-loader",
       "id": "package_devdependencies_babel_loader"
     },
@@ -1011,7 +1051,7 @@
       "source_file": "package.json",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "compression-webpack-plugin",
       "id": "package_devdependencies_compression_webpack_plugin"
     },
@@ -1021,7 +1061,7 @@
       "source_file": "package.json",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "copy-webpack-plugin",
       "id": "package_devdependencies_copy_webpack_plugin"
     },
@@ -1031,7 +1071,7 @@
       "source_file": "package.json",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "css-loader",
       "id": "package_devdependencies_css_loader"
     },
@@ -1041,7 +1081,7 @@
       "source_file": "package.json",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "file-loader",
       "id": "package_devdependencies_file_loader"
     },
@@ -1051,7 +1091,7 @@
       "source_file": "package.json",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "html-webpack-plugin",
       "id": "package_devdependencies_html_webpack_plugin"
     },
@@ -1061,7 +1101,7 @@
       "source_file": "package.json",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "sass",
       "id": "package_devdependencies_sass"
     },
@@ -1071,7 +1111,7 @@
       "source_file": "package.json",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "sass-loader",
       "id": "package_devdependencies_sass_loader"
     },
@@ -1081,7 +1121,7 @@
       "source_file": "package.json",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "style-loader",
       "id": "package_devdependencies_style_loader"
     },
@@ -1091,7 +1131,7 @@
       "source_file": "package.json",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "terser-webpack-plugin",
       "id": "package_devdependencies_terser_webpack_plugin"
     },
@@ -1101,7 +1141,7 @@
       "source_file": "package.json",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "webpack",
       "id": "package_devdependencies_webpack"
     },
@@ -1111,7 +1151,7 @@
       "source_file": "package.json",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "webpack-cli",
       "id": "package_devdependencies_webpack_cli"
     },
@@ -1121,7 +1161,7 @@
       "source_file": "package.json",
       "source_location": "L30",
       "_origin": "ast",
-      "community": 6,
+      "community": 2,
       "norm_label": "webpack-dev-server",
       "id": "package_devdependencies_webpack_dev_server"
     },
@@ -1331,7 +1371,7 @@
       "source_file": "src/App/App.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 0,
       "norm_label": "app.jsx",
       "id": "app_app"
     },
@@ -1341,7 +1381,7 @@
       "source_file": "src/App/App.jsx",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 1,
+      "community": 0,
       "norm_label": "getinitialcategory()",
       "id": "app_app_getinitialcategory"
     },
@@ -1351,7 +1391,7 @@
       "source_file": "src/App/App.jsx",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "app()",
       "id": "app_app_app"
     },
@@ -1361,7 +1401,7 @@
       "source_file": "src/Categories/Categories.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 0,
       "norm_label": "categories.jsx",
       "id": "categories_categories"
     },
@@ -1371,7 +1411,7 @@
       "source_file": "src/Categories/Categories.jsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 1,
+      "community": 0,
       "norm_label": "category_retry_delays",
       "id": "categories_categories_category_retry_delays"
     },
@@ -1381,7 +1421,7 @@
       "source_file": "src/Categories/Categories.jsx",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 1,
+      "community": 0,
       "norm_label": "categories()",
       "id": "categories_categories_categories"
     },
@@ -1391,7 +1431,7 @@
       "source_file": "src/ChannelPanel/ChannelPanel.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "channelpanel.jsx",
       "id": "channelpanel_channelpanel"
     },
@@ -1401,7 +1441,7 @@
       "source_file": "src/ChannelPanel/ChannelPanel.jsx",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "channelpanel()",
       "id": "channelpanel_channelpanel_channelpanel"
     },
@@ -1431,7 +1471,7 @@
       "source_file": "src/Common/Icons.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "icons.jsx",
       "id": "common_icons"
     },
@@ -1441,7 +1481,7 @@
       "source_file": "src/Common/Icons.jsx",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "iconeye()",
       "id": "common_icons_iconeye"
     },
@@ -1451,7 +1491,7 @@
       "source_file": "src/Common/Icons.jsx",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "iconthumbup()",
       "id": "common_icons_iconthumbup"
     },
@@ -1461,7 +1501,7 @@
       "source_file": "src/Common/Icons.jsx",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "iconcomment()",
       "id": "common_icons_iconcomment"
     },
@@ -1471,7 +1511,7 @@
       "source_file": "src/Common/LanguageContext.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 11,
+      "community": 1,
       "norm_label": "languagecontext.jsx",
       "id": "common_languagecontext"
     },
@@ -1501,7 +1541,7 @@
       "source_file": "src/Common/MapPointContext.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 0,
       "norm_label": "mappointcontext.jsx",
       "id": "common_mappointcontext"
     },
@@ -1511,7 +1551,7 @@
       "source_file": "src/Common/MapPointContext.jsx",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 2,
+      "community": 0,
       "norm_label": "mappointcontext",
       "id": "common_mappointcontext_mappointcontext"
     },
@@ -1521,7 +1561,7 @@
       "source_file": "src/Common/SidebarContext.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 0,
       "norm_label": "sidebarcontext.jsx",
       "id": "common_sidebarcontext"
     },
@@ -1531,7 +1571,7 @@
       "source_file": "src/Common/SidebarContext.jsx",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 1,
+      "community": 0,
       "norm_label": "sidebarcontext",
       "id": "common_sidebarcontext_sidebarcontext"
     },
@@ -1591,7 +1631,7 @@
       "source_file": "src/CountryPanel/AppearancesTooltip.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 12,
+      "community": 1,
       "norm_label": "appearancestooltip.jsx",
       "id": "countrypanel_appearancestooltip"
     },
@@ -1601,7 +1641,7 @@
       "source_file": "src/CountryPanel/AppearancesTooltip.jsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 12,
+      "community": 1,
       "norm_label": "appearancestooltip()",
       "id": "countrypanel_appearancestooltip_appearancestooltip"
     },
@@ -1661,7 +1701,7 @@
       "source_file": "src/CustomMarker/CustomMarker.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 0,
       "norm_label": "custommarker.jsx",
       "id": "custommarker_custommarker"
     },
@@ -1671,7 +1711,7 @@
       "source_file": "src/CustomMarker/CustomMarker.jsx",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 0,
+      "community": 4,
       "norm_label": "custommarker()",
       "id": "custommarker_custommarker_custommarker"
     },
@@ -1691,7 +1731,7 @@
       "source_file": "src/Footer/Footer.jsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 1,
+      "community": 0,
       "norm_label": "footer()",
       "id": "footer_footer_footer"
     },
@@ -1834,26 +1874,6 @@
       "community": 11,
       "norm_label": "sunicon()",
       "id": "header_sunicon_sunicon"
-    },
-    {
-      "label": "LiveClock.jsx",
-      "file_type": "code",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 1,
-      "norm_label": "liveclock.jsx",
-      "id": "liveclock_liveclock"
-    },
-    {
-      "label": "LiveClock()",
-      "file_type": "code",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L10",
-      "_origin": "ast",
-      "community": 1,
-      "norm_label": "liveclock()",
-      "id": "liveclock_liveclock_liveclock"
     },
     {
       "label": "Countries.jsx",
@@ -2001,7 +2021,7 @@
       "source_file": "src/Map/Points/Points.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 33,
       "norm_label": "points.js",
       "id": "points_points"
     },
@@ -2011,7 +2031,7 @@
       "source_file": "src/Map/Points/Points.js",
       "source_location": "L5",
       "_origin": "ast",
-      "community": 0,
+      "community": 33,
       "norm_label": "color_palette",
       "id": "points_points_color_palette"
     },
@@ -2021,7 +2041,7 @@
       "source_file": "src/Map/Points/Points.js",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 0,
+      "community": 33,
       "norm_label": "nametocolorindex()",
       "id": "points_points_nametocolorindex"
     },
@@ -2031,7 +2051,7 @@
       "source_file": "src/Map/Points/Points.js",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 0,
+      "community": 33,
       "norm_label": "hextorgba()",
       "id": "points_points_hextorgba"
     },
@@ -2041,7 +2061,7 @@
       "source_file": "src/Map/Points/Points.js",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 0,
+      "community": 33,
       "norm_label": "calculatepointattributes()",
       "id": "points_points_calculatepointattributes"
     },
@@ -2051,7 +2071,7 @@
       "source_file": "src/Map/Points/Points.js",
       "source_location": "L86",
       "_origin": "ast",
-      "community": 0,
+      "community": 33,
       "norm_label": "changepointappearance()",
       "id": "points_points_changepointappearance"
     },
@@ -2061,7 +2081,7 @@
       "source_file": "src/Map/Points/Points.js",
       "source_location": "L126",
       "_origin": "ast",
-      "community": 0,
+      "community": 33,
       "norm_label": "resize()",
       "id": "points_points_resize"
     },
@@ -2071,7 +2091,7 @@
       "source_file": "src/Map/Points/Points.js",
       "source_location": "L141",
       "_origin": "ast",
-      "community": 0,
+      "community": 33,
       "norm_label": "processpoint()",
       "id": "points_points_processpoint"
     },
@@ -2121,7 +2141,7 @@
       "source_file": "src/Player/Player.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "player.jsx",
       "id": "player_player"
     },
@@ -2131,7 +2151,7 @@
       "source_file": "src/Player/Player.jsx",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 2,
+      "community": 1,
       "norm_label": "player",
       "id": "player_player_player"
     },
@@ -2141,7 +2161,7 @@
       "source_file": "src/config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 0,
       "norm_label": "config.js",
       "id": "src_config"
     },
@@ -2151,7 +2171,7 @@
       "source_file": "src/config.js",
       "source_location": "L65",
       "_origin": "ast",
-      "community": 2,
+      "community": 0,
       "norm_label": "marker_icon_size",
       "id": "src_config_marker_icon_size"
     },
@@ -2161,7 +2181,7 @@
       "source_file": "src/config.js",
       "source_location": "L66",
       "_origin": "ast",
-      "community": 2,
+      "community": 0,
       "norm_label": "marker_icon_anchor",
       "id": "src_config_marker_icon_anchor"
     },
@@ -2231,7 +2251,7 @@
       "source_file": "src/hooks/useImageRetry.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 4,
       "norm_label": "useimageretry.js",
       "id": "hooks_useimageretry"
     },
@@ -2241,7 +2261,7 @@
       "source_file": "src/hooks/useImageRetry.js",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 0,
+      "community": 4,
       "norm_label": "useimageretry()",
       "id": "hooks_useimageretry_useimageretry"
     },
@@ -2420,7 +2440,7 @@
       "file_type": "code",
       "source_file": "src/App/App.jsx",
       "source_location": "line 29",
-      "community": 2,
+      "community": 31,
       "norm_label": "app component",
       "id": "app_app_appcomponent"
     },
@@ -2429,7 +2449,7 @@
       "file_type": "code",
       "source_file": "src/Categories/Categories.jsx",
       "source_location": "line 13",
-      "community": 2,
+      "community": 1,
       "norm_label": "categories component",
       "id": "categories_categoriescomponent"
     },
@@ -2438,7 +2458,7 @@
       "file_type": "code",
       "source_file": "src/ChannelPanel/ChannelPanel.jsx",
       "source_location": "line 12",
-      "community": 2,
+      "community": 1,
       "norm_label": "channelpanel component",
       "id": "channelpanel_channelpanelcomponent"
     },
@@ -2501,7 +2521,7 @@
       "file_type": "rationale",
       "source_file": "src/App/App.jsx",
       "source_location": "line 29",
-      "community": 2,
+      "community": 0,
       "norm_label": "real-time data update pattern",
       "id": "design_realtime_data_pattern"
     },
@@ -2537,7 +2557,7 @@
       "file_type": "rationale",
       "source_file": "src/App/App.jsx",
       "source_location": "line 154",
-      "community": 2,
+      "community": 31,
       "norm_label": "url parameter state synchronization",
       "id": "design_url_state_sync"
     },
@@ -2555,7 +2575,7 @@
       "file_type": "code",
       "source_file": "src/Footer/Footer.jsx",
       "source_location": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "footer",
       "id": "src_Footer_footer"
     },
@@ -2564,7 +2584,7 @@
       "file_type": "code",
       "source_file": "src/Head/Head.jsx",
       "source_location": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "head",
       "id": "src_Head_head"
     },
@@ -2594,15 +2614,6 @@
       "community": 11,
       "norm_label": "sunicon",
       "id": "src_Header_sunicon"
-    },
-    {
-      "label": "LiveClock",
-      "file_type": "code",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": null,
-      "community": 11,
-      "norm_label": "liveclock",
-      "id": "src_LiveClock_liveclock"
     },
     {
       "label": "HeatmapLayer",
@@ -2636,7 +2647,7 @@
       "file_type": "code",
       "source_file": "src/Map/MapSettings/MapSettings.jsx",
       "source_location": null,
-      "community": 11,
+      "community": 1,
       "norm_label": "mapsettings",
       "id": "src_MapSettings_mapsettings"
     },
@@ -2762,7 +2773,7 @@
       "file_type": "concept",
       "source_file": null,
       "source_location": null,
-      "community": 2,
+      "community": 1,
       "norm_label": "youtube iframe api",
       "id": "lib_youtube_api"
     },
@@ -2878,7 +2889,7 @@
       "label": "WIF-12: Channel Images Not Loading In Map Pin",
       "file_type": "document",
       "source_file": ".sdd/specs/WIF-12.md",
-      "community": 0,
+      "community": 4,
       "norm_label": "wif-12: channel images not loading in map pin",
       "id": "sdd_specs_wif12_image_loading"
     },
@@ -2918,7 +2929,7 @@
       "label": "WIF-17: Rename InfoSidebar To ChannelPanel",
       "file_type": "document",
       "source_file": ".sdd/specs/WIF-17.md",
-      "community": 1,
+      "community": 4,
       "norm_label": "wif-17: rename infosidebar to channelpanel",
       "id": "sdd_specs_wif17_rename"
     },
@@ -3589,226 +3600,6 @@
   ],
   "links": [
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L10",
-      "weight": 1.0,
-      "source": "specs_wif_19",
-      "target": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L72",
-      "weight": 1.0,
-      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "target": "specs_wif_19_acceptance_criteria",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L167",
-      "weight": 1.0,
-      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "target": "specs_wif_19_analysis",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L108",
-      "weight": 1.0,
-      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "target": "specs_wif_19_clarifications",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L12",
-      "weight": 1.0,
-      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "target": "specs_wif_19_context_background",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L88",
-      "weight": 1.0,
-      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "target": "specs_wif_19_dependencies",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L23",
-      "weight": 1.0,
-      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "target": "specs_wif_19_functional_requirements",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L232",
-      "weight": 1.0,
-      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "target": "specs_wif_19_implementation_plan",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L55",
-      "weight": 1.0,
-      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "target": "specs_wif_19_non_goals_out_of_scope",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L80",
-      "weight": 1.0,
-      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "target": "specs_wif_19_open_questions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L61",
-      "weight": 1.0,
-      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "target": "specs_wif_19_possible_edge_cases",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L92",
-      "weight": 1.0,
-      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "target": "specs_wif_19_success_metrics",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L20",
-      "weight": 1.0,
-      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "target": "specs_wif_19_summary",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L95",
-      "weight": 1.0,
-      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
-      "target": "specs_wif_19_testing_guidelines",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L25",
-      "weight": 1.0,
-      "source": "specs_wif_19_functional_requirements",
-      "target": "specs_wif_19_a_live_clock_label",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L32",
-      "weight": 1.0,
-      "source": "specs_wif_19_functional_requirements",
-      "target": "specs_wif_19_b_country_modal_structure",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L38",
-      "weight": 1.0,
-      "source": "specs_wif_19_functional_requirements",
-      "target": "specs_wif_19_c_country_modal_tab_1_real_time_today",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L45",
-      "weight": 1.0,
-      "source": "specs_wif_19_functional_requirements",
-      "target": "specs_wif_19_d_country_modal_tab_2_historical",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L50",
-      "weight": 1.0,
-      "source": "specs_wif_19_functional_requirements",
-      "target": "specs_wif_19_e_new_real_time_channel_count_setting",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L169",
-      "weight": 1.0,
-      "source": "specs_wif_19_analysis",
-      "target": "specs_wif_19_affected_files",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L223",
-      "weight": 1.0,
-      "source": "specs_wif_19_analysis",
-      "target": "specs_wif_19_decisions",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/WIF-19.md",
-      "source_location": "L207",
-      "weight": 1.0,
-      "source": "specs_wif_19_analysis",
-      "target": "specs_wif_19_risks_concerns",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -4017,9 +3808,9 @@
       "source_file": "src/CountryPanel/CountryPanel.jsx",
       "source_location": "L175",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "countrypanel_countrypanel",
-      "target": "countrypanel_countrypanel_livetimestamp",
-      "confidence_score": 1.0
+      "target": "countrypanel_countrypanel_livetimestamp"
     },
     {
       "relation": "contains",
@@ -4094,6 +3885,28 @@
       "confidence_score": 1.0,
       "source": "countrypanel_countrypanel",
       "target": "hooks_usecountrytoday_usecountrytoday"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "hooks_usenow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "countrypanel_countrypanel",
+      "target": "hooks_usenow_usenow",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4189,6 +4002,17 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
+      "source_location": "L177",
+      "weight": 1.0,
+      "source": "countrypanel_countrypanel_livetimestamp",
+      "target": "hooks_usenow_usenow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/CountryPanel/CountryPanel.jsx",
       "source_location": "L180",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -4205,6 +4029,345 @@
       "confidence_score": 1.0,
       "source": "countrypanel_countrypanel_historicaltab",
       "target": "hooks_usecountryhistory_usecountryhistory"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App/App.jsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_app",
+      "target": "liveclock_liveclock"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "liveclock_liveclock",
+      "target": "common_languagecontext"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "liveclock_liveclock",
+      "target": "common_languagecontext_languagecontext"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "liveclock_liveclock",
+      "target": "common_translations"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "liveclock_liveclock",
+      "target": "common_translations_translations"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "liveclock_liveclock",
+      "target": "hooks_usenow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "liveclock_liveclock",
+      "target": "hooks_usenow_usenow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "liveclock_liveclock",
+      "target": "liveclock_liveclock_liveclock"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App/App.jsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "app_app",
+      "target": "liveclock_liveclock_liveclock"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/LiveClock/LiveClock.jsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "liveclock_liveclock_liveclock",
+      "target": "hooks_usenow_usenow"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useNow.js",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "hooks_usenow",
+      "target": "hooks_usenow_usenow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L10",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19",
+      "target": "specs_wif_19_spec_realtime_country_modal_and_live_clock"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L72",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
+      "target": "specs_wif_19_acceptance_criteria"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L167",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
+      "target": "specs_wif_19_analysis"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L108",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
+      "target": "specs_wif_19_clarifications"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L12",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
+      "target": "specs_wif_19_context_background"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L88",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
+      "target": "specs_wif_19_dependencies"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L23",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
+      "target": "specs_wif_19_functional_requirements"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L232",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
+      "target": "specs_wif_19_implementation_plan"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L55",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
+      "target": "specs_wif_19_non_goals_out_of_scope"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L80",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
+      "target": "specs_wif_19_open_questions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L61",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
+      "target": "specs_wif_19_possible_edge_cases"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L92",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
+      "target": "specs_wif_19_success_metrics"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L20",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
+      "target": "specs_wif_19_summary"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L95",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_spec_realtime_country_modal_and_live_clock",
+      "target": "specs_wif_19_testing_guidelines"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_functional_requirements",
+      "target": "specs_wif_19_a_live_clock_label"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_functional_requirements",
+      "target": "specs_wif_19_b_country_modal_structure"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_functional_requirements",
+      "target": "specs_wif_19_c_country_modal_tab_1_real_time_today"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L45",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_functional_requirements",
+      "target": "specs_wif_19_d_country_modal_tab_2_historical"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_functional_requirements",
+      "target": "specs_wif_19_e_new_real_time_channel_count_setting"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L169",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_analysis",
+      "target": "specs_wif_19_affected_files"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L223",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_analysis",
+      "target": "specs_wif_19_decisions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".sdd/specs/WIF-19.md",
+      "source_location": "L207",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "specs_wif_19_analysis",
+      "target": "specs_wif_19_risks_concerns"
     },
     {
       "relation": "imports_from",
@@ -5582,28 +5745,6 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/App/App.jsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_app",
-      "target": "liveclock_liveclock"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App/App.jsx",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "app_app",
-      "target": "liveclock_liveclock_liveclock"
-    },
-    {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/App/App.jsx",
       "source_location": "L13",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -6220,17 +6361,6 @@
       "target": "common_languagecontext"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "liveclock_liveclock",
-      "target": "common_languagecontext"
-    },
-    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -6255,15 +6385,6 @@
       "source_file": "src/Header/Header.jsx",
       "source_location": null,
       "source": "src_Header_header",
-      "target": "common_languagecontext"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": null,
-      "source": "src_LiveClock_liveclock",
       "target": "common_languagecontext"
     },
     {
@@ -6344,17 +6465,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "header_header",
-      "target": "common_languagecontext_languagecontext"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L3",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "liveclock_liveclock",
       "target": "common_languagecontext_languagecontext"
     },
     {
@@ -6732,17 +6842,6 @@
       "target": "common_translations"
     },
     {
-      "relation": "imports_from",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "liveclock_liveclock",
-      "target": "common_translations"
-    },
-    {
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -6773,17 +6872,6 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "head_head",
-      "target": "common_translations_translations"
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L4",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "liveclock_liveclock",
       "target": "common_translations_translations"
     },
     {
@@ -7127,16 +7215,6 @@
       "confidence_score": 1.0,
       "source": "header_sunicon",
       "target": "header_sunicon_sunicon"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/LiveClock/LiveClock.jsx",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "liveclock_liveclock",
-      "target": "liveclock_liveclock_liveclock"
     },
     {
       "relation": "contains",
@@ -9038,5 +9116,5 @@
       "source_file": "screenshot.png"
     }
   ],
-  "built_at_commit": "eb5f2df49af6cd7f2a764a709f56f0f7af93473a"
+  "built_at_commit": "975e2716bf11295c444415123aa3e95301710628"
 }
