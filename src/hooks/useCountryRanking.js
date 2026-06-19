@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 
 /**
  * Shared fetch state machine for the country-panel ranking endpoints
@@ -26,21 +26,20 @@ export function useCountryRanking(url, retryTrigger, label) {
   const [isEmpty, setIsEmpty]     = useState(false);
   const [error, setError]         = useState(false);
 
-  useEffect(() => {
-    if (!url) {
-      setData(null);
-      setIsLoading(false);
-      setIsEmpty(false);
-      setError(false);
-      return;
-    }
-
-    const controller = new AbortController();
-
+  // Reset state synchronously before browser paint whenever the target URL
+  // changes. useLayoutEffect fires after DOM mutations but before paint, so
+  // stale data from the previous mode/country is never visible for even one frame.
+  useLayoutEffect(() => {
     setData(null);
-    setIsLoading(true);
+    setIsLoading(!!url);
     setIsEmpty(false);
     setError(false);
+  }, [url, retryTrigger]);
+
+  useEffect(() => {
+    if (!url) return;
+
+    const controller = new AbortController();
 
     fetch(url, {
       signal: controller.signal,
