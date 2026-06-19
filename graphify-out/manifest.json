@@ -70,8 +70,8 @@
     "semantic_hash": "ae50fea7bc1f05b77cd3c230c3752335"
   },
   "src/Common/translations.js": {
-    "mtime": 1781888034.462831,
-    "ast_hash": "82f6de39eb38c56f16dc346d491b4555",
+    "mtime": 1781888313.4515421,
+    "ast_hash": "8102107d18511bb35c5eec79c5e50dcf",
     "semantic_hash": ""
   },
   "src/CountryPanel/AppearancesTooltip.jsx": {
