@@ -8,6 +8,9 @@
     <meta name="robots" content="index, follow">
     <!-- Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-3771668571647204">
+    <% if (htmlWebpackPlugin.options.isProd) { %>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3771668571647204" crossorigin="anonymous"></script>
+    <% } %>
     <link rel="icon" href="favicon.svg" type="image/x-icon">
     <!-- Preconnect to YouTube CDN domains used for channel images and thumbnails -->
     <link rel="preconnect" href="https://ggpht.com" crossorigin>
