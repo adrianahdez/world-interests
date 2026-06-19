@@ -168,10 +168,32 @@ CountryPanel.propTypes = {
   categoryName: PropTypes.string,
 };
 
-// ── Real-time tab ───────────────────────────────────────────────────────────────
-// Shows today's live ranking (#1..#N) for the country, fetched once on open.
-// The "Updated:" timestamp is a wall clock ticking every second — a liveness cue,
-// not the data's capture time.
+// ── Live timestamp ──────────────────────────────────────────────────────────────
+// Isolated leaf so only the timestamp span re-renders on each 1-second tick,
+// not the surrounding tab (which may map over a long video card list).
+
+function LiveTimestamp({ isEs, label }) {
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  const locale = isEs ? 'es-ES' : 'en-US';
+  const time = now.toLocaleTimeString(locale, {
+    hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short',
+  });
+  return <span className="country-panel__meta-item">{label} <strong>{time}</strong></span>;
+}
+
+LiveTimestamp.propTypes = {
+  isEs: PropTypes.bool.isRequired,
+  label: PropTypes.string.isRequired,
+};
+
+// ── Pestaña en vivo ─────────────────────────────────────────────────────────────
+// Muestra el ranking del día (#1..#N) para el país, obtenido una vez al abrir.
+// El timestamp "Actualizado:" es un reloj de pared en vivo — indicador de
+// presencia, no de actualización del dato en el backend.
 
 function RealtimeTab({ alpha2, category, categoryName, realtimeChannels, isEs, tr, onName }) {
   const [retryTrigger, setRetryTrigger] = useState(0);
@@ -182,17 +204,6 @@ function RealtimeTab({ alpha2, category, categoryName, realtimeChannels, isEs, t
   // Report the localized country name up to the panel header when data lands.
   useEffect(() => { onName(localizedName(data, isEs)); }, [data, isEs, onName]);
 
-  // Live wall clock for the "Updated:" label, ticking every second.
-  const [now, setNow] = useState(() => new Date());
-  useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
-  }, []);
-  const locale = isEs ? 'es-ES' : 'en-US';
-  const updatedTime = now.toLocaleTimeString(locale, {
-    hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short',
-  });
-
   return (
     <>
       <div className="country-panel__meta">
@@ -200,7 +211,7 @@ function RealtimeTab({ alpha2, category, categoryName, realtimeChannels, isEs, t
           <span className="country-panel__meta-item">{tr.countryPanelCategory} <strong>{categoryName}</strong></span>
         )}
         {/* No "Based on data…" label here — it does not apply to real-time data. */}
-        <span className="country-panel__meta-item">{tr.countryPanelUpdated} <strong>{updatedTime}</strong></span>
+        <LiveTimestamp isEs={isEs} label={tr.countryPanelUpdated} />
       </div>
 
       {isLoading && (
@@ -327,7 +338,7 @@ function HistoricalTab({ alpha2, category, categoryName, countryChannels, isEs, 
         </div>
       )}
 
-      {!isLoading && !error && !isEmpty && data && (
+      {!isLoading && !error && !isEmpty && data && items.length > 0 && (
         <>
           <p className="country-panel__channel-count">
             {tr.showingOf} {items.length} {tr.ofUpTo} {countryChannels} {noun} {tr.basedOnSettings}

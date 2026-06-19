@@ -394,7 +394,7 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
   // (breadth). This reflects trending dominance, not raw views — YouTube's mostPopular
   // order is opaque/per-region, so "topping the most countries" is the honest global signal.
   // Tiebreak by highest view count; the representative country shown is the highest-views one.
-  const mostViewedPoint = useMemo(() => {
+  const topCountriesPoint = useMemo(() => {
     const alpha2Keys = Object.keys(data);
     if (alpha2Keys.length === 0) return null;
 
@@ -430,18 +430,18 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
     };
   }, [data]);
 
-  // Must be defined after mostViewedPoint so the dep array captures the real value.
-  const handleMostViewedClick = useCallback(() => {
-    if (!mostViewedPoint) return;
+  // Must be defined after topCountriesPoint so the dep array captures the real value.
+  const handleTopCountriesClick = useCallback(() => {
+    if (!topCountriesPoint) return;
     // Open the sidebar first — matching the order used in CustomMarker to guarantee
     // the dialog opens even if the map animation below throws unexpectedly.
     toggleSidebar(true);
-    setMapPoint(mostViewedPoint);
+    setMapPoint(topCountriesPoint);
     try {
-      const latLon = getCountryLatLon(mostViewedPoint.alpha2);
+      const latLon = getCountryLatLon(topCountriesPoint.alpha2);
       if (latLon) flyToRef.current?.(latLon);
     } catch (_) {}
-  }, [mostViewedPoint, setMapPoint, toggleSidebar]);
+  }, [topCountriesPoint, setMapPoint, toggleSidebar]);
 
   // Memoized so Leaflet only unmounts/remounts markers when data or clustering mode changes.
   // Avoids marker flicker on unrelated state updates (settings toggles, hover events, etc.).
@@ -514,19 +514,19 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
           </div>
         )}
         {DEBUG_ZOOM_LEVEL_ENABLED && <div ref={zoomLabelRef} className="map-overlay-label map-overlay-label--zoom" />}
-        {mostViewedPoint && (
+        {topCountriesPoint && (
           <button
             type="button"
             className="map-overlay-label map-overlay-label--most-viewed"
-            onClick={handleMostViewedClick}
+            onClick={handleTopCountriesClick}
             title={categoryName ? `${tr.mostViewedTooltip} ${categoryName}` : undefined}
           >
             {'🏆 '}
             {/* "Worldwide #1:" prefix — desktop only (hidden ≤768px to save space). */}
             <span className="map-overlay-label__prefix">{tr.worldwideNumberOne} </span>
-            <span className="map-overlay-label__truncated">{mostViewedPoint.channel?.channelTitle}</span>
+            <span className="map-overlay-label__truncated">{topCountriesPoint.channel?.channelTitle}</span>
             {' · '}
-            <span className="map-overlay-label__truncated">{mostViewedPoint.videoTitle}</span>
+            <span className="map-overlay-label__truncated">{topCountriesPoint.videoTitle}</span>
           </button>
         )}
         {COUNTRY_HOVER_LABEL_ENABLED && <div ref={hoverLabelRef} className="map-overlay-label map-overlay-label--country map-overlay-label--dynamic" style={{ display: 'none' }} />}
