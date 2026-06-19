@@ -413,5 +413,10 @@
     "mtime": 1781866767.1131406,
     "ast_hash": "e1073342e958ac9f00716938c8f165e3",
     "semantic_hash": ""
+  },
+  ".github/copilot-instructions.md": {
+    "mtime": 1781869797.2939532,
+    "ast_hash": "ec2dc0dc7bef63488889f34de2f5584d",
+    "semantic_hash": ""
   }
 }

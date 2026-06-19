@@ -216,14 +216,24 @@
   },
   "nodes": [
     {
-      "label": "CLAUDE.md",
+      "label": "copilot-instructions.md",
       "file_type": "document",
-      "source_file": "CLAUDE.md",
+      "source_file": ".github/copilot-instructions.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "claude",
-      "community": 30,
-      "norm_label": "claude.md"
+      "id": "github_copilot_instructions",
+      "community": 7,
+      "norm_label": "copilot-instructions.md"
+    },
+    {
+      "label": "graphify",
+      "file_type": "document",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "github_copilot_instructions_graphify",
+      "community": 7,
+      "norm_label": "graphify"
     },
     {
       "label": "CLAUDE.md",
@@ -231,9 +241,19 @@
       "source_file": "CLAUDE.md",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "claude_claude_md",
       "community": 30,
-      "norm_label": "claude.md"
+      "norm_label": "claude.md",
+      "id": "claude"
+    },
+    {
+      "label": "CLAUDE.md",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 30,
+      "norm_label": "claude.md",
+      "id": "claude_claude_md"
     },
     {
       "label": "Build & Dev Commands",
@@ -241,9 +261,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L5",
       "_origin": "ast",
-      "id": "claude_build_dev_commands",
       "community": 30,
-      "norm_label": "build & dev commands"
+      "norm_label": "build & dev commands",
+      "id": "claude_build_dev_commands"
     },
     {
       "label": "Environment",
@@ -251,9 +271,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L15",
       "_origin": "ast",
-      "id": "claude_environment",
       "community": 30,
-      "norm_label": "environment"
+      "norm_label": "environment",
+      "id": "claude_environment"
     },
     {
       "label": "Sitemap",
@@ -261,9 +281,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L21",
       "_origin": "ast",
-      "id": "claude_sitemap",
       "community": 30,
-      "norm_label": "sitemap"
+      "norm_label": "sitemap",
+      "id": "claude_sitemap"
     },
     {
       "label": "Architecture",
@@ -271,9 +291,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L29",
       "_origin": "ast",
-      "id": "claude_architecture",
       "community": 30,
-      "norm_label": "architecture"
+      "norm_label": "architecture",
+      "id": "claude_architecture"
     },
     {
       "label": "Data Flow",
@@ -281,9 +301,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L33",
       "_origin": "ast",
-      "id": "claude_data_flow",
       "community": 30,
-      "norm_label": "data flow"
+      "norm_label": "data flow",
+      "id": "claude_data_flow"
     },
     {
       "label": "Context Providers",
@@ -291,9 +311,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L42",
       "_origin": "ast",
-      "id": "claude_context_providers",
       "community": 30,
-      "norm_label": "context providers"
+      "norm_label": "context providers",
+      "id": "claude_context_providers"
     },
     {
       "label": "Component Organization",
@@ -301,9 +321,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L47",
       "_origin": "ast",
-      "id": "claude_component_organization",
       "community": 30,
-      "norm_label": "component organization"
+      "norm_label": "component organization",
+      "id": "claude_component_organization"
     },
     {
       "label": "Backend",
@@ -311,9 +331,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L51",
       "_origin": "ast",
-      "id": "claude_backend",
       "community": 30,
-      "norm_label": "backend"
+      "norm_label": "backend",
+      "id": "claude_backend"
     },
     {
       "label": "Working Guidelines",
@@ -321,9 +341,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L55",
       "_origin": "ast",
-      "id": "claude_working_guidelines",
       "community": 30,
-      "norm_label": "working guidelines"
+      "norm_label": "working guidelines",
+      "id": "claude_working_guidelines"
     },
     {
       "label": "1. Think Before Coding",
@@ -331,9 +351,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L59",
       "_origin": "ast",
-      "id": "claude_1_think_before_coding",
       "community": 30,
-      "norm_label": "1. think before coding"
+      "norm_label": "1. think before coding",
+      "id": "claude_1_think_before_coding"
     },
     {
       "label": "2. Simplicity First",
@@ -341,9 +361,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L68",
       "_origin": "ast",
-      "id": "claude_2_simplicity_first",
       "community": 30,
-      "norm_label": "2. simplicity first"
+      "norm_label": "2. simplicity first",
+      "id": "claude_2_simplicity_first"
     },
     {
       "label": "3. Surgical Changes",
@@ -351,9 +371,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L80",
       "_origin": "ast",
-      "id": "claude_3_surgical_changes",
       "community": 30,
-      "norm_label": "3. surgical changes"
+      "norm_label": "3. surgical changes",
+      "id": "claude_3_surgical_changes"
     },
     {
       "label": "4. Goal-Driven Execution",
@@ -361,9 +381,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L92",
       "_origin": "ast",
-      "id": "claude_4_goal_driven_execution",
       "community": 30,
-      "norm_label": "4. goal-driven execution"
+      "norm_label": "4. goal-driven execution",
+      "id": "claude_4_goal_driven_execution"
     },
     {
       "label": "graphify",
@@ -371,9 +391,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L104",
       "_origin": "ast",
-      "id": "claude_graphify",
       "community": 30,
-      "norm_label": "graphify"
+      "norm_label": "graphify",
+      "id": "claude_graphify"
     },
     {
       "label": "package.json",
@@ -501,7 +521,7 @@
       "source_file": "package.json",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "devdependencies",
       "id": "package_devdependencies"
     },
@@ -511,7 +531,7 @@
       "source_file": "package.json",
       "source_location": "L15",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "@babel/core",
       "id": "package_devdependencies_babel_core"
     },
@@ -521,7 +541,7 @@
       "source_file": "package.json",
       "source_location": "L16",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "@babel/preset-env",
       "id": "package_devdependencies_babel_preset_env"
     },
@@ -531,7 +551,7 @@
       "source_file": "package.json",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "@babel/preset-react",
       "id": "package_devdependencies_babel_preset_react"
     },
@@ -541,7 +561,7 @@
       "source_file": "package.json",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "babel-loader",
       "id": "package_devdependencies_babel_loader"
     },
@@ -551,7 +571,7 @@
       "source_file": "package.json",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "compression-webpack-plugin",
       "id": "package_devdependencies_compression_webpack_plugin"
     },
@@ -561,7 +581,7 @@
       "source_file": "package.json",
       "source_location": "L20",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "copy-webpack-plugin",
       "id": "package_devdependencies_copy_webpack_plugin"
     },
@@ -571,7 +591,7 @@
       "source_file": "package.json",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "css-loader",
       "id": "package_devdependencies_css_loader"
     },
@@ -581,7 +601,7 @@
       "source_file": "package.json",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "file-loader",
       "id": "package_devdependencies_file_loader"
     },
@@ -591,7 +611,7 @@
       "source_file": "package.json",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "html-webpack-plugin",
       "id": "package_devdependencies_html_webpack_plugin"
     },
@@ -601,7 +621,7 @@
       "source_file": "package.json",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "sass",
       "id": "package_devdependencies_sass"
     },
@@ -611,7 +631,7 @@
       "source_file": "package.json",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "sass-loader",
       "id": "package_devdependencies_sass_loader"
     },
@@ -621,7 +641,7 @@
       "source_file": "package.json",
       "source_location": "L26",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "style-loader",
       "id": "package_devdependencies_style_loader"
     },
@@ -631,7 +651,7 @@
       "source_file": "package.json",
       "source_location": "L27",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "terser-webpack-plugin",
       "id": "package_devdependencies_terser_webpack_plugin"
     },
@@ -641,7 +661,7 @@
       "source_file": "package.json",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "webpack",
       "id": "package_devdependencies_webpack"
     },
@@ -651,7 +671,7 @@
       "source_file": "package.json",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "webpack-cli",
       "id": "package_devdependencies_webpack_cli"
     },
@@ -661,7 +681,7 @@
       "source_file": "package.json",
       "source_location": "L30",
       "_origin": "ast",
-      "community": 7,
+      "community": 6,
       "norm_label": "webpack-dev-server",
       "id": "package_devdependencies_webpack_dev_server"
     },
@@ -951,7 +971,7 @@
       "source_file": "src/Common/CountryPanelContext.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 2,
+      "community": 12,
       "norm_label": "countrypanelcontext.jsx",
       "id": "common_countrypanelcontext"
     },
@@ -1301,7 +1321,7 @@
       "source_file": "src/CustomMarker/CustomMarker.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 2,
       "norm_label": "custommarker.jsx",
       "id": "custommarker_custommarker"
     },
@@ -1881,7 +1901,7 @@
       "source_file": "src/config.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 2,
       "norm_label": "config.js",
       "id": "src_config"
     },
@@ -1891,7 +1911,7 @@
       "source_file": "src/config.js",
       "source_location": "L65",
       "_origin": "ast",
-      "community": 0,
+      "community": 2,
       "norm_label": "marker_icon_size",
       "id": "src_config_marker_icon_size"
     },
@@ -1901,7 +1921,7 @@
       "source_file": "src/config.js",
       "source_location": "L66",
       "_origin": "ast",
-      "community": 0,
+      "community": 2,
       "norm_label": "marker_icon_anchor",
       "id": "src_config_marker_icon_anchor"
     },
@@ -2187,7 +2207,7 @@
       "file_type": "code",
       "source_file": "src/CountryPanel/CountryPanel.jsx",
       "source_location": "line 40",
-      "community": 2,
+      "community": 12,
       "norm_label": "countrypanel component",
       "id": "countrypanel_countrypanelcomponent"
     },
@@ -2277,7 +2297,7 @@
       "file_type": "rationale",
       "source_file": "src/Common/CountryPanelContext.jsx",
       "source_location": "line 11",
-      "community": 2,
+      "community": 12,
       "norm_label": "mutual panel exclusivity pattern",
       "id": "design_panel_exclusivity"
     },
@@ -2668,7 +2688,7 @@
       "label": "WIF-16: Map Pin Style Loss on Language Change",
       "file_type": "document",
       "source_file": ".sdd/specs/WIF-16.md",
-      "community": 1,
+      "community": 0,
       "norm_label": "wif-16: map pin style loss on language change",
       "id": "sdd_specs_wif16_pin_style"
     },
@@ -3469,12 +3489,22 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "github_copilot_instructions",
+      "target": "github_copilot_instructions_graphify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude",
-      "target": "claude_claude_md",
-      "confidence_score": 1.0
+      "target": "claude_claude_md"
     },
     {
       "relation": "contains",
@@ -3482,9 +3512,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L29",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_claude_md",
-      "target": "claude_architecture",
-      "confidence_score": 1.0
+      "target": "claude_architecture"
     },
     {
       "relation": "contains",
@@ -3492,9 +3522,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_claude_md",
-      "target": "claude_build_dev_commands",
-      "confidence_score": 1.0
+      "target": "claude_build_dev_commands"
     },
     {
       "relation": "contains",
@@ -3502,9 +3532,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_claude_md",
-      "target": "claude_environment",
-      "confidence_score": 1.0
+      "target": "claude_environment"
     },
     {
       "relation": "contains",
@@ -3512,9 +3542,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L104",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_claude_md",
-      "target": "claude_graphify",
-      "confidence_score": 1.0
+      "target": "claude_graphify"
     },
     {
       "relation": "contains",
@@ -3522,9 +3552,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_claude_md",
-      "target": "claude_sitemap",
-      "confidence_score": 1.0
+      "target": "claude_sitemap"
     },
     {
       "relation": "contains",
@@ -3532,9 +3562,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L55",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_claude_md",
-      "target": "claude_working_guidelines",
-      "confidence_score": 1.0
+      "target": "claude_working_guidelines"
     },
     {
       "relation": "contains",
@@ -3542,9 +3572,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L51",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_architecture",
-      "target": "claude_backend",
-      "confidence_score": 1.0
+      "target": "claude_backend"
     },
     {
       "relation": "contains",
@@ -3552,9 +3582,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_architecture",
-      "target": "claude_component_organization",
-      "confidence_score": 1.0
+      "target": "claude_component_organization"
     },
     {
       "relation": "contains",
@@ -3562,9 +3592,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L42",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_architecture",
-      "target": "claude_context_providers",
-      "confidence_score": 1.0
+      "target": "claude_context_providers"
     },
     {
       "relation": "contains",
@@ -3572,9 +3602,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_architecture",
-      "target": "claude_data_flow",
-      "confidence_score": 1.0
+      "target": "claude_data_flow"
     },
     {
       "relation": "contains",
@@ -3582,9 +3612,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L59",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_working_guidelines",
-      "target": "claude_1_think_before_coding",
-      "confidence_score": 1.0
+      "target": "claude_1_think_before_coding"
     },
     {
       "relation": "contains",
@@ -3592,9 +3622,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L68",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_working_guidelines",
-      "target": "claude_2_simplicity_first",
-      "confidence_score": 1.0
+      "target": "claude_2_simplicity_first"
     },
     {
       "relation": "contains",
@@ -3602,9 +3632,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L80",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_working_guidelines",
-      "target": "claude_3_surgical_changes",
-      "confidence_score": 1.0
+      "target": "claude_3_surgical_changes"
     },
     {
       "relation": "contains",
@@ -3612,9 +3642,9 @@
       "source_file": "CLAUDE.md",
       "source_location": "L92",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "claude_working_guidelines",
-      "target": "claude_4_goal_driven_execution",
-      "confidence_score": 1.0
+      "target": "claude_4_goal_driven_execution"
     },
     {
       "relation": "contains",
@@ -8938,5 +8968,5 @@
       "source_file": "screenshot.png"
     }
   ],
-  "built_at_commit": "76f69fc98aacf3a6e56117c5a96e6f7cc4579fe5"
+  "built_at_commit": "2cda5217d2c311a21791e696d42acf21e9157531"
 }
