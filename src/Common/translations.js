@@ -31,7 +31,7 @@ const translations = {
     realtimeChannelsLabel: "Real-time top channels",
     labelsLabel: "Map labels",
     // Tooltip on the most-viewed label — composed as: mostViewedTooltip + " " + categoryName
-    mostViewedTooltip: "Today's worldwide #1 in",
+    mostViewedTooltip: "Today's #1 in the most countries in",
     // Desktop-only prefix on the 🏆 label (hidden on mobile)
     worldwideNumberOne: "Worldwide #1:",
     // Accessible label for the fixed top-center live clock (date/time tick visibly)
@@ -51,8 +51,8 @@ const translations = {
     historicalViewAriaLabel: "Historical view: videos or channels",
     historicalVideos: "Videos",
     historicalChannels: "Channels",
-    historicalInfoVideos: "Ranked by distinct days at #1. Ties broken by most recent appearance.",
-    historicalInfoChannels: "Channels ranked by distinct days at #1. Ties broken by most recent appearance.",
+    historicalInfoVideos: "Ranked by days at #1. Ties: most recent #1 first.",
+    historicalInfoChannels: "Ranked by days at #1. Ties: most recent #1 first.",
     // "<n> day(s) at #1" appearance count on historical cards
     dayAtNumberOne: "day at #1",
     daysAtNumberOne: "days at #1",
@@ -125,7 +125,7 @@ const translations = {
     countryChannelsLabel: "Top canales por país",
     realtimeChannelsLabel: "Top canales en tiempo real",
     labelsLabel: "Etiquetas del mapa",
-    mostViewedTooltip: "El #1 mundial de hoy en",
+    mostViewedTooltip: "El #1 en más países hoy en",
     // Prefijo solo-escritorio en la etiqueta 🏆 (oculto en móvil)
     worldwideNumberOne: "#1 mundial:",
     // Etiqueta accesible del reloj en vivo fijo en la parte superior central
@@ -143,8 +143,8 @@ const translations = {
     historicalViewAriaLabel: "Vista histórica: vídeos o canales",
     historicalVideos: "Vídeos",
     historicalChannels: "Canales",
-    historicalInfoVideos: "Ordenado por días distintos en #1. Empates resueltos por aparición más reciente.",
-    historicalInfoChannels: "Canales ordenados por días distintos en #1. Empates resueltos por aparición más reciente.",
+    historicalInfoVideos: "Ordenado por días como #1. Empates: aparición más reciente primero.",
+    historicalInfoChannels: "Ordenado por días como #1. Empates: aparición más reciente primero.",
     // Conteo "<n> día(s) como #1" en las tarjetas del histórico
     dayAtNumberOne: "día como #1",
     daysAtNumberOne: "días como #1",
