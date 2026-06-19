@@ -80,9 +80,9 @@
     "semantic_hash": "cd09c5a0f87cd23174574bc67518189b"
   },
   "src/CountryPanel/CountryPanel.jsx": {
-    "mtime": 1781858792.73268,
-    "ast_hash": "9a9b106b11f5ccb972eb221684c6ffb9",
-    "semantic_hash": "9a9b106b11f5ccb972eb221684c6ffb9"
+    "mtime": 1781880911.4124389,
+    "ast_hash": "21f898a4769a5a44d3ae06d8cb90633e",
+    "semantic_hash": ""
   },
   "src/CountryPanel/groupAppearanceDates.js": {
     "mtime": 1781822291.4569218,
@@ -120,9 +120,9 @@
     "semantic_hash": "6af16aa5867b6cf5b232d8e84fc4373e"
   },
   "src/LiveClock/LiveClock.jsx": {
-    "mtime": 1781790285.0593424,
-    "ast_hash": "a541cbab80341c3b9bf3ca80f849636a",
-    "semantic_hash": "a541cbab80341c3b9bf3ca80f849636a"
+    "mtime": 1781880846.3865197,
+    "ast_hash": "10d48dd028bd08a3fc5342bfdc149755",
+    "semantic_hash": ""
   },
   "src/Map/Countries/Countries.jsx": {
     "mtime": 1776471518.5982282,
@@ -150,9 +150,9 @@
     "semantic_hash": "fa6f7bca9852c5c53a5070d2f49bc339"
   },
   "src/Map/Map.jsx": {
-    "mtime": 1781822543.919754,
-    "ast_hash": "e70fa18a86ffe2f33ac913f1ea0ced04",
-    "semantic_hash": "e70fa18a86ffe2f33ac913f1ea0ced04"
+    "mtime": 1781880052.6448772,
+    "ast_hash": "dcab0468bd71db20a81ad06c4eff5ff4",
+    "semantic_hash": ""
   },
   "src/Map/MapSettings/MapSettings.jsx": {
     "mtime": 1781790753.7851307,
@@ -310,9 +310,9 @@
     "semantic_hash": "fda948fdda866d89ac77dff9cfcfd266"
   },
   ".sdd/specs/WIF-19.md": {
-    "mtime": 1781857041.5618186,
-    "ast_hash": "38397228c4cdfcb3fa485fdff635aaa3",
-    "semantic_hash": "38397228c4cdfcb3fa485fdff635aaa3"
+    "mtime": 1781881181.6557913,
+    "ast_hash": "cb2e44c4f3193cc1ee8a75daba7ef47f",
+    "semantic_hash": ""
   },
   ".sdd/specs/WIF-2.md": {
     "mtime": 1776124365.5864184,
@@ -417,6 +417,11 @@
   ".github/copilot-instructions.md": {
     "mtime": 1781869797.2939532,
     "ast_hash": "ec2dc0dc7bef63488889f34de2f5584d",
+    "semantic_hash": ""
+  },
+  "src/hooks/useNow.js": {
+    "mtime": 1781880802.8529127,
+    "ast_hash": "6ae8719c7a77a40de70ee73c1f73bd4d",
     "semantic_hash": ""
   }
 }
