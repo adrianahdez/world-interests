@@ -192,7 +192,7 @@ function RealtimeTab({ alpha2, category, categoryName, realtimeChannels, isEs, t
           <span className="country-panel__meta-item">{tr.countryPanelCategory} <strong>{categoryName}</strong></span>
         )}
         {/* No "Based on data…" label here — it does not apply to real-time data. */}
-        <LiveTimestamp label={tr.countryPanelUpdated} />
+        <LiveTimestamp label={tr.countryPanelUpdated} capturedAt={data?.latest_capture_at} />
       </div>
 
       {isLoading && (
