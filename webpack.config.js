@@ -103,6 +103,7 @@ module.exports = (env, argv) => {
           { from: 'screenshot.png', to: '' }, // Copy the screenshot.png to the dist folder
           { from: '_redirects', to: '' }, // Copy the redirects file to the dist folder
           { from: 'robots.txt', to: '' }, // Copy the robots.txt to the dist folder
+          { from: 'ads.txt', to: '' }, // Copy the ads.txt to the dist folder
         ],
       }),
     ],
