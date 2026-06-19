@@ -1,16 +1,16 @@
 # Graph Report - world-interests  (2026-06-19)
 
 ## Corpus Check
-- 79 files · ~143,821 words
+- 79 files · ~144,029 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 334 nodes · 525 edges · 34 communities (15 shown, 19 thin omitted)
-- Extraction: 90% EXTRACTED · 10% INFERRED · 0% AMBIGUOUS · INFERRED: 52 edges (avg confidence: 0.88)
+- 745 nodes · 915 edges · 75 communities (55 shown, 20 thin omitted)
+- Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 52 edges (avg confidence: 0.88)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7fd09e04`
+- Built from commit: `af8db9b1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -46,22 +46,66 @@
 - [[_COMMUNITY_Settings Flags|Settings Flags]]
 - [[_COMMUNITY_Country Utilities|Country Utilities]]
 - [[_COMMUNITY_Community 30|Community 30]]
+- [[_COMMUNITY_Community 31|Community 31]]
 - [[_COMMUNITY_Community 32|Community 32]]
 - [[_COMMUNITY_Community 33|Community 33]]
+- [[_COMMUNITY_Community 34|Community 34]]
+- [[_COMMUNITY_Community 35|Community 35]]
+- [[_COMMUNITY_Community 36|Community 36]]
+- [[_COMMUNITY_Community 37|Community 37]]
+- [[_COMMUNITY_Community 38|Community 38]]
+- [[_COMMUNITY_Community 39|Community 39]]
+- [[_COMMUNITY_Community 40|Community 40]]
+- [[_COMMUNITY_Community 41|Community 41]]
+- [[_COMMUNITY_Community 42|Community 42]]
+- [[_COMMUNITY_Community 43|Community 43]]
+- [[_COMMUNITY_Community 44|Community 44]]
+- [[_COMMUNITY_Community 45|Community 45]]
+- [[_COMMUNITY_Community 46|Community 46]]
+- [[_COMMUNITY_Community 47|Community 47]]
+- [[_COMMUNITY_Community 48|Community 48]]
+- [[_COMMUNITY_Community 49|Community 49]]
+- [[_COMMUNITY_Community 50|Community 50]]
+- [[_COMMUNITY_Community 51|Community 51]]
+- [[_COMMUNITY_Community 52|Community 52]]
+- [[_COMMUNITY_Community 53|Community 53]]
+- [[_COMMUNITY_Community 54|Community 54]]
+- [[_COMMUNITY_Community 55|Community 55]]
+- [[_COMMUNITY_Community 56|Community 56]]
+- [[_COMMUNITY_Community 57|Community 57]]
+- [[_COMMUNITY_Community 58|Community 58]]
+- [[_COMMUNITY_Community 59|Community 59]]
+- [[_COMMUNITY_Community 60|Community 60]]
+- [[_COMMUNITY_Community 61|Community 61]]
+- [[_COMMUNITY_Community 62|Community 62]]
+- [[_COMMUNITY_Community 63|Community 63]]
+- [[_COMMUNITY_Community 64|Community 64]]
+- [[_COMMUNITY_Community 65|Community 65]]
+- [[_COMMUNITY_Community 66|Community 66]]
+- [[_COMMUNITY_Community 67|Community 67]]
+- [[_COMMUNITY_Community 68|Community 68]]
+- [[_COMMUNITY_Community 69|Community 69]]
+- [[_COMMUNITY_Community 70|Community 70]]
+- [[_COMMUNITY_Community 71|Community 71]]
+- [[_COMMUNITY_Community 72|Community 72]]
+- [[_COMMUNITY_Community 73|Community 73]]
+- [[_COMMUNITY_Community 74|Community 74]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `LanguageContext` - 19 edges
-2. `Map()` - 14 edges
-3. `Spec: Realtime Country Modal And Live Clock` - 14 edges
-4. `translations` - 10 edges
-5. `WIF-8: Codebase Audit And Quality Improvements` - 10 edges
-6. `CountryPanel()` - 9 edges
-7. `ChannelPanel()` - 8 edges
-8. `Countries()` - 8 edges
-9. `getCountryLatLon()` - 8 edges
-10. `App Component` - 8 edges
+1. `Spec for Leaflet Feature Research And Recommendations` - 21 edges
+2. `LanguageContext` - 19 edges
+3. `Map()` - 14 edges
+4. `Spec: Map Pin Style Loss on Language Change` - 14 edges
+5. `Spec: Realtime Country Modal And Live Clock` - 14 edges
+6. `Spec for Country Panel With Trending Stats` - 12 edges
+7. `Spec: Rename InfoSidebar To ChannelPanel` - 12 edges
+8. `Spec: Settings Visibility Feature Flags` - 12 edges
+9. `Spec: <spec_title>` - 11 edges
+10. `translations` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `WIF-17: Rename InfoSidebar To ChannelPanel` --references--> `App()`  [INFERRED]
+  .sdd/specs/WIF-17.md → src/App/App.jsx
 - `WIF-16: Map Pin Style Loss on Language Change` --references--> `LanguageContext`  [INFERRED]
   .sdd/specs/WIF-16.md → src/Common/LanguageContext.jsx
 - `WIF-14: SEO And Performance Optimization` --references--> `translations`  [INFERRED]
@@ -70,8 +114,6 @@
   .sdd/specs/WIF-11.md → src/CountryPanel/CountryPanel.jsx
 - `WIF-12: Channel Images Not Loading In Map Pin` --references--> `CountryPanel()`  [INFERRED]
   .sdd/specs/WIF-12.md → src/CountryPanel/CountryPanel.jsx
-- `WIF-17: Rename InfoSidebar To ChannelPanel` --references--> `App()`  [INFERRED]
-  .sdd/specs/WIF-17.md → src/App/App.jsx
 
 ## Import Cycles
 - None detected.
@@ -92,27 +134,27 @@
 - **Data Display Pipeline (Category → Markers → Details)** — screenshot_left_sidebar, screenshot_custom_markers, screenshot_right_panel, screenshot_video_thumbnails [INFERRED 0.85]
 - **Real-Time Data Context** — screenshot_real_time_indicator, screenshot_live_clock, screenshot_video_thumbnails, screenshot_ranking_display [INFERRED 0.75]
 
-## Communities (34 total, 19 thin omitted)
+## Communities (75 total, 20 thin omitted)
 
 ### Community 0 - "Map Rendering & Data"
-Cohesion: 0.08
-Nodes (31): CountryPanelContext, MapPointContext, Countries(), SELECTED_STYLE, CustomMarker(), Mutual Panel Exclusivity Pattern, Real-Time Data Update Pattern, useImageRetry() (+23 more)
+Cohesion: 0.09
+Nodes (24): CountryPanelContext, MapPointContext, Countries(), SELECTED_STYLE, Mutual Panel Exclusivity Pattern, Real-Time Data Update Pattern, RETRY_DELAYS, useMapData() (+16 more)
 
 ### Community 1 - "App Shell & Navigation"
-Cohesion: 0.12
-Nodes (17): App(), Categories(), CATEGORY_RETRY_DELAYS, ChannelPanel(), LanguageContext, SidebarContext, ThemeContext, Footer() (+9 more)
+Cohesion: 0.20
+Nodes (11): App Component, Categories(), CATEGORY_RETRY_DELAYS, Categories Component, SidebarContext, translations, URL Parameter State Synchronization, Footer() (+3 more)
 
 ### Community 2 - "Global Configuration"
 Cohesion: 0.06
 Nodes (33): dependencies, dotenv-webpack, leaflet, leaflet-gesture-handling, @linkurious/leaflet-heat, prop-types, react, react-dom (+25 more)
 
 ### Community 3 - "Backend & Architecture"
-Cohesion: 0.11
-Nodes (27): Countries Component, CustomMarker Component, Footer Component, InfoSidebar Component, Map Component, MapSettings Component, MapViewSaver Component, Codebase Quality and Architectural Improvements (+19 more)
+Cohesion: 0.07
+Nodes (37): Categories Component, Countries Component, CustomMarker Component, Footer Component, InfoSidebar Component, Map Component, MapSettings Component, MapViewSaver Component (+29 more)
 
 ### Community 4 - "Country Panel"
-Cohesion: 0.09
-Nodes (27): ChannelPanel Component, IconComment(), IconEye(), IconInfo(), IconThumbUp(), translations, AppearancesTooltip(), buildLastUpdatedLabel() (+19 more)
+Cohesion: 0.16
+Nodes (13): IconInfo(), buildLastUpdatedLabel(), ChannelIdentity(), CountryPanel(), daysAtNumberOne(), HistoricalTab(), RealtimeTab(), useCountryHistory() (+5 more)
 
 ### Community 5 - "Leaflet Integration"
 Cohesion: 0.23
@@ -131,12 +173,12 @@ Cohesion: 0.25
 Nodes (11): Country Polygon Click Selection, Color-Coded Content Category Markers, Dark Mode Theme, Leaflet Interactive Map, Category Sidebar, Live Clock Display, World Interests Main UI, Ranked Content Display (N of Total) (+3 more)
 
 ### Community 10 - "Categories & Player"
-Cohesion: 0.22
-Nodes (10): Categories Component, Player Component, Backend-Sourced Content Localization, Browser Console Warnings Resolution, Error State Management and Graceful Degradation, Data.js Module, translations.js Module, WIF-2: Frontend Error Handling For Missing Categories (+2 more)
+Cohesion: 0.09
+Nodes (21): Acceptance Criteria, Affected Files, Analysis, Clarifications, CRITICAL — Bugs, Decisions, Functional Requirements (Implementation Steps), HIGH — Edge Cases (+13 more)
 
 ### Community 11 - "Point Rendering"
-Cohesion: 0.14
-Nodes (15): App Component, Categories Component, LanguageProvider(), ThemeProvider(), Theme & Language Persistence, URL Parameter State Synchronization, App Entry Point, Footer (+7 more)
+Cohesion: 0.18
+Nodes (9): LanguageProvider(), ThemeProvider(), Theme & Language Persistence, App Entry Point, Header, MoonIcon, SunIcon, App (+1 more)
 
 ### Community 17 - "History API"
 Cohesion: 0.09
@@ -146,29 +188,193 @@ Nodes (22): A. Live clock label, Acceptance Criteria, Affected Files, Analysis, 
 Cohesion: 0.12
 Nodes (14): 1. Think Before Coding, 2. Simplicity First, 3. Surgical Changes, 4. Goal-Driven Execution, Architecture, Backend, Build & Dev Commands, Component Organization (+6 more)
 
+### Community 31 - "Community 31"
+Cohesion: 0.10
+Nodes (20): Acceptance Criteria, Affected Files, Analysis, API URL strategy — front-controller (Option B), Backend Notes, Clarifications, DB migration needed: add `thumbnail_url` to `trending_videos`, Decisions (+12 more)
+
 ### Community 33 - "Community 33"
 Cohesion: 0.43
 Nodes (7): calculatePointAttributes(), changePointAppearance(), COLOR_PALETTE, hexToRgba(), nameToColorIndex(), processPoint(), resize()
 
+### Community 34 - "Community 34"
+Cohesion: 0.10
+Nodes (20): Acceptance Criteria, Affected Files, Analysis, Clarifications, Decisions, Functional Requirements, Implementation Plan, Open Questions (+12 more)
+
+### Community 35 - "Community 35"
+Cohesion: 0.11
+Nodes (17): Acceptance Criteria, Affected Files, Analysis, Clarifications, Context / Background, Decisions, Dependencies, Functional Requirements (+9 more)
+
+### Community 36 - "Community 36"
+Cohesion: 0.11
+Nodes (17): Acceptance Criteria, Affected Files, Analysis, Clarifications, Decisions, Functional Requirements, Implementation Plan, Open Questions (+9 more)
+
+### Community 37 - "Community 37"
+Cohesion: 0.12
+Nodes (15): Acceptance Criteria, Affected Files, Analysis, Clarifications, Context / Background, Decisions, Functional Requirements, Implementation Plan (+7 more)
+
+### Community 38 - "Community 38"
+Cohesion: 0.12
+Nodes (15): Acceptance Criteria, Affected Files, Analysis, Clarifications, Context / Background, Decisions, Functional Requirements, Implementation Plan (+7 more)
+
+### Community 39 - "Community 39"
+Cohesion: 0.23
+Nodes (14): App(), ChannelPanel(), LanguageContext, CustomMarker(), Head(), useImageRetry(), useMapData Hook, Map() (+6 more)
+
+### Community 40 - "Community 40"
+Cohesion: 0.14
+Nodes (13): Acceptance Criteria, Affected Files, Analysis, Clarifications, Decisions, Functional Requirements, Implementation Plan, Open Questions (+5 more)
+
+### Community 41 - "Community 41"
+Cohesion: 0.14
+Nodes (13): Acceptance Criteria, Affected Files, Analysis, Clarifications, Decisions, Functional Requirements, Implementation Plan, Open Questions (+5 more)
+
+### Community 42 - "Community 42"
+Cohesion: 0.14
+Nodes (13): Acceptance Criteria, Affected Files, Analysis, Clarifications, Decisions, Functional Requirements, Implementation Plan, Open Questions (+5 more)
+
+### Community 43 - "Community 43"
+Cohesion: 0.14
+Nodes (13): Acceptance Criteria, Affected Files, Analysis, Clarifications, Decisions, Functional Requirements, Implementation Plan, Open Questions (+5 more)
+
+### Community 44 - "Community 44"
+Cohesion: 0.14
+Nodes (13): Acceptance Criteria, Affected Files, Analysis, Clarifications, Decisions, Functional Requirements, Implementation Plan, Open Questions (+5 more)
+
+### Community 45 - "Community 45"
+Cohesion: 0.14
+Nodes (13): Acceptance Criteria, Affected Files, Analysis, Clarifications, Decisions, Functional Requirements, Implementation Plan, Open Questions (+5 more)
+
+### Community 46 - "Community 46"
+Cohesion: 0.14
+Nodes (13): Acceptance Criteria, Affected Files, Analysis, Clarifications, Decisions, Functional Requirements, Implementation Plan, Open Questions (+5 more)
+
+### Community 47 - "Community 47"
+Cohesion: 0.14
+Nodes (13): Acceptance Criteria, Affected Files, Analysis, Clarifications, Decisions, Functional Requirements, Implementation Plan, Open Questions (+5 more)
+
+### Community 48 - "Community 48"
+Cohesion: 0.14
+Nodes (13): Acceptance Criteria, Affected Files, Analysis, Clarifications, Decisions, Functional Requirements, Implementation Plan, Open Questions (+5 more)
+
+### Community 49 - "Community 49"
+Cohesion: 0.15
+Nodes (12): 1. Parse arguments, 2. Load spec, 3. First run vs re-run, 4. Codebase exploration, 5. Risks, 6. Ask user, 7. Write/refresh spec sections, 7a. First run (+4 more)
+
+### Community 50 - "Community 50"
+Cohesion: 0.17
+Nodes (11): Acceptance Criteria, Affected Files, Analysis, Clarifications, Decisions, Functional Requirements, Implementation Plan, Risks & Concerns (+3 more)
+
+### Community 51 - "Community 51"
+Cohesion: 0.17
+Nodes (11): Acceptance Criteria, Clarifications, Feature Priority Table, Functional Requirements, Implementation Plan, Implementation Workflow, Open Questions, Possible Edge Cases (+3 more)
+
+### Community 52 - "Community 52"
+Cohesion: 0.17
+Nodes (11): Acceptance Criteria, Context / Background, Dependencies, Functional Requirements, Non-Goals / Out of Scope, Open Questions, Possible Edge Cases, Spec: <spec_title> (+3 more)
+
+### Community 53 - "Community 53"
+Cohesion: 0.18
+Nodes (10): 1. Load and validate, 2. Find next step, 3. Build the step, 4. Pause for review, 5. Handle response, 6. Commit and mark done, 7. Loop, 7a. CLAUDE.md update (+2 more)
+
+### Community 54 - "Community 54"
+Cohesion: 0.18
+Nodes (10): 1. Parse arguments, 2. Detect re-entry, 3. Dirty tree check, 4. Choose source, 5. Pull and adapt (skill), 6. Create branch (new draft only), 7. Write spec file, 8. Commit (refresh only) (+2 more)
+
+### Community 55 - "Community 55"
+Cohesion: 0.20
+Nodes (9): Categories:, Deployment, Environment, Local development, Prerequisites, See it in action, What is this?, With Docker (+1 more)
+
+### Community 56 - "Community 56"
+Cohesion: 0.39
+Nodes (6): ChannelPanel Component, IconComment(), IconEye(), IconThumbUp(), YouTube IFrame API, Player
+
+### Community 57 - "Community 57"
+Cohesion: 0.22
+Nodes (8): 1. Parse arguments, 2. Locate specs, 3. Derive state per spec, 4. Next command, 5. Output, List mode, Single mode, Workflow
+
+### Community 58 - "Community 58"
+Cohesion: 0.22
+Nodes (8): `adapt(source, body) -> proposed_body`, Adding an adapter, `detect_conflict(source, ref) -> (has_conflict, diff)`, Guarantees, Operations, `pull(source, ref) -> body`, `push(source, ref, body)`, spec-source
+
+### Community 59 - "Community 59"
+Cohesion: 0.25
+Nodes (7): Adding an adapter, Contract, Frontmatter rule, `jira`, `local` (default), Registered adapters, Source Adapters
+
+### Community 60 - "Community 60"
+Cohesion: 0.38
+Nodes (4): ThemeContext, Header(), MoonIcon(), SunIcon()
+
+### Community 61 - "Community 61"
+Cohesion: 0.48
+Nodes (5): AppearancesTooltip(), formatDate(), formatRange(), groupAppearanceDates(), isConsecutive()
+
+### Community 63 - "Community 63"
+Cohesion: 0.60
+Nodes (3): useNow(), LiveClock(), LiveTimestamp()
+
+### Community 64 - "Community 64"
+Cohesion: 0.40
+Nodes (4): Auto-clarity overrides, Lite rules, Never compress, Persistence
+
+### Community 65 - "Community 65"
+Cohesion: 0.40
+Nodes (5): Edge Case Handling, No Data for Country, Rate-Limited API (429 Handling), Slow Connection / API Timeout, Stale Data Indicator
+
+### Community 66 - "Community 66"
+Cohesion: 0.40
+Nodes (5): fitBounds with Sidebar Padding, Gesture Handling — `leaflet-gesture-handling`, Locate Control — `leaflet.locatecontrol`, Map Interaction Improvements, Smooth Wheel Zoom — `@luomus/leaflet-smooth-wheel-zoom`
+
+### Community 67 - "Community 67"
+Cohesion: 0.50
+Nodes (4): Accessibility (a11y) and Usability, ARIA Labels on Map Container and Markers, Keyboard Navigation for Markers, Reduced Motion Respect
+
+### Community 68 - "Community 68"
+Cohesion: 0.50
+Nodes (4): Affected Files, Analysis, Decisions, Risks & Concerns
+
+### Community 69 - "Community 69"
+Cohesion: 0.50
+Nodes (4): Canvas Renderer for GeoJSON, LayerGroup / FeatureGroup per Category, Performance and Scalability, WebGL Renderer — `leaflet-glify` (future-scale)
+
+### Community 70 - "Community 70"
+Cohesion: 0.50
+Nodes (4): Country Comparison Mode (Future), Dark Tile Layer Swap on Theme Toggle, Fullscreen Mode — `leaflet.fullscreen`, Optional / Advanced Toggleable Features
+
+### Community 71 - "Community 71"
+Cohesion: 0.50
+Nodes (4): Country Highlight on GeoJSON Hover, Progressive Disclosure, Tooltip on Marker Hover (Desktop), Zoom-Level Detail Tiers
+
+### Community 72 - "Community 72"
+Cohesion: 0.50
+Nodes (4): Heatmap Overlay — `@linkurious/leaflet-heat`, Marker Clustering — `leaflet.markercluster`, Pane Management (Z-index Layering), Visual Data Differentiation
+
+### Community 73 - "Community 73"
+Cohesion: 0.50
+Nodes (4): Minimap Context Widget — `leaflet-minimap`, Mobile-Only Bottom Sheet Sidebar, Mobile vs Desktop UX, Touch-Optimized Tap Targets
+
+### Community 74 - "Community 74"
+Cohesion: 0.67
+Nodes (3): Category Persistence in localStorage, Sidebar Open/Scroll State Persistence, State Persistence
+
 ## Knowledge Gaps
-- **134 isolated node(s):** `DEFAULT_CENTER`, `Context / Background`, `Summary`, `A. Live clock label`, `B. Country modal — structure` (+129 more)
+- **455 isolated node(s):** `name`, `@linkurious/leaflet-heat`, `dotenv-webpack`, `leaflet`, `leaflet-gesture-handling` (+450 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **19 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `LanguageContext` connect `App Shell & Navigation` to `Map Rendering & Data`, `Point Rendering`, `Country Panel`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
+- **Why does `LanguageContext` connect `Community 39` to `Map Rendering & Data`, `App Shell & Navigation`, `Country Panel`, `Community 56`, `Community 60`, `Community 61`, `Community 62`, `Community 63`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+- **Why does `Spec for Leaflet Feature Research And Recommendations` connect `Community 51` to `Community 65`, `Community 66`, `Community 67`, `Community 68`, `Community 69`, `Community 70`, `Community 71`, `Community 72`, `Community 73`, `Community 74`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Why does `Countries` connect `Leaflet Integration` to `Map Rendering & Data`?**
-  _High betweenness centrality (0.022) - this node is a cross-community bridge._
-- **Why does `Map()` connect `Map Rendering & Data` to `App Shell & Navigation`, `Country Panel`, `Community 33`?**
-  _High betweenness centrality (0.011) - this node is a cross-community bridge._
+  _High betweenness centrality (0.004) - this node is a cross-community bridge._
 - **Are the 8 inferred relationships involving `LanguageContext` (e.g. with `App()` and `ChannelPanel()`) actually correct?**
   _`LanguageContext` has 8 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 5 inferred relationships involving `Map()` (e.g. with `App()` and `Countries()`) actually correct?**
   _`Map()` has 5 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `DEFAULT_CENTER`, `Context / Background`, `Summary` to the rest of the system?**
-  _138 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `name`, `@linkurious/leaflet-heat`, `dotenv-webpack` to the rest of the system?**
+  _459 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Map Rendering & Data` be split into smaller, more focused modules?**
-  _Cohesion score 0.0783673469387755 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.08637873754152824 - nodes in this community are weakly interconnected._

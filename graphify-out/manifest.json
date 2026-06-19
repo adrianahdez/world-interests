@@ -25,7 +25,7 @@
     "semantic_hash": "79cb1aa12b7e20fab38f5cd2c3b9fb3e"
   },
   "src/App/App.jsx": {
-    "mtime": 1781790708.1465569,
+    "mtime": 1781889325.180755,
     "ast_hash": "c6163d4f1ee202907ca884f72a75f211",
     "semantic_hash": "c6163d4f1ee202907ca884f72a75f211"
   },
@@ -45,7 +45,7 @@
     "semantic_hash": "f15282214166b7f6c21a39157c18aee4"
   },
   "src/Common/Icons.jsx": {
-    "mtime": 1781887050.8092475,
+    "mtime": 1781889325.1808467,
     "ast_hash": "fa1cb713bb6c898c56631174bafd6dcf",
     "semantic_hash": ""
   },
@@ -70,7 +70,7 @@
     "semantic_hash": "ae50fea7bc1f05b77cd3c230c3752335"
   },
   "src/Common/translations.js": {
-    "mtime": 1781888313.4515421,
+    "mtime": 1781889325.1809332,
     "ast_hash": "8102107d18511bb35c5eec79c5e50dcf",
     "semantic_hash": ""
   },
@@ -80,12 +80,12 @@
     "semantic_hash": "cd09c5a0f87cd23174574bc67518189b"
   },
   "src/CountryPanel/CountryPanel.jsx": {
-    "mtime": 1781888762.0855973,
+    "mtime": 1781889325.1810386,
     "ast_hash": "7b6be64b29c4b115d9e905c9487e389f",
     "semantic_hash": ""
   },
   "src/CountryPanel/groupAppearanceDates.js": {
-    "mtime": 1781822291.4569218,
+    "mtime": 1781889325.1812294,
     "ast_hash": "b955ae70cc10b06437b56ce5d974f26c",
     "semantic_hash": "b955ae70cc10b06437b56ce5d974f26c"
   },
@@ -120,7 +120,7 @@
     "semantic_hash": "6af16aa5867b6cf5b232d8e84fc4373e"
   },
   "src/LiveClock/LiveClock.jsx": {
-    "mtime": 1781880846.3865197,
+    "mtime": 1781889325.1815217,
     "ast_hash": "10d48dd028bd08a3fc5342bfdc149755",
     "semantic_hash": ""
   },
@@ -150,12 +150,12 @@
     "semantic_hash": "fa6f7bca9852c5c53a5070d2f49bc339"
   },
   "src/Map/Map.jsx": {
-    "mtime": 1781888045.4494693,
+    "mtime": 1781889325.1818912,
     "ast_hash": "acce64030b4a265bb80dd7b981e15784",
     "semantic_hash": ""
   },
   "src/Map/MapSettings/MapSettings.jsx": {
-    "mtime": 1781790753.7851307,
+    "mtime": 1781889325.181982,
     "ast_hash": "9640c23a82246a490e6845e5eef7d90e",
     "semantic_hash": "9640c23a82246a490e6845e5eef7d90e"
   },
@@ -180,22 +180,22 @@
     "semantic_hash": "7e910d56db5a042826356d5c2d98698e"
   },
   "src/config.js": {
-    "mtime": 1781888088.0121107,
+    "mtime": 1781889325.182147,
     "ast_hash": "e1e48bd13038eb73dcaba971fb18642c",
     "semantic_hash": ""
   },
   "src/hooks/useCountryHistory.js": {
-    "mtime": 1781858825.6026108,
+    "mtime": 1781889325.1822355,
     "ast_hash": "8e95cc9e6f69632f5aec9cc3857a0d5a",
     "semantic_hash": "8e95cc9e6f69632f5aec9cc3857a0d5a"
   },
   "src/hooks/useCountryRanking.js": {
-    "mtime": 1781884290.5085123,
+    "mtime": 1781889325.1822846,
     "ast_hash": "dc28eaca909d84f54ce1a3fc1b8b4123",
     "semantic_hash": ""
   },
   "src/hooks/useCountryToday.js": {
-    "mtime": 1781858817.4218729,
+    "mtime": 1781889325.182333,
     "ast_hash": "7aff068364dbc4439869248eb2e0426b",
     "semantic_hash": "7aff068364dbc4439869248eb2e0426b"
   },
@@ -215,7 +215,7 @@
     "semantic_hash": "96ed4a1873f09fdf772d1fa0574fb7a1"
   },
   "src/settingsVisibility.js": {
-    "mtime": 1781790673.7437282,
+    "mtime": 1781889325.182456,
     "ast_hash": "2a9ca5f93bd583ea0c6c558507af4ed6",
     "semantic_hash": "2a9ca5f93bd583ea0c6c558507af4ed6"
   },
@@ -310,7 +310,7 @@
     "semantic_hash": "fda948fdda866d89ac77dff9cfcfd266"
   },
   ".sdd/specs/WIF-19.md": {
-    "mtime": 1781888832.0743635,
+    "mtime": 1781889325.175117,
     "ast_hash": "d9d8089f471d96b677f38a9dbabe71b0",
     "semantic_hash": ""
   },
@@ -360,7 +360,7 @@
     "semantic_hash": "c75c33af4f814148cc78478b55a4d3fb"
   },
   "CLAUDE.md": {
-    "mtime": 1781866767.1128197,
+    "mtime": 1781889325.1752393,
     "ast_hash": "8d2e5ba26f0e3031dc3f7dfc7558a4df",
     "semantic_hash": ""
   },
@@ -375,9 +375,9 @@
     "semantic_hash": "fe2dc21c9c86af7551088cca70252c85"
   },
   "index.html": {
-    "mtime": 1776521469.1163907,
-    "ast_hash": "6c7de7d7e84b8ec9f1626f0ab60b939d",
-    "semantic_hash": "6c7de7d7e84b8ec9f1626f0ab60b939d"
+    "mtime": 1781891112.1785626,
+    "ast_hash": "6783e950dbf8faa30453b5fbc1050892",
+    "semantic_hash": ""
   },
   "robots.txt": {
     "mtime": 1776521469.1165514,
@@ -410,28 +410,33 @@
     "semantic_hash": "80ee93e15157a8c2863e1e9e76544eed"
   },
   ".claude/settings.json": {
-    "mtime": 1781866767.1131406,
+    "mtime": 1781889325.1736257,
     "ast_hash": "e1073342e958ac9f00716938c8f165e3",
     "semantic_hash": ""
   },
   ".github/copilot-instructions.md": {
-    "mtime": 1781869797.2939532,
+    "mtime": 1781889325.1748204,
     "ast_hash": "ec2dc0dc7bef63488889f34de2f5584d",
     "semantic_hash": ""
   },
   "src/hooks/useNow.js": {
-    "mtime": 1781880802.8529127,
+    "mtime": 1781889325.1823773,
     "ast_hash": "6ae8719c7a77a40de70ee73c1f73bd4d",
     "semantic_hash": ""
   },
   "src/LiveTimestamp/LiveTimestamp.jsx": {
-    "mtime": 1781888750.905954,
+    "mtime": 1781889325.1816351,
     "ast_hash": "b0499bb137d3d19b9125f0267e3cb7b3",
     "semantic_hash": ""
   },
   "src/InfoTooltip/InfoTooltip.jsx": {
-    "mtime": 1781887101.9316134,
+    "mtime": 1781889325.181353,
     "ast_hash": "446d1a5e214122e1a325f0289371d6f6",
+    "semantic_hash": ""
+  },
+  ".sdd/specs/WIF-20.md": {
+    "mtime": 1781890796.4226472,
+    "ast_hash": "f847b62ec6d1600d23798238a65c288b",
     "semantic_hash": ""
   }
 }
