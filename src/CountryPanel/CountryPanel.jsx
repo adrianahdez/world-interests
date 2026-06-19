@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useContext, useState, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import './CountryPanel.scss';
 import { CountryPanelContext } from '../Common/CountryPanelContext';
@@ -6,6 +6,7 @@ import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
 import { useCountryHistory } from '../hooks/useCountryHistory';
 import { useCountryToday } from '../hooks/useCountryToday';
+import useNow from '../hooks/useNow';
 import { IconEye, IconThumbUp, IconComment } from '../Common/Icons';
 import AppearancesTooltip from './AppearancesTooltip';
 
@@ -173,16 +174,12 @@ CountryPanel.propTypes = {
 // not the surrounding tab (which may map over a long video card list).
 
 function LiveTimestamp({ isEs, label }) {
-  const [now, setNow] = useState(() => new Date());
-  useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
-  }, []);
+  const now = useNow();
   const locale = isEs ? 'es-ES' : 'en-US';
-  const time = now.toLocaleTimeString(locale, {
+  const fmt = useMemo(() => new Intl.DateTimeFormat(locale, {
     hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short',
-  });
-  return <span className="country-panel__meta-item">{label} <strong>{time}</strong></span>;
+  }), [locale]);
+  return <span className="country-panel__meta-item">{label} <strong>{fmt.format(now)}</strong></span>;
 }
 
 LiveTimestamp.propTypes = {

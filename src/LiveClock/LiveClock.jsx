@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import './LiveClock.scss';
 import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
+import useNow from '../hooks/useNow';
 
 // Fixed, horizontally-centered label at the top of the viewport showing the
 // current local date and time (to the second), updating live. Its purpose is to
@@ -10,19 +11,15 @@ import translations from '../Common/translations';
 export default function LiveClock() {
   const { isEs } = useContext(LanguageContext);
   const tr = isEs ? translations.es : translations.en;
-
-  const [now, setNow] = useState(() => new Date());
-
-  // Tick every second. Cleared on unmount so the interval never leaks.
-  useEffect(() => {
-    const id = setInterval(() => setNow(new Date()), 1000);
-    return () => clearInterval(id);
-  }, []);
+  const now = useNow();
 
   const locale = isEs ? 'es-ES' : 'en-US';
-  // Local timezone throughout; timeZoneName: 'short' appends an unambiguous tz label (e.g. "GMT+2").
-  const dateStr = now.toLocaleDateString(locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-  const timeStr = now.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' });
+  // Formatters cached per locale — Intl.DateTimeFormat construction is expensive.
+  // timeZoneName: 'short' appends an unambiguous tz label (e.g. "GMT+2").
+  const dateFmt = useMemo(() => new Intl.DateTimeFormat(locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }), [locale]);
+  const timeFmt = useMemo(() => new Intl.DateTimeFormat(locale, { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' }), [locale]);
+  const dateStr = dateFmt.format(now);
+  const timeStr = timeFmt.format(now);
 
   return (
     <div
