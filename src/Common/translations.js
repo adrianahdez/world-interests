@@ -30,10 +30,10 @@ const translations = {
     countryChannelsLabel: "Country top channels",
     realtimeChannelsLabel: "Real-time top channels",
     labelsLabel: "Map labels",
-    // Tooltip on the most-viewed label — composed as: mostViewedTooltip + " " + categoryName
-    mostViewedTooltip: "Today's #1 in the most countries in",
+    // Tooltip on the top-countries label — composed as: topCountriesTooltip + " " + categoryName
+    topCountriesTooltip: "Today's #1 in the most countries in",
     // Desktop-only prefix on the 🏆 label (hidden on mobile)
-    worldwideNumberOne: "Worldwide #1:",
+    topCountriesLabel: "Worldwide #1:",
     // Accessible label for the fixed top-center live clock (date/time tick visibly)
     liveClockAriaLabel: "Current local date and time, updating live",
     // ── Channel panel (ChannelPanel) ───────────────────────────────────────────
@@ -51,8 +51,8 @@ const translations = {
     historicalViewAriaLabel: "Historical view: videos or channels",
     historicalVideos: "Videos",
     historicalChannels: "Channels",
-    historicalInfoVideos: "Ranked by days at #1. Ties: most recent #1 first.",
-    historicalInfoChannels: "Ranked by days at #1. Ties: most recent #1 first.",
+    historicalInfoVideos: "Ordered by number of days at #1. Ties: most recent #1 appearance goes first.",
+    historicalInfoChannels: "Ordered by number of days at #1. Ties: most recent #1 appearance goes first.",
     // "<n> day(s) at #1" appearance count on historical cards
     dayAtNumberOne: "day at #1",
     daysAtNumberOne: "days at #1",
@@ -125,9 +125,9 @@ const translations = {
     countryChannelsLabel: "Top canales por país",
     realtimeChannelsLabel: "Top canales en tiempo real",
     labelsLabel: "Etiquetas del mapa",
-    mostViewedTooltip: "El #1 en más países hoy en",
+    topCountriesTooltip: "El #1 en más países hoy en",
     // Prefijo solo-escritorio en la etiqueta 🏆 (oculto en móvil)
-    worldwideNumberOne: "#1 mundial:",
+    topCountriesLabel: "#1 mundial:",
     // Etiqueta accesible del reloj en vivo fijo en la parte superior central
     liveClockAriaLabel: "Fecha y hora local actual, actualizándose en vivo",
     // ── Panel de canal (ChannelPanel) ──────────────────────────────────────────
@@ -143,8 +143,8 @@ const translations = {
     historicalViewAriaLabel: "Vista histórica: vídeos o canales",
     historicalVideos: "Vídeos",
     historicalChannels: "Canales",
-    historicalInfoVideos: "Ordenado por días como #1. Empates: aparición más reciente primero.",
-    historicalInfoChannels: "Ordenado por días como #1. Empates: aparición más reciente primero.",
+    historicalInfoVideos: "Ordenado por cantidad de días como #1. Empates: aparición más reciente va primero.",
+    historicalInfoChannels: "Ordenado por cantidad de días como #1. Empates: aparición más reciente va primero.",
     // Conteo "<n> día(s) como #1" en las tarjetas del histórico
     dayAtNumberOne: "día como #1",
     daysAtNumberOne: "días como #1",

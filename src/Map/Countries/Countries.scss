@@ -121,7 +121,7 @@
 /* Wrapper that stacks all bottom-right overlay labels (category, zoom, country hover).
    Sits outside MapContainer so all labels share the same positioning context.
    pointer-events is intentionally NOT set here — it is applied per-label instead,
-   so the clickable most-viewed button can have pointer-events: auto without fighting
+   so the clickable top-countries button can have pointer-events: auto without fighting
    an inherited none from this ancestor. */
 .map-overlay-labels {
   position: absolute;
@@ -147,7 +147,7 @@
 
 /* Shared style for individual overlay labels.
    pointer-events: none here (not on the container) keeps the map interactive
-   under static labels while still allowing the most-viewed button to override it. */
+   under static labels while still allowing the top-countries button to override it. */
 .map-overlay-label {
   background: rgba(0, 0, 0, 0.55);
   color: rgba(255, 255, 255, 0.9);
@@ -164,8 +164,8 @@
     letter-spacing: 0.02em;
   }
 
-  // Most-viewed label is a <button> — reset browser defaults and re-enable pointer events.
-  &--most-viewed {
+  // Top-countries label is a <button> — reset browser defaults and re-enable pointer events.
+  &--top-countries {
     pointer-events: auto;
     cursor: pointer;
     font-family: inherit;
@@ -189,7 +189,7 @@
   }
 }
 
-// Each truncated field (channel name / video title) inside the most-viewed label.
+// Each truncated field (channel name / video title) inside the top-countries label.
 // Per-field max-width + ellipsis keeps both fields visible at any screen width.
 .map-overlay-label__truncated {
   display: inline-block;
@@ -210,7 +210,7 @@
   display: none;
 }
 
-.light .map-overlay-label--most-viewed:hover {
+.light .map-overlay-label--top-countries:hover {
   background: rgba(200, 200, 200, 0.92);
   border-color: rgba(0, 0, 0, 0.2);
 }

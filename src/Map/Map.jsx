@@ -517,13 +517,13 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
         {topCountriesPoint && (
           <button
             type="button"
-            className="map-overlay-label map-overlay-label--most-viewed"
+            className="map-overlay-label map-overlay-label--top-countries"
             onClick={handleTopCountriesClick}
-            title={categoryName ? `${tr.mostViewedTooltip} ${categoryName}` : undefined}
+            title={categoryName ? `${tr.topCountriesTooltip} ${categoryName}` : undefined}
           >
             {'🏆 '}
             {/* "Worldwide #1:" prefix — desktop only (hidden ≤768px to save space). */}
-            <span className="map-overlay-label__prefix">{tr.worldwideNumberOne} </span>
+            <span className="map-overlay-label__prefix">{tr.topCountriesLabel} </span>
             <span className="map-overlay-label__truncated">{topCountriesPoint.channel?.channelTitle}</span>
             {' · '}
             <span className="map-overlay-label__truncated">{topCountriesPoint.videoTitle}</span>

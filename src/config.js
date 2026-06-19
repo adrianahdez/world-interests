@@ -28,7 +28,7 @@ export const FLAGS_VISIBLE           = true;
 // Automatically true in development builds and false in production (via webpack NODE_ENV).
 export const DEBUG_ZOOM_LEVEL_ENABLED  = process.env.NODE_ENV === 'development';
 
-// Shows the labels overlay area (category badge, most-viewed, country hover). Can be toggled at runtime via map settings.
+// Shows the labels overlay area (category badge, top-countries, country hover). Can be toggled at runtime via map settings.
 export const LABELS_VISIBLE = true;
 
 // ─── localStorage Keys ───────────────────────────────────────────────────────
