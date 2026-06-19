@@ -220,9 +220,9 @@
     "semantic_hash": "2a9ca5f93bd583ea0c6c558507af4ed6"
   },
   "webpack.config.js": {
-    "mtime": 1776521469.123408,
-    "ast_hash": "acd2b6350ad832c25c6b77314e171a15",
-    "semantic_hash": "acd2b6350ad832c25c6b77314e171a15"
+    "mtime": 1781894854.3007007,
+    "ast_hash": "c9985aa3e3cd90d8be048e7f8ff799d4",
+    "semantic_hash": ""
   },
   ".claude/commands/spec-build.md": {
     "mtime": 1776532098.8116758,
@@ -432,6 +432,11 @@
   "src/InfoTooltip/InfoTooltip.jsx": {
     "mtime": 1781889325.181353,
     "ast_hash": "446d1a5e214122e1a325f0289371d6f6",
+    "semantic_hash": ""
+  },
+  "ads.txt": {
+    "mtime": 1781894843.4500444,
+    "ast_hash": "5cb642f516338a3947507ba4c7de5f22",
     "semantic_hash": ""
   }
 }
