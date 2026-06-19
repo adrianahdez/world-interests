@@ -375,7 +375,7 @@
     "semantic_hash": "fe2dc21c9c86af7551088cca70252c85"
   },
   "index.html": {
-    "mtime": 1781891112.1785626,
+    "mtime": 1781892556.718069,
     "ast_hash": "6783e950dbf8faa30453b5fbc1050892",
     "semantic_hash": ""
   },
@@ -432,11 +432,6 @@
   "src/InfoTooltip/InfoTooltip.jsx": {
     "mtime": 1781889325.181353,
     "ast_hash": "446d1a5e214122e1a325f0289371d6f6",
-    "semantic_hash": ""
-  },
-  ".sdd/specs/WIF-20.md": {
-    "mtime": 1781890796.4226472,
-    "ast_hash": "f847b62ec6d1600d23798238a65c288b",
     "semantic_hash": ""
   }
 }
