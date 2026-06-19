@@ -6,9 +6,10 @@ import { LanguageContext } from '../Common/LanguageContext';
 import translations from '../Common/translations';
 import { useCountryHistory } from '../hooks/useCountryHistory';
 import { useCountryToday } from '../hooks/useCountryToday';
-import { IconEye, IconThumbUp, IconComment } from '../Common/Icons';
+import { IconEye, IconThumbUp, IconComment, IconInfo } from '../Common/Icons';
 import AppearancesTooltip from './AppearancesTooltip';
 import LiveTimestamp from '../LiveTimestamp/LiveTimestamp';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 // Returns a JSX "Last updated …" label with the time portion in bold.
 // Uses separate lastUpdatedRecent / lastUpdatedAgo keys so Spanish avoids
@@ -274,26 +275,31 @@ function HistoricalTab({ alpha2, category, categoryName, countryChannels, isEs, 
         {lastUpdatedLabel && <span className="country-panel__meta-item">{lastUpdatedLabel}</span>}
       </div>
 
-      {/* Sub-toggle: Videos (default) | Channels */}
-      <div className="country-panel__subtabs" role="tablist" aria-label={tr.historicalViewAriaLabel}>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={mode === 'videos'}
-          className={`country-panel__subtab${mode === 'videos' ? ' country-panel__subtab--active' : ''}`}
-          onClick={() => setMode('videos')}
-        >
-          {tr.historicalVideos}
-        </button>
-        <button
-          type="button"
-          role="tab"
-          aria-selected={mode === 'channels'}
-          className={`country-panel__subtab${mode === 'channels' ? ' country-panel__subtab--active' : ''}`}
-          onClick={() => setMode('channels')}
-        >
-          {tr.historicalChannels}
-        </button>
+      {/* Sub-toggle: Videos (default) | Channels, with info icon */}
+      <div className="country-panel__subtabs-row">
+        <div className="country-panel__subtabs" role="tablist" aria-label={tr.historicalViewAriaLabel}>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === 'videos'}
+            className={`country-panel__subtab${mode === 'videos' ? ' country-panel__subtab--active' : ''}`}
+            onClick={() => setMode('videos')}
+          >
+            {tr.historicalVideos}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === 'channels'}
+            className={`country-panel__subtab${mode === 'channels' ? ' country-panel__subtab--active' : ''}`}
+            onClick={() => setMode('channels')}
+          >
+            {tr.historicalChannels}
+          </button>
+        </div>
+        <InfoTooltip text={mode === 'videos' ? tr.historicalInfoVideos : tr.historicalInfoChannels}>
+          <IconInfo className="country-panel__info-icon" />
+        </InfoTooltip>
       </div>
 
       {isLoading && (

@@ -178,14 +178,26 @@
 
 // ── Historical sub-toggle (Videos | Channels) — segmented control ─────────────
 
+.country-panel__subtabs-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
 .country-panel__subtabs {
   display: inline-flex;
   gap: 2px;
-  margin-bottom: 16px;
   padding: 3px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.country-panel__info-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 
 .country-panel__subtab {

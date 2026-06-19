@@ -6,8 +6,14 @@
   outline: none;
   flex-shrink: 0;
 
+  svg {
+    opacity: 0.45;
+    transition: opacity 150ms;
+  }
+
+  &:hover svg,
   &:focus-visible svg {
-    opacity: 1;
+    opacity: 0.85;
   }
 }
 
