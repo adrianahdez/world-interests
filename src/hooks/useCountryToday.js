@@ -1,92 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useCountryRanking } from './useCountryRanking';
 
 /**
  * Fetches the latest real-time (today) top-N ranking for a country + category.
+ * Calls GET /api/country/today?country=<alpha2>&category=<slug>&limit=<n>.
  *
- * Calls GET /api/country/today?country=<alpha2>&category=<slug>&limit=<n>
- *
- * Returns:
- *   data       — { latest_capture_at, country_name_en, country_name_es, channels } on success; null otherwise.
- *   isLoading  — true while the request is in flight.
- *   isEmpty    — true when the endpoint returned no channels or a 501 stub response.
- *   error      — true on a genuine network or server error (not 501).
- *
- * Mirrors useCountryHistory: cancels any in-flight request when alpha2, category,
- * or limit changes, or on unmount; treats HTTP 501 as an empty/coming-soon state.
+ * Thin wrapper over useCountryRanking — see it for the returned shape and semantics.
  *
  * @param {string|null} alpha2        ISO 3166-1 alpha-2 country code, e.g. 'ES'
  * @param {string}      category      Category slug, e.g. 'music'
  * @param {number}      limit         Number of channels to request (1–20)
- * @param {number}      [retryTrigger=0]  Increment to force a re-fetch (used by retry button)
+ * @param {number}      [retryTrigger=0]  Increment to force a re-fetch (retry button)
  */
 export function useCountryToday(alpha2, category, limit, retryTrigger = 0) {
-  const [data, setData]         = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isEmpty, setIsEmpty]   = useState(false);
-  const [error, setError]       = useState(false);
-
-  useEffect(() => {
-    // Don't fetch until we have all required params.
-    if (!alpha2 || !category) {
-      setData(null);
-      setIsLoading(false);
-      setIsEmpty(false);
-      setError(false);
-      return;
-    }
-
-    const controller = new AbortController();
-
-    setData(null);
-    setIsLoading(true);
-    setIsEmpty(false);
-    setError(false);
-
-    const url =
-      process.env.REACT_APP_BACKEND_API_URL +
+  const url = (alpha2 && category)
+    ? process.env.REACT_APP_BACKEND_API_URL +
       'api/country/today?country=' + encodeURIComponent(alpha2) +
       '&category=' + encodeURIComponent(category) +
-      '&limit=' + encodeURIComponent(limit);
+      '&limit=' + encodeURIComponent(limit)
+    : null;
 
-    fetch(url, {
-      signal: controller.signal,
-      headers: { 'Content-type': 'application/json' },
-    })
-      .then(async (res) => {
-        // 501 = endpoint not yet implemented — treat as empty, not an error.
-        if (res.status === 501) {
-          setIsEmpty(true);
-          setIsLoading(false);
-          return;
-        }
-
-        if (!res.ok) {
-          throw new Error('HTTP ' + res.status);
-        }
-
-        const json = await res.json();
-
-        if (json.error || !json.data || !json.data.channels || json.data.channels.length === 0) {
-          setIsEmpty(true);
-          setIsLoading(false);
-          return;
-        }
-
-        setData(json.data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        // Ignore cancellation — it's intentional, not a failure.
-        if (err.name === 'AbortError') return;
-        console.warn('[WorldInterests] useCountryToday fetch failed:', err.message);
-        setError(true);
-        setIsLoading(false);
-      });
-
-    return () => controller.abort();
-  // retryTrigger is intentionally in the dep array — incrementing it re-runs the fetch.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [alpha2, category, limit, retryTrigger]);
-
-  return { data, isLoading, isEmpty, error };
+  return useCountryRanking(url, retryTrigger, 'useCountryToday');
 }

@@ -211,10 +211,10 @@
     outline-offset: 2px;
   }
 
-  // Explicit white (not var(--white), which is black in light theme) so the label
-  // stays readable on the accent-coloured pill in both themes.
+  // --on-accent (theme-invariant white) keeps the label readable on the accent
+  // pill in both themes (unlike --white, which flips to black in light theme).
   &--active {
-    color: #fff;
+    color: var(--on-accent);
     background: var(--link-color);
   }
 
@@ -567,14 +567,14 @@
   .country-panel__subtab {
     color: rgba(0, 0, 0, 0.6);
 
-    // Hover only on inactive pills (see base rule) so the active pill's white
-    // label survives hover on the accent background.
+    // Hover only on inactive pills (see base rule) so the active pill's label
+    // survives hover on the accent background.
     &:not(.country-panel__subtab--active):hover { color: #000; }
 
-    // Needs to be explicit here: this `.light .country-panel__subtab` selector
-    // outranks the base `--active` rule, so without it the active label would
-    // render dark on the accent pill (unreadable in light theme).
-    &--active { color: #fff; }
+    // Re-assert --on-accent: this `.light .country-panel__subtab` selector outranks
+    // the base `--active` rule, so the active label would otherwise inherit the dark
+    // color above and become unreadable on the accent pill.
+    &--active { color: var(--on-accent); }
   }
 
   .channel-card {

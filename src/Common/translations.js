@@ -74,15 +74,8 @@ const translations = {
     basedOnSettings: "(based on your settings)",
     // Prefix label shown above the #1 trending video link in the channel panel
     videoLabel: "#1 Video:",
-    // Channel card appearances line: "Channel: 4 different days as #2 in data history"
-    channelLabel: "Channel:",
-    channelDayAs: "day as",
-    channelDaysAs: "different days as",
-    inDataHistory: "in data history",
     // Overflow suffix in the appearances tooltip: "+ 5 more"
     andMore: "+ {n} more",
-    // Peak video label
-    peakVideo: "Most viewed video",
     // Channel count notice (always shown when data loads): "Showing X of up to N channels"
     showingOf: "Showing",
     ofUpTo: "of up to",
@@ -90,7 +83,6 @@ const translations = {
     videosNoun: "videos",  // noun for the "Showing X of up to Y videos" notice
     // States
     countryPanelLoading: "Loading historical data…",
-    countryPanelEmpty: "No historical data available for this country yet.",
     // Generic message — avoids implying data will ever arrive for countries that never trend
     countryPanelComingSoon: "Historical data for this country is not available yet.",
     countryPanelError: "Could not load historical data.",
@@ -100,7 +92,6 @@ const translations = {
     realtimeComingSoon: "Real-time data for this country is not available yet.",
     realtimeError: "Could not load real-time data.",
     countryPanelUpdated: "Updated:",
-    realtimeVideoLabel: "Trending video",
   },
   es: {
     statsFor: "Estadísticas para ",
@@ -168,12 +159,7 @@ const translations = {
     daysAgo: "días",
     weeksAgo: "semanas",
     monthsAgo: "meses",
-    channelLabel: "Canal:",
-    channelDayAs: "día como",
-    channelDaysAs: "días diferentes como",
-    inDataHistory: "en la historia de datos",
     andMore: "+ {n} más",
-    peakVideo: "Vídeo más visto",
     showingOf: "Mostrando",
     ofUpTo: "de hasta",
     channels: "canales",
@@ -183,14 +169,12 @@ const translations = {
     // Prefix label shown above the #1 trending video link in the channel panel
     videoLabel: "Video #1:",
     countryPanelLoading: "Cargando datos históricos…",
-    countryPanelEmpty: "Aún no hay datos históricos disponibles para este país.",
     countryPanelComingSoon: "Los datos históricos de este país aún no están disponibles.",
     // Estados y etiquetas de la pestaña en tiempo real
     realtimeLoading: "Cargando datos en tiempo real…",
     realtimeComingSoon: "Los datos en tiempo real de este país aún no están disponibles.",
     realtimeError: "No se pudieron cargar los datos en tiempo real.",
     countryPanelUpdated: "Actualizado:",
-    realtimeVideoLabel: "Vídeo en tendencia",
     countryPanelError: "No se pudieron cargar los datos históricos.",
     countryPanelRetry: "Intentar de nuevo",
   },

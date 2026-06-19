@@ -367,45 +367,59 @@ HistoricalTab.propTypes = {
 
 // ── Cards ───────────────────────────────────────────────────────────────────────
 
+// Channel avatar + name link, with an optional "<n> days at #1" line (tooltip of
+// the dates). Shared by VideoCard and ChannelCard.
+function ChannelIdentity({ channel, appearances, appearanceDates, tr }) {
+  return (
+    <div className="channel-card__channel">
+      {channel.image_url && (
+        <img
+          className="channel-card__avatar"
+          src={channel.image_url}
+          alt={channel.title}
+          loading="lazy"
+          referrerPolicy="no-referrer"
+        />
+      )}
+      <div className="channel-card__channel-info">
+        <a
+          className="channel-card__channel-name"
+          href={`https://youtube.com/channel/${channel.youtube_id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {channel.title}
+        </a>
+        {appearances != null && (
+          <AppearancesTooltip dates={appearanceDates ?? []}>
+            <span className="channel-card__appearances">{daysAtNumberOne(appearances, tr)}</span>
+          </AppearancesTooltip>
+        )}
+      </div>
+    </div>
+  );
+}
+
+ChannelIdentity.propTypes = {
+  channel: PropTypes.object.isRequired,
+  appearances: PropTypes.number,
+  appearanceDates: PropTypes.arrayOf(PropTypes.string),
+  tr: PropTypes.object.isRequired,
+};
+
 // A ranked video card: channel identity + the video (thumbnail, title, stats).
 // Used by both the real-time tab and the historical Videos sub-view. When
 // `appearances` is given (historical), shows a "<n> days at #1" line with a tooltip.
 function VideoCard({ channel, video, rank, appearances, appearanceDates, tr }) {
-  const thumbnailUrl = `https://img.youtube.com/vi/${video.youtube_id}/mqdefault.jpg`;
   const watchUrl = `https://www.youtube.com/watch?v=${video.youtube_id}`;
+  const thumbnailUrl = `https://img.youtube.com/vi/${video.youtube_id}/mqdefault.jpg`;
 
   return (
     <li className="channel-card">
       <div className="channel-card__rank">#{rank}</div>
       <div className="channel-card__content">
 
-        {/* Channel identity */}
-        <div className="channel-card__channel">
-          {channel.image_url && (
-            <img
-              className="channel-card__avatar"
-              src={channel.image_url}
-              alt={channel.title}
-              loading="lazy"
-              referrerPolicy="no-referrer"
-            />
-          )}
-          <div className="channel-card__channel-info">
-            <a
-              className="channel-card__channel-name"
-              href={`https://youtube.com/channel/${channel.youtube_id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {channel.title}
-            </a>
-            {appearances != null && (
-              <AppearancesTooltip dates={appearanceDates ?? []}>
-                <span className="channel-card__appearances">{daysAtNumberOne(appearances, tr)}</span>
-              </AppearancesTooltip>
-            )}
-          </div>
-        </div>
+        <ChannelIdentity channel={channel} appearances={appearances} appearanceDates={appearanceDates} tr={tr} />
 
         {/* Video */}
         <div className="channel-card__video">
@@ -443,30 +457,12 @@ function ChannelCard({ channel, rank, tr }) {
     <li className="channel-card channel-card--compact">
       <div className="channel-card__rank">#{rank}</div>
       <div className="channel-card__content">
-        <div className="channel-card__channel">
-          {channel.image_url && (
-            <img
-              className="channel-card__avatar"
-              src={channel.image_url}
-              alt={channel.title}
-              loading="lazy"
-              referrerPolicy="no-referrer"
-            />
-          )}
-          <div className="channel-card__channel-info">
-            <a
-              className="channel-card__channel-name"
-              href={`https://youtube.com/channel/${channel.youtube_id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {channel.title}
-            </a>
-            <AppearancesTooltip dates={channel.appearance_dates ?? []}>
-              <span className="channel-card__appearances">{daysAtNumberOne(channel.appearances, tr)}</span>
-            </AppearancesTooltip>
-          </div>
-        </div>
+        <ChannelIdentity
+          channel={channel}
+          appearances={channel.appearances}
+          appearanceDates={channel.appearance_dates}
+          tr={tr}
+        />
       </div>
     </li>
   );
