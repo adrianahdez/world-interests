@@ -39,3 +39,8 @@ export const SETTING_LABELS_VISIBLE = true;
 // When false, the channel count is fixed at COUNTRY_CHANNELS_DEFAULT in config.js
 // and the user cannot change it at runtime.
 export const SETTING_COUNTRY_CHANNELS_VISIBLE = true;
+
+// Shows/hides the "Real-time Channels" stepper in the settings menu.
+// When false, the real-time channel count is fixed at REALTIME_CHANNELS_DEFAULT
+// in config.js and the user cannot change it at runtime.
+export const SETTING_REALTIME_CHANNELS_VISIBLE = true;

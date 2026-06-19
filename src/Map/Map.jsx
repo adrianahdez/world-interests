@@ -168,7 +168,7 @@ function MarkerPaneSetup() {
   return null;
 }
 
-function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onChannelRestored, footerVisible, onFooterToggle, countryChannels, onCountryChannelsChange }) {
+function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onChannelRestored, footerVisible, onFooterToggle, countryChannels, onCountryChannelsChange, realtimeChannels, onRealtimeChannelsChange }) {
   const { isEs } = useContext(LanguageContext);
   const { setMapPoint } = useContext(MapPointContext);
   const { toggleSidebar } = useContext(SidebarContext);
@@ -390,38 +390,58 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
     return pos;
   }, [data]);
 
-  // Find the pin with the highest view count across all countries for the current category.
-  // Ties are broken by array order (first occurrence wins).
-  const mostViewedPoint = useMemo(() => {
+  // The worldwide #1: the video that is the #1 trending in the MOST countries right now
+  // (breadth). This reflects trending dominance, not raw views — YouTube's mostPopular
+  // order is opaque/per-region, so "topping the most countries" is the honest global signal.
+  // Tiebreak by highest view count; the representative country shown is the highest-views one.
+  const topCountriesPoint = useMemo(() => {
     const alpha2Keys = Object.keys(data);
     if (alpha2Keys.length === 0) return null;
-    const bestAlpha2 = alpha2Keys.reduce((best, a2) => {
-      const views = parseInt(data[a2][0]?.statistics?.viewCount, 10) || 0;
-      const bestViews = parseInt(data[best][0]?.statistics?.viewCount, 10) || 0;
-      return views > bestViews ? a2 : best;
-    });
-    const point = data[bestAlpha2][0];
-    if (!point?.channel) return null;
+
+    // idVideo -> { count: countries topped, views: best view count, alpha2: that country }
+    const byVideo = {};
+    for (const a2 of alpha2Keys) {
+      const p = data[a2]?.[0];
+      if (!p?.idVideo || !p.channel) continue;
+      const views = parseInt(p.statistics?.viewCount, 10) || 0;
+      const entry = byVideo[p.idVideo];
+      if (!entry) {
+        byVideo[p.idVideo] = { count: 1, views, alpha2: a2 };
+      } else {
+        entry.count += 1;
+        if (views > entry.views) { entry.views = views; entry.alpha2 = a2; }
+      }
+    }
+
+    let best = null;
+    for (const entry of Object.values(byVideo)) {
+      if (!best || entry.count > best.count || (entry.count === best.count && entry.views > best.views)) {
+        best = entry;
+      }
+    }
+    if (!best) return null;
+
+    const point = data[best.alpha2][0];
     return {
       ...point,
-      flag: getFlagFromAlpha2(bestAlpha2),
-      alpha2: bestAlpha2,
+      flag: getFlagFromAlpha2(best.alpha2),
+      alpha2: best.alpha2,
       channel: { ...point.channel, channelImage: point.channel.channelImage || ImageNotFound },
     };
   }, [data]);
 
-  // Must be defined after mostViewedPoint so the dep array captures the real value.
-  const handleMostViewedClick = useCallback(() => {
-    if (!mostViewedPoint) return;
+  // Must be defined after topCountriesPoint so the dep array captures the real value.
+  const handleTopCountriesClick = useCallback(() => {
+    if (!topCountriesPoint) return;
     // Open the sidebar first — matching the order used in CustomMarker to guarantee
     // the dialog opens even if the map animation below throws unexpectedly.
     toggleSidebar(true);
-    setMapPoint(mostViewedPoint);
+    setMapPoint(topCountriesPoint);
     try {
-      const latLon = getCountryLatLon(mostViewedPoint.alpha2);
+      const latLon = getCountryLatLon(topCountriesPoint.alpha2);
       if (latLon) flyToRef.current?.(latLon);
     } catch (_) {}
-  }, [mostViewedPoint, setMapPoint, toggleSidebar]);
+  }, [topCountriesPoint, setMapPoint, toggleSidebar]);
 
   // Memoized so Leaflet only unmounts/remounts markers when data or clustering mode changes.
   // Avoids marker flicker on unrelated state updates (settings toggles, hover events, etc.).
@@ -472,6 +492,7 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
   }), [data, clusteringEnabled, isEs]);
 
   return (
+    <>
     <div ref={mapContainerRef} className="map-container" role="region" aria-label={tr.mapAriaLabel}>
       {isLoading && !mapError && (
         <div className="map-loading-overlay" role="status" aria-live="polite">
@@ -493,38 +514,23 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
           </div>
         )}
         {DEBUG_ZOOM_LEVEL_ENABLED && <div ref={zoomLabelRef} className="map-overlay-label map-overlay-label--zoom" />}
-        {mostViewedPoint && (
+        {topCountriesPoint && (
           <button
             type="button"
-            className="map-overlay-label map-overlay-label--most-viewed"
-            onClick={handleMostViewedClick}
-            title={categoryName ? `${tr.mostViewedTooltip} ${categoryName}` : undefined}
+            className="map-overlay-label map-overlay-label--top-countries"
+            onClick={handleTopCountriesClick}
+            title={categoryName ? `${tr.topCountriesTooltip} ${categoryName}` : undefined}
           >
             {'🏆 '}
-            <span className="map-overlay-label__truncated">{mostViewedPoint.channel?.channelTitle}</span>
+            {/* "Worldwide #1:" prefix — desktop only (hidden ≤768px to save space). */}
+            <span className="map-overlay-label__prefix">{tr.topCountriesLabel} </span>
+            <span className="map-overlay-label__truncated">{topCountriesPoint.channel?.channelTitle}</span>
             {' · '}
-            <span className="map-overlay-label__truncated">{mostViewedPoint.videoTitle}</span>
+            <span className="map-overlay-label__truncated">{topCountriesPoint.videoTitle}</span>
           </button>
         )}
         {COUNTRY_HOVER_LABEL_ENABLED && <div ref={hoverLabelRef} className="map-overlay-label map-overlay-label--country map-overlay-label--dynamic" style={{ display: 'none' }} />}
       </div>
-      <MapSettings
-        heatmapVisible={heatmapVisible}
-        onHeatmapToggle={() => setHeatmapVisible(v => !v)}
-        clusteringEnabled={clusteringEnabled}
-        onClusteringToggle={() => setClusteringEnabled(v => !v)}
-        fullscreenEnabled={fullscreenEnabled}
-        onFullscreenToggle={handleFullscreenToggle}
-        flagsVisible={flagsVisible}
-        onFlagsToggle={() => setFlagsVisible(v => !v)}
-        footerVisible={footerVisible}
-        onFooterToggle={onFooterToggle}
-        countryChannels={countryChannels}
-        onCountryChannelsChange={onCountryChannelsChange}
-        labelsVisible={labelsVisible}
-        onLabelsVisibleChange={() => setLabelsVisible(v => !v)}
-        tr={tr}
-      />
       <MapContainer {...mapConfig}>
         <MapViewSaver />
         <MapFlyToSetup flyToRef={flyToRef} />
@@ -545,6 +551,29 @@ function Map({ category, categoryName, restoreRegion, restoreChannelAlpha2, onCh
         {heatmapVisible && <HeatmapLayer data={data} visible={heatmapVisible} />}
       </MapContainer>
     </div>
+    {/* Rendered outside .map-container (which is `isolation: isolate`) so the
+        settings panel can stack above the app modals (country/category/channel),
+        which live at z-index ≤ 40. */}
+    <MapSettings
+      heatmapVisible={heatmapVisible}
+      onHeatmapToggle={() => setHeatmapVisible(v => !v)}
+      clusteringEnabled={clusteringEnabled}
+      onClusteringToggle={() => setClusteringEnabled(v => !v)}
+      fullscreenEnabled={fullscreenEnabled}
+      onFullscreenToggle={handleFullscreenToggle}
+      flagsVisible={flagsVisible}
+      onFlagsToggle={() => setFlagsVisible(v => !v)}
+      footerVisible={footerVisible}
+      onFooterToggle={onFooterToggle}
+      countryChannels={countryChannels}
+      onCountryChannelsChange={onCountryChannelsChange}
+      realtimeChannels={realtimeChannels}
+      onRealtimeChannelsChange={onRealtimeChannelsChange}
+      labelsVisible={labelsVisible}
+      onLabelsVisibleChange={() => setLabelsVisible(v => !v)}
+      tr={tr}
+    />
+    </>
   )
 }
 
@@ -558,6 +587,8 @@ Map.propTypes = {
   onFooterToggle: PropTypes.func.isRequired,
   countryChannels: PropTypes.number.isRequired,
   onCountryChannelsChange: PropTypes.func.isRequired,
+  realtimeChannels: PropTypes.number.isRequired,
+  onRealtimeChannelsChange: PropTypes.func.isRequired,
 };
 
 export default memo(Map);

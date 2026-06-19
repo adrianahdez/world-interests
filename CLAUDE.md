@@ -37,6 +37,7 @@ React 18 app using Leaflet (via react-leaflet) to display an interactive world m
 3. **Categories** (`src/Categories/Categories.jsx`) fetches the category list from the backend (`get-category-list.php`); categories are bilingual (EN/ES) and returned as `{en: {slug: name}, es: {slug: name}}`
 4. **Data utilities** (`src/Map/Points/Data.js`) handle API fetching and country coordinate lookups using a static JSON mapping of alpha-2/alpha-3 codes to lat/lon/flags
 5. **Countries** (`src/Map/Countries/Countries.jsx`) renders GeoJSON polygons with click-to-center behavior
+6. **CountryPanel** (`src/CountryPanel/CountryPanel.jsx`) opens on polygon click with two tabs: a default **Real-time** tab (today's ranked top-N, via `useCountryToday` → `GET /api/country/today`) and a **Historical** tab (via `useCountryHistory` → `GET /api/country/history?mode=`). The Historical tab has a **Videos | Channels** sub-toggle (Videos default): both ranked by distinct days at #1. Each tab has its own channel-count setting (`realtimeChannels` / `countryChannels`). A fixed top-center **LiveClock** (`src/LiveClock/LiveClock.jsx`) shows the ticking local date/time to reinforce that data is real-time.
 
 ### Context Providers
 
@@ -50,3 +51,62 @@ Each component lives in its own folder with a colocated `.scss` file. Global sty
 ### Backend
 
 The backend is a separate private repo ([world-interests-backend](https://github.com/adrianahdez/world-interests-backend)). This frontend only consumes its PHP API endpoints.
+
+## Working Guidelines
+
+Behavioral guidelines to reduce common LLM coding mistakes. These bias toward caution over speed; for trivial tasks, use judgment.
+
+### 1. Think Before Coding
+
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
+
+- State your assumptions explicitly. If uncertain, ask.
+- If multiple interpretations exist, present them — don't pick silently.
+- If a simpler approach exists, say so. Push back when warranted.
+- If something is unclear, stop. Name what's confusing. Ask.
+
+### 2. Simplicity First
+
+**Minimum code that solves the problem. Nothing speculative.**
+
+- No features beyond what was asked.
+- No abstractions for single-use code.
+- No "flexibility" or "configurability" that wasn't requested.
+- No error handling for impossible scenarios.
+- If you write 200 lines and it could be 50, rewrite it.
+
+Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
+
+### 3. Surgical Changes
+
+**Touch only what you must. Clean up only your own mess.**
+
+- Don't "improve" adjacent code, comments, or formatting.
+- Don't refactor things that aren't broken.
+- Match the existing style of this repo (component-per-folder with a colocated `.scss`, the existing context/hook patterns), even if you'd do it differently.
+- If you notice unrelated dead code, mention it — don't delete it.
+- Remove imports/variables/functions that YOUR changes made unused, but leave pre-existing dead code unless asked.
+
+The test: every changed line should trace directly to the user's request.
+
+### 4. Goal-Driven Execution
+
+**Define success criteria. Loop until verified.**
+
+This project has **no automated tests or linting**, so verification is manual and behavioral. Turn vague tasks into concrete, observable outcomes:
+
+- "Add validation" → describe the invalid input and the exact UI/console result you expect, then confirm it in the running app.
+- "Fix the bug" → reproduce it in the browser first, then confirm the reproduction is gone after the fix.
+- "Refactor X" → confirm the affected UI behaves identically before and after.
+
+Verify against the **running dev container** (`npm run serve` / HMR on port 9000) by observing the browser and console — do **not** run `npm run build` to check your work (see Build & Dev Commands). For multi-step tasks, state a brief plan with a verification check per step.
+
+## graphify
+
+This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
+
+Rules:
+- For codebase questions, first run `graphify query "<question>"` when graphify-out/graph.json exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
+- If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
+- Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
+- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).

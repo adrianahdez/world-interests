@@ -28,16 +28,34 @@ const translations = {
     footerLabel: "Footer",
     settingsLabel: "Map settings",
     countryChannelsLabel: "Country top channels",
+    realtimeChannelsLabel: "Real-time top channels",
     labelsLabel: "Map labels",
-    // Tooltip on the most-viewed label — composed as: mostViewedTooltip + " " + categoryName
-    mostViewedTooltip: "Today's worldwide #1 in",
+    // Tooltip on the top-countries label — composed as: topCountriesTooltip + " " + categoryName
+    topCountriesTooltip: "Today's #1 in the most countries in",
+    // Desktop-only prefix on the 🏆 label (hidden on mobile)
+    topCountriesLabel: "Worldwide #1:",
+    // Accessible label for the fixed top-center live clock (date/time tick visibly)
+    liveClockAriaLabel: "Current local date and time, updating live",
     // ── Channel panel (ChannelPanel) ───────────────────────────────────────────
     // Used as the panel title: "Today's #1 for 🇲🇽 Mexico"
     channelPanelTitle: "Today's #1 for",
     // ── Country Panel ──────────────────────────────────────────────────────────
     // Used as the panel title: "Trends history for 🇧🇷 Brazil"
-    countryPanelTitlePrefix: "Trends history for",
+    countryPanelTitlePrefix: "Trending in",
     countryPanelAriaLabel: "Country historical trends panel",
+    // Country panel tabs: real-time (default) vs historical
+    countryPanelTabsAriaLabel: "Real-time and historical views",
+    countryPanelTabRealtime: "Real-time",
+    countryPanelTabHistorical: "Historical",
+    // Historical sub-toggle (Videos default | Channels)
+    historicalViewAriaLabel: "Historical view: videos or channels",
+    historicalVideos: "Videos",
+    historicalChannels: "Channels",
+    historicalInfoVideos: "Ordered by number of days at #1. Ties: most recent #1 appearance goes first.",
+    historicalInfoChannels: "Ordered by number of days at #1. Ties: most recent #1 appearance goes first.",
+    // "<n> day(s) at #1" appearance count on historical cards
+    dayAtNumberOne: "day at #1",
+    daysAtNumberOne: "days at #1",
     countryPanelCategory: "Category:",
     // "Based on data from X day(s)" — compose as: basedOnData + bold(X + day/days)
     basedOnData: "Based on data from",
@@ -58,26 +76,24 @@ const translations = {
     basedOnSettings: "(based on your settings)",
     // Prefix label shown above the #1 trending video link in the channel panel
     videoLabel: "#1 Video:",
-    // Channel card appearances line: "Channel: 4 different days as #2 in data history"
-    channelLabel: "Channel:",
-    channelDayAs: "day as",
-    channelDaysAs: "different days as",
-    inDataHistory: "in data history",
     // Overflow suffix in the appearances tooltip: "+ 5 more"
     andMore: "+ {n} more",
-    // Peak video label
-    peakVideo: "Most viewed video",
     // Channel count notice (always shown when data loads): "Showing X of up to N channels"
     showingOf: "Showing",
     ofUpTo: "of up to",
     channels: "channels",
+    videosNoun: "videos",  // noun for the "Showing X of up to Y videos" notice
     // States
     countryPanelLoading: "Loading historical data…",
-    countryPanelEmpty: "No historical data available for this country yet.",
     // Generic message — avoids implying data will ever arrive for countries that never trend
     countryPanelComingSoon: "Historical data for this country is not available yet.",
     countryPanelError: "Could not load historical data.",
     countryPanelRetry: "Try again",
+    // Real-time tab states + labels
+    realtimeLoading: "Loading real-time data…",
+    realtimeComingSoon: "Real-time data for this country is not available yet.",
+    realtimeError: "Could not load real-time data.",
+    countryPanelUpdated: "Updated:",
   },
   es: {
     statsFor: "Estadísticas para ",
@@ -107,13 +123,31 @@ const translations = {
     footerLabel: "Pie de página",
     settingsLabel: "Ajustes del mapa",
     countryChannelsLabel: "Top canales por país",
+    realtimeChannelsLabel: "Top canales en tiempo real",
     labelsLabel: "Etiquetas del mapa",
-    mostViewedTooltip: "El #1 mundial de hoy en",
+    topCountriesTooltip: "El #1 en más países hoy en",
+    // Prefijo solo-escritorio en la etiqueta 🏆 (oculto en móvil)
+    topCountriesLabel: "#1 mundial:",
+    // Etiqueta accesible del reloj en vivo fijo en la parte superior central
+    liveClockAriaLabel: "Fecha y hora local actual, actualizándose en vivo",
     // ── Panel de canal (ChannelPanel) ──────────────────────────────────────────
     channelPanelTitle: "Tendencia #1 hoy en",
     // ── Panel de país ──────────────────────────────────────────────────────────
-    countryPanelTitlePrefix: "Historial de tendencias de",
+    countryPanelTitlePrefix: "Tendencias en",
     countryPanelAriaLabel: "Panel de tendencias históricas del país",
+    // Pestañas del panel de país: tiempo real (por defecto) vs histórico
+    countryPanelTabsAriaLabel: "Vistas en tiempo real e histórica",
+    countryPanelTabRealtime: "En tiempo real",
+    countryPanelTabHistorical: "Histórico",
+    // Sub-toggle del histórico (Vídeos por defecto | Canales)
+    historicalViewAriaLabel: "Vista histórica: vídeos o canales",
+    historicalVideos: "Vídeos",
+    historicalChannels: "Canales",
+    historicalInfoVideos: "Ordenado por cantidad de días como #1. Empates: aparición más reciente va primero.",
+    historicalInfoChannels: "Ordenado por cantidad de días como #1. Empates: aparición más reciente va primero.",
+    // Conteo "<n> día(s) como #1" en las tarjetas del histórico
+    dayAtNumberOne: "día como #1",
+    daysAtNumberOne: "días como #1",
     countryPanelCategory: "Categoría:",
     // "Basado en datos de hace" includes "hace" so the number follows naturally: "hace 2 días"
     basedOnData: "Basado en datos de hace",
@@ -129,22 +163,22 @@ const translations = {
     daysAgo: "días",
     weeksAgo: "semanas",
     monthsAgo: "meses",
-    channelLabel: "Canal:",
-    channelDayAs: "día como",
-    channelDaysAs: "días diferentes como",
-    inDataHistory: "en la historia de datos",
     andMore: "+ {n} más",
-    peakVideo: "Vídeo más visto",
     showingOf: "Mostrando",
     ofUpTo: "de hasta",
     channels: "canales",
+    videosNoun: "vídeos",  // sustantivo para "Mostrando X de hasta Y vídeos"
     // Channel count notice suffix
     basedOnSettings: "(según tu configuración)",
     // Prefix label shown above the #1 trending video link in the channel panel
     videoLabel: "Video #1:",
     countryPanelLoading: "Cargando datos históricos…",
-    countryPanelEmpty: "Aún no hay datos históricos disponibles para este país.",
     countryPanelComingSoon: "Los datos históricos de este país aún no están disponibles.",
+    // Estados y etiquetas de la pestaña en tiempo real
+    realtimeLoading: "Cargando datos en tiempo real…",
+    realtimeComingSoon: "Los datos en tiempo real de este país aún no están disponibles.",
+    realtimeError: "No se pudieron cargar los datos en tiempo real.",
+    countryPanelUpdated: "Actualizado:",
     countryPanelError: "No se pudieron cargar los datos históricos.",
     countryPanelRetry: "Intentar de nuevo",
   },

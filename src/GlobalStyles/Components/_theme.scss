@@ -9,6 +9,10 @@
   --link-color: #1fa2e1;
   --black: black;
   --white: white;
+  // Foreground for text/icons sitting on a --link-color (accent) fill. Theme-invariant
+  // white because --link-color is a medium-dark blue in both themes; unlike --white,
+  // which flips to black in light theme, this stays readable on the accent.
+  --on-accent: white;
   --panels-fill-color: rgb(10 28 36);
   --footer-fill-color: rgb(11, 36, 46);
 

@@ -1,0 +1,61 @@
+@use '../GlobalStyles/helpers' as *;
+
+// Fixed, horizontally-centered live clock at the top of the viewport.
+// Inherits its look from .map-overlay-label (background, font, padding, radius);
+// this rule only handles positioning and the inline layout of its parts.
+.live-clock {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  // Above the map and its overlay labels (.map-overlay-labels is 1100).
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  // Purely informational — never intercept map interactions.
+  pointer-events: none;
+
+  // The time is the most "live" part; give it a touch more weight.
+  &__time {
+    font-weight: 600;
+  }
+
+  &__sep {
+    opacity: 0.6;
+  }
+
+  // Pulsing dot signals continuously updating, real-time data.
+  // Green reads as "live / online", reinforcing the real-time feel.
+  &__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #2ecc40;
+    flex-shrink: 0;
+    animation: live-clock-pulse 1.6s ease-in-out infinite;
+  }
+
+  // On narrow screens, drop the long date to keep the label from overflowing;
+  // the ticking time + tz is enough to convey "live". Nudge right of centre so
+  // the label clears the top-left navbar / hamburger control.
+  @include respond-max(768) {
+    transform: translateX(calc(-50% + 64px));
+
+    &__date,
+    &__sep {
+      display: none;
+    }
+  }
+}
+
+@keyframes live-clock-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.7); }
+}
+
+// Respect users who prefer reduced motion — keep the dot, drop the animation.
+@media (prefers-reduced-motion: reduce) {
+  .live-clock__dot { animation: none; }
+}

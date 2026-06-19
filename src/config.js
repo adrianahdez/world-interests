@@ -28,7 +28,7 @@ export const FLAGS_VISIBLE           = true;
 // Automatically true in development builds and false in production (via webpack NODE_ENV).
 export const DEBUG_ZOOM_LEVEL_ENABLED  = process.env.NODE_ENV === 'development';
 
-// Shows the labels overlay area (category badge, most-viewed, country hover). Can be toggled at runtime via map settings.
+// Shows the labels overlay area (category badge, top-countries, country hover). Can be toggled at runtime via map settings.
 export const LABELS_VISIBLE = true;
 
 // ─── localStorage Keys ───────────────────────────────────────────────────────
@@ -44,6 +44,7 @@ export const STORAGE_KEY_HEATMAP           = 'heatmapVisible';    // whether the
 export const STORAGE_KEY_CLUSTERING        = 'clusteringEnabled'; // whether marker clustering is on (true/false)
 export const STORAGE_KEY_FLAGS             = 'flagsVisible';      // whether pin flag emojis are shown (true/false)
 export const STORAGE_KEY_COUNTRY_CHANNELS  = 'countryChannels';   // how many historical channels to show in the country panel (1–10)
+export const STORAGE_KEY_REALTIME_CHANNELS = 'realtimeChannels';  // how many real-time (today) channels to show in the country panel
 export const STORAGE_KEY_LABELS            = 'labelsVisible';     // whether the map overlay labels area is shown (true/false)
 
 // ─── Country Panel ────────────────────────────────────────────────────────────
@@ -52,6 +53,11 @@ export const STORAGE_KEY_LABELS            = 'labelsVisible';     // whether the
 export const COUNTRY_CHANNELS_DEFAULT = 10;
 // Maximum number of top channels the user can request in the country history panel.
 export const COUNTRY_CHANNELS_MAX     = 20;
+
+// Default number of channels shown in the real-time (today) tab of the country panel.
+export const REALTIME_CHANNELS_DEFAULT = 10;
+// Maximum number of channels the user can request in the real-time tab.
+export const REALTIME_CHANNELS_MAX     = 20;
 
 // ─── Marker Icon Geometry ─────────────────────────────────────────────────────
 // DivIcon size and anchor used by CustomMarker. Anchor is bottom-centre so the

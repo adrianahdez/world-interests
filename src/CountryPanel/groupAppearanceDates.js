@@ -20,14 +20,18 @@ function formatRange(start, end, isEs) {
   if (start.toISOString().slice(0, 10) === end.toISOString().slice(0, 10)) {
     return formatDate(start, isEs);
   }
-  const startStr = start.toLocaleDateString(isEs ? 'es-ES' : 'en-US', {
+  // Input is newest-first, so a run arrives as start=newest, end=oldest.
+  // Display chronologically (oldest → newest), e.g. "15 abr – 17 abr".
+  const older = end;
+  const newer = start;
+  const olderStr = older.toLocaleDateString(isEs ? 'es-ES' : 'en-US', {
     month: 'short',
     day: 'numeric',
-    // Include year on start if it differs from end's year or from current year.
-    year: start.getFullYear() !== end.getFullYear() ? 'numeric' : undefined,
+    // Include year on the older end only if it differs from the newer end's year.
+    year: older.getFullYear() !== newer.getFullYear() ? 'numeric' : undefined,
   });
-  const endStr = formatDate(end, isEs);
-  return `${startStr} – ${endStr}`;
+  const newerStr = formatDate(newer, isEs);
+  return `${olderStr} – ${newerStr}`;
 }
 
 /**
