@@ -108,6 +108,12 @@ Add a persistent top-center live clock styled identically to the existing map ov
 ## Clarifications
 <!-- User's answers to open questions and decisions -->
 
+**Icono ⓘ de información en tab Histórico (2026-06-19).**
+- Posición: a la derecha de los botones del sub-toggle (misma fila, `country-panel__subtabs`).
+- Texto: cambia según el modo activo (Vídeos / Canales) — más preciso que un texto fijo para ambos.
+- Aplica solo a la tab Histórico; la tab En vivo no lo necesita (YouTube decide el orden, no hay criterio explicable).
+- Implementación: nuevo componente genérico `InfoTooltip` (hover/focus, mismo patrón que `AppearancesTooltip`). Nuevo icono `IconInfo` SVG en `Icons.jsx`. Texto bilingüe en `translations.js`.
+
 **Historical split into Videos + Channels (2026-06-19, #4).**
 Clarified that `trend_snapshots` stores VIDEOS (one row per video per capture) but the Historical tab aggregates them to CHANNELS (`GROUP BY ch.id`) — e.g. ПРЕМИЯ ДАРВИНА was #1 with 9 distinct videos but shows as one channel. The user wants BOTH lists, keeping the channel-aggregation work but giving the #1 VIDEOS more prominence. Chosen UI = **Variant 2** (2 tabs + sub-toggle):
 - Top level stays 2 tabs: **En vivo** (real-time videos) | **Histórico**.
@@ -168,9 +174,18 @@ Debated whether top-N should live in `trend_snapshots` (one table) or a separate
 
 ### Affected Files
 
+**Frontend — new files (2026-06-19, info tooltip):**
+- `src/InfoTooltip/InfoTooltip.jsx` + `src/InfoTooltip/InfoTooltip.scss` — generic hover/focus info tooltip. Follows `AppearancesTooltip` pattern; takes a `text` prop.
+
 **Frontend — new files:**
 - `src/LiveClock/LiveClock.jsx` + `src/LiveClock/LiveClock.scss` — fixed top-center ticking clock label.
 - `src/hooks/useCountryToday.js` — fetch hook for `/api/country/today` (mirrors `useCountryHistory`).
+
+**Frontend — modified (2026-06-19, info tooltip):**
+- `src/Common/Icons.jsx` — añadir `IconInfo` SVG (círculo con «i», mismo estilo que los iconos existentes).
+- `src/Common/translations.js` — añadir `historicalInfoVideos` y `historicalInfoChannels` (EN + ES).
+- `src/CountryPanel/CountryPanel.jsx` — importar `InfoTooltip` e `IconInfo`; colocar `<InfoTooltip>` a la derecha del sub-toggle en `HistoricalTab`, texto dependiente del `mode` activo.
+- `src/CountryPanel/CountryPanel.scss` — alinear el icono a la derecha dentro de `country-panel__subtabs` (flexbox `space-between` o `margin-left: auto`).
 
 **Frontend — modified:**
 - `src/config.js` — add `STORAGE_KEY_REALTIME_CHANNELS`, `REALTIME_CHANNELS_DEFAULT` (10), `REALTIME_CHANNELS_MAX` (20).
@@ -205,6 +220,9 @@ Debated whether top-N should live in `trend_snapshots` (one table) or a separate
 - Backend `YoutubeTrendingService.php`, `TrendingSnapshotRepo.php`, `TrendingHistoryRepo.php` (`getHistory`), `Database.php`, and the JSON output — remove `favorite_count` (Step 16).
 
 ### Risks & Concerns
+- **Tooltip en móvil (2026-06-19)** — hover no funciona en touch. `AppearancesTooltip` usa el mismo patrón y tiene el mismo límite; es consistente no resolverlo aquí. Si se quiere toggle en tap, es trabajo futuro.
+- **Desbordamiento del tooltip (2026-06-19)** — el panel es estrecho; el tooltip debe abrirse hacia arriba o hacia la izquierda para no salir del viewport. Controlar con CSS (`bottom: 100%`, `right: 0`).
+
 - **Map payload regression** — if the cron writes top-N to `response-<slug>.json`, the map fetch balloons ~20×. Mitigation: write only `[0]` per region to the JSON; full list goes to the DB only.
 - **Snapshot row volume** — storing 20 rows/region/category/run vs 1 grows `trend_snapshots` ~20×. Acceptable for SQLite at this scale (≈6.8k rows over the project's life today). History-query performance protected by the **partial index** on the `position = 0 OR position IS NULL` slice, so it touches the same row count as today.
 - **History semantics change** — the history query now reads a table holding #1..#N, so it MUST filter `position = 0 OR position IS NULL` to keep counting "#1 only". Mitigation: legacy rows are `NULL` (preserved), new #1 is `position 0`; verify output is identical by diffing `/api/country/history` before/after on real data.
@@ -269,3 +287,8 @@ Debated whether top-N should live in `trend_snapshots` (one table) or a separate
 - [x] Paso 36 (bajo — fix en el hook en lugar del consumidor para el stale frame): En `src/hooks/useCountryRanking.js`, cambiar el `useEffect` de reset de estado (`setData(null)`, `setIsLoading(true)`, etc.) a `useLayoutEffect`. `useEffect` corre asíncronamente después del paint, lo que provoca un frame donde `data` tiene la respuesta anterior, `isEmpty` es `false` y `items = []` (el nuevo modo no tiene esa key). `useLayoutEffect` corre síncronamente antes del paint, eliminando ese frame. Una vez aplicado, eliminar el guard `&& items.length > 0` de la condición de éxito en `CountryPanel.jsx` (línea ~338) — ya no defiende ningún estado alcanzable.
 - [x] Paso 37 (bajo — convención CLAUDE.md): Mover `LiveTimestamp` de su definición inline en `src/CountryPanel/CountryPanel.jsx` a `src/LiveTimestamp/LiveTimestamp.jsx`. CLAUDE.md: «Each component lives in its own folder with a colocated .scss file.» `LiveTimestamp` tiene propTypes y hooks; cumple la definición de componente propio. No necesita `.scss` propio (usa `country-panel__meta-item` de `CountryPanel.scss`), así que crear el archivo vacío o simplemente omitirlo. Actualizar el import en `CountryPanel.jsx`.
 - [x] Paso 38 (backend — desempate por recencia en histórico de canales y vídeos): En `src/Repositories/TrendingHistoryRepo.php`, cambiar el desempate de `getCountryHistoryChannels` y `getCountryHistoryVideos` de vistas a `MAX(captured_at) DESC` (recencia). Razonamiento: dos entradas con los mismos días en #1 — la más reciente es más relevante para una app de tendencias. Para vídeos el argumento es aún más fuerte: son efímeros por naturaleza y `view_count` acumulado favorecería siempre a contenido antiguo sobre uno que acaba de explotar.
+- [ ] Paso 39 (frontend — icono info): En `src/Common/Icons.jsx`, añadir `IconInfo` — círculo SVG con letra «i» inscrita, mismo tamaño y estilo que `IconEye`/`IconThumbUp`/`IconComment`. Props: `className`.
+- [ ] Paso 40 (frontend — componente InfoTooltip): Crear `src/InfoTooltip/InfoTooltip.jsx` + `src/InfoTooltip/InfoTooltip.scss`. Sigue exactamente el patrón de `AppearancesTooltip` (hover/focus → visible, blur/leave → oculto, `role="tooltip"`, `useId`, `aria-describedby`). Props: `text` (string), `children` (el trigger). El tooltip se posiciona `bottom: 100%; right: 0` para no salir del panel por la derecha ni por debajo.
+- [ ] Paso 41 (frontend — traducciones): En `src/Common/translations.js`, añadir `historicalInfoVideos` y `historicalInfoChannels` en EN y ES. Texto EN — vídeos: «Ranked by distinct days at #1. Ties broken by most recent appearance.» Canales: «Channels ranked by distinct days at #1. Ties broken by most recent appearance.» Traducir al ES equivalente.
+- [ ] Paso 42 (frontend — integración): En `src/CountryPanel/CountryPanel.jsx`, importar `InfoTooltip` e `IconInfo`. En `HistoricalTab`, añadir `<InfoTooltip text={mode === 'videos' ? tr.historicalInfoVideos : tr.historicalInfoChannels}><IconInfo /></InfoTooltip>` dentro de `country-panel__subtabs`, separado del tablist (no dentro del `role="tablist"` para no romper la accesibilidad). En `CountryPanel.scss`, hacer que el wrapper del sub-toggle use `display: flex; align-items: center; justify-content: space-between` para empujar el icono a la derecha.
+- [ ] Paso 43: QA manual — verificar tooltip en ambas subtabs (Vídeos / Canales), ambos idiomas, ambos temas; confirmar que el texto cambia al alternar el modo; comprobar que no desborda el panel en pantallas estrechas; confirmar que `AppearancesTooltip` existente no se ve afectado. En `src/Repositories/TrendingHistoryRepo.php`, cambiar el desempate de `getCountryHistoryChannels` y `getCountryHistoryVideos` de vistas a `MAX(captured_at) DESC` (recencia). Razonamiento: dos entradas con los mismos días en #1 — la más reciente es más relevante para una app de tendencias. Para vídeos el argumento es aún más fuerte: son efímeros por naturaleza y `view_count` acumulado favorecería siempre a contenido antiguo sobre uno que acaba de explotar.
