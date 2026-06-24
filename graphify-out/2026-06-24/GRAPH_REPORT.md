@@ -1,16 +1,16 @@
-# Graph Report - world-interests  (2026-06-24)
+# Graph Report - world-interests  (2026-06-19)
 
 ## Corpus Check
-- 85 files · ~148,778 words
+- 79 files · ~144,029 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 791 nodes · 956 edges · 77 communities (56 shown, 21 thin omitted)
-- Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 52 edges (avg confidence: 0.88)
+- 745 nodes · 915 edges · 75 communities (55 shown, 20 thin omitted)
+- Extraction: 94% EXTRACTED · 6% INFERRED · 0% AMBIGUOUS · INFERRED: 52 edges (avg confidence: 0.88)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a2071fe3`
+- Built from commit: `af8db9b1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -90,7 +90,6 @@
 - [[_COMMUNITY_Community 72|Community 72]]
 - [[_COMMUNITY_Community 73|Community 73]]
 - [[_COMMUNITY_Community 74|Community 74]]
-- [[_COMMUNITY_Community 75|Community 75]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `Spec for Leaflet Feature Research And Recommendations` - 21 edges
@@ -101,20 +100,20 @@
 6. `Spec for Country Panel With Trending Stats` - 12 edges
 7. `Spec: Rename InfoSidebar To ChannelPanel` - 12 edges
 8. `Spec: Settings Visibility Feature Flags` - 12 edges
-9. `Workflow` - 11 edges
-10. `Spec: <spec_title>` - 11 edges
+9. `Spec: <spec_title>` - 11 edges
+10. `translations` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `WIF-16: Map Pin Style Loss on Language Change` --references--> `LanguageContext`  [INFERRED]
-  .sdd/specs/WIF-16.md → src/Common/LanguageContext.jsx
 - `WIF-17: Rename InfoSidebar To ChannelPanel` --references--> `App()`  [INFERRED]
   .sdd/specs/WIF-17.md → src/App/App.jsx
+- `WIF-16: Map Pin Style Loss on Language Change` --references--> `LanguageContext`  [INFERRED]
+  .sdd/specs/WIF-16.md → src/Common/LanguageContext.jsx
 - `WIF-14: SEO And Performance Optimization` --references--> `translations`  [INFERRED]
   .sdd/specs/WIF-14.md → src/Common/translations.js
 - `WIF-11: Tooltip With Date Ranges For Channel History` --references--> `CountryPanel()`  [INFERRED]
   .sdd/specs/WIF-11.md → src/CountryPanel/CountryPanel.jsx
-- `WIF-12: Channel Images Not Loading In Map Pin` --references--> `CustomMarker()`  [INFERRED]
-  .sdd/specs/WIF-12.md → src/CustomMarker/CustomMarker.jsx
+- `WIF-12: Channel Images Not Loading In Map Pin` --references--> `CountryPanel()`  [INFERRED]
+  .sdd/specs/WIF-12.md → src/CountryPanel/CountryPanel.jsx
 
 ## Import Cycles
 - None detected.
@@ -135,15 +134,15 @@
 - **Data Display Pipeline (Category → Markers → Details)** — screenshot_left_sidebar, screenshot_custom_markers, screenshot_right_panel, screenshot_video_thumbnails [INFERRED 0.85]
 - **Real-Time Data Context** — screenshot_real_time_indicator, screenshot_live_clock, screenshot_video_thumbnails, screenshot_ranking_display [INFERRED 0.75]
 
-## Communities (77 total, 21 thin omitted)
+## Communities (75 total, 20 thin omitted)
 
 ### Community 0 - "Map Rendering & Data"
-Cohesion: 0.20
-Nodes (14): CountryPanelContext, Countries(), SELECTED_STYLE, Mutual Panel Exclusivity Pattern, BASE_STYLE, makeStyleConfig(), NO_DATA_STYLE, HEATMAP_OPTIONS (+6 more)
+Cohesion: 0.09
+Nodes (24): CountryPanelContext, MapPointContext, Countries(), SELECTED_STYLE, Mutual Panel Exclusivity Pattern, Real-Time Data Update Pattern, RETRY_DELAYS, useMapData() (+16 more)
 
 ### Community 1 - "App Shell & Navigation"
-Cohesion: 0.23
-Nodes (9): Categories(), CATEGORY_RETRY_DELAYS, MapPointContext, SidebarContext, Real-Time Data Update Pattern, Leaflet, CustomMarker, MARKER_ICON_ANCHOR (+1 more)
+Cohesion: 0.20
+Nodes (11): App Component, Categories(), CATEGORY_RETRY_DELAYS, Categories Component, SidebarContext, translations, URL Parameter State Synchronization, Footer() (+3 more)
 
 ### Community 2 - "Global Configuration"
 Cohesion: 0.06
@@ -154,12 +153,12 @@ Cohesion: 0.07
 Nodes (37): Categories Component, Countries Component, CustomMarker Component, Footer Component, InfoSidebar Component, Map Component, MapSettings Component, MapViewSaver Component (+29 more)
 
 ### Community 4 - "Country Panel"
-Cohesion: 0.06
-Nodes (42): App Component, Categories Component, ChannelPanel Component, IconComment(), IconEye(), IconInfo(), IconThumbUp(), LanguageProvider() (+34 more)
+Cohesion: 0.16
+Nodes (13): IconInfo(), buildLastUpdatedLabel(), ChannelIdentity(), CountryPanel(), daysAtNumberOne(), HistoricalTab(), RealtimeTab(), useCountryHistory() (+5 more)
 
 ### Community 5 - "Leaflet Integration"
-Cohesion: 0.29
-Nodes (8): leaflet-heat, react-leaflet, Countries, makeStyleConfig, HeatmapLayer, getAlpha2FromAlpha3, getCountryLatLon, getFlagFromAlpha2
+Cohesion: 0.23
+Nodes (10): Leaflet, leaflet-heat, react-leaflet, Countries, CustomMarker, makeStyleConfig, HeatmapLayer, getAlpha2FromAlpha3 (+2 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.22
@@ -178,8 +177,8 @@ Cohesion: 0.09
 Nodes (21): Acceptance Criteria, Affected Files, Analysis, Clarifications, CRITICAL — Bugs, Decisions, Functional Requirements (Implementation Steps), HIGH — Edge Cases (+13 more)
 
 ### Community 11 - "Point Rendering"
-Cohesion: 0.12
-Nodes (12): CustomMarker(), useImageRetry(), RETRY_DELAYS, useMapData(), useMapData Hook, DEFAULT_CENTER, loadMapView(), Map() (+4 more)
+Cohesion: 0.18
+Nodes (9): LanguageProvider(), ThemeProvider(), Theme & Language Persistence, App Entry Point, Header, MoonIcon, SunIcon, App (+1 more)
 
 ### Community 17 - "History API"
 Cohesion: 0.09
@@ -218,8 +217,8 @@ Cohesion: 0.12
 Nodes (15): Acceptance Criteria, Affected Files, Analysis, Clarifications, Context / Background, Decisions, Functional Requirements, Implementation Plan (+7 more)
 
 ### Community 39 - "Community 39"
-Cohesion: 0.31
-Nodes (11): App(), ChannelPanel(), LanguageContext, ThemeContext, CountryPanel(), Head(), WIF-11: Tooltip With Date Ranges For Channel History, WIF-12: Channel Images Not Loading In Map Pin (+3 more)
+Cohesion: 0.23
+Nodes (14): App(), ChannelPanel(), LanguageContext, CustomMarker(), Head(), useImageRetry(), useMapData Hook, Map() (+6 more)
 
 ### Community 40 - "Community 40"
 Cohesion: 0.14
@@ -286,8 +285,8 @@ Cohesion: 0.20
 Nodes (9): Categories:, Deployment, Environment, Local development, Prerequisites, See it in action, What is this?, With Docker (+1 more)
 
 ### Community 56 - "Community 56"
-Cohesion: 0.12
-Nodes (16): 1. Parse arguments, 2. Lazy init, load spec, detect mode, 3.1 Derive metadata, 3.2 Dirty tree check, 3.3 Branch prompt, 3.4 Write the spec file, 3. Create mode, 4. Codebase exploration (+8 more)
+Cohesion: 0.39
+Nodes (6): ChannelPanel Component, IconComment(), IconEye(), IconThumbUp(), YouTube IFrame API, Player
 
 ### Community 57 - "Community 57"
 Cohesion: 0.22
@@ -302,16 +301,16 @@ Cohesion: 0.25
 Nodes (7): Adding an adapter, Contract, Frontmatter rule, `jira`, `local` (default), Registered adapters, Source Adapters
 
 ### Community 60 - "Community 60"
-Cohesion: 0.47
-Nodes (3): Header(), MoonIcon(), SunIcon()
+Cohesion: 0.38
+Nodes (4): ThemeContext, Header(), MoonIcon(), SunIcon()
 
 ### Community 61 - "Community 61"
-Cohesion: 0.12
-Nodes (15): 1. Load and validate, 1a. Select build mode, 2. Find next step, 3. Build the step, 4. Pause for review, 5. Handle response, 6. Commit and mark done, 7. Loop (+7 more)
+Cohesion: 0.48
+Nodes (5): AppearancesTooltip(), formatDate(), formatRange(), groupAppearanceDates(), isConsecutive()
 
 ### Community 63 - "Community 63"
-Cohesion: 0.22
-Nodes (8): 1. Parse arguments, 2. Locate specs, 3. Derive state per spec, 4. Next command, 5. Output, List mode, Single mode, Workflow
+Cohesion: 0.60
+Nodes (3): useNow(), LiveClock(), LiveTimestamp()
 
 ### Community 64 - "Community 64"
 Cohesion: 0.40
@@ -358,24 +357,24 @@ Cohesion: 0.67
 Nodes (3): Category Persistence in localStorage, Sidebar Open/Scroll State Persistence, State Persistence
 
 ## Knowledge Gaps
-- **488 isolated node(s):** `1. Load and validate`, `1a. Select build mode`, `2. Find next step`, `3. Build the step`, `4. Pause for review` (+483 more)
+- **455 isolated node(s):** `name`, `@linkurious/leaflet-heat`, `dotenv-webpack`, `leaflet`, `leaflet-gesture-handling` (+450 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **21 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **20 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `LanguageContext` connect `Community 39` to `App Shell & Navigation`, `Country Panel`, `Point Rendering`, `Community 60`, `Community 62`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
+- **Why does `LanguageContext` connect `Community 39` to `Map Rendering & Data`, `App Shell & Navigation`, `Country Panel`, `Community 56`, `Community 60`, `Community 61`, `Community 62`, `Community 63`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
 - **Why does `Spec for Leaflet Feature Research And Recommendations` connect `Community 51` to `Community 65`, `Community 66`, `Community 67`, `Community 68`, `Community 69`, `Community 70`, `Community 71`, `Community 72`, `Community 73`, `Community 74`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
-- **Why does `Countries` connect `Leaflet Integration` to `Map Rendering & Data`, `App Shell & Navigation`?**
+  _High betweenness centrality (0.005) - this node is a cross-community bridge._
+- **Why does `Countries` connect `Leaflet Integration` to `Map Rendering & Data`?**
   _High betweenness centrality (0.004) - this node is a cross-community bridge._
 - **Are the 8 inferred relationships involving `LanguageContext` (e.g. with `App()` and `ChannelPanel()`) actually correct?**
   _`LanguageContext` has 8 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 5 inferred relationships involving `Map()` (e.g. with `App()` and `Countries()`) actually correct?**
   _`Map()` has 5 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `1. Load and validate`, `1a. Select build mode`, `2. Find next step` to the rest of the system?**
-  _492 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Global Configuration` be split into smaller, more focused modules?**
-  _Cohesion score 0.058823529411764705 - nodes in this community are weakly interconnected._
+- **What connects `name`, `@linkurious/leaflet-heat`, `dotenv-webpack` to the rest of the system?**
+  _459 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `Map Rendering & Data` be split into smaller, more focused modules?**
+  _Cohesion score 0.08637873754152824 - nodes in this community are weakly interconnected._

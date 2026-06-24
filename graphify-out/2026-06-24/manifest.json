@@ -360,7 +360,7 @@
     "semantic_hash": "c75c33af4f814148cc78478b55a4d3fb"
   },
   "CLAUDE.md": {
-    "mtime": 1781979722.4987187,
+    "mtime": 1781889325.1752393,
     "ast_hash": "8d2e5ba26f0e3031dc3f7dfc7558a4df",
     "semantic_hash": ""
   },
@@ -437,36 +437,6 @@
   "ads.txt": {
     "mtime": 1781894843.4500444,
     "ast_hash": "5cb642f516338a3947507ba4c7de5f22",
-    "semantic_hash": ""
-  },
-  ".opencode/opencode.json": {
-    "mtime": 1782335640.6698651,
-    "ast_hash": "abcc8b9dcd80bca5f9dde6d9f0c3ae79",
-    "semantic_hash": ""
-  },
-  ".opencode/plugins/graphify.js": {
-    "mtime": 1782335640.6697633,
-    "ast_hash": "64ccd3c03dbfe0980b6095766f5c4e52",
-    "semantic_hash": ""
-  },
-  ".github/prompts/build.prompt.md": {
-    "mtime": 1782332869.293885,
-    "ast_hash": "960a5a36a366118647b9446244faef35",
-    "semantic_hash": ""
-  },
-  ".github/prompts/plan.prompt.md": {
-    "mtime": 1782332869.2958848,
-    "ast_hash": "95dc365e4c8b6052ac237cb4a1e720b2",
-    "semantic_hash": ""
-  },
-  ".github/prompts/status.prompt.md": {
-    "mtime": 1782332869.297885,
-    "ast_hash": "b94762e29f9a565179b62f9516769cc8",
-    "semantic_hash": ""
-  },
-  "AGENTS.md": {
-    "mtime": 1782335640.6695862,
-    "ast_hash": "62c05a2bf20bf036a0b2633478663e64",
     "semantic_hash": ""
   }
 }
