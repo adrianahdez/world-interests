@@ -4,11 +4,6 @@
     "ast_hash": "2df81f5f9d1cb3bc248a575f50a2fb0f",
     "semantic_hash": "2df81f5f9d1cb3bc248a575f50a2fb0f"
   },
-  ".sdd/config.json": {
-    "mtime": 1776532098.8254726,
-    "ast_hash": "fdfdd0f4d239be3812a6e42e10d66765",
-    "semantic_hash": "fdfdd0f4d239be3812a6e42e10d66765"
-  },
   "_example_of_response-music.json": {
     "mtime": 1776095686.5960145,
     "ast_hash": "d41b4ade6e4370ab2108088928282aff",
@@ -224,26 +219,6 @@
     "ast_hash": "c9985aa3e3cd90d8be048e7f8ff799d4",
     "semantic_hash": ""
   },
-  ".claude/commands/spec-build.md": {
-    "mtime": 1776532098.8116758,
-    "ast_hash": "ecb35dce79e5311aeb5b41a2a0522e78",
-    "semantic_hash": "ecb35dce79e5311aeb5b41a2a0522e78"
-  },
-  ".claude/commands/spec-draft.md": {
-    "mtime": 1776532098.812676,
-    "ast_hash": "b7a36615d8f08f6031e18b01d2e1adfe",
-    "semantic_hash": "b7a36615d8f08f6031e18b01d2e1adfe"
-  },
-  ".claude/commands/spec-plan.md": {
-    "mtime": 1776532098.8146758,
-    "ast_hash": "1f0f598e8f3bc6e846bf9caa5f5ba246",
-    "semantic_hash": "1f0f598e8f3bc6e846bf9caa5f5ba246"
-  },
-  ".claude/commands/spec-status.md": {
-    "mtime": 1776532098.8156757,
-    "ast_hash": "9665b848b808721fdd6a1428ee9198ae",
-    "semantic_hash": "9665b848b808721fdd6a1428ee9198ae"
-  },
   ".claude/skills/spec-caveman/SKILL.md": {
     "mtime": 1776532098.8216565,
     "ast_hash": "3f3652cb69d84e8bad8e809ef27bdc4e",
@@ -354,11 +329,6 @@
     "ast_hash": "eb7e3b3b5fb374e4a38517007dd3c325",
     "semantic_hash": "eb7e3b3b5fb374e4a38517007dd3c325"
   },
-  ".sdd/specs/template/spec.md": {
-    "mtime": 1776532098.8248181,
-    "ast_hash": "c75c33af4f814148cc78478b55a4d3fb",
-    "semantic_hash": "c75c33af4f814148cc78478b55a4d3fb"
-  },
   "CLAUDE.md": {
     "mtime": 1781979722.4987187,
     "ast_hash": "8d2e5ba26f0e3031dc3f7dfc7558a4df",
@@ -415,8 +385,8 @@
     "semantic_hash": ""
   },
   ".github/copilot-instructions.md": {
-    "mtime": 1781889325.1748204,
-    "ast_hash": "ec2dc0dc7bef63488889f34de2f5584d",
+    "mtime": 1782337935.7951126,
+    "ast_hash": "6a866f2f94459aa6211f063251c69ff4",
     "semantic_hash": ""
   },
   "src/hooks/useNow.js": {
@@ -440,8 +410,8 @@
     "semantic_hash": ""
   },
   ".opencode/opencode.json": {
-    "mtime": 1782335640.6698651,
-    "ast_hash": "abcc8b9dcd80bca5f9dde6d9f0c3ae79",
+    "mtime": 1782335722.0439658,
+    "ast_hash": "e5f74d14a81702b55bdf53b33ec991d7",
     "semantic_hash": ""
   },
   ".opencode/plugins/graphify.js": {
@@ -450,23 +420,28 @@
     "semantic_hash": ""
   },
   ".github/prompts/build.prompt.md": {
-    "mtime": 1782332869.293885,
+    "mtime": 1782337928.3554134,
     "ast_hash": "960a5a36a366118647b9446244faef35",
     "semantic_hash": ""
   },
   ".github/prompts/plan.prompt.md": {
-    "mtime": 1782332869.2958848,
+    "mtime": 1782337928.3577318,
     "ast_hash": "95dc365e4c8b6052ac237cb4a1e720b2",
     "semantic_hash": ""
   },
   ".github/prompts/status.prompt.md": {
-    "mtime": 1782332869.297885,
+    "mtime": 1782337928.3598282,
     "ast_hash": "b94762e29f9a565179b62f9516769cc8",
     "semantic_hash": ""
   },
   "AGENTS.md": {
     "mtime": 1782335640.6695862,
     "ast_hash": "62c05a2bf20bf036a0b2633478663e64",
+    "semantic_hash": ""
+  },
+  ".opencode/package.json": {
+    "mtime": 1782335725.2728999,
+    "ast_hash": "9d3cdb0c223df9772b14e9af07b23c09",
     "semantic_hash": ""
   }
 }

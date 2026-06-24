@@ -216,14 +216,104 @@
   },
   "nodes": [
     {
+      "label": "copilot-instructions.md",
+      "file_type": "document",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "copilot-instructions.md",
+      "id": "github_copilot_instructions"
+    },
+    {
+      "label": "Copilot instructions",
+      "file_type": "document",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "copilot instructions",
+      "id": "github_copilot_instructions_copilot_instructions"
+    },
+    {
+      "label": "Working principles",
+      "file_type": "document",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "working principles",
+      "id": "github_copilot_instructions_working_principles"
+    },
+    {
+      "label": "1. Think before coding",
+      "file_type": "document",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L9",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "1. think before coding",
+      "id": "github_copilot_instructions_1_think_before_coding"
+    },
+    {
+      "label": "2. Simplicity first",
+      "file_type": "document",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L13",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "2. simplicity first",
+      "id": "github_copilot_instructions_2_simplicity_first"
+    },
+    {
+      "label": "3. Surgical changes",
+      "file_type": "document",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L17",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "3. surgical changes",
+      "id": "github_copilot_instructions_3_surgical_changes"
+    },
+    {
+      "label": "4. Goal-driven execution",
+      "file_type": "document",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L21",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "4. goal-driven execution",
+      "id": "github_copilot_instructions_4_goal_driven_execution"
+    },
+    {
+      "label": "Pause caveat",
+      "file_type": "document",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L25",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "pause caveat",
+      "id": "github_copilot_instructions_pause_caveat"
+    },
+    {
+      "label": "graphify",
+      "file_type": "document",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L29",
+      "_origin": "ast",
+      "community": 7,
+      "norm_label": "graphify",
+      "id": "github_copilot_instructions_graphify"
+    },
+    {
       "label": "opencode.json",
       "file_type": "code",
       "source_file": ".opencode/opencode.json",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "opencode_opencode",
       "community": 78,
-      "norm_label": "opencode.json"
+      "norm_label": "opencode.json",
+      "id": "opencode_opencode"
     },
     {
       "label": "$schema",
@@ -231,9 +321,9 @@
       "source_file": ".opencode/opencode.json",
       "source_location": "L2",
       "_origin": "ast",
-      "id": "opencode_opencode_schema",
       "community": 78,
-      "norm_label": "$schema"
+      "norm_label": "$schema",
+      "id": "opencode_opencode_schema"
     },
     {
       "label": "plugin",
@@ -241,9 +331,9 @@
       "source_file": ".opencode/opencode.json",
       "source_location": "L3",
       "_origin": "ast",
-      "id": "opencode_opencode_plugin",
       "community": 78,
-      "norm_label": "plugin"
+      "norm_label": "plugin",
+      "id": "opencode_opencode_plugin"
     },
     {
       "label": "build.prompt.md",
@@ -1201,7 +1291,7 @@
       "source_file": "src/App/App.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "app.jsx",
       "id": "app_app"
     },
@@ -1211,7 +1301,7 @@
       "source_file": "src/App/App.jsx",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "getinitialcategory()",
       "id": "app_app_getinitialcategory"
     },
@@ -1221,7 +1311,7 @@
       "source_file": "src/App/App.jsx",
       "source_location": "L29",
       "_origin": "ast",
-      "community": 39,
+      "community": 4,
       "norm_label": "app()",
       "id": "app_app_app"
     },
@@ -1231,7 +1321,7 @@
       "source_file": "src/Categories/Categories.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "categories.jsx",
       "id": "categories_categories"
     },
@@ -1241,7 +1331,7 @@
       "source_file": "src/Categories/Categories.jsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "category_retry_delays",
       "id": "categories_categories_category_retry_delays"
     },
@@ -1251,7 +1341,7 @@
       "source_file": "src/Categories/Categories.jsx",
       "source_location": "L13",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "categories()",
       "id": "categories_categories_categories"
     },
@@ -1261,7 +1351,7 @@
       "source_file": "src/ChannelPanel/ChannelPanel.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 33,
+      "community": 4,
       "norm_label": "channelpanel.jsx",
       "id": "channelpanel_channelpanel"
     },
@@ -1271,7 +1361,7 @@
       "source_file": "src/ChannelPanel/ChannelPanel.jsx",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 39,
+      "community": 4,
       "norm_label": "channelpanel()",
       "id": "channelpanel_channelpanel_channelpanel"
     },
@@ -1301,7 +1391,7 @@
       "source_file": "src/Common/Icons.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 33,
+      "community": 4,
       "norm_label": "icons.jsx",
       "id": "common_icons"
     },
@@ -1311,7 +1401,7 @@
       "source_file": "src/Common/Icons.jsx",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 33,
+      "community": 4,
       "norm_label": "iconeye()",
       "id": "common_icons_iconeye"
     },
@@ -1321,7 +1411,7 @@
       "source_file": "src/Common/Icons.jsx",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 33,
+      "community": 4,
       "norm_label": "iconthumbup()",
       "id": "common_icons_iconthumbup"
     },
@@ -1331,7 +1421,7 @@
       "source_file": "src/Common/Icons.jsx",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 33,
+      "community": 4,
       "norm_label": "iconcomment()",
       "id": "common_icons_iconcomment"
     },
@@ -1351,7 +1441,7 @@
       "source_file": "src/Common/LanguageContext.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 0,
+      "community": 4,
       "norm_label": "languagecontext.jsx",
       "id": "common_languagecontext"
     },
@@ -1361,7 +1451,7 @@
       "source_file": "src/Common/LanguageContext.jsx",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 39,
+      "community": 4,
       "norm_label": "languagecontext",
       "id": "common_languagecontext_languagecontext"
     },
@@ -1381,7 +1471,7 @@
       "source_file": "src/Common/MapPointContext.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 11,
+      "community": 4,
       "norm_label": "mappointcontext.jsx",
       "id": "common_mappointcontext"
     },
@@ -1391,7 +1481,7 @@
       "source_file": "src/Common/MapPointContext.jsx",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 11,
+      "community": 4,
       "norm_label": "mappointcontext",
       "id": "common_mappointcontext_mappointcontext"
     },
@@ -1401,7 +1491,7 @@
       "source_file": "src/Common/SidebarContext.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "sidebarcontext.jsx",
       "id": "common_sidebarcontext"
     },
@@ -1411,7 +1501,7 @@
       "source_file": "src/Common/SidebarContext.jsx",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "sidebarcontext",
       "id": "common_sidebarcontext_sidebarcontext"
     },
@@ -1431,7 +1521,7 @@
       "source_file": "src/Common/ThemeContext.jsx",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 0,
+      "community": 4,
       "norm_label": "themecontext",
       "id": "common_themecontext_themecontext"
     },
@@ -1451,7 +1541,7 @@
       "source_file": "src/Common/translations.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "translations.js",
       "id": "common_translations"
     },
@@ -1461,7 +1551,7 @@
       "source_file": "src/Common/translations.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "translations",
       "id": "common_translations_translations"
     },
@@ -1471,7 +1561,7 @@
       "source_file": "src/CountryPanel/AppearancesTooltip.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 62,
+      "community": 4,
       "norm_label": "appearancestooltip.jsx",
       "id": "countrypanel_appearancestooltip"
     },
@@ -1481,7 +1571,7 @@
       "source_file": "src/CountryPanel/AppearancesTooltip.jsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 62,
+      "community": 4,
       "norm_label": "appearancestooltip()",
       "id": "countrypanel_appearancestooltip_appearancestooltip"
     },
@@ -1591,7 +1681,7 @@
       "source_file": "src/CountryPanel/groupAppearanceDates.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 62,
+      "community": 4,
       "norm_label": "groupappearancedates.js",
       "id": "countrypanel_groupappearancedates"
     },
@@ -1601,7 +1691,7 @@
       "source_file": "src/CountryPanel/groupAppearanceDates.js",
       "source_location": "L4",
       "_origin": "ast",
-      "community": 62,
+      "community": 4,
       "norm_label": "isconsecutive()",
       "id": "countrypanel_groupappearancedates_isconsecutive"
     },
@@ -1611,7 +1701,7 @@
       "source_file": "src/CountryPanel/groupAppearanceDates.js",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 62,
+      "community": 4,
       "norm_label": "formatdate()",
       "id": "countrypanel_groupappearancedates_formatdate"
     },
@@ -1621,7 +1711,7 @@
       "source_file": "src/CountryPanel/groupAppearanceDates.js",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 62,
+      "community": 4,
       "norm_label": "formatrange()",
       "id": "countrypanel_groupappearancedates_formatrange"
     },
@@ -1631,7 +1721,7 @@
       "source_file": "src/CountryPanel/groupAppearanceDates.js",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 62,
+      "community": 4,
       "norm_label": "groupappearancedates()",
       "id": "countrypanel_groupappearancedates_groupappearancedates"
     },
@@ -1661,7 +1751,7 @@
       "source_file": "src/Footer/Footer.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "footer.jsx",
       "id": "footer_footer"
     },
@@ -1671,7 +1761,7 @@
       "source_file": "src/Footer/Footer.jsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 1,
+      "community": 4,
       "norm_label": "footer()",
       "id": "footer_footer_footer"
     },
@@ -1681,7 +1771,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 39,
+      "community": 4,
       "norm_label": "head.jsx",
       "id": "head_head"
     },
@@ -1691,7 +1781,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 39,
+      "community": 4,
       "norm_label": "json_ld",
       "id": "head_head_json_ld"
     },
@@ -1701,7 +1791,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 39,
+      "community": 4,
       "norm_label": "getcanonicalurl()",
       "id": "head_head_getcanonicalurl"
     },
@@ -1711,7 +1801,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L43",
       "_origin": "ast",
-      "community": 39,
+      "community": 4,
       "norm_label": "upserttag()",
       "id": "head_head_upserttag"
     },
@@ -1721,7 +1811,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 39,
+      "community": 4,
       "norm_label": "managed_selectors",
       "id": "head_head_managed_selectors"
     },
@@ -1731,7 +1821,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L71",
       "_origin": "ast",
-      "community": 39,
+      "community": 4,
       "norm_label": "removemanagedtags()",
       "id": "head_head_removemanagedtags"
     },
@@ -1741,7 +1831,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L78",
       "_origin": "ast",
-      "community": 39,
+      "community": 4,
       "norm_label": "addgoogleanalyticsscript()",
       "id": "head_head_addgoogleanalyticsscript"
     },
@@ -1751,7 +1841,7 @@
       "source_file": "src/Head/Head.jsx",
       "source_location": "L98",
       "_origin": "ast",
-      "community": 39,
+      "community": 4,
       "norm_label": "head()",
       "id": "head_head_head"
     },
@@ -1761,7 +1851,7 @@
       "source_file": "src/Header/Header.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 60,
+      "community": 4,
       "norm_label": "header.jsx",
       "id": "header_header"
     },
@@ -1771,7 +1861,7 @@
       "source_file": "src/Header/Header.jsx",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 60,
+      "community": 4,
       "norm_label": "header()",
       "id": "header_header_header"
     },
@@ -1781,7 +1871,7 @@
       "source_file": "src/Header/MoonIcon.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 60,
+      "community": 4,
       "norm_label": "moonicon.jsx",
       "id": "header_moonicon"
     },
@@ -1791,7 +1881,7 @@
       "source_file": "src/Header/MoonIcon.jsx",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 60,
+      "community": 4,
       "norm_label": "moonicon()",
       "id": "header_moonicon_moonicon"
     },
@@ -1801,7 +1891,7 @@
       "source_file": "src/Header/SunIcon.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 60,
+      "community": 4,
       "norm_label": "sunicon.jsx",
       "id": "header_sunicon"
     },
@@ -1811,7 +1901,7 @@
       "source_file": "src/Header/SunIcon.jsx",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 60,
+      "community": 4,
       "norm_label": "sunicon()",
       "id": "header_sunicon_sunicon"
     },
@@ -1841,7 +1931,7 @@
       "source_file": "src/LiveClock/LiveClock.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 77,
+      "community": 4,
       "norm_label": "liveclock.jsx",
       "id": "liveclock_liveclock"
     },
@@ -1851,7 +1941,7 @@
       "source_file": "src/LiveClock/LiveClock.jsx",
       "source_location": "L11",
       "_origin": "ast",
-      "community": 77,
+      "community": 4,
       "norm_label": "liveclock()",
       "id": "liveclock_liveclock_liveclock"
     },
@@ -1861,7 +1951,7 @@
       "source_file": "src/LiveTimestamp/LiveTimestamp.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 77,
+      "community": 4,
       "norm_label": "livetimestamp.jsx",
       "id": "livetimestamp_livetimestamp"
     },
@@ -1871,7 +1961,7 @@
       "source_file": "src/LiveTimestamp/LiveTimestamp.jsx",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 77,
+      "community": 4,
       "norm_label": "livetimestamp()",
       "id": "livetimestamp_livetimestamp_livetimestamp"
     },
@@ -2241,7 +2331,7 @@
       "source_file": "src/Player/Player.jsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 33,
+      "community": 4,
       "norm_label": "player.jsx",
       "id": "player_player"
     },
@@ -2251,7 +2341,7 @@
       "source_file": "src/Player/Player.jsx",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 33,
+      "community": 4,
       "norm_label": "player",
       "id": "player_player_player"
     },
@@ -2401,7 +2491,7 @@
       "source_file": "src/hooks/useNow.js",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 77,
+      "community": 4,
       "norm_label": "usenow.js",
       "id": "hooks_usenow"
     },
@@ -2411,7 +2501,7 @@
       "source_file": "src/hooks/useNow.js",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 77,
+      "community": 4,
       "norm_label": "usenow()",
       "id": "hooks_usenow_usenow"
     },
@@ -2556,446 +2646,6 @@
       "id": "webpack_config_parseenvfile"
     },
     {
-      "label": "spec-build.md",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 53,
-      "norm_label": "spec-build.md",
-      "id": "commands_spec_build"
-    },
-    {
-      "label": "Workflow",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L15",
-      "_origin": "ast",
-      "community": 53,
-      "norm_label": "workflow",
-      "id": "commands_spec_build_workflow"
-    },
-    {
-      "label": "1. Load and validate",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L17",
-      "_origin": "ast",
-      "community": 53,
-      "norm_label": "1. load and validate",
-      "id": "commands_spec_build_1_load_and_validate"
-    },
-    {
-      "label": "2. Find next step",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L21",
-      "_origin": "ast",
-      "community": 53,
-      "norm_label": "2. find next step",
-      "id": "commands_spec_build_2_find_next_step"
-    },
-    {
-      "label": "3. Build the step",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L25",
-      "_origin": "ast",
-      "community": 53,
-      "norm_label": "3. build the step",
-      "id": "commands_spec_build_3_build_the_step"
-    },
-    {
-      "label": "4. Pause for review",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L31",
-      "_origin": "ast",
-      "community": 53,
-      "norm_label": "4. pause for review",
-      "id": "commands_spec_build_4_pause_for_review"
-    },
-    {
-      "label": "5. Handle response",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L53",
-      "_origin": "ast",
-      "community": 53,
-      "norm_label": "5. handle response",
-      "id": "commands_spec_build_5_handle_response"
-    },
-    {
-      "label": "6. Commit and mark done",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L64",
-      "_origin": "ast",
-      "community": 53,
-      "norm_label": "6. commit and mark done",
-      "id": "commands_spec_build_6_commit_and_mark_done"
-    },
-    {
-      "label": "7. Loop",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L72",
-      "_origin": "ast",
-      "community": 53,
-      "norm_label": "7. loop",
-      "id": "commands_spec_build_7_loop"
-    },
-    {
-      "label": "7a. CLAUDE.md update",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L76",
-      "_origin": "ast",
-      "community": 53,
-      "norm_label": "7a. claude.md update",
-      "id": "commands_spec_build_7a_claude_md_update"
-    },
-    {
-      "label": "8. Completion",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L88",
-      "_origin": "ast",
-      "community": 53,
-      "norm_label": "8. completion",
-      "id": "commands_spec_build_8_completion"
-    },
-    {
-      "label": "spec-draft.md",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 54,
-      "norm_label": "spec-draft.md",
-      "id": "commands_spec_draft"
-    },
-    {
-      "label": "Workflow",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L16",
-      "_origin": "ast",
-      "community": 54,
-      "norm_label": "workflow",
-      "id": "commands_spec_draft_workflow"
-    },
-    {
-      "label": "1. Parse arguments",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L18",
-      "_origin": "ast",
-      "community": 54,
-      "norm_label": "1. parse arguments",
-      "id": "commands_spec_draft_1_parse_arguments"
-    },
-    {
-      "label": "2. Detect re-entry",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L32",
-      "_origin": "ast",
-      "community": 54,
-      "norm_label": "2. detect re-entry",
-      "id": "commands_spec_draft_2_detect_re_entry"
-    },
-    {
-      "label": "3. Dirty tree check",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L39",
-      "_origin": "ast",
-      "community": 54,
-      "norm_label": "3. dirty tree check",
-      "id": "commands_spec_draft_3_dirty_tree_check"
-    },
-    {
-      "label": "4. Choose source",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L46",
-      "_origin": "ast",
-      "community": 54,
-      "norm_label": "4. choose source",
-      "id": "commands_spec_draft_4_choose_source"
-    },
-    {
-      "label": "5. Pull and adapt (skill)",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L55",
-      "_origin": "ast",
-      "community": 54,
-      "norm_label": "5. pull and adapt (skill)",
-      "id": "commands_spec_draft_5_pull_and_adapt_skill"
-    },
-    {
-      "label": "6. Create branch (new draft only)",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L63",
-      "_origin": "ast",
-      "community": 54,
-      "norm_label": "6. create branch (new draft only)",
-      "id": "commands_spec_draft_6_create_branch_new_draft_only"
-    },
-    {
-      "label": "7. Write spec file",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L67",
-      "_origin": "ast",
-      "community": 54,
-      "norm_label": "7. write spec file",
-      "id": "commands_spec_draft_7_write_spec_file"
-    },
-    {
-      "label": "8. Commit (refresh only)",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L89",
-      "_origin": "ast",
-      "community": 54,
-      "norm_label": "8. commit (refresh only)",
-      "id": "commands_spec_draft_8_commit_refresh_only"
-    },
-    {
-      "label": "9. Output",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L100",
-      "_origin": "ast",
-      "community": 54,
-      "norm_label": "9. output",
-      "id": "commands_spec_draft_9_output"
-    },
-    {
-      "label": "spec-plan.md",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 49,
-      "norm_label": "spec-plan.md",
-      "id": "commands_spec_plan"
-    },
-    {
-      "label": "Workflow",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L15",
-      "_origin": "ast",
-      "community": 49,
-      "norm_label": "workflow",
-      "id": "commands_spec_plan_workflow"
-    },
-    {
-      "label": "1. Parse arguments",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L17",
-      "_origin": "ast",
-      "community": 49,
-      "norm_label": "1. parse arguments",
-      "id": "commands_spec_plan_1_parse_arguments"
-    },
-    {
-      "label": "2. Load spec",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L22",
-      "_origin": "ast",
-      "community": 49,
-      "norm_label": "2. load spec",
-      "id": "commands_spec_plan_2_load_spec"
-    },
-    {
-      "label": "3. First run vs re-run",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L28",
-      "_origin": "ast",
-      "community": 49,
-      "norm_label": "3. first run vs re-run",
-      "id": "commands_spec_plan_3_first_run_vs_re_run"
-    },
-    {
-      "label": "4. Codebase exploration",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L40",
-      "_origin": "ast",
-      "community": 49,
-      "norm_label": "4. codebase exploration",
-      "id": "commands_spec_plan_4_codebase_exploration"
-    },
-    {
-      "label": "5. Risks",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L51",
-      "_origin": "ast",
-      "community": 49,
-      "norm_label": "5. risks",
-      "id": "commands_spec_plan_5_risks"
-    },
-    {
-      "label": "6. Ask user",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L58",
-      "_origin": "ast",
-      "community": 49,
-      "norm_label": "6. ask user",
-      "id": "commands_spec_plan_6_ask_user"
-    },
-    {
-      "label": "7. Write/refresh spec sections",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L84",
-      "_origin": "ast",
-      "community": 49,
-      "norm_label": "7. write/refresh spec sections",
-      "id": "commands_spec_plan_7_write_refresh_spec_sections"
-    },
-    {
-      "label": "7a. First run",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L86",
-      "_origin": "ast",
-      "community": 49,
-      "norm_label": "7a. first run",
-      "id": "commands_spec_plan_7a_first_run"
-    },
-    {
-      "label": "7b. Re-run",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L111",
-      "_origin": "ast",
-      "community": 49,
-      "norm_label": "7b. re-run",
-      "id": "commands_spec_plan_7b_re_run"
-    },
-    {
-      "label": "8. Sync to source",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L130",
-      "_origin": "ast",
-      "community": 49,
-      "norm_label": "8. sync to source",
-      "id": "commands_spec_plan_8_sync_to_source"
-    },
-    {
-      "label": "9. Output",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L140",
-      "_origin": "ast",
-      "community": 49,
-      "norm_label": "9. output",
-      "id": "commands_spec_plan_9_output"
-    },
-    {
-      "label": "spec-status.md",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 57,
-      "norm_label": "spec-status.md",
-      "id": "commands_spec_status"
-    },
-    {
-      "label": "Workflow",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L13",
-      "_origin": "ast",
-      "community": 57,
-      "norm_label": "workflow",
-      "id": "commands_spec_status_workflow"
-    },
-    {
-      "label": "1. Parse arguments",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L15",
-      "_origin": "ast",
-      "community": 57,
-      "norm_label": "1. parse arguments",
-      "id": "commands_spec_status_1_parse_arguments"
-    },
-    {
-      "label": "2. Locate specs",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L20",
-      "_origin": "ast",
-      "community": 57,
-      "norm_label": "2. locate specs",
-      "id": "commands_spec_status_2_locate_specs"
-    },
-    {
-      "label": "3. Derive state per spec",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L30",
-      "_origin": "ast",
-      "community": 57,
-      "norm_label": "3. derive state per spec",
-      "id": "commands_spec_status_3_derive_state_per_spec"
-    },
-    {
-      "label": "4. Next command",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L55",
-      "_origin": "ast",
-      "community": 57,
-      "norm_label": "4. next command",
-      "id": "commands_spec_status_4_next_command"
-    },
-    {
-      "label": "5. Output",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L66",
-      "_origin": "ast",
-      "community": 57,
-      "norm_label": "5. output",
-      "id": "commands_spec_status_5_output"
-    },
-    {
-      "label": "Single mode",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L68",
-      "_origin": "ast",
-      "community": 57,
-      "norm_label": "single mode",
-      "id": "commands_spec_status_single_mode"
-    },
-    {
-      "label": "List mode",
-      "file_type": "document",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L83",
-      "_origin": "ast",
-      "community": 57,
-      "norm_label": "list mode",
-      "id": "commands_spec_status_list_mode"
-    },
-    {
       "label": "SKILL.md",
       "file_type": "document",
       "source_file": ".claude/skills/spec-caveman/SKILL.md",
@@ -3134,26 +2784,6 @@
       "community": 58,
       "norm_label": "adding an adapter",
       "id": "spec_source_skill_adding_an_adapter"
-    },
-    {
-      "label": "copilot-instructions.md",
-      "file_type": "document",
-      "source_file": ".github/copilot-instructions.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 7,
-      "norm_label": "copilot-instructions.md",
-      "id": "github_copilot_instructions"
-    },
-    {
-      "label": "graphify",
-      "file_type": "document",
-      "source_file": ".github/copilot-instructions.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 7,
-      "norm_label": "graphify",
-      "id": "github_copilot_instructions_graphify"
     },
     {
       "label": "sources.md",
@@ -6696,126 +6326,6 @@
       "id": "specs_wif_9_implementation_plan"
     },
     {
-      "label": "spec.md",
-      "file_type": "document",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 52,
-      "norm_label": "spec.md",
-      "id": "template_spec"
-    },
-    {
-      "label": "Spec: <spec_title>",
-      "file_type": "document",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L10",
-      "_origin": "ast",
-      "community": 52,
-      "norm_label": "spec: <spec_title>",
-      "id": "template_spec_spec_spec_title"
-    },
-    {
-      "label": "Context / Background",
-      "file_type": "document",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L12",
-      "_origin": "ast",
-      "community": 52,
-      "norm_label": "context / background",
-      "id": "template_spec_context_background"
-    },
-    {
-      "label": "Summary",
-      "file_type": "document",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L16",
-      "_origin": "ast",
-      "community": 52,
-      "norm_label": "summary",
-      "id": "template_spec_summary"
-    },
-    {
-      "label": "Functional Requirements",
-      "file_type": "document",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L20",
-      "_origin": "ast",
-      "community": 52,
-      "norm_label": "functional requirements",
-      "id": "template_spec_functional_requirements"
-    },
-    {
-      "label": "Non-Goals / Out of Scope",
-      "file_type": "document",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L24",
-      "_origin": "ast",
-      "community": 52,
-      "norm_label": "non-goals / out of scope",
-      "id": "template_spec_non_goals_out_of_scope"
-    },
-    {
-      "label": "Possible Edge Cases",
-      "file_type": "document",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L28",
-      "_origin": "ast",
-      "community": 52,
-      "norm_label": "possible edge cases",
-      "id": "template_spec_possible_edge_cases"
-    },
-    {
-      "label": "Acceptance Criteria",
-      "file_type": "document",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L32",
-      "_origin": "ast",
-      "community": 52,
-      "norm_label": "acceptance criteria",
-      "id": "template_spec_acceptance_criteria"
-    },
-    {
-      "label": "Open Questions",
-      "file_type": "document",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L36",
-      "_origin": "ast",
-      "community": 52,
-      "norm_label": "open questions",
-      "id": "template_spec_open_questions"
-    },
-    {
-      "label": "Dependencies",
-      "file_type": "document",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L40",
-      "_origin": "ast",
-      "community": 52,
-      "norm_label": "dependencies",
-      "id": "template_spec_dependencies"
-    },
-    {
-      "label": "Success Metrics",
-      "file_type": "document",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L44",
-      "_origin": "ast",
-      "community": 52,
-      "norm_label": "success metrics",
-      "id": "template_spec_success_metrics"
-    },
-    {
-      "label": "Testing Guidelines",
-      "file_type": "document",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L48",
-      "_origin": "ast",
-      "community": 52,
-      "norm_label": "testing guidelines",
-      "id": "template_spec_testing_guidelines"
-    },
-    {
       "label": "CLAUDE.md",
       "file_type": "document",
       "source_file": "CLAUDE.md",
@@ -7080,7 +6590,7 @@
       "file_type": "code",
       "source_file": "src/App/App.jsx",
       "source_location": "line 29",
-      "community": 0,
+      "community": 4,
       "norm_label": "app component",
       "id": "app_app_appcomponent"
     },
@@ -7089,7 +6599,7 @@
       "file_type": "code",
       "source_file": "src/Categories/Categories.jsx",
       "source_location": "line 13",
-      "community": 0,
+      "community": 4,
       "norm_label": "categories component",
       "id": "categories_categoriescomponent"
     },
@@ -7098,7 +6608,7 @@
       "file_type": "code",
       "source_file": "src/ChannelPanel/ChannelPanel.jsx",
       "source_location": "line 12",
-      "community": 33,
+      "community": 4,
       "norm_label": "channelpanel component",
       "id": "channelpanel_channelpanelcomponent"
     },
@@ -7139,20 +6649,11 @@
       "id": "scripts_generatesitemap"
     },
     {
-      "label": "Spec Driven Development Config",
-      "file_type": "code",
-      "source_file": ".sdd/config.json",
-      "source_location": "line 1",
-      "community": 25,
-      "norm_label": "spec driven development config",
-      "id": "sdd_config_json"
-    },
-    {
       "label": "Real-Time Data Update Pattern",
       "file_type": "rationale",
       "source_file": "src/App/App.jsx",
       "source_location": "line 29",
-      "community": 11,
+      "community": 4,
       "norm_label": "real-time data update pattern",
       "id": "design_realtime_data_pattern"
     },
@@ -7179,7 +6680,7 @@
       "file_type": "rationale",
       "source_file": "src/App/App.jsx",
       "source_location": "line 154",
-      "community": 0,
+      "community": 4,
       "norm_label": "url parameter state synchronization",
       "id": "design_url_state_sync"
     },
@@ -7188,7 +6689,7 @@
       "file_type": "code",
       "source_file": "src/CustomMarker/CustomMarker.jsx",
       "source_location": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "custommarker",
       "id": "src_CustomMarker_custommarker"
     },
@@ -7197,7 +6698,7 @@
       "file_type": "code",
       "source_file": "src/Footer/Footer.jsx",
       "source_location": null,
-      "community": 0,
+      "community": 4,
       "norm_label": "footer",
       "id": "src_Footer_footer"
     },
@@ -7206,7 +6707,7 @@
       "file_type": "code",
       "source_file": "src/Head/Head.jsx",
       "source_location": null,
-      "community": 0,
+      "community": 4,
       "norm_label": "head",
       "id": "src_Head_head"
     },
@@ -7269,7 +6770,7 @@
       "file_type": "code",
       "source_file": "src/Map/MapSettings/MapSettings.jsx",
       "source_location": null,
-      "community": 0,
+      "community": 4,
       "norm_label": "mapsettings",
       "id": "src_MapSettings_mapsettings"
     },
@@ -7359,7 +6860,7 @@
       "file_type": "concept",
       "source_file": null,
       "source_location": null,
-      "community": 5,
+      "community": 4,
       "norm_label": "leaflet",
       "id": "lib_leaflet"
     },
@@ -7386,7 +6887,7 @@
       "file_type": "concept",
       "source_file": null,
       "source_location": null,
-      "community": 33,
+      "community": 4,
       "norm_label": "youtube iframe api",
       "id": "lib_youtube_api"
     },
@@ -7502,7 +7003,7 @@
       "label": "WIF-12: Channel Images Not Loading In Map Pin",
       "file_type": "document",
       "source_file": ".sdd/specs/WIF-12.md",
-      "community": 39,
+      "community": 4,
       "norm_label": "wif-12: channel images not loading in map pin",
       "id": "sdd_specs_wif12_image_loading"
     },
@@ -7510,7 +7011,7 @@
       "label": "WIF-13: GA Warning Message Misleading In Dev",
       "file_type": "document",
       "source_file": ".sdd/specs/WIF-13.md",
-      "community": 39,
+      "community": 4,
       "norm_label": "wif-13: ga warning message misleading in dev",
       "id": "sdd_specs_wif13_ga_warning"
     },
@@ -7518,7 +7019,7 @@
       "label": "WIF-14: SEO And Performance Optimization",
       "file_type": "document",
       "source_file": ".sdd/specs/WIF-14.md",
-      "community": 39,
+      "community": 4,
       "norm_label": "wif-14: seo and performance optimization",
       "id": "sdd_specs_wif14_seo_perf"
     },
@@ -7534,7 +7035,7 @@
       "label": "WIF-16: Map Pin Style Loss on Language Change",
       "file_type": "document",
       "source_file": ".sdd/specs/WIF-16.md",
-      "community": 39,
+      "community": 11,
       "norm_label": "wif-16: map pin style loss on language change",
       "id": "sdd_specs_wif16_pin_style"
     },
@@ -7542,7 +7043,7 @@
       "label": "WIF-17: Rename InfoSidebar To ChannelPanel",
       "file_type": "document",
       "source_file": ".sdd/specs/WIF-17.md",
-      "community": 39,
+      "community": 4,
       "norm_label": "wif-17: rename infosidebar to channelpanel",
       "id": "sdd_specs_wif17_rename"
     },
@@ -7653,18 +7154,6 @@
       "community": 3,
       "norm_label": "wif-9: revert spanish translations to backend source",
       "id": "sdd_specs_wif_9"
-    },
-    {
-      "label": "Spec Template",
-      "file_type": "document",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 27,
-      "norm_label": "spec template",
-      "id": "sdd_specs_template_spec"
     },
     {
       "label": "Settings Visibility Feature Flags",
@@ -8215,12 +7704,102 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "github_copilot_instructions",
+      "target": "github_copilot_instructions_copilot_instructions"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "github_copilot_instructions",
+      "target": "github_copilot_instructions_graphify"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L29",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "github_copilot_instructions_copilot_instructions",
+      "target": "github_copilot_instructions_graphify"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "github_copilot_instructions_copilot_instructions",
+      "target": "github_copilot_instructions_pause_caveat"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "github_copilot_instructions_copilot_instructions",
+      "target": "github_copilot_instructions_working_principles"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L9",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "github_copilot_instructions_working_principles",
+      "target": "github_copilot_instructions_1_think_before_coding"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L13",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "github_copilot_instructions_working_principles",
+      "target": "github_copilot_instructions_2_simplicity_first"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L17",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "github_copilot_instructions_working_principles",
+      "target": "github_copilot_instructions_3_surgical_changes"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".github/copilot-instructions.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "github_copilot_instructions_working_principles",
+      "target": "github_copilot_instructions_4_goal_driven_execution"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": ".opencode/opencode.json",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "opencode_opencode",
-      "target": "opencode_opencode_plugin",
-      "confidence_score": 1.0
+      "target": "opencode_opencode_plugin"
     },
     {
       "relation": "contains",
@@ -8228,9 +7807,9 @@
       "source_file": ".opencode/opencode.json",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "opencode_opencode",
-      "target": "opencode_opencode_schema",
-      "confidence_score": 1.0
+      "target": "opencode_opencode_schema"
     },
     {
       "relation": "contains",
@@ -12791,406 +12370,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_build",
-      "target": "commands_spec_build_workflow"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_build_workflow",
-      "target": "commands_spec_build_1_load_and_validate"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L21",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_build_workflow",
-      "target": "commands_spec_build_2_find_next_step"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L25",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_build_workflow",
-      "target": "commands_spec_build_3_build_the_step"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L31",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_build_workflow",
-      "target": "commands_spec_build_4_pause_for_review"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L53",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_build_workflow",
-      "target": "commands_spec_build_5_handle_response"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L64",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_build_workflow",
-      "target": "commands_spec_build_6_commit_and_mark_done"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L72",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_build_workflow",
-      "target": "commands_spec_build_7_loop"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L76",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_build_workflow",
-      "target": "commands_spec_build_7a_claude_md_update"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-build.md",
-      "source_location": "L88",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_build_workflow",
-      "target": "commands_spec_build_8_completion"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_draft",
-      "target": "commands_spec_draft_workflow"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L18",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_draft_workflow",
-      "target": "commands_spec_draft_1_parse_arguments"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L32",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_draft_workflow",
-      "target": "commands_spec_draft_2_detect_re_entry"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L39",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_draft_workflow",
-      "target": "commands_spec_draft_3_dirty_tree_check"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L46",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_draft_workflow",
-      "target": "commands_spec_draft_4_choose_source"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L55",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_draft_workflow",
-      "target": "commands_spec_draft_5_pull_and_adapt_skill"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L63",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_draft_workflow",
-      "target": "commands_spec_draft_6_create_branch_new_draft_only"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L67",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_draft_workflow",
-      "target": "commands_spec_draft_7_write_spec_file"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L89",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_draft_workflow",
-      "target": "commands_spec_draft_8_commit_refresh_only"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-draft.md",
-      "source_location": "L100",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_draft_workflow",
-      "target": "commands_spec_draft_9_output"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_plan",
-      "target": "commands_spec_plan_workflow"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L17",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_plan_workflow",
-      "target": "commands_spec_plan_1_parse_arguments"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L22",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_plan_workflow",
-      "target": "commands_spec_plan_2_load_spec"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L28",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_plan_workflow",
-      "target": "commands_spec_plan_3_first_run_vs_re_run"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L40",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_plan_workflow",
-      "target": "commands_spec_plan_4_codebase_exploration"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L51",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_plan_workflow",
-      "target": "commands_spec_plan_5_risks"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L58",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_plan_workflow",
-      "target": "commands_spec_plan_6_ask_user"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L84",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_plan_workflow",
-      "target": "commands_spec_plan_7_write_refresh_spec_sections"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L130",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_plan_workflow",
-      "target": "commands_spec_plan_8_sync_to_source"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L140",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_plan_workflow",
-      "target": "commands_spec_plan_9_output"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L86",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_plan_7_write_refresh_spec_sections",
-      "target": "commands_spec_plan_7a_first_run"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-plan.md",
-      "source_location": "L111",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_plan_7_write_refresh_spec_sections",
-      "target": "commands_spec_plan_7b_re_run"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L13",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_status",
-      "target": "commands_spec_status_workflow"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L15",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_status_workflow",
-      "target": "commands_spec_status_1_parse_arguments"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_status_workflow",
-      "target": "commands_spec_status_2_locate_specs"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L30",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_status_workflow",
-      "target": "commands_spec_status_3_derive_state_per_spec"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L55",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_status_workflow",
-      "target": "commands_spec_status_4_next_command"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L66",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_status_workflow",
-      "target": "commands_spec_status_5_output"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L83",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_status_5_output",
-      "target": "commands_spec_status_list_mode"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".claude/commands/spec-status.md",
-      "source_location": "L68",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "commands_spec_status_5_output",
-      "target": "commands_spec_status_single_mode"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": ".claude/skills/spec-caveman/SKILL.md",
       "source_location": "L42",
       "weight": 1.0,
@@ -13307,16 +12486,6 @@
       "confidence_score": 1.0,
       "source": "spec_source_skill_operations",
       "target": "spec_source_skill_push_source_ref_body"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".github/copilot-instructions.md",
-      "source_location": "L1",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "github_copilot_instructions",
-      "target": "github_copilot_instructions_graphify"
     },
     {
       "relation": "contains",
@@ -16661,116 +15830,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L10",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "template_spec",
-      "target": "template_spec_spec_spec_title"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L32",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "template_spec_spec_spec_title",
-      "target": "template_spec_acceptance_criteria"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L12",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "template_spec_spec_spec_title",
-      "target": "template_spec_context_background"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L40",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "template_spec_spec_spec_title",
-      "target": "template_spec_dependencies"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L20",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "template_spec_spec_spec_title",
-      "target": "template_spec_functional_requirements"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L24",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "template_spec_spec_spec_title",
-      "target": "template_spec_non_goals_out_of_scope"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L36",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "template_spec_spec_spec_title",
-      "target": "template_spec_open_questions"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L28",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "template_spec_spec_spec_title",
-      "target": "template_spec_possible_edge_cases"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L44",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "template_spec_spec_spec_title",
-      "target": "template_spec_success_metrics"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L16",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "template_spec_spec_spec_title",
-      "target": "template_spec_summary"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": ".sdd/specs/template/spec.md",
-      "source_location": "L48",
-      "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "template_spec_spec_spec_title",
-      "target": "template_spec_testing_guidelines"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -18073,5 +17132,5 @@
       "source_file": "screenshot.png"
     }
   ],
-  "built_at_commit": "5a7ef96c7be5b78ecd3f4e0733d9c446ad2a4d2e"
+  "built_at_commit": "4db30fa43c29037fde119c9fc6f80becca2f2db5"
 }
